@@ -1,10 +1,10 @@
-import { Button } from '@mui/material';
+import { BpmnViewer } from '../components/bpmn-editor.tsx';
 
 export const Home = () => {
   return (
     <div>
       <h1>Home</h1>
-      <Button variant="contained">Hello world</Button>
+      <BpmnViewer />
     </div>
   );
 };
