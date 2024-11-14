@@ -11,6 +11,9 @@ importers:
       '@bpmn-io/form-js':
         specifier: ^1.11.3
         version: 1.11.3(@lezer/common@1.2.3)
+      '@bpmn-io/properties-panel':
+        specifier: ^3.25.0
+        version: 3.25.0(@lezer/common@1.2.3)
       '@emotion/react':
         specifier: 11.13.3
         version: 11.13.3(@types/react@18.3.12)(react@18.3.1)
@@ -29,6 +32,9 @@ importers:
       bpmn-js:
         specifier: ^18.0.0
         version: 18.0.0
+      bpmn-js-properties-panel:
+        specifier: ^5.26.0
+        version: 5.26.0(@bpmn-io/properties-panel@3.25.0(@lezer/common@1.2.3))(bpmn-js@18.0.0)(camunda-bpmn-js-behaviors@1.6.1(bpmn-js@18.0.0)(camunda-bpmn-moddle@7.0.1)(zeebe-bpmn-moddle@1.7.0))(diagram-js@15.2.0)
       date-fns:
         specifier: 4.1.0
         version: 4.1.0
@@ -185,6 +191,9 @@ packages:
 
   '@bpmn-io/draggle@4.1.1':
     resolution: {integrity: sha512-2frw1gBl5I3XGrIDg4CBy6bpJiOuslKUOg9T91Fke6bIttFkF0zxlTKh4E4zU8g7gAo4ze0HnKMZDgHxea+Itw==}
+
+  '@bpmn-io/extract-process-variables@1.0.0':
+    resolution: {integrity: sha512-4EpxKwsV1h1ttlFywo8Af+JBhGzmmv63C8x2Fu5traH8z/4VJbPa2AncIU2GFHj7LYeZlygEDYWPB0QRYoQWKg==}
 
   '@bpmn-io/feel-editor@1.9.1':
     resolution: {integrity: sha512-UxSORdh5cwKM4fib4f9ov6J1/BHGpQVNtA+wPyEdKQyCyz3wqwE2/xe5wneVR1j5QFC5m2Na8nTy4a1TDFvZTw==}
@@ -929,6 +938,14 @@ packages:
   big.js@6.2.2:
     resolution: {integrity: sha512-y/ie+Faknx7sZA5MfGA2xKlu0GDv8RWrXGsmlteyJQ2lvoKv9GBK/fpRMc2qlSoBAgNxrixICFCBefIq8WCQpQ==}
 
+  bpmn-js-properties-panel@5.26.0:
+    resolution: {integrity: sha512-xL6+sohIP81Ptj2Dk+EfgQommYW+1TFCKLq6XyWJoJTsPtHKxgJArq6vL2mSbWC8XE1/n1HCuypUTEsX/A1B/w==}
+    peerDependencies:
+      '@bpmn-io/properties-panel': '>= 3.7'
+      bpmn-js: '>= 11.5'
+      camunda-bpmn-js-behaviors: '>= 0.4'
+      diagram-js: '>= 11.9'
+
   bpmn-js@18.0.0:
     resolution: {integrity: sha512-eZR4hqk2BT0m9jAGGtp/f1TD0m7LXXKfYle99q75d+NjSmxetIuvxGn48S9W+H8arJ7vgsls2GELzXoDuEE0eg==}
 
@@ -958,6 +975,16 @@ packages:
   callsites@3.1.0:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
     engines: {node: '>=6'}
+
+  camunda-bpmn-js-behaviors@1.6.1:
+    resolution: {integrity: sha512-nvfFmL2wrCi5IApt4NcYcpRHJx4nPS8AHSUq9ckyq9FiDeIwASafsvaEYY0r+FeobqUY1deYNYsKjhSYd4N0kQ==}
+    peerDependencies:
+      bpmn-js: '>= 9'
+      camunda-bpmn-moddle: '>= 7'
+      zeebe-bpmn-moddle: '>= 0.18'
+
+  camunda-bpmn-moddle@7.0.1:
+    resolution: {integrity: sha512-Br8Diu6roMpziHdpl66Dhnm0DTnCFMrSD9zwLV08LpD52QA0UsXxU87XfHf08HjuB7ly0Hd1bvajZRpf9hbmYQ==}
 
   caniuse-lite@1.0.30001677:
     resolution: {integrity: sha512-fmfjsOlJUpMWu+mAAtZZZHz7UEwsUxIIvu1TJfO1HqFQvB/B+ii0xr9B5HpbZY/mC4XZ8SvjHJqtAY6pDPQEog==}
@@ -2064,6 +2091,9 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
+  zeebe-bpmn-moddle@1.7.0:
+    resolution: {integrity: sha512-eZ6OXSt0c4n9V/oN/46gTlwDIS3GhWQLt9jbM5uS/YryB4yN8wdrrKrtw+TpyNy0SSKWXNDHyC83nCA2blPO3Q==}
+
 snapshots:
 
   '@ampproject/remapping@2.3.0':
@@ -2201,6 +2231,10 @@ snapshots:
   '@bpmn-io/draggle@4.1.1':
     dependencies:
       contra: 1.9.4
+
+  '@bpmn-io/extract-process-variables@1.0.0':
+    dependencies:
+      min-dash: 4.2.2
 
   '@bpmn-io/feel-editor@1.9.1(@lezer/common@1.2.3)':
     dependencies:
@@ -3004,6 +3038,18 @@ snapshots:
 
   big.js@6.2.2: {}
 
+  bpmn-js-properties-panel@5.26.0(@bpmn-io/properties-panel@3.25.0(@lezer/common@1.2.3))(bpmn-js@18.0.0)(camunda-bpmn-js-behaviors@1.6.1(bpmn-js@18.0.0)(camunda-bpmn-moddle@7.0.1)(zeebe-bpmn-moddle@1.7.0))(diagram-js@15.2.0):
+    dependencies:
+      '@bpmn-io/extract-process-variables': 1.0.0
+      '@bpmn-io/properties-panel': 3.25.0(@lezer/common@1.2.3)
+      array-move: 4.0.0
+      bpmn-js: 18.0.0
+      camunda-bpmn-js-behaviors: 1.6.1(bpmn-js@18.0.0)(camunda-bpmn-moddle@7.0.1)(zeebe-bpmn-moddle@1.7.0)
+      diagram-js: 15.2.0
+      ids: 1.0.5
+      min-dash: 4.2.2
+      min-dom: 4.2.1
+
   bpmn-js@18.0.0:
     dependencies:
       bpmn-moddle: 9.0.1
@@ -3050,6 +3096,16 @@ snapshots:
       set-function-length: 1.2.2
 
   callsites@3.1.0: {}
+
+  camunda-bpmn-js-behaviors@1.6.1(bpmn-js@18.0.0)(camunda-bpmn-moddle@7.0.1)(zeebe-bpmn-moddle@1.7.0):
+    dependencies:
+      bpmn-js: 18.0.0
+      camunda-bpmn-moddle: 7.0.1
+      ids: 1.0.5
+      min-dash: 4.2.2
+      zeebe-bpmn-moddle: 1.7.0
+
+  camunda-bpmn-moddle@7.0.1: {}
 
   caniuse-lite@1.0.30001677: {}
 
@@ -4397,3 +4453,5 @@ snapshots:
   yaml@1.10.2: {}
 
   yocto-queue@0.1.0: {}
+
+  zeebe-bpmn-moddle@1.7.0: {}
