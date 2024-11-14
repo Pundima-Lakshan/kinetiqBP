@@ -1,15 +1,10 @@
-import { useEffect, useState } from 'react';
+import { Button } from '@mui/material';
 
 export const Home = () => {
-  const [he] = useState();
-
-  useEffect(() => {
-    console.log(he);
-  }, []);
-
   return (
     <div>
       <h1>Home</h1>
+      <Button variant="contained">Hello world</Button>
     </div>
   );
 };
