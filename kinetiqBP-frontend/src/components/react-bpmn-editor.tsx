@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import BpmnModeler from 'bpmn-js/lib/Modeler';
-import { SaveSVGResult, SaveXMLResult } from 'bpmn-js/lib/BaseViewer';
+import { BpmnPropertiesPanelModule, BpmnPropertiesProviderModule } from 'bpmn-js-properties-panel';
 
 // Import necessary CSS files
 import 'bpmn-js/dist/assets/diagram-js.css';
 import 'bpmn-js/dist/assets/bpmn-js.css';
 import 'bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css';
-
+import '@bpmn-io/properties-panel/assets/properties-panel.css';
 import './style.css';
 
 interface ReactBpmnEditorProps {
@@ -16,28 +16,33 @@ interface ReactBpmnEditorProps {
 export const ReactBpmnEditor = ({ diagramXml }: ReactBpmnEditorProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLDivElement>(null);
+  const propertiesPanelRef = useRef<HTMLDivElement>(null);
   const downloadLinkRef = useRef<HTMLAnchorElement>(null);
   const downloadSvgLinkRef = useRef<HTMLAnchorElement>(null);
 
-  const [modeler, setModeler] = useState<BpmnModeler | null>(null);
+  const [bpmnModeler, setBpmnModeler] = useState<BpmnModeler | null>(null);
   const [diagramError, setDiagramError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (canvasRef.current) {
-      const bpmnModeler = new BpmnModeler({
+    if (canvasRef.current && propertiesPanelRef.current) {
+      const modeler = new BpmnModeler({
         container: canvasRef.current,
-        keyboard: { bindTo: window },
+        propertiesPanel: {
+          parent: propertiesPanelRef.current,
+        },
+        additionalModules: [BpmnPropertiesPanelModule, BpmnPropertiesProviderModule],
       });
-      setModeler(bpmnModeler);
 
+      setBpmnModeler(modeler);
+
+      // Open the initial diagram
       const openDiagram = async (xml: string) => {
         try {
-          await bpmnModeler.importXML(xml);
+          await modeler.importXML(xml);
           containerRef.current?.classList.remove('with-error');
           containerRef.current?.classList.add('with-diagram');
-        } catch (err: unknown) {
-          const msg = err instanceof Error ? err.message : 'Unknown error';
-          setDiagramError(msg);
+        } catch (err: any) {
+          setDiagramError(err.message);
           containerRef.current?.classList.remove('with-diagram');
           containerRef.current?.classList.add('with-error');
           console.error('Error importing BPMN XML:', err);
@@ -56,13 +61,13 @@ export const ReactBpmnEditor = ({ diagramXml }: ReactBpmnEditorProps) => {
         registerFileDrop(containerRef.current, openDiagram);
       }
 
-      return () => bpmnModeler.destroy();
+      return () => modeler.destroy();
     }
-  }, [diagramXml]);
+  }, []);
 
   const createNewDiagram = () => {
-    if (modeler) {
-      modeler
+    if (bpmnModeler) {
+      bpmnModeler
         .importXML(diagramXml)
         .then((result) => {
           console.log(result);
@@ -112,9 +117,9 @@ export const ReactBpmnEditor = ({ diagramXml }: ReactBpmnEditorProps) => {
   };
 
   const exportArtifacts = async () => {
-    if (modeler) {
+    if (bpmnModeler) {
       try {
-        const { svg } = (await modeler.saveSVG()) as SaveSVGResult;
+        const { svg } = await bpmnModeler.saveSVG();
         setEncoded(downloadSvgLinkRef, 'diagram.svg', svg);
       } catch (err) {
         console.error('Error exporting SVG:', err);
@@ -122,7 +127,7 @@ export const ReactBpmnEditor = ({ diagramXml }: ReactBpmnEditorProps) => {
       }
 
       try {
-        const { xml = null } = (await modeler.saveXML({ format: true })) as SaveXMLResult;
+        const { xml = null } = await bpmnModeler.saveXML({ format: true });
         setEncoded(downloadLinkRef, 'diagram.bpmn', xml);
       } catch (err) {
         console.error('Error exporting XML:', err);
@@ -132,19 +137,19 @@ export const ReactBpmnEditor = ({ diagramXml }: ReactBpmnEditorProps) => {
   };
 
   useEffect(() => {
-    if (modeler) {
-      const debouncedExport = debounce(exportArtifacts, 500);
-      modeler.on('commandStack.changed', debouncedExport);
-    }
-  }, [modeler]);
+    if (bpmnModeler) {
+      const debounce = (fn: () => void, timeout: number) => {
+        let timer: number;
+        return () => {
+          clearTimeout(timer);
+          timer = setTimeout(fn, timeout);
+        };
+      };
 
-  const debounce = (fn: () => void, timeout: number) => {
-    let timer: number;
-    return () => {
-      clearTimeout(timer);
-      timer = setTimeout(fn, timeout);
-    };
-  };
+      const debouncedExport = debounce(exportArtifacts, 500);
+      bpmnModeler.on('commandStack.changed', debouncedExport);
+    }
+  }, [bpmnModeler]);
 
   return (
     <div ref={containerRef} className="content" id="js-drop-zone">
@@ -172,8 +177,11 @@ export const ReactBpmnEditor = ({ diagramXml }: ReactBpmnEditorProps) => {
         </div>
       )}
 
-      {/* Canvas for BPMN diagram */}
+      {/* BPMN Modeler Canvas */}
       <div ref={canvasRef} className="canvas" id="js-canvas"></div>
+
+      {/* BPMN Properties Panel */}
+      <div ref={propertiesPanelRef} id="js-properties-panel" className="properties-panel"></div>
 
       {/* Download Buttons */}
       <ul className="buttons">
