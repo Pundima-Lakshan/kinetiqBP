@@ -1,10 +1,10 @@
-package org.workflow.flowableSpringBoot;
+package org.kinetiqbp.uiservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FlowableSpringBootApplicationTests {
+class UiServiceApplicationTests {
 
     @Test
     void contextLoads() {

@@ -1,13 +1,13 @@
-package org.workflow.flowableSpringBoot;
+package org.kinetiqbp.flowablerest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(proxyBeanMethods = false)
-public class FlowableSpringBootApplication {
+public class FlowableRestApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(FlowableSpringBootApplication.class, args);
+        SpringApplication.run(FlowableRestApplication.class, args);
     }
 
 }
