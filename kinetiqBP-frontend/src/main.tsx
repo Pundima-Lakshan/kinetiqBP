@@ -3,22 +3,18 @@ import { createRoot } from 'react-dom/client';
 
 import './index.css';
 
-import { Home } from './pages/home.tsx';
-import { CssBaseline, StyledEngineProvider } from '@mui/material';
-import { datePickersCustomizations } from './theme/customizations';
-import AppTheme from './theme/app-theme.tsx';
+import '@xyflow/react/dist/style.css';
 
-const xThemeComponents = {
-  ...datePickersCustomizations,
-};
+import '@bpmn-io/form-js/dist/assets/form-js.css';
+import '@bpmn-io/form-js/dist/assets/form-js-editor.css';
+import '@bpmn-io/form-js/dist/assets/form-js-playground.css';
+
+import { Home } from './pages/home.tsx';
+import { CssBaseline } from '@mui/material';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <StyledEngineProvider injectFirst>
-      <AppTheme themeComponents={xThemeComponents}>
-        <CssBaseline />
-        <Home />
-      </AppTheme>
-    </StyledEngineProvider>
+    <CssBaseline />
+    <Home />
   </StrictMode>,
 );
