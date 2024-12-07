@@ -34,7 +34,7 @@ export const edges = [
   },
   {
     id: 'e1-3',
-    source: '1-1',
+    source: '1-2',
     target: '1-3',
     animated: true,
   },

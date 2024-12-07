@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:flowable="http://flowable.org/bpmn"
+             typeLanguage="http://www.w3.org/2001/XMLSchema"
+             expressionLanguage="http://www.w3.org/1999/XPath"
+             targetNamespace="http://www.flowable.org/processdef">
+
+    <process id="holidayRequest" name="Holiday Request" isExecutable="true">
+
+        <!-- Events -->
+        <startEvent id="startEvent" />
+        <endEvent id="approveEnd" />
+        <endEvent id="rejectEnd" />
+
+        <!-- Tasks -->
+        <userTask id="approveTask" name="Approve or reject request" />
+        <serviceTask id="externalSystemCall" name="Enter holidays in external system"
+                     flowable:class="org.flowable.CallExternalSystemDelegate" />
+        <userTask id="holidayApprovedTask" name="Holiday approved">
+            <extensionElements>
+                <flowable:formProperty id="numDays" name="Number of Days" type="long" required="true" />
+                <flowable:formProperty id="reason" name="Reason for Leave" type="string" required="true" />
+                <flowable:formProperty id="substitute" name="Substitute" type="string" required="false" />
+            </extensionElements>
+        </userTask>
+
+        <serviceTask id="sendRejectionMail" name="Send out rejection email"
+                     flowable:class="org.flowable.SendRejectionMail" />
+
+        <!-- Gateways -->
+        <exclusiveGateway id="decision" />
+
+        <!-- Sequence Flows -->
+        <sequenceFlow sourceRef="startEvent" targetRef="approveTask" />
+        <sequenceFlow sourceRef="approveTask" targetRef="decision" />
+
+        <!-- Approved Path -->
+        <sequenceFlow sourceRef="decision" targetRef="externalSystemCall">
+            <conditionExpression xsi:type="tFormalExpression">
+                <![CDATA[
+                    ${approved}
+                ]]>
+            </conditionExpression>
+        </sequenceFlow>
+        <sequenceFlow sourceRef="externalSystemCall" targetRef="holidayApprovedTask" />
+        <sequenceFlow sourceRef="holidayApprovedTask" targetRef="approveEnd" />
+
+        <!-- Rejected Path -->
+        <sequenceFlow sourceRef="decision" targetRef="sendRejectionMail">
+            <conditionExpression xsi:type="tFormalExpression">
+                <![CDATA[
+                    ${!approved}
+                ]]>
+            </conditionExpression>
+        </sequenceFlow>
+        <sequenceFlow sourceRef="sendRejectionMail" targetRef="rejectEnd" />
+
+    </process>
+
+</definitions>

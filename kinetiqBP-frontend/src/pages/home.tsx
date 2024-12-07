@@ -7,10 +7,12 @@ import TaskIcon from '@mui/icons-material/Task';
 import DescriptionIcon from '@mui/icons-material/Description';
 import LayersIcon from '@mui/icons-material/Layers';
 import PendingActionsIcon from '@mui/icons-material/PendingActions';
-import { AppProvider, type Navigation } from '@toolpad/core/AppProvider';
+import { AppProvider, type Navigation, Session } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { useDemoRouter } from '@toolpad/core/internal';
 import { Forms } from './forms.tsx';
+import { SidebarFooterAccount } from '../components/sidebar-footer-account.tsx';
+import { useMemo, useState } from 'react';
 
 const NAVIGATION: Navigation = [
   {
@@ -86,6 +88,14 @@ const demoTheme = createTheme({
   },
 });
 
+const demoSession = {
+  user: {
+    name: 'Pundima Lakshan',
+    email: 'pundimal@gmail.com',
+    image: 'https://avatars.githubusercontent.com/u/111065950',
+  },
+};
+
 function DemoPageContent({ pathname }: { pathname: string }) {
   return (
     <Box
@@ -119,6 +129,18 @@ export const Home = (props: DemoProps) => {
   // Remove this const when copying and pasting into your project.
   const demoWindow = window !== undefined ? window() : undefined;
 
+  const [session, setSession] = useState<Session | null>(demoSession);
+  const authentication = useMemo(() => {
+    return {
+      signIn: () => {
+        setSession(demoSession);
+      },
+      signOut: () => {
+        setSession(null);
+      },
+    };
+  }, []);
+
   return (
     <AppProvider
       navigation={NAVIGATION}
@@ -129,8 +151,10 @@ export const Home = (props: DemoProps) => {
       router={router}
       theme={demoTheme}
       window={demoWindow}
+      authentication={authentication}
+      session={session}
     >
-      <DashboardLayout defaultSidebarCollapsed>
+      <DashboardLayout defaultSidebarCollapsed slots={{ toolbarAccount: () => null, sidebarFooter: SidebarFooterAccount }}>
         <DemoPageContent pathname={router.pathname} />
       </DashboardLayout>
     </AppProvider>

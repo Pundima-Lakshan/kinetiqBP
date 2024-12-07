@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import { FormViewer } from '../components/form/form-viewer.tsx';
 import { FormEditorComponent } from '../components/form/form-editor.tsx';
 import { FlowComponent } from '../components/react-flow/flow.tsx';
+import { GrafanaIframe } from '../components/grafana-iframe.tsx';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -51,6 +52,7 @@ export const Forms = () => {
           <Tab label="Flow" {...a11yProps(0)} />
           <Tab label="Viewer" {...a11yProps(1)} />
           <Tab label="Editor" {...a11yProps(2)} />
+          <Tab label="Dashboard" {...a11yProps(3)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
@@ -61,6 +63,9 @@ export const Forms = () => {
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
         <FormEditorComponent />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={3}>
+        <GrafanaIframe />
       </CustomTabPanel>
     </Box>
   );
