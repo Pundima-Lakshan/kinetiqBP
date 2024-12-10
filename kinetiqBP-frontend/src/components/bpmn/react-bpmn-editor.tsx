@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import BpmnModeler from 'bpmn-js/lib/Modeler';
-import { BpmnPropertiesPanelModule, BpmnPropertiesProviderModule } from 'bpmn-js-properties-panel';
+import { BpmnPropertiesPanelModule, BpmnPropertiesProviderModule, CamundaPlatformPropertiesProviderModule } from 'bpmn-js-properties-panel';
 
-// Import necessary CSS files
 import 'bpmn-js/dist/assets/diagram-js.css';
 import 'bpmn-js/dist/assets/bpmn-js.css';
 import 'bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css';
@@ -30,7 +29,7 @@ export const ReactBpmnEditor = ({ diagramXml }: ReactBpmnEditorProps) => {
         propertiesPanel: {
           parent: propertiesPanelRef.current,
         },
-        additionalModules: [BpmnPropertiesPanelModule, BpmnPropertiesProviderModule],
+        additionalModules: [BpmnPropertiesPanelModule, BpmnPropertiesProviderModule, CamundaPlatformPropertiesProviderModule],
       });
 
       setBpmnModeler(modeler);
@@ -128,10 +127,27 @@ export const ReactBpmnEditor = ({ diagramXml }: ReactBpmnEditorProps) => {
 
       try {
         const { xml = null } = await bpmnModeler.saveXML({ format: true });
-        setEncoded(downloadLinkRef, 'diagram.bpmn', xml);
+        setEncoded(downloadLinkRef, 'bpmnio.bpmn20.xml', xml);
       } catch (err) {
         console.error('Error exporting XML:', err);
-        setEncoded(downloadLinkRef, 'diagram.bpmn', null);
+        setEncoded(downloadLinkRef, 'diagram.bpmn20.xml', null);
+      }
+    }
+  };
+
+  const downloadLink = async () => {
+    if (bpmnModeler) {
+      const { xml = null } = await bpmnModeler.saveXML({ format: true });
+      if (xml) {
+        const blob = new Blob([xml], { type: 'application/bpmn20-xml' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'diagram.bpmn20.xml';
+        document.body.appendChild(link);
+        link.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(link);
       }
     }
   };
@@ -152,39 +168,28 @@ export const ReactBpmnEditor = ({ diagramXml }: ReactBpmnEditorProps) => {
   }, [bpmnModeler]);
 
   return (
-    <div ref={containerRef} className="content" id="js-drop-zone">
-      {/* Intro Message */}
-      <div className="message intro">
-        <div className="note">
-          Drop BPMN diagram from your desktop or{' '}
-          <button id="js-create-diagram" onClick={createNewDiagram}>
-            create a new diagram
-          </button>{' '}
-          to get started.
-        </div>
-      </div>
-
+    <div ref={containerRef} className="bpmn-editor-content" id="js-drop-zone">
       {/* Error Message */}
       {diagramError && (
         <div className="message error">
-          <div className="note">
-            <p>Oops, we could not display the BPMN 2.0 diagram.</p>
-            <div className="details">
-              <span>cause of the problem</span>
-              <pre>{diagramError}</pre>
-            </div>
+          <p>Oops, we could not display the BPMN 2.0 diagram.</p>
+          <div className="details">
+            <span>cause of the problem</span>
+            <pre>{diagramError}</pre>
           </div>
         </div>
       )}
 
       {/* BPMN Modeler Canvas */}
-      <div ref={canvasRef} className="canvas" id="js-canvas"></div>
+      <div ref={canvasRef} className="bpmn-editor-canvas" id="js-canvas"></div>
 
       {/* BPMN Properties Panel */}
-      <div ref={propertiesPanelRef} id="js-properties-panel" className="properties-panel"></div>
+      <div className='bpmn-editor-properties-panel' >
+        <div ref={propertiesPanelRef} id="js-properties-panel" className=""></div>
+      </div>
 
       {/* Download Buttons */}
-      <ul className="buttons">
+      <ul className="bpmn-editor-buttons">
         <li>download</li>
         <li>
           <a ref={downloadLinkRef} id="js-download-diagram" title="download BPMN diagram">
@@ -192,9 +197,9 @@ export const ReactBpmnEditor = ({ diagramXml }: ReactBpmnEditorProps) => {
           </a>
         </li>
         <li>
-          <a ref={downloadSvgLinkRef} id="js-download-svg" title="download as SVG image">
+          <button onClick={downloadLink} id="js-download-svg" title="download as SVG image">
             SVG image
-          </a>
+          </button>
         </li>
       </ul>
     </div>

@@ -5,7 +5,7 @@ export const BpmnViewer = () => {
   const [diagramXML, setDiagramXML] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch(`/diagram.bpmn`)
+    fetch(`/bpmnio.bpmn20.xml`)
       .then((response) => response.text())
       .then((data) => setDiagramXML(data))
       .catch((error) => console.error('Error loading BPMN XML:', error));

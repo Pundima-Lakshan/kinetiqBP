@@ -9,8 +9,11 @@ importers:
   .:
     dependencies:
       '@bpmn-io/form-js':
-        specifier: ^1.11.3
+        specifier: 1.11.3
         version: 1.11.3(@lezer/common@1.2.3)
+      '@bpmn-io/properties-panel':
+        specifier: 3.25.0
+        version: 3.25.0(@lezer/common@1.2.3)
       '@emotion/react':
         specifier: 11.13.3
         version: 11.13.3(@types/react@18.3.12)(react@18.3.1)
@@ -27,16 +30,25 @@ importers:
         specifier: 7.22.2
         version: 7.22.2(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@mui/material@6.1.6(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mui/system@6.1.6(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(date-fns@4.1.0)(luxon@3.5.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@toolpad/core':
-        specifier: ^0.9.0
+        specifier: 0.9.0
         version: 0.9.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@mui/icons-material@6.1.6(@mui/material@6.1.6(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@mui/material@6.1.6(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.4.10)
       '@xyflow/react':
-        specifier: ^12.3.5
+        specifier: 12.3.5
         version: 12.3.5(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      bpmn-js:
+        specifier: 18.1.1
+        version: 18.1.1
+      bpmn-js-properties-panel:
+        specifier: 5.26.0
+        version: 5.26.0(@bpmn-io/properties-panel@3.25.0(@lezer/common@1.2.3))(bpmn-js@18.1.1)(camunda-bpmn-js-behaviors@1.7.2(bpmn-js@18.1.1)(camunda-bpmn-moddle@7.0.1)(zeebe-bpmn-moddle@1.7.0))(diagram-js@15.2.3)
+      camunda-bpmn-moddle:
+        specifier: 7.0.1
+        version: 7.0.1
       date-fns:
         specifier: 4.1.0
         version: 4.1.0
       dmn-js:
-        specifier: ^17.0.1
+        specifier: 17.0.1
         version: 17.0.1(@lezer/common@1.2.3)
       react:
         specifier: 18.3.1
@@ -188,6 +200,9 @@ packages:
 
   '@bpmn-io/draggle@4.1.1':
     resolution: {integrity: sha512-2frw1gBl5I3XGrIDg4CBy6bpJiOuslKUOg9T91Fke6bIttFkF0zxlTKh4E4zU8g7gAo4ze0HnKMZDgHxea+Itw==}
+
+  '@bpmn-io/extract-process-variables@1.0.0':
+    resolution: {integrity: sha512-4EpxKwsV1h1ttlFywo8Af+JBhGzmmv63C8x2Fu5traH8z/4VJbPa2AncIU2GFHj7LYeZlygEDYWPB0QRYoQWKg==}
 
   '@bpmn-io/feel-editor@1.9.1':
     resolution: {integrity: sha512-UxSORdh5cwKM4fib4f9ov6J1/BHGpQVNtA+wPyEdKQyCyz3wqwE2/xe5wneVR1j5QFC5m2Na8nTy4a1TDFvZTw==}
@@ -1036,6 +1051,21 @@ packages:
   big.js@6.2.2:
     resolution: {integrity: sha512-y/ie+Faknx7sZA5MfGA2xKlu0GDv8RWrXGsmlteyJQ2lvoKv9GBK/fpRMc2qlSoBAgNxrixICFCBefIq8WCQpQ==}
 
+  bpmn-js-properties-panel@5.26.0:
+    resolution: {integrity: sha512-xL6+sohIP81Ptj2Dk+EfgQommYW+1TFCKLq6XyWJoJTsPtHKxgJArq6vL2mSbWC8XE1/n1HCuypUTEsX/A1B/w==}
+    peerDependencies:
+      '@bpmn-io/properties-panel': '>= 3.7'
+      bpmn-js: '>= 11.5'
+      camunda-bpmn-js-behaviors: '>= 0.4'
+      diagram-js: '>= 11.9'
+
+  bpmn-js@18.1.1:
+    resolution: {integrity: sha512-7LN+f7y1u4FtbI/6lI3Elf2phEBa0RVr0YJZrSG46RyiHU9wY5NR2n9OIqKeuGJq1RJ/YMowMoUNDIBdmb9zbg==}
+
+  bpmn-moddle@9.0.1:
+    resolution: {integrity: sha512-jO2P5RBx0cZCCd+imqhpNE5anttaYuGd71u76NEA/qMZwJSW1t5ETAtw9/E2InfiPU2w0TR8oxPyopJXRc9VQg==}
+    engines: {node: '>= 18'}
+
   brace-expansion@1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
 
@@ -1058,6 +1088,16 @@ packages:
   callsites@3.1.0:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
     engines: {node: '>=6'}
+
+  camunda-bpmn-js-behaviors@1.7.2:
+    resolution: {integrity: sha512-xjLJHc18T40tcYu4JCeYDo1wR5i9+ZqcVnXVP6c4ooAe2gKISbBvFc07gqGpqiwm7TpEBvUfDj3PrRr+ofaf4w==}
+    peerDependencies:
+      bpmn-js: '>= 9'
+      camunda-bpmn-moddle: '>= 7'
+      zeebe-bpmn-moddle: '>= 0.18'
+
+  camunda-bpmn-moddle@7.0.1:
+    resolution: {integrity: sha512-Br8Diu6roMpziHdpl66Dhnm0DTnCFMrSD9zwLV08LpD52QA0UsXxU87XfHf08HjuB7ly0Hd1bvajZRpf9hbmYQ==}
 
   caniuse-lite@1.0.30001677:
     resolution: {integrity: sha512-fmfjsOlJUpMWu+mAAtZZZHz7UEwsUxIIvu1TJfO1HqFQvB/B+ii0xr9B5HpbZY/mC4XZ8SvjHJqtAY6pDPQEog==}
@@ -1222,8 +1262,8 @@ packages:
     peerDependencies:
       diagram-js: '*'
 
-  diagram-js@15.2.0:
-    resolution: {integrity: sha512-ae9gGCJQiusCcPxBBM6jxMpPlIZ7LrP+ibaX/iOTlopzIkEuxxYHGKFDeEKwNVo65BJlIy33AS/H4vX4aHfnHQ==}
+  diagram-js@15.2.3:
+    resolution: {integrity: sha512-C7MM5D7D0x6F5KsPzGmIPL/O9VoglTFSGrDnQNiFIA0SldC6WCwx/0nG9nS4Pwjtf7QeccaozF7FD1NAMHFs5Q==}
 
   didi@10.2.2:
     resolution: {integrity: sha512-l8NYkYFXV1izHI65EyT8EXOjUZtKmQkHLTT89cSP7HU5J/G7AOj0dXKtLc04EXYlga99PBY18IPjOeZ+c3DI4w==}
@@ -1811,11 +1851,20 @@ packages:
   mitt@3.0.1:
     resolution: {integrity: sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==}
 
+  moddle-xml@11.0.0:
+    resolution: {integrity: sha512-L3Sseepfcq9Uy0iIfqEDTXSoYLva1Y/JGbN/4AMOeQ6cqbu8Ma/SDJIdOFm7smsAa64j2z3SwCGG3FIilQVnUg==}
+    engines: {node: '>= 18'}
+    peerDependencies:
+      moddle: '>= 6.2.0'
+
   moddle-xml@9.0.6:
     resolution: {integrity: sha512-tl0reHpsY/aKlLGhXeFlQWlYAQHFxTkFqC8tq8jXRYpQSnLVw13T6swMaourLd7EXqHdWsc+5ggsB+fEep6xZQ==}
 
   moddle@5.0.4:
     resolution: {integrity: sha512-Kjb+hjuzO+YlojNGxEUXvdhLYTHTtAABDlDcJTtTcn5MbJF9Zkv4I1Fyvp3Ypmfgg1EfHDZ3PsCQTuML9JD6wg==}
+
+  moddle@7.0.0:
+    resolution: {integrity: sha512-Hpte2hfKDwoZWPvDngsEHjloPnO+sKMUVkAPc0r9PrpnVLqsyPUTV0ZQU8CAp87YmRZ9QzeQMJxdKbaP9vEIKA==}
 
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
@@ -2031,6 +2080,10 @@ packages:
   safe-regex-test@1.0.3:
     resolution: {integrity: sha512-CdASjNJPvRa7roO6Ra/gLYBTzYzzPyyBXxIMdGW3USQLyjWEls2RgW5UBTXaQVp+OrpeCK3bLem8smtmheoRuw==}
     engines: {node: '>= 0.4'}
+
+  saxen@10.0.0:
+    resolution: {integrity: sha512-RXsmWok/SAWqOG/f5ADEz51DN9WtZEzqih3e08ranldcaXekxjx8NBKjGh/y5hlowjo0JH/LekBu6gtPFD1G6g==}
+    engines: {node: '>= 18'}
 
   saxen@8.1.2:
     resolution: {integrity: sha512-xUOiiFbc3Ow7p8KMxwsGICPx46ZQvy3+qfNVhrkwfz3Vvq45eGt98Ft5IQaA1R/7Tb5B5MKh9fUR9x3c3nDTxw==}
@@ -2312,6 +2365,9 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
+  zeebe-bpmn-moddle@1.7.0:
+    resolution: {integrity: sha512-eZ6OXSt0c4n9V/oN/46gTlwDIS3GhWQLt9jbM5uS/YryB4yN8wdrrKrtw+TpyNy0SSKWXNDHyC83nCA2blPO3Q==}
+
   zustand@4.5.5:
     resolution: {integrity: sha512-+0PALYNJNgK6hldkgDq2vLrw5f6g/jCInz52n9RTpropGgeAf/ioFUCdtsjCqu4gNhW9D01rUQBROoRjdzyn2Q==}
     engines: {node: '>=12.7.0'}
@@ -2464,6 +2520,10 @@ snapshots:
   '@bpmn-io/draggle@4.1.1':
     dependencies:
       contra: 1.9.4
+
+  '@bpmn-io/extract-process-variables@1.0.0':
+    dependencies:
+      min-dash: 4.2.2
 
   '@bpmn-io/feel-editor@1.9.1(@lezer/common@1.2.3)':
     dependencies:
@@ -3398,6 +3458,35 @@ snapshots:
 
   big.js@6.2.2: {}
 
+  bpmn-js-properties-panel@5.26.0(@bpmn-io/properties-panel@3.25.0(@lezer/common@1.2.3))(bpmn-js@18.1.1)(camunda-bpmn-js-behaviors@1.7.2(bpmn-js@18.1.1)(camunda-bpmn-moddle@7.0.1)(zeebe-bpmn-moddle@1.7.0))(diagram-js@15.2.3):
+    dependencies:
+      '@bpmn-io/extract-process-variables': 1.0.0
+      '@bpmn-io/properties-panel': 3.25.0(@lezer/common@1.2.3)
+      array-move: 4.0.0
+      bpmn-js: 18.1.1
+      camunda-bpmn-js-behaviors: 1.7.2(bpmn-js@18.1.1)(camunda-bpmn-moddle@7.0.1)(zeebe-bpmn-moddle@1.7.0)
+      diagram-js: 15.2.3
+      ids: 1.0.5
+      min-dash: 4.2.2
+      min-dom: 4.2.1
+
+  bpmn-js@18.1.1:
+    dependencies:
+      bpmn-moddle: 9.0.1
+      diagram-js: 15.2.3
+      diagram-js-direct-editing: 3.2.0(diagram-js@15.2.3)
+      ids: 1.0.5
+      inherits-browser: 0.1.0
+      min-dash: 4.2.2
+      min-dom: 4.2.1
+      tiny-svg: 3.1.3
+
+  bpmn-moddle@9.0.1:
+    dependencies:
+      min-dash: 4.2.2
+      moddle: 7.0.0
+      moddle-xml: 11.0.0(moddle@7.0.0)
+
   brace-expansion@1.1.11:
     dependencies:
       balanced-match: 1.0.2
@@ -3427,6 +3516,16 @@ snapshots:
       set-function-length: 1.2.2
 
   callsites@3.1.0: {}
+
+  camunda-bpmn-js-behaviors@1.7.2(bpmn-js@18.1.1)(camunda-bpmn-moddle@7.0.1)(zeebe-bpmn-moddle@1.7.0):
+    dependencies:
+      bpmn-js: 18.1.1
+      camunda-bpmn-moddle: 7.0.1
+      ids: 1.0.5
+      min-dash: 4.2.2
+      zeebe-bpmn-moddle: 1.7.0
+
+  camunda-bpmn-moddle@7.0.1: {}
 
   caniuse-lite@1.0.30001677: {}
 
@@ -3595,13 +3694,13 @@ snapshots:
       has-property-descriptors: 1.0.2
       object-keys: 1.1.1
 
-  diagram-js-direct-editing@3.2.0(diagram-js@15.2.0):
+  diagram-js-direct-editing@3.2.0(diagram-js@15.2.3):
     dependencies:
-      diagram-js: 15.2.0
+      diagram-js: 15.2.3
       min-dash: 4.2.2
       min-dom: 4.2.1
 
-  diagram-js@15.2.0:
+  diagram-js@15.2.3:
     dependencies:
       '@bpmn-io/diagram-js-ui': 0.2.3
       clsx: 2.1.1
@@ -3618,12 +3717,12 @@ snapshots:
   dmn-js-boxed-expression@17.0.1(@lezer/common@1.2.3):
     dependencies:
       '@bpmn-io/dmn-variable-resolver': 0.7.0
-      diagram-js: 15.2.0
+      diagram-js: 15.2.3
       dmn-js-shared: 17.0.1(@lezer/common@1.2.3)
       inferno: 5.6.3
       min-dash: 4.2.2
       min-dom: 4.2.1
-      table-js: 9.2.0(diagram-js@15.2.0)(inferno@5.6.3)
+      table-js: 9.2.0(diagram-js@15.2.3)(inferno@5.6.3)
     transitivePeerDependencies:
       - '@lezer/common'
 
@@ -3631,21 +3730,21 @@ snapshots:
     dependencies:
       '@bpmn-io/dmn-variable-resolver': 0.7.0
       css.escape: 1.5.1
-      diagram-js: 15.2.0
+      diagram-js: 15.2.3
       dmn-js-shared: 17.0.1(@lezer/common@1.2.3)
       escape-html: 1.0.3
       inferno: 5.6.3
       min-dash: 4.2.2
       min-dom: 4.2.1
       selection-ranges: 3.0.3
-      table-js: 9.2.0(diagram-js@15.2.0)(inferno@5.6.3)
+      table-js: 9.2.0(diagram-js@15.2.3)(inferno@5.6.3)
     transitivePeerDependencies:
       - '@lezer/common'
 
   dmn-js-drd@17.0.1(@lezer/common@1.2.3):
     dependencies:
-      diagram-js: 15.2.0
-      diagram-js-direct-editing: 3.2.0(diagram-js@15.2.0)
+      diagram-js: 15.2.3
+      diagram-js-direct-editing: 3.2.0(diagram-js@15.2.3)
       dmn-js-shared: 17.0.1(@lezer/common@1.2.3)
       inherits-browser: 0.1.0
       min-dash: 4.2.2
@@ -3658,20 +3757,20 @@ snapshots:
   dmn-js-literal-expression@17.0.1(@lezer/common@1.2.3):
     dependencies:
       '@bpmn-io/dmn-variable-resolver': 0.7.0
-      diagram-js: 15.2.0
+      diagram-js: 15.2.3
       dmn-js-shared: 17.0.1(@lezer/common@1.2.3)
       escape-html: 1.0.3
       inferno: 5.6.3
       min-dash: 4.2.2
       min-dom: 4.2.1
-      table-js: 9.2.0(diagram-js@15.2.0)(inferno@5.6.3)
+      table-js: 9.2.0(diagram-js@15.2.3)(inferno@5.6.3)
     transitivePeerDependencies:
       - '@lezer/common'
 
   dmn-js-shared@17.0.1(@lezer/common@1.2.3):
     dependencies:
       '@bpmn-io/feel-editor': 1.9.1(@lezer/common@1.2.3)
-      diagram-js: 15.2.0
+      diagram-js: 15.2.3
       didi: 10.2.2
       dmn-moddle: 10.0.0
       ids: 1.0.5
@@ -3680,7 +3779,7 @@ snapshots:
       min-dom: 4.2.1
       selection-ranges: 3.0.3
       selection-update: 0.1.2
-      table-js: 9.2.0(diagram-js@15.2.0)(inferno@5.6.3)
+      table-js: 9.2.0(diagram-js@15.2.3)(inferno@5.6.3)
     transitivePeerDependencies:
       - '@lezer/common'
 
@@ -4378,6 +4477,12 @@ snapshots:
 
   mitt@3.0.1: {}
 
+  moddle-xml@11.0.0(moddle@7.0.0):
+    dependencies:
+      min-dash: 4.2.2
+      moddle: 7.0.0
+      saxen: 10.0.0
+
   moddle-xml@9.0.6:
     dependencies:
       min-dash: 3.8.1
@@ -4387,6 +4492,10 @@ snapshots:
   moddle@5.0.4:
     dependencies:
       min-dash: 3.8.1
+
+  moddle@7.0.0:
+    dependencies:
+      min-dash: 4.2.2
 
   ms@2.1.3: {}
 
@@ -4615,6 +4724,8 @@ snapshots:
       es-errors: 1.3.0
       is-regex: 1.1.4
 
+  saxen@10.0.0: {}
+
   saxen@8.1.2: {}
 
   scheduler@0.23.2:
@@ -4735,9 +4846,9 @@ snapshots:
 
   tabbable@6.2.0: {}
 
-  table-js@9.2.0(diagram-js@15.2.0)(inferno@5.6.3):
+  table-js@9.2.0(diagram-js@15.2.3)(inferno@5.6.3):
     dependencies:
-      diagram-js: 15.2.0
+      diagram-js: 15.2.3
       didi: 10.2.2
       ids: 1.0.5
       inferno: 5.6.3
@@ -4911,6 +5022,8 @@ snapshots:
   yaml@2.5.1: {}
 
   yocto-queue@0.1.0: {}
+
+  zeebe-bpmn-moddle@1.7.0: {}
 
   zustand@4.5.5(@types/react@18.3.12)(react@18.3.1):
     dependencies:

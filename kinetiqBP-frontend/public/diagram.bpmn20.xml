@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:flowable="http://flowable.org/bpmn"
+             typeLanguage="http://www.w3.org/2001/XMLSchema"
+             expressionLanguage="http://www.w3.org/1999/XPath"
+             targetNamespace="http://www.flowable.org/processdef">
+
+    <process id="holidayRequest" name="Holiday Request" isExecutable="true">
+        <startEvent id="startEvent"/>
+        <sequenceFlow id="startToApprove" sourceRef="startEvent" targetRef="approveTask"/>
+        <userTask id="approveTask" name="Approve or reject request"/>
+        <sequenceFlow id="approveToDecision" sourceRef="approveTask" targetRef="decision"/>
+        <exclusiveGateway id="decision"/>
+        <sequenceFlow id="decisionToExternal" sourceRef="decision" targetRef="externalSystemCall">
+            <conditionExpression xsi:type="tFormalExpression">
+                <![CDATA[
+                    ${approved}
+                ]]>
+            </conditionExpression>
+        </sequenceFlow>
+        <sequenceFlow id="decisionToRejection" sourceRef="decision" targetRef="sendRejectionMail">
+            <conditionExpression xsi:type="tFormalExpression">
+                <![CDATA[
+                    ${!approved}
+                ]]>
+            </conditionExpression>
+        </sequenceFlow>
+        <serviceTask id="externalSystemCall" name="Enter holidays in external system"
+                     flowable:class="org.flowable.CallExternalSystemDelegate"/>
+        <sequenceFlow id="externalToApproved" sourceRef="externalSystemCall" targetRef="holidayApprovedTask"/>
+        <userTask id="holidayApprovedTask" name="Holiday approved"/>
+        <sequenceFlow id="approvedToEnd" sourceRef="holidayApprovedTask" targetRef="approveEnd"/>
+        <serviceTask id="sendRejectionMail" name="Send out rejection email"
+                     flowable:class="org.flowable.SendRejectionMail"/>
+        <sequenceFlow id="rejectionToEnd" sourceRef="sendRejectionMail" targetRef="rejectEnd"/>
+        <endEvent id="approveEnd"/>
+        <endEvent id="rejectEnd"/>
+    </process>
+
+    <bpmndi:BPMNDiagram id="BPMNDiagram_holidayRequest">
+        <bpmndi:BPMNPlane id="BPMNPlane_holidayRequest" bpmnElement="holidayRequest">
+            <bpmndi:BPMNShape id="BPMNShape_startEvent" bpmnElement="startEvent">
+                <omgdc:Bounds x="100" y="100" width="36" height="36"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="BPMNShape_approveTask" bpmnElement="approveTask">
+                <omgdc:Bounds x="200" y="85" width="100" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="BPMNShape_decision" bpmnElement="decision">
+                <omgdc:Bounds x="350" y="95" width="50" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="BPMNShape_externalSystemCall" bpmnElement="externalSystemCall">
+                <omgdc:Bounds x="450" y="50" width="100" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="BPMNShape_sendRejectionMail" bpmnElement="sendRejectionMail">
+                <omgdc:Bounds x="450" y="150" width="100" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="BPMNShape_holidayApprovedTask" bpmnElement="holidayApprovedTask">
+                <omgdc:Bounds x="600" y="50" width="100" height="50"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="BPMNShape_approveEnd" bpmnElement="approveEnd">
+                <omgdc:Bounds x="750" y="50" width="36" height="36"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="BPMNShape_rejectEnd" bpmnElement="rejectEnd">
+                <omgdc:Bounds x="750" y="150" width="36" height="36"/>
+            </bpmndi:BPMNShape>
+
+            <!-- Sequence Flows -->
+            <bpmndi:BPMNEdge id="BPMNEdge_startToApprove" bpmnElement="startToApprove">
+                <omgdi:waypoint x="136" y="118"/>
+                <omgdi:waypoint x="200" y="110"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="BPMNEdge_approveToDecision" bpmnElement="approveToDecision">
+                <omgdi:waypoint x="300" y="110"/>
+                <omgdi:waypoint x="350" y="120"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="BPMNEdge_decisionToExternal" bpmnElement="decisionToExternal">
+                <omgdi:waypoint x="400" y="120"/>
+                <omgdi:waypoint x="450" y="75"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="BPMNEdge_decisionToRejection" bpmnElement="decisionToRejection">
+                <omgdi:waypoint x="400" y="120"/>
+                <omgdi:waypoint x="450" y="175"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="BPMNEdge_externalToApproved" bpmnElement="externalToApproved">
+                <omgdi:waypoint x="550" y="75"/>
+                <omgdi:waypoint x="600" y="75"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="BPMNEdge_approvedToEnd" bpmnElement="approvedToEnd">
+                <omgdi:waypoint x="700" y="75"/>
+                <omgdi:waypoint x="750" y="75"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="BPMNEdge_rejectionToEnd" bpmnElement="rejectionToEnd">
+                <omgdi:waypoint x="550" y="175"/>
+                <omgdi:waypoint x="750" y="175"/>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+
+</definitions>
