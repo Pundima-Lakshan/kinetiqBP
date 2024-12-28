@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import BpmnModeler from 'bpmn-js/lib/Modeler';
 import { BpmnPropertiesPanelModule, BpmnPropertiesProviderModule, CamundaPlatformPropertiesProviderModule } from 'bpmn-js-properties-panel';
+import camundaModdlePackage from "camunda-bpmn-moddle/resources/camunda";
+import TokenSimulationModule from 'bpmn-js-token-simulation';
 
 import 'bpmn-js/dist/assets/diagram-js.css';
 import 'bpmn-js/dist/assets/bpmn-js.css';
@@ -29,7 +31,10 @@ export const ReactBpmnEditor = ({ diagramXml }: ReactBpmnEditorProps) => {
         propertiesPanel: {
           parent: propertiesPanelRef.current,
         },
-        additionalModules: [BpmnPropertiesPanelModule, BpmnPropertiesProviderModule, CamundaPlatformPropertiesProviderModule],
+        additionalModules: [BpmnPropertiesPanelModule, BpmnPropertiesProviderModule, CamundaPlatformPropertiesProviderModule, TokenSimulationModule],
+        moddleExtensions: {
+          camunda: camundaModdlePackage
+        },
       });
 
       setBpmnModeler(modeler);
@@ -184,7 +189,7 @@ export const ReactBpmnEditor = ({ diagramXml }: ReactBpmnEditorProps) => {
       <div ref={canvasRef} className="bpmn-editor-canvas" id="js-canvas"></div>
 
       {/* BPMN Properties Panel */}
-      <div className='bpmn-editor-properties-panel' >
+      <div className="bpmn-editor-properties-panel">
         <div ref={propertiesPanelRef} id="js-properties-panel" className=""></div>
       </div>
 

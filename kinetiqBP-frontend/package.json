@@ -11,7 +11,6 @@
     "format": "prettier . --write"
   },
   "dependencies": {
-    "camunda-bpmn-moddle": "7.0.1",
     "@bpmn-io/form-js": "1.11.3",
     "@bpmn-io/properties-panel": "3.25.0",
     "@emotion/react": "11.13.3",
@@ -19,14 +18,22 @@
     "@mui/icons-material": "6.1.6",
     "@mui/material": "6.1.6",
     "@mui/x-date-pickers": "7.22.2",
-    "bpmn-js": "18.1.1",
+    "@pdfme/common": "^5.2.11",
+    "@pdfme/generator": "^5.2.11",
+    "@pdfme/schemas": "^5.2.11",
+    "@pdfme/ui": "^5.2.11",
     "@toolpad/core": "0.9.0",
+    "@types/jsonwebtoken": "^9.0.7",
     "@xyflow/react": "12.3.5",
+    "bpmn-js": "18.1.1",
     "bpmn-js-properties-panel": "5.26.0",
+    "bpmn-js-token-simulation": "^0.36.0",
+    "camunda-bpmn-moddle": "7.0.1",
     "date-fns": "4.1.0",
     "dmn-js": "17.0.1",
     "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react-dom": "18.3.1",
+    "signature_pad": "^5.0.4"
   },
   "devDependencies": {
     "@eslint/js": "9.13.0",

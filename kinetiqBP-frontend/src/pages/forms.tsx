@@ -7,6 +7,7 @@ import { FormEditorComponent } from '../components/form/form-editor.tsx';
 import { FlowComponent } from '../components/react-flow/flow.tsx';
 import { GrafanaIframe } from '../components/grafana-iframe.tsx';
 import { BpmnEditor } from '../components/bpmn/bpmn-editor.tsx';
+import { Designer, Form } from '../components';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -55,6 +56,8 @@ export const Forms = () => {
           <Tab label="Editor" {...a11yProps(2)} />
           <Tab label="Dashboard" {...a11yProps(3)} />
           <Tab label="BPMN editor" {...a11yProps(4)} />
+          <Tab label="PDF Designer" {...a11yProps(5)} />
+          <Tab label="PDF Form and Viewer" {...a11yProps(6)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
@@ -71,6 +74,12 @@ export const Forms = () => {
       </CustomTabPanel>
       <CustomTabPanel value={value} index={4}>
         <BpmnEditor />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={5}>
+        <Designer />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={6}>
+        <Form />
       </CustomTabPanel>
     </Box>
   );
