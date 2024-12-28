@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+ xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+ xmlns:activiti="http://activiti.org/bpmn"
+ xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+ xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
+ xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+ typeLanguage="http://www.w3.org/2001/XMLSchema"
+ expressionLanguage="http://www.w3.org/1999/XPath"
+ targetNamespace="http://www.activiti.org/test">
+ <process id="FlowableProcess" name="FlowableProcess" isExecutable="true">
+  <startEvent id="startevent1" name="Start"></startEvent>
+  <userTask id="maker" name="maker" activiti:owner="maker"></userTask>
+  <userTask id="checker" name="checker" activiti:owner="checker"></userTask>
+  <sequenceFlow id="Flow_StartToMaker"
+   sourceRef="startevent1" targetRef="maker"></sequenceFlow>
+  <exclusiveGateway id="MakerExclusivegateway"
+   name="Exclusive Gateway Maer"></exclusiveGateway>
+  <sequenceFlow id="Flow_MakerToGateway" sourceRef="maker"
+   targetRef="MakerExclusivegateway"></sequenceFlow>
+  <sequenceFlow id="Flow_MakerGatewayToChecker"
+   sourceRef="MakerExclusivegateway" targetRef="checker">
+   <conditionExpression xsi:type="tFormalExpression"><![CDATA[${makerApproved}]]></conditionExpression>
+  </sequenceFlow>
+  <exclusiveGateway id="CheckerExclusivegateway"
+   name="Exclusive Gateway"></exclusiveGateway>
+  <sequenceFlow id="Flow_CheckerToGateway"
+   sourceRef="checker" targetRef="CheckerExclusivegateway"></sequenceFlow>
+  <endEvent id="endevent" name="End"></endEvent>
+  <sequenceFlow id="Flow_CheckerGatewayToEnd"
+   sourceRef="CheckerExclusivegateway" targetRef="endevent">
+   <conditionExpression xsi:type="tFormalExpression"><![CDATA[${checkerApproved}]]></conditionExpression>
+  </sequenceFlow>
+  <sequenceFlow id="Flow_MakerGatewayToEnd"
+   sourceRef="MakerExclusivegateway" targetRef="endevent">
+   <conditionExpression xsi:type="tFormalExpression"><![CDATA[${!makerApproved}]]></conditionExpression>
+  </sequenceFlow>
+  <sequenceFlow id="Flow_CheckerGatewayToMaker"
+   sourceRef="CheckerExclusivegateway" targetRef="maker">
+   <conditionExpression xsi:type="tFormalExpression"><![CDATA[${!checkerApproved}]]></conditionExpression>
+  </sequenceFlow>
+ </process>
+</definitions>
