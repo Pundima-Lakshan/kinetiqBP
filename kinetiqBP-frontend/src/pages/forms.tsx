@@ -2,12 +2,8 @@ import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import { FormViewer } from '../components/form/form-viewer.tsx';
-import { FormEditorComponent } from '../components/form/form-editor.tsx';
-import { FlowComponent } from '../components/react-flow/flow.tsx';
-import { GrafanaIframe } from '../components/grafana-iframe.tsx';
-import { BpmnEditor } from '../components/bpmn/bpmn-editor.tsx';
-import { Designer, Form } from '../components';
+import { BpmnEditor, Designer, Form, FormViewer, GrafanaIframe } from '@/components';
+import PlaygroundComponent from '@/components/organisms/form/react-form.tsx';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -58,11 +54,10 @@ export const Forms = () => {
           <Tab label="BPMN editor" {...a11yProps(4)} />
           <Tab label="PDF Designer" {...a11yProps(5)} />
           <Tab label="PDF Form and Viewer" {...a11yProps(6)} />
+          <Tab label="Form Playground" {...a11yProps(7)} />
         </Tabs>
       </Box>
-      <CustomTabPanel value={value} index={0}>
-        <FlowComponent />
-      </CustomTabPanel>
+      <CustomTabPanel value={value} index={0}></CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         <FormViewer />
       </CustomTabPanel>
@@ -80,6 +75,9 @@ export const Forms = () => {
       </CustomTabPanel>
       <CustomTabPanel value={value} index={6}>
         <Form />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={7}>
+        <PlaygroundComponent />
       </CustomTabPanel>
     </Box>
   );

@@ -43,4 +43,15 @@ export default tseslint.config(
       ...prettierPlugin.rules,
     },
   },
+  {
+    files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
+    rules: {
+      'no-duplicate-imports': [
+        'error',
+        {
+          includeExports: true,
+        },
+      ],
+    },
+  },
 );
