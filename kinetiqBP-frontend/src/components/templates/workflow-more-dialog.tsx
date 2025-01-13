@@ -5,7 +5,7 @@ import { WorkflowDefinitionsRowModel } from '@/components';
 
 export const WorkflowMoreDialog = ({ open, onClose }: DialogProps<GridRenderCellParams<WorkflowDefinitionsRowModel>>) => {
   return (
-    <Dialog fullWidth open={open} onClose={() => onClose()}>
+    <Dialog fullWidth open={open} onClose={() => onClose()} closeAfterTransition={false}>
       <DialogTitle>More dialog</DialogTitle>
       <DialogContent>Somethings</DialogContent>
       <DialogActions>

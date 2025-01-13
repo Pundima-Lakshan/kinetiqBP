@@ -24,7 +24,7 @@ const data = {
   creditor: 'John Doe Company',
 };
 
-const PlaygroundComponent: React.FC<PlaygroundProps> = ({ initialSchema = schema, initialData = data }) => {
+const KBPFormPlayground: React.FC<PlaygroundProps> = ({ initialSchema = schema, initialData = data }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [playgroundInstance, setPlaygroundInstance] = useState<FormPlayground | null>(null);
   const [currentSchema, setCurrentSchema] = useState<any>(initialSchema);
@@ -48,4 +48,4 @@ const PlaygroundComponent: React.FC<PlaygroundProps> = ({ initialSchema = schema
   return <div id="container" ref={containerRef} style={{ width: '100%', height: '100%', textAlign: 'start' }} />;
 };
 
-export default PlaygroundComponent;
+export default KBPFormPlayground;

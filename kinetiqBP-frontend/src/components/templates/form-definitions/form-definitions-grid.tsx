@@ -18,7 +18,7 @@ const StartWorkflowInstance = (params: GridRenderCellParams<FormDefinitionsRowMo
   const dialogs = useDialogs();
   return (
     <Button
-      variant="contained"
+      variant="text"
       size="small"
       tabIndex={params.hasFocus ? 0 : -1}
       onClick={() => {

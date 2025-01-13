@@ -59,7 +59,7 @@ const schema = {
   schemaVersion: 17,
 };
 
-export const FormEditorComponent: React.FC = () => {
+export const KBPFormEditor: React.FC = () => {
   const editorContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -71,9 +71,8 @@ export const FormEditorComponent: React.FC = () => {
       await formEditor.importSchema(schema);
     };
 
-    initializeEditor();
-
-    // Clean up form editor on unmount
+    void initializeEditor();
+    
     return () => {
       formEditor.destroy();
     };
