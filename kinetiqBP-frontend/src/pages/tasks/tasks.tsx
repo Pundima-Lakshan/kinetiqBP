@@ -1,6 +1,6 @@
-import { WorkflowInstancesGrid } from '@/components';
+import { TasksGrid } from '@/components';
 
-export const WorkflowInstances = () => {
+export const Tasks = () => {
   const dummyData = [
     {
       id: '1',
@@ -28,5 +28,5 @@ export const WorkflowInstances = () => {
     },
   ];
 
-  return <WorkflowInstancesGrid data={dummyData} />;
+  return <TasksGrid data={dummyData} />;
 };

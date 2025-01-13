@@ -1,6 +1,6 @@
-import { WorkflowInstancesGrid } from '@/components';
+import { FormDefinitionsGrid } from '@/components';
 
-export const WorkflowInstances = () => {
+export const FormDefinitions = () => {
   const dummyData = [
     {
       id: '1',
@@ -28,5 +28,5 @@ export const WorkflowInstances = () => {
     },
   ];
 
-  return <WorkflowInstancesGrid data={dummyData} />;
+  return <FormDefinitionsGrid data={dummyData} />;
 };

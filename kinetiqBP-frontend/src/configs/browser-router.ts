@@ -1,5 +1,14 @@
 import { createBrowserRouter } from 'react-router';
-import { Dashboard, FormDefinition, Heatmaps, Home, Statistics, Tasks, WorkflowDefinitions, WorkflowInstances } from '@/pages';
+import {
+  Dashboard,
+  FormDefinitions,
+  Heatmaps,
+  Home,
+  Statistics,
+  Tasks,
+  WorkflowDefinitions,
+  WorkflowInstances,
+} from '@/pages';
 
 export const BrowserRouteSegments = {
   Dashboard: '',
@@ -33,7 +42,7 @@ export const browserRouter = createBrowserRouter([
       },
       {
         path: getPath(BrowserRouteSegments.FormDefinitions),
-        Component: FormDefinition,
+        Component: FormDefinitions,
       },
       {
         path: getPath(BrowserRouteSegments.Heatmap),
