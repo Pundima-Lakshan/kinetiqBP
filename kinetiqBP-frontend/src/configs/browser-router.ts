@@ -10,14 +10,14 @@ import {
   WorkflowInstances,
 } from '@/pages';
 
-export const BrowserRouteSegments = {
-  Dashboard: '',
-  WorkflowDefinitions: 'workflow-definitions',
-  WorkflowInstances: 'workflow-instances',
-  FormDefinitions: 'form-definitions',
-  Tasks: 'tasks',
-  Statistics: 'statistics',
-  Heatmap: 'heatmap',
+export const browserRoutesCollection = {
+  Dashboard: { segment: '', title: 'Dashboard' },
+  WorkflowDefinitions: { segment: 'workflow-definitions', title: 'Workflow Definitions' },
+  WorkflowInstances: { segment: 'workflow-instances', title: 'Workflow Instances' },
+  FormDefinitions: { segment: 'form-definitions', title: 'Form Definitions' },
+  Tasks: { segment: 'tasks', title: 'Tasks' },
+  Statistics: { segment: 'statistics', title: 'Statistics' },
+  Heatmap: { segment: 'heatmap', title: 'Heatmap' },
 };
 
 const getPath = (segment: string) => {
@@ -29,31 +29,31 @@ export const browserRouter = createBrowserRouter([
     Component: Home,
     children: [
       {
-        path: getPath(BrowserRouteSegments.Dashboard),
+        path: getPath(browserRoutesCollection.Dashboard.segment),
         Component: Dashboard,
       },
       {
-        path: getPath(BrowserRouteSegments.WorkflowDefinitions),
+        path: getPath(browserRoutesCollection.WorkflowDefinitions.segment),
         Component: WorkflowDefinitions,
       },
       {
-        path: getPath(BrowserRouteSegments.WorkflowInstances),
+        path: getPath(browserRoutesCollection.WorkflowInstances.segment),
         Component: WorkflowInstances,
       },
       {
-        path: getPath(BrowserRouteSegments.FormDefinitions),
+        path: getPath(browserRoutesCollection.FormDefinitions.segment),
         Component: FormDefinitions,
       },
       {
-        path: getPath(BrowserRouteSegments.Heatmap),
+        path: getPath(browserRoutesCollection.Heatmap.segment),
         Component: Heatmaps,
       },
       {
-        path: getPath(BrowserRouteSegments.Statistics),
+        path: getPath(browserRoutesCollection.Statistics.segment),
         Component: Statistics,
       },
       {
-        path: getPath(BrowserRouteSegments.Tasks),
+        path: getPath(browserRoutesCollection.Tasks.segment),
         Component: Tasks,
       },
     ],

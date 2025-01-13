@@ -1,1 +1,2 @@
-export * from './non-initial-effect.ts'
+export * from './non-initial-effect.ts';
+export * from './synced-state.ts';

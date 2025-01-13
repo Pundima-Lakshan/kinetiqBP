@@ -1,19 +1,18 @@
 import { PageHeader, PageHeaderToolbar } from '@toolpad/core';
-import { Button } from '@mui/material';
 import { useCallback } from 'react';
 import { useDynamicBreadcrumbs } from '@/pages/home/dynamic-breadcrumbs.ts';
+import { PageHeaderAction } from '@/components';
 
-const CustomPageToolbar = ({ status }: { status: string }) => {
+const KBPPageToolbar = () => {
   return (
     <PageHeaderToolbar>
-      <p>Current status: {status}</p>
-      <Button color="inherit">Export</Button>
+      <PageHeaderAction />
     </PageHeaderToolbar>
   );
 };
 
-export const CustomPageHeader = ({ status }: { status: string }) => {
-  const CustomPageToolbarComponent = useCallback(() => <CustomPageToolbar status={status} />, [status]);
+export const KBPPageHeader = () => {
+  const CustomPageToolbarComponent = useCallback(() => <KBPPageToolbar />, []);
   const { breadcrumbs, title } = useDynamicBreadcrumbs();
 
   return <PageHeader breadcrumbs={breadcrumbs} title={title} slots={{ toolbar: CustomPageToolbarComponent }} />;

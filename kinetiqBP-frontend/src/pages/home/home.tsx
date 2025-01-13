@@ -6,7 +6,7 @@ import { useAuthInitialization } from './auth-initialization.ts';
 import { Outlet } from 'react-router';
 import { brandiung, envs, navigation } from '@/configs';
 import { DialogsProvider, PageContainer } from '@toolpad/core';
-import { CustomPageHeader } from '@/pages/home/page-header.tsx';
+import { KBPPageHeader } from '@/pages/home/page-header.tsx';
 import { useAuth } from 'react-oidc-context';
 import LinearProgress from '@mui/material/LinearProgress';
 import { Button, Container } from '@mui/material';
@@ -48,7 +48,7 @@ export const Home = () => {
         <PageContainer
           style={{ flex: 1, border: 0, maxWidth: '100%' }}
           slots={{
-            header: CustomPageHeader,
+            header: KBPPageHeader,
           }}
         >
           <DialogsProvider>

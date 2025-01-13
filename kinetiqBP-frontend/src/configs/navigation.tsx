@@ -2,12 +2,12 @@ import type { Navigation } from '@toolpad/core/AppProvider';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import DescriptionIcon from '@mui/icons-material/Description';
-import { BrowserRouteSegments } from '@/configs/browser-router.ts';
+import { browserRoutesCollection } from '@/configs/browser-router.ts';
 
 export const navigation: Navigation = [
   {
-    segment: BrowserRouteSegments.Dashboard,
-    title: 'Dashboard',
+    segment: browserRoutesCollection.Dashboard.segment,
+    title: browserRoutesCollection.Dashboard.title,
     icon: <DashboardIcon />,
   },
   {
@@ -18,8 +18,8 @@ export const navigation: Navigation = [
     title: 'Work',
   },
   {
-    segment: BrowserRouteSegments.Tasks,
-    title: 'Tasks',
+    segment: browserRoutesCollection.Tasks.segment,
+    title: browserRoutesCollection.Tasks.title,
     icon: <AssignmentIcon />,
   },
   {
@@ -30,18 +30,18 @@ export const navigation: Navigation = [
     title: 'Workflows',
   },
   {
-    segment: BrowserRouteSegments.WorkflowDefinitions,
-    title: 'Definitions',
+    segment: browserRoutesCollection.WorkflowDefinitions.segment,
+    title: browserRoutesCollection.WorkflowDefinitions.title,
     icon: <AssignmentIcon />,
   },
   {
-    segment: BrowserRouteSegments.WorkflowInstances,
-    title: 'Instances',
+    segment: browserRoutesCollection.WorkflowInstances.segment,
+    title: browserRoutesCollection.WorkflowInstances.title,
     icon: <AssignmentIcon />,
   },
   {
-    segment: BrowserRouteSegments.FormDefinitions,
-    title: 'Form Definitions',
+    segment: browserRoutesCollection.FormDefinitions.segment,
+    title: browserRoutesCollection.FormDefinitions.title,
     icon: <AssignmentIcon />,
   },
   {
@@ -52,13 +52,13 @@ export const navigation: Navigation = [
     title: 'Analytics',
   },
   {
-    segment: BrowserRouteSegments.Statistics,
-    title: 'Statistics',
+    segment: browserRoutesCollection.Statistics.segment,
+    title: browserRoutesCollection.Statistics.title,
     icon: <DescriptionIcon />,
   },
   {
-    segment: BrowserRouteSegments.Heatmap,
-    title: 'Heatmap',
+    segment: browserRoutesCollection.Heatmap.segment,
+    title: browserRoutesCollection.Heatmap.title,
     icon: <DescriptionIcon />,
   },
 ];
