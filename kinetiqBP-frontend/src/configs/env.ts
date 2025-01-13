@@ -4,6 +4,7 @@ const PlaceholderEnvs = {
   VITE_KEYCLOAK_REALM: '',
   VITE_KEYCLOAK_CLIENT_ID: '',
   DEV: false,
+  VITE_NO_AUTH: false,  
 };
 
 const envs = {
@@ -12,7 +13,8 @@ const envs = {
   VITE_KEYCLOAK_REALM: import.meta.env.VITE_KEYCLOAK_REALM,
   VITE_KEYCLOAK_CLIENT_ID: import.meta.env.VITE_KEYCLOAK_CLIENT_ID,
   DEV: import.meta.env.DEV,
-};
+  VITE_NO_AUTH: import.meta.env.VITE_NO_AUTH,
+} satisfies typeof PlaceholderEnvs;
 
 const validateEnvs = () => {
   const placeholderEnvKeys = Object.keys(PlaceholderEnvs) as Array<keyof typeof PlaceholderEnvs>;

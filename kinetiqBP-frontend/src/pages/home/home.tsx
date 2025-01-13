@@ -4,7 +4,7 @@ import { SidebarFooterAccount, ToolbarAccount } from '@/components';
 import { muiTheme } from '@/styles';
 import { useAuthInitialization } from './auth-initialization.ts';
 import { Outlet } from 'react-router';
-import { brandiung, navigation } from '@/configs';
+import { brandiung, envs, navigation } from '@/configs';
 import { DialogsProvider, PageContainer } from '@toolpad/core';
 import { CustomPageHeader } from '@/pages/home/page-header.tsx';
 import { useAuth } from 'react-oidc-context';
@@ -23,7 +23,7 @@ export const Home = () => {
     );
   }
 
-  if (!user) {
+  if (!user && !envs.VITE_NO_AUTH) {
     return (
       <Container
         style={{
