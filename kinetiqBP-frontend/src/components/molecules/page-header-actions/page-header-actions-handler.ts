@@ -1,7 +1,7 @@
 import { useActivePage } from '@toolpad/core/useActivePage';
 import { useDialogs } from '@toolpad/core';
 import { browserRoutesCollection } from '@/configs';
-import { NewFormDefinitionDialog } from '@/components';
+import { NewFormDefinitionDialog, NewWorkflowDefinitionDialog } from '@/components';
 
 export const usePageHeaderActionsHandler = () => {
   const activePage = useActivePage();
@@ -14,6 +14,9 @@ export const usePageHeaderActionsHandler = () => {
     switch (activePage.title) {
       case browserRoutesCollection.FormDefinitions.title:
         await dialogs.open(NewFormDefinitionDialog);
+        break;
+      case browserRoutesCollection.WorkflowDefinitions.title:
+        await dialogs.open(NewWorkflowDefinitionDialog);
         break;
       default:
         break;

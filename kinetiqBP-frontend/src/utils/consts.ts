@@ -1,0 +1,1 @@
+export const DEFAULT_BPMN_DIAGRAM_XML_PATH = '/default-editor-diagram.bpmn20.xml';

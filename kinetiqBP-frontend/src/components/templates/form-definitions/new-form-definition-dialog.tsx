@@ -23,7 +23,7 @@ export const NewFormDefinitionDialog = ({ open, onClose }: DialogProps) => {
       <DialogContent {...defaultDialogContentProps}>
         <KBPFormEditor formEditorRef={formEditorRef} />
       </DialogContent>
-      <DialogConfirmationActions onConfirm={handleConfirm} onCancel={handleClose} />
+      <DialogConfirmationActions onConfirm={handleConfirm} onCancel={handleClose} isLoading={false} />
     </Dialog>
   );
 };

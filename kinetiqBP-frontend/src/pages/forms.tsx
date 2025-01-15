@@ -2,7 +2,7 @@ import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import { BpmnEditor, Designer, Form, GrafanaIframe } from '@/components';
+import { Designer, Form, GrafanaIframe } from '@/components';
 import KBPFormPlayground from '@/components/organisms/form/form-playground.tsx';
 
 interface TabPanelProps {
@@ -68,7 +68,7 @@ export const Forms = () => {
         <GrafanaIframe />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={4}>
-        <BpmnEditor />
+        {/*<KBPFormEditor />*/}
       </CustomTabPanel>
       <CustomTabPanel value={value} index={5}>
         <Designer />
