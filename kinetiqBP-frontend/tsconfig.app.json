@@ -10,7 +10,6 @@
     ],
     "module": "ESNext",
     "skipLibCheck": true,
-    
     /* Bundler mode */
     "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
@@ -18,19 +17,22 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
-    
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-    
+    /* Other */
     "paths": {
       "@/*": [
         "./src/*"
       ]
-    }
+    },
+    "typeRoots": [
+      "./types",
+      "./node_modules/@types"
+    ]
   },
   "include": [
     "src"

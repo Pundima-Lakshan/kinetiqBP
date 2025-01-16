@@ -71,6 +71,9 @@ importers:
       dmn-js:
         specifier: 17.0.1
         version: 17.0.1(@lezer/common@1.2.3)
+      htm:
+        specifier: ^3.1.1
+        version: 3.1.1
       keycloak-js:
         specifier: 26.0.7
         version: 26.0.7

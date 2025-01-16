@@ -6,9 +6,11 @@ import './style.css';
 
 import React, { useEffect, useRef, useState } from 'react';
 import BpmnModeler from 'bpmn-js/lib/Modeler';
-import { BpmnPropertiesPanelModule, BpmnPropertiesProviderModule, CamundaPlatformPropertiesProviderModule } from 'bpmn-js-properties-panel';
-import camundaModdlePackage from 'camunda-bpmn-moddle/resources/camunda';
-import TokenSimulationModule from 'bpmn-js-token-simulation';
+import { BpmnPropertiesPanelModule, BpmnPropertiesProviderModule } from 'bpmn-js-properties-panel';
+
+import magicPropertiesProviderModule from './common/provider/magic';
+import magicModdleDescriptor from './common/descriptors/magic';
+
 import { DEFAULT_BPMN_DIAGRAM_XML_PATH } from '@/utils';
 
 interface ReactBpmnEditorProps {
@@ -20,12 +22,9 @@ export const KBPBpmnEditor = ({ diagramXml, bpmnModelerRef }: ReactBpmnEditorPro
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLDivElement>(null);
   const propertiesPanelRef = useRef<HTMLDivElement>(null);
-  const downloadLinkRef = useRef<HTMLAnchorElement>(null);
-  const downloadSvgLinkRef = useRef<HTMLAnchorElement>(null);
 
   const [diagramError, setDiagramError] = useState<string | null>(null);
   const [diagram, setDiagram] = useState(diagramXml);
-  const [bpmnModeler, setBpmnModeler] = useState<BpmnModeler | null>(null);
 
   useEffect(() => {
     if (diagram) {
@@ -47,13 +46,12 @@ export const KBPBpmnEditor = ({ diagramXml, bpmnModelerRef }: ReactBpmnEditorPro
       propertiesPanel: {
         parent: propertiesPanelRef.current,
       },
-      additionalModules: [BpmnPropertiesPanelModule, BpmnPropertiesProviderModule, CamundaPlatformPropertiesProviderModule, TokenSimulationModule],
+      additionalModules: [BpmnPropertiesPanelModule, BpmnPropertiesProviderModule, magicPropertiesProviderModule],
       moddleExtensions: {
-        camunda: camundaModdlePackage,
+        magic: magicModdleDescriptor,
       },
     });
 
-    setBpmnModeler(modeler);
     if (bpmnModelerRef) {
       bpmnModelerRef.current = modeler;
     }
@@ -116,69 +114,6 @@ export const KBPBpmnEditor = ({ diagramXml, bpmnModelerRef }: ReactBpmnEditorPro
       container.removeEventListener('drop', handleFileSelect);
     };
   };
-
-  const setEncoded = (linkRef: React.RefObject<HTMLAnchorElement>, name: string, data: string | null) => {
-    if (data) {
-      const encodedData = encodeURIComponent(data);
-      linkRef.current?.classList.add('active');
-      linkRef.current?.setAttribute('href', `data:application/bpmn20-xml;charset=UTF-8,${encodedData}`);
-      linkRef.current?.setAttribute('download', name);
-    } else {
-      linkRef.current?.classList.remove('active');
-    }
-  };
-
-  const exportArtifacts = async () => {
-    if (bpmnModeler) {
-      try {
-        const { svg } = await bpmnModeler.saveSVG();
-        setEncoded(downloadSvgLinkRef, 'diagram.svg', svg);
-      } catch (err) {
-        console.error('Error exporting SVG:', err);
-        setEncoded(downloadSvgLinkRef, 'diagram.svg', null);
-      }
-
-      try {
-        const { xml = null } = await bpmnModeler.saveXML({ format: true });
-        setEncoded(downloadLinkRef, 'bpmnio.bpmn20.xml', xml);
-      } catch (err) {
-        console.error('Error exporting XML:', err);
-        setEncoded(downloadLinkRef, 'diagram.bpmn20.xml', null);
-      }
-    }
-  };
-
-  const downloadLink = async () => {
-    if (bpmnModeler) {
-      const { xml = null } = await bpmnModeler.saveXML({ format: true });
-      if (xml) {
-        const blob = new Blob([xml], { type: 'application/bpmn20-xml' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'diagram.bpmn20.xml';
-        document.body.appendChild(link);
-        link.click();
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(link);
-      }
-    }
-  };
-
-  useEffect(() => {
-    if (bpmnModeler) {
-      const debounce = (fn: () => void, timeout: number) => {
-        let timer: NodeJS.Timeout;
-        return () => {
-          clearTimeout(timer);
-          timer = setTimeout(fn, timeout);
-        };
-      };
-
-      const debouncedExport = debounce(exportArtifacts, 500);
-      bpmnModeler.on('commandStack.changed', debouncedExport);
-    }
-  }, [bpmnModeler]);
 
   return (
     <div ref={containerRef} className="bpmn-editor-content" id="js-drop-zone">
