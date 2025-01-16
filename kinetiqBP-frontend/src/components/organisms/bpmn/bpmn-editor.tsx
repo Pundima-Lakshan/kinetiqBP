@@ -8,8 +8,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import BpmnModeler from 'bpmn-js/lib/Modeler';
 import { BpmnPropertiesPanelModule, BpmnPropertiesProviderModule } from 'bpmn-js-properties-panel';
 
-import magicPropertiesProviderModule from './common/provider/magic';
-import magicModdleDescriptor from './common/descriptors/magic';
+import { MagicPropertiesProviderModule } from './common/provider';
+import { magicModdleDescriptor } from './common/descriptors';
 
 import { DEFAULT_BPMN_DIAGRAM_XML_PATH } from '@/utils';
 
@@ -46,7 +46,7 @@ export const KBPBpmnEditor = ({ diagramXml, bpmnModelerRef }: ReactBpmnEditorPro
       propertiesPanel: {
         parent: propertiesPanelRef.current,
       },
-      additionalModules: [BpmnPropertiesPanelModule, BpmnPropertiesProviderModule, magicPropertiesProviderModule],
+      additionalModules: [BpmnPropertiesPanelModule, BpmnPropertiesProviderModule, MagicPropertiesProviderModule],
       moddleExtensions: {
         magic: magicModdleDescriptor,
       },

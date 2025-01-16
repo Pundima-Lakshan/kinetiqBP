@@ -1,6 +1,6 @@
 import MagicPropertiesProvider from './MagicPropertiesProvider';
 
-export default {
+export const MagicPropertiesProviderModule = {
   __init__: [ 'magicPropertiesProvider' ],
   magicPropertiesProvider: [ 'type', MagicPropertiesProvider ]
 };
