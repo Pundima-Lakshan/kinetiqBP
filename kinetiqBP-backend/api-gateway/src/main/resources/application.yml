@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: api-gateway
+  main:
+    web-application-type: reactive
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+#          issuer-uri: "http://localhost:14403/realms/kinetiqBP"
+          jwk-set-uri: "http://localhost:14403/realms/kinetiqBP/protocol/openid-connect/certs"
+#      client:
+#        registration:
+#          keycloak:
+#            client-id: "kinetiqBP"
+#            authorization-grant-type: "authorization_code"
+#            scope: profile, roles, groups
+#        provider:
+#          keycloak:
+#            issuer-uri: http://localhost:14403/realms/kinetiqBP
+#            user-name-attribute: preferred_username
+
+server:
+  port: 18403
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:17403/eureka/
+    fetch-registry: true
+    register-with-eureka: true
