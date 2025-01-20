@@ -12,4 +12,7 @@ export default defineConfig({
       '@': root,
     } as AliasOptions,
   },
+  server: {
+    port: 13403,  // Set the port to your desired value
+  },
 });
