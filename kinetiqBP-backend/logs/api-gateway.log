@@ -1,0 +1,956 @@
+[2m2025-02-07T05:01:13.168+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.k.apigateway.ApiGatewayApplication    [0;39m [2m:[0;39m Starting ApiGatewayApplication using Java 21.0.1 with PID 5432 (D:\Projects\kinetiqBP\kinetiqBP\kinetiqBP-backend\api-gateway\target\classes started by WDPLAKSHAN in D:\Projects\kinetiqBP\kinetiqBP\kinetiqBP-backend)
+[2m2025-02-07T05:01:13.170+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.k.apigateway.ApiGatewayApplication    [0;39m [2m:[0;39m Running with Spring Boot v3.4.1, Spring v6.2.1
+[2m2025-02-07T05:01:13.171+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.k.apigateway.ApiGatewayApplication    [0;39m [2m:[0;39m No active profile set, falling back to 1 default profile: "default"
+[2m2025-02-07T05:01:14.170+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.cloud.context.scope.GenericScope    [0;39m [2m:[0;39m BeanFactory id=9a534841-6805-38d3-aab5-c7148a3c7a9f
+[2m2025-02-07T05:01:15.204+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [After]
+[2m2025-02-07T05:01:15.204+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [Before]
+[2m2025-02-07T05:01:15.204+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [Between]
+[2m2025-02-07T05:01:15.204+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [Cookie]
+[2m2025-02-07T05:01:15.204+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [Header]
+[2m2025-02-07T05:01:15.204+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [Host]
+[2m2025-02-07T05:01:15.204+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [Method]
+[2m2025-02-07T05:01:15.204+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [Path]
+[2m2025-02-07T05:01:15.204+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [Query]
+[2m2025-02-07T05:01:15.204+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [ReadBody]
+[2m2025-02-07T05:01:15.205+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [RemoteAddr]
+[2m2025-02-07T05:01:15.205+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+[2m2025-02-07T05:01:15.205+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [Weight]
+[2m2025-02-07T05:01:15.205+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [CloudFoundryRouteService]
+[2m2025-02-07T05:01:15.518+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mDiscoveryClientOptionalArgsConfiguration[0;39m [2m:[0;39m Eureka HTTP Client uses RestTemplate.
+[2m2025-02-07T05:01:15.547+05:30[0;39m [33m WARN[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36miguration$LoadBalancerCaffeineWarnLogger[0;39m [2m:[0;39m Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+[2m2025-02-07T05:01:15.613+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.n.eureka.InstanceInfoFactory      [0;39m [2m:[0;39m Setting initial instance status as: STARTING
+[2m2025-02-07T05:01:15.644+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Initializing Eureka in region us-east-1
+[2m2025-02-07T05:01:15.649+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mc.n.d.s.r.aws.ConfigClusterResolver     [0;39m [2m:[0;39m Resolving eureka endpoints via configuration
+[2m2025-02-07T05:01:15.659+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Disable delta property : false
+[2m2025-02-07T05:01:15.659+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Single vip registry refresh property : null
+[2m2025-02-07T05:01:15.659+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Force full registry fetch : false
+[2m2025-02-07T05:01:15.659+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Application is null : false
+[2m2025-02-07T05:01:15.659+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Registered Applications size is zero : true
+[2m2025-02-07T05:01:15.659+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Application version is -1: true
+[2m2025-02-07T05:01:15.659+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Getting all instance registry info from the eureka server
+[2m2025-02-07T05:01:16.055+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m The response status is 200
+[2m2025-02-07T05:01:16.057+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Starting heartbeat executor: renew interval is: 30
+[2m2025-02-07T05:01:16.058+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mc.n.discovery.InstanceInfoReplicator    [0;39m [2m:[0;39m InstanceInfoReplicator onDemand update allowed rate per min is 4
+[2m2025-02-07T05:01:16.060+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Discovery Client initialized at timestamp 1738884676059 with initial instances count: 1
+[2m2025-02-07T05:01:16.063+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.n.e.s.EurekaServiceRegistry       [0;39m [2m:[0;39m Registering application API-GATEWAY with eureka with status UP
+[2m2025-02-07T05:01:16.063+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Saw local status change event StatusChangeEvent [timestamp=1738884676063, current=UP, previous=STARTING]
+[2m2025-02-07T05:01:16.064+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[foReplicator-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m DiscoveryClient_API-GATEWAY/LAKSHAN-LAPTOP.mshome.net:api-gateway:18403: registering service...
+[2m2025-02-07T05:01:16.106+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[foReplicator-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m DiscoveryClient_API-GATEWAY/LAKSHAN-LAPTOP.mshome.net:api-gateway:18403 - registration status: 204
+[2m2025-02-07T05:01:16.120+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_UI-SERVICE applying {pattern=/ui-service/**} to Path
+[2m2025-02-07T05:01:16.137+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_UI-SERVICE applying filter {regexp=/ui-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+[2m2025-02-07T05:01:16.145+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition matched: ReactiveCompositeDiscoveryClient_UI-SERVICE
+[2m2025-02-07T05:01:16.235+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.b.web.embedded.netty.NettyWebServer [0;39m [2m:[0;39m Netty started on port 18403 (http)
+[2m2025-02-07T05:01:16.236+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36m.s.c.n.e.s.EurekaAutoServiceRegistration[0;39m [2m:[0;39m Updating port to 18403
+[2m2025-02-07T05:01:16.248+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_UI-SERVICE applying {pattern=/ui-service/**} to Path
+[2m2025-02-07T05:01:16.250+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_UI-SERVICE applying filter {regexp=/ui-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+[2m2025-02-07T05:01:16.251+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition matched: ReactiveCompositeDiscoveryClient_UI-SERVICE
+[2m2025-02-07T05:01:16.253+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.k.apigateway.ApiGatewayApplication    [0;39m [2m:[0;39m Started ApiGatewayApplication in 3.803 seconds (process running for 4.708)
+[2m2025-02-07T05:01:27.583+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[ctor-http-nio-2][0;39m [36mo.k.a.c.l.RequestResponseLoggingFilter  [0;39m [2m:[0;39m Request: GET http://localhost:18403/ui-service/api/v1/hello
+[2m2025-02-07T05:01:27.846+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[ctor-http-nio-2][0;39m [36mr.netty.http.client.HttpClientConnect   [0;39m [2m:[0;39m [2ace9e53-1, L:/127.0.0.1:51003 - R:localhost/127.0.0.1:14403] Handler is being applied: {uri=http://localhost:14403/realms/kinetiqBP/protocol/openid-connect/certs, method=GET}
+[2m2025-02-07T05:01:27.850+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[ctor-http-nio-2][0;39m [36mr.n.http.client.HttpClientOperations    [0;39m [2m:[0;39m [2ace9e53-1, L:/127.0.0.1:51003 - R:localhost/127.0.0.1:14403] No sendHeaders() called before complete, sending zero-length header
+[2m2025-02-07T05:01:28.271+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[ctor-http-nio-2][0;39m [36mr.n.http.client.HttpClientOperations    [0;39m [2m:[0;39m [2ace9e53-1, L:/127.0.0.1:51003 - R:localhost/127.0.0.1:14403] Received response (auto-read:false) : RESPONSE(decodeResult: success, version: HTTP/1.1)
+HTTP/1.1 200 OK
+content-length: <filtered>
+Cache-Control: <filtered>
+Content-Type: <filtered>
+Referrer-Policy: <filtered>
+Strict-Transport-Security: <filtered>
+X-Content-Type-Options: <filtered>
+X-Frame-Options: <filtered>
+X-XSS-Protection: <filtered>
+[2m2025-02-07T05:01:28.288+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[ctor-http-nio-2][0;39m [36mr.n.http.client.HttpClientOperations    [0;39m [2m:[0;39m [2ace9e53-1, L:/127.0.0.1:51003 - R:localhost/127.0.0.1:14403] Received last HTTP packet
+[2m2025-02-07T05:01:28.301+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[ctor-http-nio-2][0;39m [36mo.s.s.oauth2.jwt.JwtTimestampValidator  [0;39m [2m:[0;39m Jwt expired at 2025-02-06T16:10:16Z
+[2m2025-02-07T05:01:28.305+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[ctor-http-nio-2][0;39m [36mo.s.s.w.s.a.AuthenticationWebFilter     [0;39m [2m:[0;39m Authentication failed: Jwt expired at 2025-02-06T16:10:16Z
+
+org.springframework.security.oauth2.server.resource.InvalidBearerTokenException: Jwt expired at 2025-02-06T16:10:16Z
+	at org.springframework.security.oauth2.server.resource.authentication.JwtReactiveAuthenticationManager.onError(JwtReactiveAuthenticationManager.java:79)
+	at reactor.core.publisher.Mono.lambda$onErrorMap$28(Mono.java:3848)
+	at reactor.core.publisher.Mono.lambda$onErrorResume$30(Mono.java:3938)
+	at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onError(FluxOnErrorResume.java:94)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onError(FluxMapFuseable.java:142)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.onError(MonoFlatMap.java:180)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.secondError(MonoFlatMap.java:241)
+	at reactor.core.publisher.MonoFlatMap$FlatMapInner.onError(MonoFlatMap.java:315)
+	at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onError(FluxOnErrorResume.java:106)
+	at reactor.core.publisher.Operators.error(Operators.java:198)
+	at reactor.core.publisher.MonoError.subscribe(MonoError.java:53)
+	at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
+	at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onError(FluxOnErrorResume.java:103)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onError(FluxMapFuseable.java:142)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:121)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.secondComplete(MonoFlatMap.java:245)
+	at reactor.core.publisher.MonoFlatMap$FlatMapInner.onNext(MonoFlatMap.java:305)
+	at reactor.core.publisher.FluxMap$MapSubscriber.onNext(FluxMap.java:122)
+	at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onNext(FluxOnErrorResume.java:79)
+	at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onNext(FluxSwitchIfEmpty.java:74)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.secondComplete(MonoFlatMap.java:245)
+	at reactor.core.publisher.MonoFlatMap$FlatMapInner.onNext(MonoFlatMap.java:305)
+	at reactor.core.publisher.Operators$ScalarSubscription.request(Operators.java:2571)
+	at reactor.core.publisher.MonoFlatMap$FlatMapInner.onSubscribe(MonoFlatMap.java:291)
+	at reactor.core.publisher.MonoJust.subscribe(MonoJust.java:55)
+	at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:53)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:165)
+	at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onNext(FluxSwitchIfEmpty.java:74)
+	at reactor.core.publisher.Operators$MonoSubscriber.complete(Operators.java:1865)
+	at reactor.core.publisher.MonoCacheTime$CoordinatorSubscriber.signalCached(MonoCacheTime.java:337)
+	at reactor.core.publisher.MonoCacheTime$CoordinatorSubscriber.onNext(MonoCacheTime.java:354)
+	at reactor.core.publisher.FluxPeekFuseable$PeekFuseableSubscriber.onNext(FluxPeekFuseable.java:210)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.secondComplete(MonoFlatMap.java:245)
+	at reactor.core.publisher.MonoFlatMap$FlatMapInner.onNext(MonoFlatMap.java:305)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.secondComplete(MonoFlatMap.java:245)
+	at reactor.core.publisher.MonoFlatMap$FlatMapInner.onNext(MonoFlatMap.java:305)
+	at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onNext(FluxOnErrorResume.java:79)
+	at reactor.core.publisher.FluxOnAssembly$OnAssemblySubscriber.onNext(FluxOnAssembly.java:539)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129)
+	at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onNext(FluxContextWrite.java:107)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableConditionalSubscriber.onNext(FluxMapFuseable.java:299)
+	at reactor.core.publisher.FluxFilterFuseable$FilterFuseableConditionalSubscriber.onNext(FluxFilterFuseable.java:337)
+	at reactor.core.publisher.Operators$BaseFluxToMonoOperator.completePossiblyEmpty(Operators.java:2097)
+	at reactor.core.publisher.MonoCollect$CollectSubscriber.onComplete(MonoCollect.java:145)
+	at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144)
+	at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:260)
+	at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144)
+	at reactor.netty.channel.FluxReceive.onInboundComplete(FluxReceive.java:413)
+	at reactor.netty.channel.ChannelOperations.onInboundComplete(ChannelOperations.java:455)
+	at reactor.netty.channel.ChannelOperations.terminate(ChannelOperations.java:509)
+	at reactor.netty.http.client.HttpClientOperations.onInboundNext(HttpClientOperations.java:817)
+	at reactor.netty.channel.ChannelOperationsHandler.channelRead(ChannelOperationsHandler.java:115)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.handler.codec.MessageToMessageDecoder.channelRead(MessageToMessageDecoder.java:107)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.channel.CombinedChannelDuplexHandler$DelegatingChannelHandlerContext.fireChannelRead(CombinedChannelDuplexHandler.java:436)
+	at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:346)
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:318)
+	at io.netty.channel.CombinedChannelDuplexHandler.channelRead(CombinedChannelDuplexHandler.java:251)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1357)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:868)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.springframework.security.oauth2.jwt.JwtValidationException: Jwt expired at 2025-02-06T16:10:16Z
+	at org.springframework.security.oauth2.jwt.NimbusReactiveJwtDecoder.validateJwt(NimbusReactiveJwtDecoder.java:198)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:113)
+	... 66 common frames omitted
+
+[2m2025-02-07T05:01:28.313+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[ctor-http-nio-2][0;39m [36mo.k.a.c.l.RequestResponseLoggingFilter  [0;39m [2m:[0;39m Response: GET http://localhost:18403/ui-service/api/v1/hello - Status: 401 UNAUTHORIZED - Time: 730ms
+[2m2025-02-07T05:01:28.318+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[ctor-http-nio-2][0;39m [36mo.k.a.c.l.RequestResponseLoggingFilter  [0;39m [2m:[0;39m Request: GET http://localhost:18403/ui-service/api/v1/hello
+[2m2025-02-07T05:01:28.320+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[ctor-http-nio-2][0;39m [36mo.s.s.oauth2.jwt.JwtTimestampValidator  [0;39m [2m:[0;39m Jwt expired at 2025-02-06T16:10:16Z
+[2m2025-02-07T05:01:28.321+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[ctor-http-nio-2][0;39m [36mo.s.s.w.s.a.AuthenticationWebFilter     [0;39m [2m:[0;39m Authentication failed: Jwt expired at 2025-02-06T16:10:16Z
+
+org.springframework.security.oauth2.server.resource.InvalidBearerTokenException: Jwt expired at 2025-02-06T16:10:16Z
+	at org.springframework.security.oauth2.server.resource.authentication.JwtReactiveAuthenticationManager.onError(JwtReactiveAuthenticationManager.java:79)
+	at reactor.core.publisher.Mono.lambda$onErrorMap$28(Mono.java:3848)
+	at reactor.core.publisher.Mono.lambda$onErrorResume$30(Mono.java:3938)
+	at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onError(FluxOnErrorResume.java:94)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onError(FluxMapFuseable.java:142)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.onError(MonoFlatMap.java:180)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.secondError(MonoFlatMap.java:241)
+	at reactor.core.publisher.MonoFlatMap$FlatMapInner.onError(MonoFlatMap.java:315)
+	at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onError(FluxOnErrorResume.java:106)
+	at reactor.core.publisher.Operators.error(Operators.java:198)
+	at reactor.core.publisher.MonoError.subscribe(MonoError.java:53)
+	at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
+	at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onError(FluxOnErrorResume.java:103)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onError(FluxMapFuseable.java:142)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:121)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.secondComplete(MonoFlatMap.java:245)
+	at reactor.core.publisher.MonoFlatMap$FlatMapInner.onNext(MonoFlatMap.java:305)
+	at reactor.core.publisher.FluxMap$MapSubscriber.onNext(FluxMap.java:122)
+	at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onNext(FluxOnErrorResume.java:79)
+	at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onNext(FluxSwitchIfEmpty.java:74)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.secondComplete(MonoFlatMap.java:245)
+	at reactor.core.publisher.MonoFlatMap$FlatMapInner.onNext(MonoFlatMap.java:305)
+	at reactor.core.publisher.Operators$ScalarSubscription.request(Operators.java:2571)
+	at reactor.core.publisher.MonoFlatMap$FlatMapInner.onSubscribe(MonoFlatMap.java:291)
+	at reactor.core.publisher.MonoJust.subscribe(MonoJust.java:55)
+	at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:53)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:165)
+	at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onNext(FluxSwitchIfEmpty.java:74)
+	at reactor.core.publisher.Operators$ScalarSubscription.request(Operators.java:2571)
+	at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.set(Operators.java:2367)
+	at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.onSubscribe(Operators.java:2241)
+	at reactor.core.publisher.MonoJust.subscribe(MonoJust.java:55)
+	at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:165)
+	at reactor.core.publisher.Operators$MonoSubscriber.complete(Operators.java:1865)
+	at reactor.core.publisher.MonoCacheTime.subscribeOrReturn(MonoCacheTime.java:151)
+	at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:63)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:165)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129)
+	at reactor.core.publisher.FluxFilterFuseable$FilterFuseableSubscriber.onNext(FluxFilterFuseable.java:118)
+	at reactor.core.publisher.Operators$ScalarSubscription.request(Operators.java:2571)
+	at reactor.core.publisher.FluxFilterFuseable$FilterFuseableSubscriber.request(FluxFilterFuseable.java:191)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.request(FluxMapFuseable.java:171)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.request(FluxMapFuseable.java:171)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.request(MonoFlatMap.java:194)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.request(MonoFlatMap.java:194)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.request(FluxMapFuseable.java:171)
+	at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.set(Operators.java:2367)
+	at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onSubscribe(FluxOnErrorResume.java:74)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onSubscribe(FluxMapFuseable.java:96)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.onSubscribe(MonoFlatMap.java:117)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.onSubscribe(MonoFlatMap.java:117)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onSubscribe(FluxMapFuseable.java:96)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onSubscribe(FluxMapFuseable.java:96)
+	at reactor.core.publisher.FluxFilterFuseable$FilterFuseableSubscriber.onSubscribe(FluxFilterFuseable.java:87)
+	at reactor.core.publisher.MonoJust.subscribe(MonoJust.java:55)
+	at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
+	at reactor.core.publisher.FluxFlatMap.trySubscribeScalarMap(FluxFlatMap.java:205)
+	at reactor.core.publisher.MonoFlatMap.subscribeOrReturn(MonoFlatMap.java:53)
+	at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:63)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:165)
+	at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onNext(FluxSwitchIfEmpty.java:74)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.secondComplete(MonoFlatMap.java:245)
+	at reactor.core.publisher.MonoFlatMap$FlatMapInner.onNext(MonoFlatMap.java:305)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129)
+	at reactor.core.publisher.MonoCallable$MonoCallableSubscription.request(MonoCallable.java:156)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.request(FluxMapFuseable.java:171)
+	at reactor.core.publisher.MonoFlatMap$FlatMapInner.onSubscribe(MonoFlatMap.java:291)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onSubscribe(FluxMapFuseable.java:96)
+	at reactor.core.publisher.MonoCallable.subscribe(MonoCallable.java:48)
+	at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:165)
+	at reactor.core.publisher.FluxFilterFuseable$FilterFuseableSubscriber.onNext(FluxFilterFuseable.java:118)
+	at reactor.core.publisher.Operators$ScalarSubscription.request(Operators.java:2571)
+	at reactor.core.publisher.FluxFilterFuseable$FilterFuseableSubscriber.request(FluxFilterFuseable.java:191)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.request(MonoFlatMap.java:194)
+	at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.set(Operators.java:2367)
+	at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.onSubscribe(Operators.java:2241)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.onSubscribe(MonoFlatMap.java:117)
+	at reactor.core.publisher.FluxFilterFuseable$FilterFuseableSubscriber.onSubscribe(FluxFilterFuseable.java:87)
+	at reactor.core.publisher.MonoJust.subscribe(MonoJust.java:55)
+	at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
+	at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:53)
+	at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
+	at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:53)
+	at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
+	at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:53)
+	at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
+	at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:53)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:165)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.secondComplete(MonoFlatMap.java:245)
+	at reactor.core.publisher.MonoFlatMap$FlatMapInner.onNext(MonoFlatMap.java:305)
+	at reactor.core.publisher.Operators$BaseFluxToMonoOperator.completePossiblyEmpty(Operators.java:2097)
+	at reactor.core.publisher.MonoCollectList$MonoCollectListSubscriber.onComplete(MonoCollectList.java:118)
+	at reactor.core.publisher.FluxIterable$IterableSubscription.fastPath(FluxIterable.java:424)
+	at reactor.core.publisher.FluxIterable$IterableSubscription.request(FluxIterable.java:291)
+	at reactor.core.publisher.Operators$BaseFluxToMonoOperator.request(Operators.java:2067)
+	at reactor.core.publisher.MonoFlatMap$FlatMapInner.onSubscribe(MonoFlatMap.java:291)
+	at reactor.core.publisher.Operators$BaseFluxToMonoOperator.onSubscribe(Operators.java:2051)
+	at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:201)
+	at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:83)
+	at reactor.core.publisher.MonoFromFluxOperator.subscribe(MonoFromFluxOperator.java:83)
+	at reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:165)
+	at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onNext(FluxSwitchIfEmpty.java:74)
+	at reactor.core.publisher.MonoNext$NextSubscriber.onNext(MonoNext.java:82)
+	at reactor.core.publisher.FluxFilterWhen$FluxFilterWhenSubscriber.drain(FluxFilterWhen.java:302)
+	at reactor.core.publisher.FluxFilterWhen$FluxFilterWhenSubscriber.onNext(FluxFilterWhen.java:140)
+	at reactor.core.publisher.FluxIterable$IterableSubscription.slowPath(FluxIterable.java:335)
+	at reactor.core.publisher.FluxIterable$IterableSubscription.request(FluxIterable.java:294)
+	at reactor.core.publisher.FluxFilterWhen$FluxFilterWhenSubscriber.onSubscribe(FluxFilterWhen.java:200)
+	at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:201)
+	at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:83)
+	at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
+	at reactor.core.publisher.FluxFlatMap.trySubscribeScalarMap(FluxFlatMap.java:202)
+	at reactor.core.publisher.MonoFlatMap.subscribeOrReturn(MonoFlatMap.java:53)
+	at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:63)
+	at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:53)
+	at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
+	at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:53)
+	at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
+	at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:53)
+	at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
+	at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.subscribeNext(MonoIgnoreThen.java:265)
+	at reactor.core.publisher.MonoIgnoreThen.subscribe(MonoIgnoreThen.java:51)
+	at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
+	at reactor.core.publisher.MonoDeferContextual.subscribe(MonoDeferContextual.java:55)
+	at reactor.netty.http.server.HttpServer$HttpServerHandle.onStateChange(HttpServer.java:1211)
+	at reactor.netty.ReactorNetty$CompositeConnectionObserver.onStateChange(ReactorNetty.java:716)
+	at reactor.netty.transport.ServerTransport$ChildObserver.onStateChange(ServerTransport.java:486)
+	at reactor.netty.http.server.HttpServerOperations.handleDefaultHttpRequest(HttpServerOperations.java:843)
+	at reactor.netty.http.server.HttpServerOperations.onInboundNext(HttpServerOperations.java:776)
+	at reactor.netty.channel.ChannelOperationsHandler.channelRead(ChannelOperationsHandler.java:115)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at reactor.netty.http.server.HttpTrafficHandler.channelRead(HttpTrafficHandler.java:267)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.channel.CombinedChannelDuplexHandler$DelegatingChannelHandlerContext.fireChannelRead(CombinedChannelDuplexHandler.java:436)
+	at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:346)
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:318)
+	at io.netty.channel.CombinedChannelDuplexHandler.channelRead(CombinedChannelDuplexHandler.java:251)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1357)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:868)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.springframework.security.oauth2.jwt.JwtValidationException: Jwt expired at 2025-02-06T16:10:16Z
+	at org.springframework.security.oauth2.jwt.NimbusReactiveJwtDecoder.validateJwt(NimbusReactiveJwtDecoder.java:198)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:113)
+	... 147 common frames omitted
+
+[2m2025-02-07T05:01:28.324+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[ctor-http-nio-2][0;39m [36mo.k.a.c.l.RequestResponseLoggingFilter  [0;39m [2m:[0;39m Response: GET http://localhost:18403/ui-service/api/v1/hello - Status: 401 UNAUTHORIZED - Time: 6ms
+[2m2025-02-07T05:01:46.096+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_API-GATEWAY applying {pattern=/api-gateway/**} to Path
+[2m2025-02-07T05:01:46.103+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_API-GATEWAY applying filter {regexp=/api-gateway/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+[2m2025-02-07T05:01:46.104+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition matched: ReactiveCompositeDiscoveryClient_API-GATEWAY
+[2m2025-02-07T05:01:46.105+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_UI-SERVICE applying {pattern=/ui-service/**} to Path
+[2m2025-02-07T05:01:46.105+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_UI-SERVICE applying filter {regexp=/ui-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+[2m2025-02-07T05:01:46.106+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition matched: ReactiveCompositeDiscoveryClient_UI-SERVICE
+[2m2025-02-07T05:02:16.135+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_API-GATEWAY applying {pattern=/api-gateway/**} to Path
+[2m2025-02-07T05:02:16.136+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_API-GATEWAY applying filter {regexp=/api-gateway/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+[2m2025-02-07T05:02:16.137+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition matched: ReactiveCompositeDiscoveryClient_API-GATEWAY
+[2m2025-02-07T05:02:16.138+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_UI-SERVICE applying {pattern=/ui-service/**} to Path
+[2m2025-02-07T05:02:16.139+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_UI-SERVICE applying filter {regexp=/ui-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+[2m2025-02-07T05:02:16.140+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition matched: ReactiveCompositeDiscoveryClient_UI-SERVICE
+[2m2025-02-07T05:02:39.920+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[ctor-http-nio-3][0;39m [36mo.k.a.c.l.RequestResponseLoggingFilter  [0;39m [2m:[0;39m Request: GET http://localhost:18403/ui-service/api/v1/hello
+[2m2025-02-07T05:02:40.222+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-1][0;39m [36mo.s.s.w.s.u.m.OrServerWebExchangeMatcher[0;39m [2m:[0;39m Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+[2m2025-02-07T05:02:40.232+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-1][0;39m [36mathPatternParserServerWebExchangeMatcher[0;39m [2m:[0;39m Request 'GET /ui-service/api/v1/hello' doesn't match 'POST /logout'
+[2m2025-02-07T05:02:40.232+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-1][0;39m [36mo.s.s.w.s.u.m.OrServerWebExchangeMatcher[0;39m [2m:[0;39m No matches found
+[2m2025-02-07T05:02:40.246+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-1][0;39m [36mo.s.s.w.s.u.m.OrServerWebExchangeMatcher[0;39m [2m:[0;39m Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/service-registry/**', method=GET}
+[2m2025-02-07T05:02:40.247+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-1][0;39m [36mathPatternParserServerWebExchangeMatcher[0;39m [2m:[0;39m Request 'GET /ui-service/api/v1/hello' doesn't match 'GET /service-registry/**'
+[2m2025-02-07T05:02:40.247+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-1][0;39m [36mo.s.s.w.s.u.m.OrServerWebExchangeMatcher[0;39m [2m:[0;39m No matches found
+[2m2025-02-07T05:02:40.248+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-1][0;39m [36mo.s.s.w.s.u.m.OrServerWebExchangeMatcher[0;39m [2m:[0;39m Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/**', method=OPTIONS}
+[2m2025-02-07T05:02:40.248+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-1][0;39m [36mathPatternParserServerWebExchangeMatcher[0;39m [2m:[0;39m Request 'GET /ui-service/api/v1/hello' doesn't match 'OPTIONS /**'
+[2m2025-02-07T05:02:40.248+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-1][0;39m [36mo.s.s.w.s.u.m.OrServerWebExchangeMatcher[0;39m [2m:[0;39m No matches found
+[2m2025-02-07T05:02:40.250+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-1][0;39m [36ma.DelegatingReactiveAuthorizationManager[0;39m [2m:[0;39m Checking authorization on '/ui-service/api/v1/hello' using org.springframework.security.authorization.AuthenticatedReactiveAuthorizationManager@51b2580d
+[2m2025-02-07T05:02:40.253+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-1][0;39m [36mo.s.s.w.s.a.AuthorizationWebFilter      [0;39m [2m:[0;39m Authorization successful
+[2m2025-02-07T05:02:40.287+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-1][0;39m [36mo.s.c.g.h.RoutePredicateHandlerMapping  [0;39m [2m:[0;39m Route matched: ReactiveCompositeDiscoveryClient_UI-SERVICE
+[2m2025-02-07T05:02:40.305+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-1][0;39m [36mo.s.c.g.h.RoutePredicateHandlerMapping  [0;39m [2m:[0;39m Mapping [Exchange: GET http://localhost:18403/ui-service/api/v1/hello] to Route{id='ReactiveCompositeDiscoveryClient_UI-SERVICE', uri=lb://UI-SERVICE, order=0, predicate=Paths: [/ui-service/**], match trailing slash: true, gatewayFilters=[[[RewritePath /ui-service/?(?<remaining>.*) = '/${remaining}'], order = 1]], metadata={management.port=16403}}
+[2m2025-02-07T05:02:40.305+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-1][0;39m [36mo.s.c.g.h.RoutePredicateHandlerMapping  [0;39m [2m:[0;39m [286ff449-3] Mapped to org.springframework.cloud.gateway.handler.FilteringWebHandler@4a9b3956
+[2m2025-02-07T05:02:40.308+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-1][0;39m [36mo.s.c.g.handler.FilteringWebHandler     [0;39m [2m:[0;39m Sorted gatewayFilterFactories: [[GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RemoveCachedBodyFilter@7de35070}, order = -2147483648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.AdaptCachedBodyGlobalFilter@7f51f588}, order = -2147482648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyWriteResponseFilter@4044589a}, order = -1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardPathFilter@1e721583}, order = 0], [[RewritePath /ui-service/?(?<remaining>.*) = '/${remaining}'], order = 1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RouteToRequestUrlFilter@216f01}, order = 10000], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter@53cddaf8}, order = 10150], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.LoadBalancerServiceInstanceCookieFilter@55c50f52}, order = 10151], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.WebsocketRoutingFilter@79f5a6ed}, order = 2147483646], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyRoutingFilter@1ccc1026}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardRoutingFilter@7c901203}, order = 2147483647]]
+[2m2025-02-07T05:02:40.548+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[ctor-http-nio-4][0;39m [36mr.netty.http.client.HttpClientConnect   [0;39m [2m:[0;39m [83d9cc52-1, L:/127.0.0.1:51120 - R:localhost/127.0.0.1:16403] Handler is being applied: {uri=http://localhost:16403/api/v1/hello, method=GET}
+[2m2025-02-07T05:02:41.988+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[ctor-http-nio-4][0;39m [36mr.n.http.client.HttpClientOperations    [0;39m [2m:[0;39m [83d9cc52-1, L:/127.0.0.1:51120 - R:localhost/127.0.0.1:16403] Received response (auto-read:false) : RESPONSE(decodeResult: success, version: HTTP/1.1)
+HTTP/1.1 200 
+Content-Type: <filtered>
+Content-Length: <filtered>
+Date: <filtered>
+[2m2025-02-07T05:02:42.008+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[ctor-http-nio-4][0;39m [36mr.n.http.client.HttpClientOperations    [0;39m [2m:[0;39m [83d9cc52-1, L:/127.0.0.1:51120 - R:localhost/127.0.0.1:16403] Received last HTTP packet
+[2m2025-02-07T05:02:42.039+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[ctor-http-nio-5][0;39m [36mo.k.a.c.l.RequestResponseLoggingFilter  [0;39m [2m:[0;39m Request: GET http://localhost:18403/ui-service/api/v1/hello
+[2m2025-02-07T05:02:42.043+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-3][0;39m [36mo.s.s.w.s.u.m.OrServerWebExchangeMatcher[0;39m [2m:[0;39m Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+[2m2025-02-07T05:02:42.043+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-3][0;39m [36mathPatternParserServerWebExchangeMatcher[0;39m [2m:[0;39m Request 'GET /ui-service/api/v1/hello' doesn't match 'POST /logout'
+[2m2025-02-07T05:02:42.043+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-3][0;39m [36mo.s.s.w.s.u.m.OrServerWebExchangeMatcher[0;39m [2m:[0;39m No matches found
+[2m2025-02-07T05:02:42.044+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-3][0;39m [36mo.s.s.w.s.u.m.OrServerWebExchangeMatcher[0;39m [2m:[0;39m Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/service-registry/**', method=GET}
+[2m2025-02-07T05:02:42.044+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-3][0;39m [36mathPatternParserServerWebExchangeMatcher[0;39m [2m:[0;39m Request 'GET /ui-service/api/v1/hello' doesn't match 'GET /service-registry/**'
+[2m2025-02-07T05:02:42.044+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-3][0;39m [36mo.s.s.w.s.u.m.OrServerWebExchangeMatcher[0;39m [2m:[0;39m No matches found
+[2m2025-02-07T05:02:42.044+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-3][0;39m [36mo.s.s.w.s.u.m.OrServerWebExchangeMatcher[0;39m [2m:[0;39m Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/**', method=OPTIONS}
+[2m2025-02-07T05:02:42.045+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-3][0;39m [36mathPatternParserServerWebExchangeMatcher[0;39m [2m:[0;39m Request 'GET /ui-service/api/v1/hello' doesn't match 'OPTIONS /**'
+[2m2025-02-07T05:02:42.045+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-3][0;39m [36mo.s.s.w.s.u.m.OrServerWebExchangeMatcher[0;39m [2m:[0;39m No matches found
+[2m2025-02-07T05:02:42.045+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-3][0;39m [36ma.DelegatingReactiveAuthorizationManager[0;39m [2m:[0;39m Checking authorization on '/ui-service/api/v1/hello' using org.springframework.security.authorization.AuthenticatedReactiveAuthorizationManager@51b2580d
+[2m2025-02-07T05:02:42.045+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-3][0;39m [36mo.s.s.w.s.a.AuthorizationWebFilter      [0;39m [2m:[0;39m Authorization successful
+[2m2025-02-07T05:02:42.045+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-3][0;39m [36mo.s.c.g.h.RoutePredicateHandlerMapping  [0;39m [2m:[0;39m Route matched: ReactiveCompositeDiscoveryClient_UI-SERVICE
+[2m2025-02-07T05:02:42.045+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-3][0;39m [36mo.s.c.g.h.RoutePredicateHandlerMapping  [0;39m [2m:[0;39m Mapping [Exchange: GET http://localhost:18403/ui-service/api/v1/hello] to Route{id='ReactiveCompositeDiscoveryClient_UI-SERVICE', uri=lb://UI-SERVICE, order=0, predicate=Paths: [/ui-service/**], match trailing slash: true, gatewayFilters=[[[RewritePath /ui-service/?(?<remaining>.*) = '/${remaining}'], order = 1]], metadata={management.port=16403}}
+[2m2025-02-07T05:02:42.046+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-3][0;39m [36mo.s.c.g.h.RoutePredicateHandlerMapping  [0;39m [2m:[0;39m [9748e34b-4] Mapped to org.springframework.cloud.gateway.handler.FilteringWebHandler@4a9b3956
+[2m2025-02-07T05:02:42.046+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[     parallel-3][0;39m [36mo.s.c.g.handler.FilteringWebHandler     [0;39m [2m:[0;39m Sorted gatewayFilterFactories: [[GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RemoveCachedBodyFilter@7de35070}, order = -2147483648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.AdaptCachedBodyGlobalFilter@7f51f588}, order = -2147482648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyWriteResponseFilter@4044589a}, order = -1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardPathFilter@1e721583}, order = 0], [[RewritePath /ui-service/?(?<remaining>.*) = '/${remaining}'], order = 1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RouteToRequestUrlFilter@216f01}, order = 10000], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter@53cddaf8}, order = 10150], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.LoadBalancerServiceInstanceCookieFilter@55c50f52}, order = 10151], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.WebsocketRoutingFilter@79f5a6ed}, order = 2147483646], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyRoutingFilter@1ccc1026}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardRoutingFilter@7c901203}, order = 2147483647]]
+[2m2025-02-07T05:02:42.048+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[ctor-http-nio-3][0;39m [36mo.k.a.c.l.RequestResponseLoggingFilter  [0;39m [2m:[0;39m Response: GET http://localhost:18403/ui-service/api/v1/hello - Status: 200 OK - Time: 2131ms
+[2m2025-02-07T05:02:42.049+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[ctor-http-nio-4][0;39m [36mr.netty.http.client.HttpClientConnect   [0;39m [2m:[0;39m [83d9cc52-2, L:/127.0.0.1:51120 - R:localhost/127.0.0.1:16403] Handler is being applied: {uri=http://localhost:16403/api/v1/hello, method=GET}
+[2m2025-02-07T05:02:42.663+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[ctor-http-nio-4][0;39m [36mr.n.http.client.HttpClientOperations    [0;39m [2m:[0;39m [83d9cc52-2, L:/127.0.0.1:51120 - R:localhost/127.0.0.1:16403] Received response (auto-read:false) : RESPONSE(decodeResult: success, version: HTTP/1.1)
+HTTP/1.1 200 
+Content-Type: <filtered>
+Content-Length: <filtered>
+Date: <filtered>
+[2m2025-02-07T05:02:42.665+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[ctor-http-nio-4][0;39m [36mr.n.http.client.HttpClientOperations    [0;39m [2m:[0;39m [83d9cc52-2, L:/127.0.0.1:51120 - R:localhost/127.0.0.1:16403] Received last HTTP packet
+[2m2025-02-07T05:02:42.666+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[ctor-http-nio-5][0;39m [36mo.k.a.c.l.RequestResponseLoggingFilter  [0;39m [2m:[0;39m Response: GET http://localhost:18403/ui-service/api/v1/hello - Status: 200 OK - Time: 627ms
+[2m2025-02-07T05:02:46.168+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_API-GATEWAY applying {pattern=/api-gateway/**} to Path
+[2m2025-02-07T05:02:46.172+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_API-GATEWAY applying filter {regexp=/api-gateway/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+[2m2025-02-07T05:02:46.173+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition matched: ReactiveCompositeDiscoveryClient_API-GATEWAY
+[2m2025-02-07T05:02:46.174+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_UI-SERVICE applying {pattern=/ui-service/**} to Path
+[2m2025-02-07T05:02:46.176+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_UI-SERVICE applying filter {regexp=/ui-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+[2m2025-02-07T05:02:46.177+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition matched: ReactiveCompositeDiscoveryClient_UI-SERVICE
+[2m2025-02-07T05:03:16.216+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_API-GATEWAY applying {pattern=/api-gateway/**} to Path
+[2m2025-02-07T05:03:16.217+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_API-GATEWAY applying filter {regexp=/api-gateway/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+[2m2025-02-07T05:03:16.218+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition matched: ReactiveCompositeDiscoveryClient_API-GATEWAY
+[2m2025-02-07T05:03:16.221+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_UI-SERVICE applying {pattern=/ui-service/**} to Path
+[2m2025-02-07T05:03:16.222+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_UI-SERVICE applying filter {regexp=/ui-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+[2m2025-02-07T05:03:16.223+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition matched: ReactiveCompositeDiscoveryClient_UI-SERVICE
+[2m2025-02-07T05:03:46.253+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_API-GATEWAY applying {pattern=/api-gateway/**} to Path
+[2m2025-02-07T05:03:46.256+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_API-GATEWAY applying filter {regexp=/api-gateway/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+[2m2025-02-07T05:03:46.258+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition matched: ReactiveCompositeDiscoveryClient_API-GATEWAY
+[2m2025-02-07T05:03:46.261+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_UI-SERVICE applying {pattern=/ui-service/**} to Path
+[2m2025-02-07T05:03:46.266+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_UI-SERVICE applying filter {regexp=/ui-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+[2m2025-02-07T05:03:46.269+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition matched: ReactiveCompositeDiscoveryClient_UI-SERVICE
+[2m2025-02-07T05:04:16.291+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_API-GATEWAY applying {pattern=/api-gateway/**} to Path
+[2m2025-02-07T05:04:16.293+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_API-GATEWAY applying filter {regexp=/api-gateway/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+[2m2025-02-07T05:04:16.294+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition matched: ReactiveCompositeDiscoveryClient_API-GATEWAY
+[2m2025-02-07T05:04:16.294+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_UI-SERVICE applying {pattern=/ui-service/**} to Path
+[2m2025-02-07T05:04:16.295+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_UI-SERVICE applying filter {regexp=/ui-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+[2m2025-02-07T05:04:16.296+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition matched: ReactiveCompositeDiscoveryClient_UI-SERVICE
+[2m2025-02-07T05:04:46.314+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_API-GATEWAY applying {pattern=/api-gateway/**} to Path
+[2m2025-02-07T05:04:46.318+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_API-GATEWAY applying filter {regexp=/api-gateway/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+[2m2025-02-07T05:04:46.321+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition matched: ReactiveCompositeDiscoveryClient_API-GATEWAY
+[2m2025-02-07T05:04:46.321+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_UI-SERVICE applying {pattern=/ui-service/**} to Path
+[2m2025-02-07T05:04:46.322+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_UI-SERVICE applying filter {regexp=/ui-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+[2m2025-02-07T05:04:46.323+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition matched: ReactiveCompositeDiscoveryClient_UI-SERVICE
+[2m2025-02-07T05:05:16.354+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_API-GATEWAY applying {pattern=/api-gateway/**} to Path
+[2m2025-02-07T05:05:16.357+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_API-GATEWAY applying filter {regexp=/api-gateway/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+[2m2025-02-07T05:05:16.358+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition matched: ReactiveCompositeDiscoveryClient_API-GATEWAY
+[2m2025-02-07T05:05:16.358+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_UI-SERVICE applying {pattern=/ui-service/**} to Path
+[2m2025-02-07T05:05:16.359+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition ReactiveCompositeDiscoveryClient_UI-SERVICE applying filter {regexp=/ui-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+[2m2025-02-07T05:05:16.359+05:30[0;39m [32mDEBUG[0;39m [35m5432[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m RouteDefinition matched: ReactiveCompositeDiscoveryClient_UI-SERVICE
+[2m2025-02-07T05:05:36.737+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[ionShutdownHook][0;39m [36mo.s.c.n.e.s.EurekaServiceRegistry       [0;39m [2m:[0;39m Unregistering application API-GATEWAY with eureka with status DOWN
+[2m2025-02-07T05:05:36.740+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[ionShutdownHook][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Saw local status change event StatusChangeEvent [timestamp=1738884936740, current=DOWN, previous=UP]
+[2m2025-02-07T05:05:36.741+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[foReplicator-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m DiscoveryClient_API-GATEWAY/LAKSHAN-LAPTOP.mshome.net:api-gateway:18403: registering service...
+[2m2025-02-07T05:05:36.841+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[foReplicator-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m DiscoveryClient_API-GATEWAY/LAKSHAN-LAPTOP.mshome.net:api-gateway:18403 - registration status: 204
+[2m2025-02-07T05:05:36.915+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[ionShutdownHook][0;39m [36mo.s.b.w.embedded.netty.GracefulShutdown [0;39m [2m:[0;39m Commencing graceful shutdown. Waiting for active requests to complete
+[2m2025-02-07T05:05:36.987+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[ netty-shutdown][0;39m [36mo.s.b.w.embedded.netty.GracefulShutdown [0;39m [2m:[0;39m Graceful shutdown complete
+[2m2025-02-07T05:05:39.241+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[ionShutdownHook][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Shutting down DiscoveryClient ...
+[2m2025-02-07T05:05:42.254+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[ionShutdownHook][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Unregistering ...
+[2m2025-02-07T05:05:42.393+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[ionShutdownHook][0;39m [36mc.n.d.s.t.d.RedirectingEurekaHttpClient [0;39m [2m:[0;39m Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:17403/eureka/} exception=I/O error on DELETE request for "http://localhost:17403/eureka/apps/API-GATEWAY/LAKSHAN-LAPTOP.mshome.net:api-gateway:18403": Connect to http://localhost:17403 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on DELETE request for "http://localhost:17403/eureka/apps/API-GATEWAY/LAKSHAN-LAPTOP.mshome.net:api-gateway:18403": Connect to http://localhost:17403 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:926)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:906)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:841)
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:702)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.cancel(RestTemplateEurekaHttpClient.java:100)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:91)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:919)
+	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:900)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:415)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:239)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:202)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:195)
+	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:389)
+	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:136)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:211)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:668)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:625)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1368)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:584)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1361)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1219)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1180)
+	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.doClose(ReactiveWebServerApplicationContext.java:149)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1126)
+	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:147)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:116)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.apache.hc.client5.http.HttpHostConnectException: Connect to http://localhost:17403 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:751)
+	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:216)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:490)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:164)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:174)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:144)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:192)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:150)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:110)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:174)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
+	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
+	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
+	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:71)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:81)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:117)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$3(RestTemplateTransportClientFactory.java:141)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
+	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
+	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:81)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:900)
+	... 37 more
+
+[2m2025-02-07T05:05:42.394+05:30[0;39m [33m WARN[0;39m [35m5432[0;39m [2m---[0;39m [2m[ionShutdownHook][0;39m [36mc.n.d.s.t.d.RetryableEurekaHttpClient   [0;39m [2m:[0;39m Request execution failed with message: I/O error on DELETE request for "http://localhost:17403/eureka/apps/API-GATEWAY/LAKSHAN-LAPTOP.mshome.net:api-gateway:18403": Connect to http://localhost:17403 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+[2m2025-02-07T05:05:42.458+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[ionShutdownHook][0;39m [36mc.n.d.s.t.d.RedirectingEurekaHttpClient [0;39m [2m:[0;39m Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:17403/eureka/}, exception=I/O error on DELETE request for "http://localhost:17403/eureka/apps/API-GATEWAY/LAKSHAN-LAPTOP.mshome.net:api-gateway:18403": Connect to http://localhost:17403 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on DELETE request for "http://localhost:17403/eureka/apps/API-GATEWAY/LAKSHAN-LAPTOP.mshome.net:api-gateway:18403": Connect to http://localhost:17403 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:926)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:906)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:841)
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:702)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.cancel(RestTemplateEurekaHttpClient.java:100)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.executeOnNewServer(RedirectingEurekaHttpClient.java:121)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:80)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:919)
+	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:900)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:415)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:239)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:202)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:195)
+	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:389)
+	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:136)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:211)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:668)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:625)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1368)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:584)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1361)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1219)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1180)
+	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.doClose(ReactiveWebServerApplicationContext.java:149)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1126)
+	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:147)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:116)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.apache.hc.client5.http.HttpHostConnectException: Connect to http://localhost:17403 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:751)
+	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:216)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:490)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:164)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:174)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:144)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:192)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:150)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:110)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:174)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
+	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
+	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
+	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:71)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:81)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:117)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$3(RestTemplateTransportClientFactory.java:141)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
+	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
+	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:81)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:900)
+	... 38 more
+
+[2m2025-02-07T05:05:42.459+05:30[0;39m [33m WARN[0;39m [35m5432[0;39m [2m---[0;39m [2m[ionShutdownHook][0;39m [36mc.n.d.s.t.d.RetryableEurekaHttpClient   [0;39m [2m:[0;39m Request execution failed with message: I/O error on DELETE request for "http://localhost:17403/eureka/apps/API-GATEWAY/LAKSHAN-LAPTOP.mshome.net:api-gateway:18403": Connect to http://localhost:17403 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+[2m2025-02-07T05:05:42.459+05:30[0;39m [31mERROR[0;39m [35m5432[0;39m [2m---[0;39m [2m[ionShutdownHook][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m DiscoveryClient_API-GATEWAY/LAKSHAN-LAPTOP.mshome.net:api-gateway:18403 - de-registration failedCannot execute request on any known server
+
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:919)
+	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:900)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:415)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:239)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:202)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:195)
+	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:389)
+	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:136)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:211)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:668)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:625)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1368)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:584)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1361)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1219)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1180)
+	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.doClose(ReactiveWebServerApplicationContext.java:149)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1126)
+	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:147)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:116)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+
+[2m2025-02-07T05:05:42.463+05:30[0;39m [32m INFO[0;39m [35m5432[0;39m [2m---[0;39m [2m[ionShutdownHook][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Completed shut down of DiscoveryClient
+[2m2025-02-07T05:08:38.638+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.k.apigateway.ApiGatewayApplication    [0;39m [2m:[0;39m Starting ApiGatewayApplication using Java 21.0.1 with PID 17736 (D:\Projects\kinetiqBP\kinetiqBP\kinetiqBP-backend\api-gateway\target\classes started by WDPLAKSHAN in D:\Projects\kinetiqBP\kinetiqBP\kinetiqBP-backend)
+[2m2025-02-07T05:08:38.643+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.k.apigateway.ApiGatewayApplication    [0;39m [2m:[0;39m No active profile set, falling back to 1 default profile: "default"
+[2m2025-02-07T05:08:39.850+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.cloud.context.scope.GenericScope    [0;39m [2m:[0;39m BeanFactory id=9a534841-6805-38d3-aab5-c7148a3c7a9f
+[2m2025-02-07T05:08:41.720+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [After]
+[2m2025-02-07T05:08:41.720+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [Before]
+[2m2025-02-07T05:08:41.720+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [Between]
+[2m2025-02-07T05:08:41.721+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [Cookie]
+[2m2025-02-07T05:08:41.721+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [Header]
+[2m2025-02-07T05:08:41.721+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [Host]
+[2m2025-02-07T05:08:41.721+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [Method]
+[2m2025-02-07T05:08:41.721+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [Path]
+[2m2025-02-07T05:08:41.721+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [Query]
+[2m2025-02-07T05:08:41.721+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [ReadBody]
+[2m2025-02-07T05:08:41.721+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [RemoteAddr]
+[2m2025-02-07T05:08:41.722+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+[2m2025-02-07T05:08:41.722+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [Weight]
+[2m2025-02-07T05:08:41.722+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.g.r.RouteDefinitionRouteLocator   [0;39m [2m:[0;39m Loaded RoutePredicateFactory [CloudFoundryRouteService]
+[2m2025-02-07T05:08:42.298+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mDiscoveryClientOptionalArgsConfiguration[0;39m [2m:[0;39m Eureka HTTP Client uses RestTemplate.
+[2m2025-02-07T05:08:42.351+05:30[0;39m [33m WARN[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36miguration$LoadBalancerCaffeineWarnLogger[0;39m [2m:[0;39m Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+[2m2025-02-07T05:08:42.439+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.n.eureka.InstanceInfoFactory      [0;39m [2m:[0;39m Setting initial instance status as: STARTING
+[2m2025-02-07T05:08:42.465+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Initializing Eureka in region us-east-1
+[2m2025-02-07T05:08:42.470+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mc.n.d.s.r.aws.ConfigClusterResolver     [0;39m [2m:[0;39m Resolving eureka endpoints via configuration
+[2m2025-02-07T05:08:42.477+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Disable delta property : false
+[2m2025-02-07T05:08:42.478+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Single vip registry refresh property : null
+[2m2025-02-07T05:08:42.478+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Force full registry fetch : false
+[2m2025-02-07T05:08:42.478+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Application is null : false
+[2m2025-02-07T05:08:42.478+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Registered Applications size is zero : true
+[2m2025-02-07T05:08:42.478+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Application version is -1: true
+[2m2025-02-07T05:08:42.478+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Getting all instance registry info from the eureka server
+[2m2025-02-07T05:08:42.881+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mc.n.d.s.t.d.RedirectingEurekaHttpClient [0;39m [2m:[0;39m Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:17403/eureka/}, exception=I/O error on GET request for "http://localhost:17403/eureka/apps/": Connect to http://localhost:17403 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:17403/eureka/apps/": Connect to http://localhost:17403 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:926)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:906)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:841)
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:702)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.getApplicationsInternal(RestTemplateEurekaHttpClient.java:174)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.getApplications(RestTemplateEurekaHttpClient.java:162)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$6.execute(EurekaHttpClientDecorator.java:137)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.executeOnNewServer(RedirectingEurekaHttpClient.java:121)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:80)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getApplications(EurekaHttpClientDecorator.java:134)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$6.execute(EurekaHttpClientDecorator.java:137)
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getApplications(EurekaHttpClientDecorator.java:134)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$6.execute(EurekaHttpClientDecorator.java:137)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getApplications(EurekaHttpClientDecorator.java:134)
+	at com.netflix.discovery.DiscoveryClient.getAndStoreFullRegistry(DiscoveryClient.java:1046)
+	at com.netflix.discovery.DiscoveryClient.fetchRegistry(DiscoveryClient.java:961)
+	at com.netflix.discovery.DiscoveryClient.<init>(DiscoveryClient.java:410)
+	at com.netflix.discovery.DiscoveryClient.<init>(DiscoveryClient.java:245)
+	at com.netflix.discovery.DiscoveryClient.<init>(DiscoveryClient.java:240)
+	at org.springframework.cloud.netflix.eureka.CloudEurekaClient.<init>(CloudEurekaClient.java:68)
+	at org.springframework.cloud.netflix.eureka.EurekaClientAutoConfiguration$RefreshableEurekaClientConfiguration.eurekaClient(EurekaClientAutoConfiguration.java:324)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:171)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiateWithFactoryMethod(SimpleInstantiationStrategy.java:88)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:168)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:645)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1357)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1187)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:563)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$1(AbstractBeanFactory.java:375)
+	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.getBean(GenericScope.java:375)
+	at org.springframework.cloud.context.scope.GenericScope.get(GenericScope.java:179)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:372)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.aop.target.SimpleBeanTargetSource.getTarget(SimpleBeanTargetSource.java:35)
+	at org.springframework.cloud.netflix.eureka.serviceregistry.EurekaRegistration.getTargetObject(EurekaRegistration.java:128)
+	at org.springframework.cloud.netflix.eureka.serviceregistry.EurekaRegistration.getEurekaClient(EurekaRegistration.java:116)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:281)
+	at org.springframework.cloud.context.scope.GenericScope$LockedScopedProxyFactoryBean.invoke(GenericScope.java:482)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at org.springframework.cloud.netflix.eureka.serviceregistry.EurekaRegistration$$SpringCGLIB$$0.getEurekaClient(<generated>)
+	at org.springframework.cloud.netflix.eureka.serviceregistry.EurekaServiceRegistry.maybeInitializeClient(EurekaServiceRegistry.java:83)
+	at org.springframework.cloud.netflix.eureka.serviceregistry.EurekaServiceRegistry.register(EurekaServiceRegistry.java:66)
+	at org.springframework.cloud.netflix.eureka.serviceregistry.EurekaAutoServiceRegistration.start(EurekaAutoServiceRegistration.java:89)
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:323)
+	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:510)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:295)
+	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:240)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:1006)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:630)
+	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.refresh(ReactiveWebServerApplicationContext.java:66)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at org.kinetiqbp.apigateway.ApiGatewayApplication.main(ApiGatewayApplication.java:12)
+Caused by: org.apache.hc.client5.http.HttpHostConnectException: Connect to http://localhost:17403 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:751)
+	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:216)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:490)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:164)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:174)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:144)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:192)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:150)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:110)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:174)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
+	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
+	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
+	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:71)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:81)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:117)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$3(RestTemplateTransportClientFactory.java:141)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
+	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
+	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:81)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:900)
+	... 64 more
+
+[2m2025-02-07T05:08:42.882+05:30[0;39m [33m WARN[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mc.n.d.s.t.d.RetryableEurekaHttpClient   [0;39m [2m:[0;39m Request execution failed with message: I/O error on GET request for "http://localhost:17403/eureka/apps/": Connect to http://localhost:17403 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+[2m2025-02-07T05:08:42.883+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m DiscoveryClient_API-GATEWAY/LAKSHAN-LAPTOP.mshome.net:api-gateway:18403 - was unable to refresh its cache! This periodic background refresh will be retried in 30 seconds. status = Cannot execute request on any known server stacktrace = com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getApplications(EurekaHttpClientDecorator.java:134)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$6.execute(EurekaHttpClientDecorator.java:137)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getApplications(EurekaHttpClientDecorator.java:134)
+	at com.netflix.discovery.DiscoveryClient.getAndStoreFullRegistry(DiscoveryClient.java:1046)
+	at com.netflix.discovery.DiscoveryClient.fetchRegistry(DiscoveryClient.java:961)
+	at com.netflix.discovery.DiscoveryClient.<init>(DiscoveryClient.java:410)
+	at com.netflix.discovery.DiscoveryClient.<init>(DiscoveryClient.java:245)
+	at com.netflix.discovery.DiscoveryClient.<init>(DiscoveryClient.java:240)
+	at org.springframework.cloud.netflix.eureka.CloudEurekaClient.<init>(CloudEurekaClient.java:68)
+	at org.springframework.cloud.netflix.eureka.EurekaClientAutoConfiguration$RefreshableEurekaClientConfiguration.eurekaClient(EurekaClientAutoConfiguration.java:324)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:171)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiateWithFactoryMethod(SimpleInstantiationStrategy.java:88)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:168)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:645)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1357)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1187)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:563)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$1(AbstractBeanFactory.java:375)
+	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.getBean(GenericScope.java:375)
+	at org.springframework.cloud.context.scope.GenericScope.get(GenericScope.java:179)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:372)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.aop.target.SimpleBeanTargetSource.getTarget(SimpleBeanTargetSource.java:35)
+	at org.springframework.cloud.netflix.eureka.serviceregistry.EurekaRegistration.getTargetObject(EurekaRegistration.java:128)
+	at org.springframework.cloud.netflix.eureka.serviceregistry.EurekaRegistration.getEurekaClient(EurekaRegistration.java:116)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:281)
+	at org.springframework.cloud.context.scope.GenericScope$LockedScopedProxyFactoryBean.invoke(GenericScope.java:482)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
+	at org.springframework.cloud.netflix.eureka.serviceregistry.EurekaRegistration$$SpringCGLIB$$0.getEurekaClient(<generated>)
+	at org.springframework.cloud.netflix.eureka.serviceregistry.EurekaServiceRegistry.maybeInitializeClient(EurekaServiceRegistry.java:83)
+	at org.springframework.cloud.netflix.eureka.serviceregistry.EurekaServiceRegistry.register(EurekaServiceRegistry.java:66)
+	at org.springframework.cloud.netflix.eureka.serviceregistry.EurekaAutoServiceRegistration.start(EurekaAutoServiceRegistration.java:89)
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:323)
+	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:510)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:295)
+	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:240)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:1006)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:630)
+	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.refresh(ReactiveWebServerApplicationContext.java:66)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at org.kinetiqbp.apigateway.ApiGatewayApplication.main(ApiGatewayApplication.java:12)
+
+[2m2025-02-07T05:08:42.883+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Initial registry fetch from primary servers failed
+[2m2025-02-07T05:08:42.883+05:30[0;39m [33m WARN[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Using default backup registry implementation which does not do anything.
+[2m2025-02-07T05:08:42.883+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Initial registry fetch from backup servers failed
+[2m2025-02-07T05:08:42.885+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Starting heartbeat executor: renew interval is: 30
+[2m2025-02-07T05:08:42.888+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mc.n.discovery.InstanceInfoReplicator    [0;39m [2m:[0;39m InstanceInfoReplicator onDemand update allowed rate per min is 4
+[2m2025-02-07T05:08:42.891+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Discovery Client initialized at timestamp 1738885122889 with initial instances count: 0
+[2m2025-02-07T05:08:42.897+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.c.n.e.s.EurekaServiceRegistry       [0;39m [2m:[0;39m Registering application API-GATEWAY with eureka with status UP
+[2m2025-02-07T05:08:42.899+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Saw local status change event StatusChangeEvent [timestamp=1738885122899, current=UP, previous=STARTING]
+[2m2025-02-07T05:08:42.901+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[foReplicator-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m DiscoveryClient_API-GATEWAY/LAKSHAN-LAPTOP.mshome.net:api-gateway:18403: registering service...
+[2m2025-02-07T05:08:42.980+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[foReplicator-%d][0;39m [36mc.n.d.s.t.d.RedirectingEurekaHttpClient [0;39m [2m:[0;39m Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:17403/eureka/}, exception=I/O error on POST request for "http://localhost:17403/eureka/apps/API-GATEWAY": Connect to http://localhost:17403 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on POST request for "http://localhost:17403/eureka/apps/API-GATEWAY": Connect to http://localhost:17403 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:926)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:906)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:841)
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:702)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.register(RestTemplateEurekaHttpClient.java:87)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.executeOnNewServer(RedirectingEurekaHttpClient.java:121)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:80)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:828)
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:125)
+	at com.netflix.discovery.InstanceInfoReplicator$2.run(InstanceInfoReplicator.java:105)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.apache.hc.client5.http.HttpHostConnectException: Connect to http://localhost:17403 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:751)
+	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:216)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:490)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:164)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:174)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:144)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:192)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:150)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:110)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:174)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
+	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
+	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
+	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:71)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:81)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:117)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$3(RestTemplateTransportClientFactory.java:141)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
+	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
+	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:81)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:900)
+	... 22 more
+
+[2m2025-02-07T05:08:42.980+05:30[0;39m [33m WARN[0;39m [35m17736[0;39m [2m---[0;39m [2m[foReplicator-%d][0;39m [36mc.n.d.s.t.d.RetryableEurekaHttpClient   [0;39m [2m:[0;39m Request execution failed with message: I/O error on POST request for "http://localhost:17403/eureka/apps/API-GATEWAY": Connect to http://localhost:17403 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+[2m2025-02-07T05:08:42.981+05:30[0;39m [33m WARN[0;39m [35m17736[0;39m [2m---[0;39m [2m[foReplicator-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m DiscoveryClient_API-GATEWAY/LAKSHAN-LAPTOP.mshome.net:api-gateway:18403 - registration failed Cannot execute request on any known server
+
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:828)
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:125)
+	at com.netflix.discovery.InstanceInfoReplicator$2.run(InstanceInfoReplicator.java:105)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+
+[2m2025-02-07T05:08:42.984+05:30[0;39m [33m WARN[0;39m [35m17736[0;39m [2m---[0;39m [2m[foReplicator-%d][0;39m [36mc.n.discovery.InstanceInfoReplicator    [0;39m [2m:[0;39m There was a problem with the instance info replicator
+
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:828)
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:125)
+	at com.netflix.discovery.InstanceInfoReplicator$2.run(InstanceInfoReplicator.java:105)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+
+[2m2025-02-07T05:08:43.227+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.b.web.embedded.netty.NettyWebServer [0;39m [2m:[0;39m Netty started on port 18403 (http)
+[2m2025-02-07T05:08:43.229+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36m.s.c.n.e.s.EurekaAutoServiceRegistration[0;39m [2m:[0;39m Updating port to 18403
+[2m2025-02-07T05:08:43.252+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.k.apigateway.ApiGatewayApplication    [0;39m [2m:[0;39m Started ApiGatewayApplication in 5.485 seconds (process running for 6.727)
+[2m2025-02-07T05:09:12.853+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[ctor-http-nio-2][0;39m [36mo.k.a.c.l.RequestResponseLoggingFilter  [0;39m [2m:[0;39m Request: GET http://localhost:18403/flowable-rest/process-api/identity/users
+[2m2025-02-07T05:09:12.900+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Disable delta property : false
+[2m2025-02-07T05:09:12.900+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Single vip registry refresh property : null
+[2m2025-02-07T05:09:12.900+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Force full registry fetch : false
+[2m2025-02-07T05:09:12.901+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Application is null : false
+[2m2025-02-07T05:09:12.901+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Registered Applications size is zero : true
+[2m2025-02-07T05:09:12.901+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Application version is -1: true
+[2m2025-02-07T05:09:12.901+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Getting all instance registry info from the eureka server
+[2m2025-02-07T05:09:12.990+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[foReplicator-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m DiscoveryClient_API-GATEWAY/LAKSHAN-LAPTOP.mshome.net:api-gateway:18403: registering service...
+[2m2025-02-07T05:09:13.143+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m The response status is 200
+[2m2025-02-07T05:09:13.163+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[foReplicator-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m DiscoveryClient_API-GATEWAY/LAKSHAN-LAPTOP.mshome.net:api-gateway:18403 - registration status: 204
+[2m2025-02-07T05:09:13.172+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[beatExecutor-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m DiscoveryClient_API-GATEWAY/LAKSHAN-LAPTOP.mshome.net:api-gateway:18403 - Re-registering apps/API-GATEWAY
+[2m2025-02-07T05:09:13.172+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[beatExecutor-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m DiscoveryClient_API-GATEWAY/LAKSHAN-LAPTOP.mshome.net:api-gateway:18403: registering service...
+[2m2025-02-07T05:09:13.185+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[beatExecutor-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m DiscoveryClient_API-GATEWAY/LAKSHAN-LAPTOP.mshome.net:api-gateway:18403 - registration status: 204
+[2m2025-02-07T05:09:13.752+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[     parallel-1][0;39m [36mo.k.a.c.l.RequestResponseLoggingFilter  [0;39m [2m:[0;39m Response: GET http://localhost:18403/flowable-rest/process-api/identity/users - Status: 404 NOT_FOUND - Time: 899ms
+[2m2025-02-07T05:09:13.764+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[ctor-http-nio-3][0;39m [36mo.k.a.c.l.RequestResponseLoggingFilter  [0;39m [2m:[0;39m Request: GET http://localhost:18403/flowable-rest/process-api/identity/users
+[2m2025-02-07T05:09:13.801+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[     parallel-2][0;39m [36mo.k.a.c.l.RequestResponseLoggingFilter  [0;39m [2m:[0;39m Response: GET http://localhost:18403/flowable-rest/process-api/identity/users - Status: 404 NOT_FOUND - Time: 37ms
+[2m2025-02-07T05:09:37.462+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[ctor-http-nio-4][0;39m [36mo.k.a.c.l.RequestResponseLoggingFilter  [0;39m [2m:[0;39m Request: GET http://localhost:18403/flowable-rest/process-api/identity/users
+[2m2025-02-07T05:09:37.478+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[     parallel-3][0;39m [36mo.k.a.c.l.RequestResponseLoggingFilter  [0;39m [2m:[0;39m Response: GET http://localhost:18403/flowable-rest/process-api/identity/users - Status: 404 NOT_FOUND - Time: 16ms
+[2m2025-02-07T05:09:37.485+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[ctor-http-nio-5][0;39m [36mo.k.a.c.l.RequestResponseLoggingFilter  [0;39m [2m:[0;39m Request: GET http://localhost:18403/flowable-rest/process-api/identity/users
+[2m2025-02-07T05:09:37.499+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[     parallel-4][0;39m [36mo.k.a.c.l.RequestResponseLoggingFilter  [0;39m [2m:[0;39m Response: GET http://localhost:18403/flowable-rest/process-api/identity/users - Status: 404 NOT_FOUND - Time: 14ms
+[2m2025-02-07T05:09:43.168+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Disable delta property : false
+[2m2025-02-07T05:09:43.168+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Single vip registry refresh property : null
+[2m2025-02-07T05:09:43.168+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Force full registry fetch : false
+[2m2025-02-07T05:09:43.168+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Application is null : false
+[2m2025-02-07T05:09:43.168+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Registered Applications size is zero : true
+[2m2025-02-07T05:09:43.168+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Application version is -1: false
+[2m2025-02-07T05:09:43.168+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m Getting all instance registry info from the eureka server
+[2m2025-02-07T05:09:43.204+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[reshExecutor-%d][0;39m [36mcom.netflix.discovery.DiscoveryClient   [0;39m [2m:[0;39m The response status is 200
+[2m2025-02-07T05:10:48.905+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[ctor-http-nio-6][0;39m [36mo.k.a.c.l.RequestResponseLoggingFilter  [0;39m [2m:[0;39m Request: GET http://localhost:18403/flowable-rest/process-api/identity/users
+[2m2025-02-07T05:10:52.341+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[ctor-http-nio-8][0;39m [36mo.k.a.c.l.RequestResponseLoggingFilter  [0;39m [2m:[0;39m Request: GET http://localhost:18403/flowable-rest/process-api/identity/users
+[2m2025-02-07T05:10:52.345+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[ctor-http-nio-6][0;39m [36mo.k.a.c.l.RequestResponseLoggingFilter  [0;39m [2m:[0;39m Response: GET http://localhost:18403/flowable-rest/process-api/identity/users - Status: 200 OK - Time: 3440ms
+[2m2025-02-07T05:10:52.988+05:30[0;39m [32m INFO[0;39m [35m17736[0;39m [2m---[0;39m [2m[ctor-http-nio-8][0;39m [36mo.k.a.c.l.RequestResponseLoggingFilter  [0;39m [2m:[0;39m Response: GET http://localhost:18403/flowable-rest/process-api/identity/users - Status: 200 OK - Time: 647ms
