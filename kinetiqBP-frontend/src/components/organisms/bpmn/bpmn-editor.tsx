@@ -1,15 +1,15 @@
-import 'bpmn-js/dist/assets/diagram-js.css';
-import 'bpmn-js/dist/assets/bpmn-js.css';
-import 'bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css';
 import '@bpmn-io/properties-panel/assets/properties-panel.css';
+import 'bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css';
+import 'bpmn-js/dist/assets/bpmn-js.css';
+import 'bpmn-js/dist/assets/diagram-js.css';
 import './style.css';
 
-import React, { useEffect, useRef, useState } from 'react';
-import BpmnModeler from 'bpmn-js/lib/Modeler';
 import { BpmnPropertiesPanelModule, BpmnPropertiesProviderModule } from 'bpmn-js-properties-panel';
+import BpmnModeler from 'bpmn-js/lib/Modeler';
+import React, { useEffect, useRef, useState } from 'react';
 
-import { MagicPropertiesProviderModule } from './common/provider';
-import { magicModdleDescriptor } from './common/descriptors';
+import { magicModdleDescriptor, userAssignmentModdleDescriptor } from './common/descriptors';
+import { MagicPropertiesProviderModule, UserAssignmentPropertiesProviderModule } from './common/provider';
 
 import { DEFAULT_BPMN_DIAGRAM_XML_PATH } from '@/utils';
 
@@ -46,9 +46,15 @@ export const KBPBpmnEditor = ({ diagramXml, bpmnModelerRef }: ReactBpmnEditorPro
       propertiesPanel: {
         parent: propertiesPanelRef.current,
       },
-      additionalModules: [BpmnPropertiesPanelModule, BpmnPropertiesProviderModule, MagicPropertiesProviderModule],
+      additionalModules: [
+        BpmnPropertiesPanelModule,
+        BpmnPropertiesProviderModule,
+        MagicPropertiesProviderModule,
+        UserAssignmentPropertiesProviderModule,
+      ],
       moddleExtensions: {
         magic: magicModdleDescriptor,
+        userAssignment: userAssignmentModdleDescriptor,
       },
     });
 
@@ -56,7 +62,6 @@ export const KBPBpmnEditor = ({ diagramXml, bpmnModelerRef }: ReactBpmnEditorPro
       bpmnModelerRef.current = modeler;
     }
 
-    // Open the initial diagram
     const openDiagram = async (xml: string) => {
       try {
         const res = await modeler.importXML(xml);
@@ -117,7 +122,6 @@ export const KBPBpmnEditor = ({ diagramXml, bpmnModelerRef }: ReactBpmnEditorPro
 
   return (
     <div ref={containerRef} className="bpmn-editor-content" id="js-drop-zone">
-      {/* Error Message */}
       {diagramError && (
         <div className="message error">
           <p>Oops, we could not display the BPMN 2.0 diagram.</p>
@@ -128,10 +132,8 @@ export const KBPBpmnEditor = ({ diagramXml, bpmnModelerRef }: ReactBpmnEditorPro
         </div>
       )}
 
-      {/* BPMN Modeler Canvas */}
       <div ref={canvasRef} className="bpmn-editor-canvas" id="js-canvas"></div>
 
-      {/* BPMN Properties Panel */}
       <div className="bpmn-editor-properties-panel">
         <div ref={propertiesPanelRef} id="js-properties-panel" className=""></div>
       </div>

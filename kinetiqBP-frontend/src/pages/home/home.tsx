@@ -1,15 +1,16 @@
+import { SidebarFooterAccount, ToolbarAccount } from '@/components';
+import { brandiung, navigation } from '@/configs';
+import { getEnvs } from '@/env.ts';
+import { KBPPageHeader } from '@/pages/home/page-header.tsx';
+import { muiTheme } from '@/styles';
+import { Button, Container } from '@mui/material';
+import LinearProgress from '@mui/material/LinearProgress';
+import { DialogsProvider, NotificationsProvider, PageContainer } from '@toolpad/core';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { ReactRouterAppProvider } from '@toolpad/core/react-router';
-import { SidebarFooterAccount, ToolbarAccount } from '@/components';
-import { muiTheme } from '@/styles';
-import { useAuthInitialization } from './auth-initialization.ts';
-import { Outlet } from 'react-router';
-import { brandiung, envs, navigation } from '@/configs';
-import { DialogsProvider, PageContainer } from '@toolpad/core';
-import { KBPPageHeader } from '@/pages/home/page-header.tsx';
 import { useAuth } from 'react-oidc-context';
-import LinearProgress from '@mui/material/LinearProgress';
-import { Button, Container } from '@mui/material';
+import { Outlet } from 'react-router';
+import { useAuthInitialization } from './auth-initialization.ts';
 
 export const Home = () => {
   const { authentication, session } = useAuthInitialization();
@@ -23,7 +24,7 @@ export const Home = () => {
     );
   }
 
-  if (!user && !envs.VITE_NO_AUTH) {
+  if (!user && !getEnvs().VITE_NO_AUTH) {
     return (
       <Container
         style={{
@@ -51,9 +52,11 @@ export const Home = () => {
             header: KBPPageHeader,
           }}
         >
-          <DialogsProvider>
-            <Outlet />
-          </DialogsProvider>
+          <NotificationsProvider>
+            <DialogsProvider>
+              <Outlet />
+            </DialogsProvider>
+          </NotificationsProvider>
         </PageContainer>
       </DashboardLayout>
     </ReactRouterAppProvider>

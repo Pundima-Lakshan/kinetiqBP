@@ -3,7 +3,6 @@ import { html } from 'htm/preact';
 import { isSelectEntryEdited, SelectEntry } from '@bpmn-io/properties-panel';
 import { useService } from 'bpmn-js-properties-panel';
 
-// import hooks from the vendored preact package
 import { useEffect, useState } from '@bpmn-io/properties-panel/preact/hooks';
 
 export default function (element) {
