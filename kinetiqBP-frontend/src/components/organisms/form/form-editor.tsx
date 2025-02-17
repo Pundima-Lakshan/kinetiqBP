@@ -1,5 +1,7 @@
-import React, { useEffect, useRef } from 'react';
 import { FormEditor, Schema } from '@bpmn-io/form-js';
+import React, { useEffect, useRef } from 'react';
+import { RangeFieldPropertiesProvider } from './extension/properties-panel';
+import { RangeField } from './extension/render';
 
 export interface KBPFormEditorProps {
   initialSchema?: Schema;
@@ -17,6 +19,8 @@ export const KBPFormEditor = ({ initialSchema, formEditorRef }: KBPFormEditorPro
   useEffect(() => {
     const formEditor = new FormEditor({
       container: editorContainerRef.current,
+      additionalModules: [RangeField],
+      properties: [RangeFieldPropertiesProvider],
     });
     formEditorRef.current = formEditor;
 

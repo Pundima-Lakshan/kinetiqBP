@@ -1,6 +1,8 @@
-import { useEffect, useRef } from 'react';
-import { Form, Schema } from '@bpmn-io/form-js';
 import { useSyncedRef } from '@/utils';
+import { Form, Schema } from '@bpmn-io/form-js';
+import { useEffect, useRef } from 'react';
+import { RangeFieldPropertiesProvider } from './extension/properties-panel';
+import { RangeField } from './extension/render';
 
 export interface KBPFormViewerProps {
   submitHandler: (event: unknown) => void;
@@ -17,6 +19,8 @@ export const KBPFormViewer = ({ changedHandler, submitHandler, schema, data }: K
   useEffect(() => {
     const form = new Form({
       container: formContainerRef.current,
+      additionalModules: [RangeField],
+      properties: [RangeFieldPropertiesProvider],
     });
 
     const initializeForm = async () => {
