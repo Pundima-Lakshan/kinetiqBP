@@ -1,13 +1,15 @@
 import { type InvalidationConfig, type mutationKeys } from '@/services';
 import { type MutationCacheNotifyEvent, type QueryCacheNotifyEvent, type QueryClient } from '@tanstack/react-query';
-import { toast } from 'sonner';
+import { useNotifications } from '@toolpad/core';
 
 export type AsyncStateObserversCommonParams = {
   cacheType?: 'query' | 'mutation';
   setIsLoading: (isLoading: boolean) => void;
 };
 
-export const asyncStateObserversCommon = ({ cacheType = 'query', setIsLoading }: AsyncStateObserversCommonParams) => {
+export const useAsyncStateObserversCommon = ({ cacheType = 'query', setIsLoading }: AsyncStateObserversCommonParams) => {
+  const notifications = useNotifications();
+
   const handleEventAction = (event: QueryCacheNotifyEvent | MutationCacheNotifyEvent) => {
     if (event.type !== 'updated') {
       return;
@@ -18,7 +20,7 @@ export const asyncStateObserversCommon = ({ cacheType = 'query', setIsLoading }:
      */
     if (event.action.type === 'fetch') {
       setIsLoading(true);
-      // toast.loading('Fetching...');
+      // notifications.loading('Fetching...');
       return;
     }
 
@@ -27,7 +29,7 @@ export const asyncStateObserversCommon = ({ cacheType = 'query', setIsLoading }:
      */
     if (event.action.type === 'pending') {
       setIsLoading(true);
-      // toast.loading('Pending...');
+      // notifications.loading('Pending...');
       return;
     }
 
@@ -37,7 +39,7 @@ export const asyncStateObserversCommon = ({ cacheType = 'query', setIsLoading }:
     if (event.action.type === 'success') {
       setIsLoading(false);
       if (cacheType === 'mutation') {
-        toast.success('Action successful');
+        notifications.show('Action successful');
       }
       return;
     }
@@ -47,7 +49,7 @@ export const asyncStateObserversCommon = ({ cacheType = 'query', setIsLoading }:
      */
     if (event.action.type === 'error') {
       setIsLoading(false);
-      toast.error(event.action.error.content?.message ?? event.action.error.message ?? 'Error');
+      notifications.show(event.action.error.content?.message ?? event.action.error.message ?? 'Error');
       return;
     }
 
@@ -56,7 +58,7 @@ export const asyncStateObserversCommon = ({ cacheType = 'query', setIsLoading }:
      */
     if (event.action.type === 'failed') {
       setIsLoading(false);
-      toast.error('Something went wrong retrying');
+      notifications.show('Something went wrong retrying');
       return;
     }
 
@@ -65,7 +67,7 @@ export const asyncStateObserversCommon = ({ cacheType = 'query', setIsLoading }:
      */
     if (event.action.type === 'pause') {
       setIsLoading(false);
-      toast.error('No Internet Connection');
+      notifications.show('No Internet Connection');
       return;
     }
 

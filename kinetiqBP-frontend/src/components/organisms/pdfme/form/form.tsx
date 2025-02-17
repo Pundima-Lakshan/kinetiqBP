@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react';
 import { checkTemplate, getInputFromTemplate, Template } from '@pdfme/common';
 import { Form as PdfMeForm, Viewer as PdfMeViewer } from '@pdfme/ui';
+import { useRef, useState, type MutableRefObject } from 'react';
 import { generatePDF, getFontsData, getPlugins, getTemplateByPreset, handleLoadTemplate, isJsonString } from '../helper';
 
 const headerHeight = 71;
@@ -23,10 +23,10 @@ const initTemplate = () => {
   return template;
 };
 
-export const Form = () => {
+export const PdfForm = () => {
   const uiRef = useRef<HTMLDivElement | null>(null);
   const ui = useRef<PdfMeForm | PdfMeViewer | null>(null);
-  const [prevUiRef, setPrevUiRef] = useState<PdfMeForm | PdfMeViewer | null>(null);
+  const [prevUiRef, setPrevUiRef] = useState<MutableRefObject<HTMLDivElement | null>>(uiRef);
 
   const [mode, setMode] = useState<Mode>((localStorage.getItem('mode') as Mode) ?? 'form');
 

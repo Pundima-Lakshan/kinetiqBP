@@ -1,1 +1,3 @@
-export const mutationKeys = {};
+export const mutationKeys = {
+  dummy: 'dummy',
+};

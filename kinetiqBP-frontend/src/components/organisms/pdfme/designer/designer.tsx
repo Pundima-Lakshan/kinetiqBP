@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react';
 import { checkTemplate, cloneDeep, Lang, Template } from '@pdfme/common';
 import { Designer as PdfMeDesigner } from '@pdfme/ui';
+import { useRef, useState, type MutableRefObject } from 'react';
 import {
   downloadJsonFile,
   generatePDF,
@@ -20,12 +20,12 @@ const customTemplatePresetKey = 'custom';
 
 const templatePresets = getTemplatePresets();
 
-export const Designer = () => {
+export const PdfDesigner = () => {
   const designerRef = useRef<HTMLDivElement | null>(null);
   const designer = useRef<PdfMeDesigner | null>(null);
   const [lang, setLang] = useState<Lang>('en');
   const [templatePreset, setTemplatePreset] = useState<string>(localStorage.getItem('templatePreset') || initialTemplatePresetKey);
-  const [prevDesignerRef, setPrevDesignerRef] = useState<PdfMeDesigner | null>(null);
+  const [prevDesignerRef, setPrevDesignerRef] = useState<MutableRefObject<HTMLDivElement | null>>(designerRef);
 
   const buildDesigner = () => {
     let template: Template = getTemplateByPreset(localStorage.getItem('templatePreset') || '');

@@ -1,1 +1,1 @@
-export * from './non-initial-effect ';
+export * from './non-initial-effect';

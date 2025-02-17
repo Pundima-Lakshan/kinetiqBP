@@ -1,13 +1,8 @@
 {
   "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2020",
     "useDefineForClassFields": true,
-    "lib": [
-      "ES2020",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
     /* Bundler mode */
@@ -25,16 +20,9 @@
     "noUncheckedSideEffectImports": true,
     /* Other */
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     },
-    "typeRoots": [
-      "./types",
-      "./node_modules/@types"
-    ]
+    "typeRoots": ["./types", "./node_modules/@types"]
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

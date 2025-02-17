@@ -1,32 +1,26 @@
-"use client";
+'use client';
 
 import {
-  asyncMutationStatesObserver,
+  useAsyncMutationStatesObserver,
+  useAsyncQueryStatesObserver,
   type AsyncMutationStatesObserverParams,
-  asyncQueryStatesObserver,
   type AsyncStateObserversCommonParams,
-  useRTUpdatesObserver,
-} from "@/observers";
-import { useZustandStore } from "@/stores/store-provider";
-import { useEffect } from "react";
+} from '@/observers';
+import { useEffect } from 'react';
 
-export type AsyncStateObserversProps = Omit<AsyncStateObserversCommonParams, "cacheType" | "channel" | "setIsLoading"> &
-  Omit<AsyncMutationStatesObserverParams, "cacheType" | "channel" | "setIsLoading">;
+export type AsyncStateObserversProps = Omit<AsyncStateObserversCommonParams, 'cacheType' | 'channel' | 'setIsLoading'> &
+  Omit<AsyncMutationStatesObserverParams, 'cacheType' | 'channel' | 'setIsLoading'>;
 
 export const AsyncStateObservers = ({ ...rest }: AsyncStateObserversProps) => {
-  const { channel } = useRTUpdatesObserver();
-  const { setIsLoading } = useZustandStore((state) => state.actions);
+  const { unsubscribe: queryUnsub } = useAsyncQueryStatesObserver({
+    setIsLoading: () => {},
+  });
+  const { unsubscribe: mutationUnsub } = useAsyncMutationStatesObserver({
+    ...rest,
+    setIsLoading: () => {},
+  });
 
   useEffect(() => {
-    const { unsubscribe: queryUnsub } = asyncQueryStatesObserver({
-      setIsLoading,
-    });
-    const { unsubscribe: mutationUnsub } = asyncMutationStatesObserver({
-      ...rest,
-      setIsLoading,
-      channel,
-    });
-
     return () => {
       queryUnsub();
       mutationUnsub();

@@ -50,7 +50,7 @@ export const KBPStepper = ({ steps, allCompletedComponent }: KBPStepperProps) =>
   };
 
   const handleNext = () => {
-    const newActiveStep = isLastStep() && !allStepsCompleted() ? localSteps.findIndex((step, i) => !(i in completed)) : activeStep + 1;
+    const newActiveStep = isLastStep() && !allStepsCompleted() ? localSteps.findIndex((_step, i) => !(i in completed)) : activeStep + 1;
     setActiveStep(newActiveStep);
   };
 
