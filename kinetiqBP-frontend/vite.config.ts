@@ -1,6 +1,6 @@
-import { type AliasOptions, defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
+import { type AliasOptions, defineConfig } from 'vite';
 
 const root = path.resolve(__dirname, 'src');
 
@@ -13,6 +13,6 @@ export default defineConfig({
     } as AliasOptions,
   },
   server: {
-    port: 13403,  // Set the port to your desired value
+    port: 13403, // Set the port to your desired value
   },
 });

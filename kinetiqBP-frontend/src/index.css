@@ -28,6 +28,20 @@ body {
 }
 
 #root {
+  width: 100dvw;
+  height: 100dvh;
+}
+
+#page-container > div {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 32px);
+}
+
+#page-container > div > div {
+  width: 100%;
+  height: calc(100% - 90px);
+}
+
+#page-container > div > div:first-of-type {
+  height: 42px;
 }
