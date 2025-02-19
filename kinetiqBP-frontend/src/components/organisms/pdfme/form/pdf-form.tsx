@@ -1,9 +1,12 @@
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { checkTemplate, getInputFromTemplate, Template } from '@pdfme/common';
 import { Form as PdfMeForm, Viewer as PdfMeViewer } from '@pdfme/ui';
-import { useRef, useState, type MutableRefObject } from 'react';
-import { getFontsData, getPlugins, getTemplateByPreset, isJsonString } from '../helper';
+import { useEffect, useRef, useState } from 'react';
+import { generatePDF, getFontsData, getPlugins, getTemplateByPreset, handleLoadTemplate, isJsonString } from '../helper';
 
-import './style.css';
+import { Box, Button, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material';
+import { VisuallyHiddenInput } from '../helper-components';
+import './styles.css';
 
 type Mode = 'form' | 'viewer';
 
@@ -26,7 +29,6 @@ const initTemplate = () => {
 export const PdfForm = () => {
   const uiRef = useRef<HTMLDivElement | null>(null);
   const ui = useRef<PdfMeForm | PdfMeViewer | null>(null);
-  const [prevUiRef, setPrevUiRef] = useState<MutableRefObject<HTMLDivElement | null> | null>(null);
 
   const [mode, setMode] = useState<Mode>((localStorage.getItem('mode') as Mode) ?? 'form');
 
@@ -109,26 +111,71 @@ export const PdfForm = () => {
     }
   };
 
-  if (uiRef != prevUiRef) {
-    if (prevUiRef && ui.current) {
-      ui.current.destroy();
+  useEffect(() => {
+    if (!ui.current) {
+      buildUi(mode);
     }
-    buildUi(mode);
-    setPrevUiRef(uiRef);
-  }
-
-  const [s, setS] = useState(true);
+    return () => {
+      ui.current?.destroy();
+    };
+  }, []);
 
   return (
-    <div>
-      <button
-        onClick={() => {
-          setS((prev) => !prev);
+    <div style={{ height: '100%', width: '100%' }}>
+      <Box
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0 1rem',
+          margin: '0.5rem 0rem',
+          fontSize: 'small',
         }}
       >
-        C
-      </button>
-      <div ref={uiRef} className="pdf-form-container" style={{ display: s ? 'block' : 'none' }} />
+        <FormControl size="small">
+          <RadioGroup defaultValue="form" row onChange={onChangeMode}>
+            <FormControlLabel value="form" control={<Radio />} label="Form" />
+            <FormControlLabel value="viewer" control={<Radio />} label="Viewer" />
+          </RadioGroup>
+        </FormControl>
+
+        <FormControl size="small">
+          <Button component="label" role={undefined} variant="contained" tabIndex={-1} startIcon={<CloudUploadIcon />}>
+            Load Template
+            <VisuallyHiddenInput type="file" accept="application/json" onChange={(e) => handleLoadTemplate(e, ui.current)} />
+          </Button>
+        </FormControl>
+
+        <FormControl size="small">
+          <Button variant="outlined" onClick={onGetInputs}>
+            Get Inputs
+          </Button>
+        </FormControl>
+
+        <FormControl size="small">
+          <Button variant="outlined" onClick={onSetInputs}>
+            Set Inputs
+          </Button>
+        </FormControl>
+
+        <FormControl size="small">
+          <Button variant="outlined" onClick={onSaveInputs}>
+            Save Inputs
+          </Button>
+        </FormControl>
+
+        <FormControl size="small">
+          <Button variant="outlined" onClick={onResetInputs} color="warning">
+            Reset Inputs
+          </Button>
+        </FormControl>
+
+        <FormControl size="small">
+          <Button variant="outlined" onClick={() => generatePDF(ui.current)} color="success">
+            Generate PDF
+          </Button>
+        </FormControl>
+      </Box>
+      <div ref={uiRef} className="pdf-form-container" />
     </div>
   );
 };

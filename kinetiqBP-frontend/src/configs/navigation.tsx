@@ -1,8 +1,8 @@
-import type { Navigation } from '@toolpad/core/AppProvider';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import DescriptionIcon from '@mui/icons-material/Description';
 import { browserRoutesCollection } from '@/configs/browser-router.ts';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import DescriptionIcon from '@mui/icons-material/Description';
+import type { Navigation } from '@toolpad/core/AppProvider';
 
 export const navigation: Navigation = [
   {
@@ -43,6 +43,23 @@ export const navigation: Navigation = [
     segment: browserRoutesCollection.FormDefinitions.segment,
     title: browserRoutesCollection.FormDefinitions.title,
     icon: <AssignmentIcon />,
+  },
+  {
+    kind: 'divider',
+  },
+  {
+    kind: 'header',
+    title: 'Forms',
+  },
+  {
+    segment: browserRoutesCollection.FormDesigner.segment,
+    title: browserRoutesCollection.FormDesigner.title,
+    icon: <DescriptionIcon />,
+  },
+  {
+    segment: browserRoutesCollection.FormViewer.segment,
+    title: browserRoutesCollection.FormViewer.title,
+    icon: <DescriptionIcon />,
   },
   {
     kind: 'divider',

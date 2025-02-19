@@ -1,8 +1,9 @@
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { Box, Button, FormControl, InputLabel, MenuItem, Select, styled, type SelectChangeEvent } from '@mui/material';
+import { Box, Button, FormControl, InputLabel, MenuItem, Select, type SelectChangeEvent } from '@mui/material';
 import { checkTemplate, cloneDeep, Lang, Template } from '@pdfme/common';
 import { Designer } from '@pdfme/ui';
 import React, { useEffect, useRef, useState } from 'react';
+import { VisuallyHiddenInput } from '../helper-components.tsx';
 import {
   downloadJsonFile,
   generatePDF,
@@ -170,7 +171,7 @@ export const PdfDesigner = () => {
             Upload Template
             <VisuallyHiddenInput
               type="file"
-              accept="application/pdf"
+              accept="application/json"
               onChange={(e) => {
                 handleLoadTemplate(e as React.ChangeEvent<HTMLInputElement>, designer.current);
                 setTemplatePreset(customTemplatePresetKey);
@@ -201,15 +202,3 @@ export const PdfDesigner = () => {
     </div>
   );
 };
-
-const VisuallyHiddenInput = styled('input')({
-  clip: 'rect(0 0 0 0)',
-  clipPath: 'inset(50%)',
-  height: 1,
-  overflow: 'hidden',
-  position: 'absolute',
-  bottom: 0,
-  left: 0,
-  whiteSpace: 'nowrap',
-  width: 1,
-});

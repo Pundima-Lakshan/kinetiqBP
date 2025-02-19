@@ -1,14 +1,6 @@
+import { PdfDesigner, PdfForm } from '@/components';
+import { Dashboard, FormDefinitions, Heatmaps, Home, Statistics, Tasks, WorkflowDefinitions, WorkflowInstances } from '@/pages';
 import { createBrowserRouter } from 'react-router';
-import {
-  Dashboard,
-  FormDefinitions,
-  Heatmaps,
-  Home,
-  Statistics,
-  Tasks,
-  WorkflowDefinitions,
-  WorkflowInstances,
-} from '@/pages';
 
 export const browserRoutesCollection = {
   Dashboard: { segment: '', title: 'Dashboard' },
@@ -16,6 +8,8 @@ export const browserRoutesCollection = {
   WorkflowInstances: { segment: 'workflow-instances', title: 'Workflow Instances' },
   FormDefinitions: { segment: 'form-definitions', title: 'Form Definitions' },
   Tasks: { segment: 'tasks', title: 'Tasks' },
+  FormDesigner: { segment: 'form-designer', title: 'Form Designer' },
+  FormViewer: { segment: 'form-viewer', title: 'Form Viewer' },
   Statistics: { segment: 'statistics', title: 'Statistics' },
   Heatmap: { segment: 'heatmap', title: 'Heatmap' },
 };
@@ -43,6 +37,18 @@ export const browserRouter = createBrowserRouter([
       {
         path: getPath(browserRoutesCollection.FormDefinitions.segment),
         Component: FormDefinitions,
+      },
+      {
+        path: getPath(browserRoutesCollection.FormDefinitions.segment),
+        Component: FormDefinitions,
+      },
+      {
+        path: getPath(browserRoutesCollection.FormDesigner.segment),
+        Component: PdfDesigner,
+      },
+      {
+        path: getPath(browserRoutesCollection.FormViewer.segment),
+        Component: PdfForm,
       },
       {
         path: getPath(browserRoutesCollection.Heatmap.segment),
