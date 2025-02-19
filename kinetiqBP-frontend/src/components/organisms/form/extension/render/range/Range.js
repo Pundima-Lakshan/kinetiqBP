@@ -1,5 +1,3 @@
-import classNames from 'classnames';
-
 /*
  * Import components and utilities from our extension API. Warning: for demo experiments only.
  */
@@ -11,6 +9,7 @@ import './styles.css';
 
 export const rangeType = 'range';
 
+import { formFieldClasses, prefixId } from '../utils';
 import { RangeIcon } from './range-svg';
 
 /*
@@ -70,25 +69,3 @@ RangeRenderer.config = {
   iconUrl: `data:image/svg+xml;utf8,${encodeURIComponent(RangeIcon)}`,
   propertiesPanelEntries: ['key', 'label', 'description', 'min', 'max', 'disabled', 'readonly'],
 };
-
-// helper //////////////////////
-
-function formFieldClasses(type, { errors = [], disabled = false, readonly = false } = {}) {
-  if (!type) {
-    throw new Error('type required');
-  }
-
-  return classNames('fjs-form-field', `fjs-form-field-${type}`, {
-    'fjs-has-errors': errors.length > 0,
-    'fjs-disabled': disabled,
-    'fjs-readonly': readonly,
-  });
-}
-
-function prefixId(id, formId) {
-  if (formId) {
-    return `fjs-form-${formId}-${id}`;
-  }
-
-  return `fjs-form-${id}`;
-}

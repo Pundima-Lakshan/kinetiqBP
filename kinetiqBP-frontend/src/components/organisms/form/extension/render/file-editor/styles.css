@@ -1,0 +1,33 @@
+.file-editor-files-open-link {
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.file-editor-files-open-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+  transition: all 0.2s ease-in-out;
+}
+
+.file-editor-files-open-link:hover::after {
+  height: 2.5px;
+  bottom: -1px;
+  background-color: currentColor;
+}
+
+.file-editor-files-links {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-items: center;
+  justify-content: space-between;
+  gap: 0 0.5rem;
+}
