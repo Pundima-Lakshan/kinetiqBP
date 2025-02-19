@@ -1,6 +1,8 @@
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { Box, Button, FormControl, InputLabel, MenuItem, Select, styled, type SelectChangeEvent } from '@mui/material';
 import { checkTemplate, cloneDeep, Lang, Template } from '@pdfme/common';
-import { Designer as PdfMeDesigner } from '@pdfme/ui';
-import { useRef, useState, type MutableRefObject } from 'react';
+import { Designer } from '@pdfme/ui';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   downloadJsonFile,
   generatePDF,
@@ -13,8 +15,6 @@ import {
   translations,
 } from '../helper.ts';
 
-const headerHeight = 180;
-
 const initialTemplatePresetKey = 'invoice';
 const customTemplatePresetKey = 'custom';
 
@@ -22,10 +22,9 @@ const templatePresets = getTemplatePresets();
 
 export const PdfDesigner = () => {
   const designerRef = useRef<HTMLDivElement | null>(null);
-  const designer = useRef<PdfMeDesigner | null>(null);
+  const designer = useRef<Designer | null>(null);
   const [lang, setLang] = useState<Lang>('en');
   const [templatePreset, setTemplatePreset] = useState<string>(localStorage.getItem('templatePreset') || initialTemplatePresetKey);
-  const [prevDesignerRef, setPrevDesignerRef] = useState<MutableRefObject<HTMLDivElement | null>>(designerRef);
 
   const buildDesigner = () => {
     let template: Template = getTemplateByPreset(localStorage.getItem('templatePreset') || '');
@@ -44,19 +43,19 @@ export const PdfDesigner = () => {
 
     getFontsData().then((font) => {
       if (designerRef.current) {
-        designer.current = new PdfMeDesigner({
+        designer.current = new Designer({
           domContainer: designerRef.current,
           template,
           options: {
             font,
             lang,
             labels: {
-              clear: '🗑️', // Add custom labels to consume them in your own plugins
+              clear: 'clear', // Add custom labels to consume them in your own plugins
             },
             theme: {
               token: {
                 colorPrimary: '#1564be',
-                borderRadius: 1,
+                borderRadius: 1.5,
               },
             },
             icons: {
@@ -102,7 +101,7 @@ export const PdfDesigner = () => {
     }
   };
 
-  const onChangeTemplatePresets = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const onChangeTemplatePresets = (e: SelectChangeEvent) => {
     setTemplatePreset(e.target.value);
     localStorage.setItem('template', JSON.stringify(getTemplateByPreset(localStorage.getItem('templatePreset') || '')));
     localStorage.removeItem('template');
@@ -110,41 +109,39 @@ export const PdfDesigner = () => {
     buildDesigner();
   };
 
-  if (designerRef != prevDesignerRef) {
-    if (prevDesignerRef && designer.current) {
-      designer.current.destroy();
-    }
+  useEffect(() => {
     buildDesigner();
-    setPrevDesignerRef(designerRef);
-  }
+    return () => {
+      designer.current?.destroy();
+    };
+  }, []);
 
   return (
-    <div>
-      <header
+    <div style={{ height: '100%', width: '100%' }}>
+      <Box
         style={{
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between',
-          margin: '0 1rem',
+          gap: '0 1rem',
+          margin: '0.5rem 0rem',
           fontSize: 'small',
         }}
       >
-        <strong>Designer</strong>
-        <span style={{ margin: '0 1rem' }}>:</span>
-        <label>
-          Template Preset:{' '}
-          <select onChange={onChangeTemplatePresets} value={templatePreset}>
+        <FormControl variant="outlined" size="small">
+          <InputLabel>Template</InputLabel>
+          <Select onChange={onChangeTemplatePresets} value={templatePreset} label="Template">
             {templatePresets.map((preset) => (
-              <option key={preset.key} disabled={preset.key === customTemplatePresetKey} value={preset.key}>
+              <MenuItem key={preset.key} disabled={preset.key === customTemplatePresetKey} value={preset.key}>
                 {preset.label}
-              </option>
+              </MenuItem>
             ))}
-          </select>
-        </label>
-        <span style={{ margin: '0 1rem' }}>/</span>
-        <label>
-          Lang:{' '}
-          <select
+          </Select>
+        </FormControl>
+
+        <FormControl variant="outlined" size="small">
+          <InputLabel>Language</InputLabel>
+          <Select
+            label="Language"
             onChange={(e) => {
               setLang(e.target.value as Lang);
               if (designer.current) {
@@ -154,37 +151,65 @@ export const PdfDesigner = () => {
             value={lang}
           >
             {translations.map((t) => (
-              <option key={t.value} value={t.value}>
+              <MenuItem key={t.value} value={t.value}>
                 {t.label}
-              </option>
+              </MenuItem>
             ))}
-          </select>
-        </label>
-        <span style={{ margin: '0 1rem' }}>/</span>
-        <label style={{ width: 180 }}>
-          Change BasePDF
-          <input type="file" accept="application/pdf" onChange={onChangeBasePDF} />
-        </label>
-        <span style={{ margin: '0 1rem' }}>/</span>
-        <label style={{ width: 180 }}>
-          Load Template
-          <input
-            type="file"
-            accept="application/json"
-            onChange={(e) => {
-              handleLoadTemplate(e, designer.current);
-              setTemplatePreset(customTemplatePresetKey);
-            }}
-          />
-        </label>
-        <span style={{ margin: '0 1rem' }}>/</span>
-        <button onClick={onDownloadTemplate}>Download Template</button>
-        <span style={{ margin: '0 1rem' }}>/</span>
-        <button onClick={() => onSaveTemplate()}>Save Template</button>
-        <span style={{ margin: '0 1rem' }}>/</span>
-        <button onClick={() => generatePDF(designer.current)}>Generate PDF</button>
-      </header>
-      <div ref={designerRef} style={{ width: '100%', height: `calc(100vh - ${headerHeight}px)` }} />
+          </Select>
+        </FormControl>
+
+        <FormControl size="small">
+          <Button component="label" role={undefined} variant="contained" tabIndex={-1} startIcon={<CloudUploadIcon />}>
+            Upload BasePDF
+            <VisuallyHiddenInput type="file" accept="application/pdf" onChange={onChangeBasePDF} />
+          </Button>
+        </FormControl>
+
+        <FormControl size="small">
+          <Button component="label" role={undefined} variant="contained" tabIndex={-1} startIcon={<CloudUploadIcon />}>
+            Upload Template
+            <VisuallyHiddenInput
+              type="file"
+              accept="application/pdf"
+              onChange={(e) => {
+                handleLoadTemplate(e as React.ChangeEvent<HTMLInputElement>, designer.current);
+                setTemplatePreset(customTemplatePresetKey);
+              }}
+            />
+          </Button>
+        </FormControl>
+
+        <FormControl size="small">
+          <Button variant="outlined" onClick={onDownloadTemplate}>
+            Download Template
+          </Button>
+        </FormControl>
+
+        <FormControl size="small">
+          <Button variant="outlined" onClick={() => onSaveTemplate()}>
+            Save Template
+          </Button>
+        </FormControl>
+
+        <FormControl size="small">
+          <Button variant="outlined" onClick={() => generatePDF(designer.current)}>
+            Generate PDF
+          </Button>
+        </FormControl>
+      </Box>
+      <div ref={designerRef} style={{ width: '100%', height: `calc(100% - 40px)` }} />
     </div>
   );
 };
+
+const VisuallyHiddenInput = styled('input')({
+  clip: 'rect(0 0 0 0)',
+  clipPath: 'inset(50%)',
+  height: 1,
+  overflow: 'hidden',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  whiteSpace: 'nowrap',
+  width: 1,
+});

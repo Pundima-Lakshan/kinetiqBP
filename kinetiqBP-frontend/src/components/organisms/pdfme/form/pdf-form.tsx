@@ -1,9 +1,9 @@
 import { checkTemplate, getInputFromTemplate, Template } from '@pdfme/common';
 import { Form as PdfMeForm, Viewer as PdfMeViewer } from '@pdfme/ui';
 import { useRef, useState, type MutableRefObject } from 'react';
-import { generatePDF, getFontsData, getPlugins, getTemplateByPreset, handleLoadTemplate, isJsonString } from '../helper';
+import { getFontsData, getPlugins, getTemplateByPreset, isJsonString } from '../helper';
 
-const headerHeight = 71;
+import './style.css';
 
 type Mode = 'form' | 'viewer';
 
@@ -26,7 +26,7 @@ const initTemplate = () => {
 export const PdfForm = () => {
   const uiRef = useRef<HTMLDivElement | null>(null);
   const ui = useRef<PdfMeForm | PdfMeViewer | null>(null);
-  const [prevUiRef, setPrevUiRef] = useState<MutableRefObject<HTMLDivElement | null>>(uiRef);
+  const [prevUiRef, setPrevUiRef] = useState<MutableRefObject<HTMLDivElement | null> | null>(null);
 
   const [mode, setMode] = useState<Mode>((localStorage.getItem('mode') as Mode) ?? 'form');
 
@@ -51,8 +51,8 @@ export const PdfForm = () => {
           inputs,
           options: {
             font,
-            lang: 'ja',
-            labels: { clear: '消去' },
+            lang: 'en',
+            labels: { clear: 'clear' },
             theme: {
               token: {
                 colorPrimary: '#25c2a0',
@@ -117,41 +117,18 @@ export const PdfForm = () => {
     setPrevUiRef(uiRef);
   }
 
+  const [s, setS] = useState(true);
+
   return (
     <div>
-      <header
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          margin: '0 1rem',
-          fontSize: 'small',
+      <button
+        onClick={() => {
+          setS((prev) => !prev);
         }}
       >
-        <strong>Form, Viewer</strong>
-        <span style={{ margin: '0 1rem' }}>:</span>
-        <div>
-          <input type="radio" onChange={onChangeMode} id="form" value="form" checked={mode === 'form'} />
-          <label htmlFor="form">Form</label>
-          <input type="radio" onChange={onChangeMode} id="viewer" value="viewer" checked={mode === 'viewer'} />
-          <label htmlFor="viewer">Viewer</label>
-        </div>
-        <label style={{ width: 180 }}>
-          Load Template
-          <input type="file" accept="application/json" onChange={(e) => handleLoadTemplate(e, ui.current)} />
-        </label>
-        <span style={{ margin: '0 1rem' }}>/</span>
-        <button onClick={onGetInputs}>Get Inputs</button>
-        <span style={{ margin: '0 1rem' }}>/</span>
-        <button onClick={onSetInputs}>Set Inputs</button>
-        <span style={{ margin: '0 1rem' }}>/</span>
-        <button onClick={onSaveInputs}>Save Inputs</button>
-        <span style={{ margin: '0 1rem' }}>/</span>
-        <button onClick={onResetInputs}>Reset Inputs</button>
-        <span style={{ margin: '0 1rem' }}>/</span>
-        <button onClick={() => generatePDF(ui.current)}>Generate PDF</button>
-      </header>
-      <div ref={uiRef} style={{ width: '100%', height: `calc(100vh - ${headerHeight}px)` }} />
+        C
+      </button>
+      <div ref={uiRef} className="pdf-form-container" style={{ display: s ? 'block' : 'none' }} />
     </div>
   );
 };

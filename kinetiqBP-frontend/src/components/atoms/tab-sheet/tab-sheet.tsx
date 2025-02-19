@@ -2,6 +2,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Box, Tab, Tabs } from '@mui/material';
 import React, { type ReactNode } from 'react';
 
+import './styles.css';
+
 export interface TabItem {
   label: string;
   component: ReactNode;
@@ -14,10 +16,10 @@ export interface TabsLayoutProps {
 }
 
 export const TabSheet = ({ tabItems }: TabsLayoutProps) => {
-  const [value, setValue] = React.useState(0);
+  const [activeTabIndex, setActiveTabIndex] = React.useState(0);
 
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+    setActiveTabIndex(newValue);
   };
 
   const renderIcon = (item: TabItem) => {
@@ -30,20 +32,22 @@ export const TabSheet = ({ tabItems }: TabsLayoutProps) => {
   return (
     <Box sx={{ width: '100%', height: '100%' }} className={'forms-container'}>
       <Box sx={{ borderBottom: 0, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="tabs" variant="scrollable" scrollButtons="auto">
+        <Tabs value={activeTabIndex} onChange={handleChange} aria-label="tabs" variant="scrollable" scrollButtons="auto">
           {tabItems.map((item, index) => {
             const icon = renderIcon(item);
             return <Tab key={item.label} label={item.label} {...a11yProps(index)} icon={icon} iconPosition="end" disabled={item.disabled} />;
           })}
         </Tabs>
       </Box>
-      {tabItems.map((item, index) => {
-        return (
-          <TabPanelLayout key={item.label} value={value} index={index}>
-            {item.component}
-          </TabPanelLayout>
-        );
-      })}
+      <Box className="tab-content-container">
+        {tabItems.map((item, index) => {
+          return (
+            <TabPanelLayout key={item.label} activeTabIndex={activeTabIndex} index={index}>
+              {item.component}
+            </TabPanelLayout>
+          );
+        })}
+      </Box>
     </Box>
   );
 };
@@ -51,22 +55,21 @@ export const TabSheet = ({ tabItems }: TabsLayoutProps) => {
 interface TabPanelLayoutProps {
   children?: React.ReactNode;
   index: number;
-  value: number;
+  activeTabIndex: number;
 }
 
 const TabPanelLayout = (props: TabPanelLayoutProps) => {
-  const { children, value, index, ...other } = props;
+  const { children, activeTabIndex, index, ...other } = props;
 
   return (
     <div
       role="tabpanel"
-      hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
-      style={{ height: 'calc(100% - 48px)' }}
+      className={`tab-content-item ${activeTabIndex === index ? 'active' : ''}`}
       {...other}
     >
-      {value === index && <Box sx={{ p: 2, height: '100%' }}>{children}</Box>}
+      <Box sx={{ p: 2, height: '100%' }}>{children}</Box>
     </div>
   );
 };

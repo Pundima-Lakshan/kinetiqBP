@@ -1,0 +1,19 @@
+.tab-content-container {
+  position: relative;
+  width: 100%; /* Adjust as needed */
+  height: calc(100% - 72px);
+}
+
+.tab-content-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0; /* Default low opacity */
+}
+
+.tab-content-item.active {
+  opacity: 1; /* Fully visible item */
+  z-index: 2; /* Bring active item to the front */
+}

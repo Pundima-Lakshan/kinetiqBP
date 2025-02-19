@@ -1,9 +1,10 @@
 import js from '@eslint/js';
-import tseslint from 'typescript-eslint';
+import preactConfig from 'eslint-config-preact';
+import prettierPlugin from 'eslint-config-prettier';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
-import prettierPlugin from 'eslint-config-prettier';
 import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
   {
@@ -12,7 +13,7 @@ export default tseslint.config(
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
+    files: ['**/*.{jsx,ts,tsx}'],
     ...reactPlugin.configs.flat.recommended,
     rules: {
       ...reactPlugin.configs.flat.recommended.rules,
@@ -26,6 +27,13 @@ export default tseslint.config(
         ...globals.serviceworker,
         ...globals.browser,
       },
+    },
+  },
+  {
+    files: ['**/*.{js,mjs,cjs,ts}'],
+    ...preactConfig,
+    rules: {
+      ...preactConfig.rules,
     },
   },
   {

@@ -18,7 +18,9 @@ import {
   time,
 } from '@pdfme/schemas';
 import { Designer, Form, Viewer } from '@pdfme/ui';
+import React from 'react';
 import plugins from './plugins';
+import { getBlankTemplate, getInvoiceTemplate } from './template';
 
 interface FontObj {
   fallback: boolean;
@@ -96,9 +98,7 @@ export const handleLoadTemplate = (e: React.ChangeEvent<HTMLInputElement>, curre
         currentRef.updateTemplate(t);
       })
       .catch((e) => {
-        alert(`Invalid template file.
---------------------------
-${e}`);
+        alert(`Invalid template file.${e}`);
       });
   }
 };
@@ -186,20 +186,15 @@ export const isJsonString = (str: string) => {
   return true;
 };
 
-const getBlankTemplate = () =>
-  ({
-    schemas: [{}],
-    basePdf: {
-      width: 210,
-      height: 297,
-      padding: [20, 10, 20, 10],
-    },
-  }) as Template;
 export const getTemplatePresets = (): {
   key: string;
   label: string;
   template: () => Template;
-}[] => [{ key: 'blank', label: 'Blank', template: getBlankTemplate }];
+}[] => [
+  { key: 'blank', label: 'Blank', template: getBlankTemplate },
+  { key: 'invoice', label: 'Invoice', template: getInvoiceTemplate },
+  { key: 'custom', label: 'Custom', template: getBlankTemplate },
+];
 
 export const getTemplateByPreset = (templatePreset: string): Template => {
   const templatePresets = getTemplatePresets();

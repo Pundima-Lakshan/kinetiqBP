@@ -1,1 +1,1 @@
-export * from './designer';
+export * from './pdf-designer';
