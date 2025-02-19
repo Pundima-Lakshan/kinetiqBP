@@ -10,6 +10,15 @@ interface GenericFlowableListResponse<T> {
   size: number;
 }
 
+interface GenericUiServiceListResponse<T> {
+  data: T[];
+  total: number;
+  start: number;
+  sort: string;
+  order: string;
+  size: number;
+}
+
 interface FlowableUser {
   id: string;
   firstName: string;
@@ -33,4 +42,16 @@ interface FlowableGroup {
 
 export const fetchFlowableGroups = async () => {
   return await get<GenericFlowableListResponse<FlowableGroup>>(`${getEnvs().VITE_FLOWABLE_REST_URL}/identity/groups`);
+};
+
+interface FlowableForm {
+  id: string;
+  name: string;
+  key: string;
+  version: number;
+  url: string;
+}
+
+export const fetchFormDefinitions = async () => {
+  return await get<GenericUiServiceListResponse<any>>(`${getEnvs().VITE_FLOWABLE_REST_URL}/form-repository/form-definitions`);
 };
