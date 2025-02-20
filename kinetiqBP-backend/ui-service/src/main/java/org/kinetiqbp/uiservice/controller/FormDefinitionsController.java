@@ -40,9 +40,8 @@ public class FormDefinitionsController {
                 formDefinitionPostRequest.getDescription(),
                 formDefinitionPostRequest.getCreatedDate(),
                 formDefinitionPostRequest.getCreatedDate(),
-                formDefinitionPostRequest.getCreatedBy(),
                 formDefinitionPostRequest.getFormSchema());
-        FormDefinition response = formDefinitionsService.postFormDefinition(newFormDefinition);
+        FormDefinition response = formDefinitionsService.postFormDefinition(newFormDefinition, formDefinitionPostRequest.getCreatedBy());
         return ResponseEntity.ok(response);
     }
     

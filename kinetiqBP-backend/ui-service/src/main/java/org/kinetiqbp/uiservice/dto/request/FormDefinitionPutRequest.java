@@ -2,6 +2,7 @@ package org.kinetiqbp.uiservice.dto.request;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.*;
+import org.kinetiqbp.uiservice.model.User;
 
 import java.util.Date;
 
@@ -11,7 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class FormDefinitionPutRequest {
     @NonNull
-    private Long id;
+    private Integer id;
 
     @NonNull
     private String formId;
@@ -29,7 +30,7 @@ public class FormDefinitionPutRequest {
     private Date modifiedDate;
 
     @NonNull
-    private String createdBy;
+    private User createdBy;
 
     @NonNull
     private JsonNode formSchema;

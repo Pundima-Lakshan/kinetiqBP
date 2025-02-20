@@ -16,8 +16,8 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class FormDefinition {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @NonNull
     private String formId;
@@ -34,11 +34,22 @@ public class FormDefinition {
     @NonNull
     private Date modifiedDate;
 
+    @ManyToOne
+    @JoinColumn(name = "created_by", nullable = false)
     @NonNull
-    private String createdBy;
+    private User createdBy;
 
     @NonNull
     @Type(JsonType.class)
     @Column(columnDefinition = "json")
     private JsonNode formSchema;
+    
+    public FormDefinition(@NonNull String formId, @NonNull String version, @NonNull String description, @NonNull Date createdDate, @NonNull Date modifiedDate, @NonNull JsonNode formSchema) {
+        this.formId = formId;
+        this.version = version;
+        this.description = description;
+        this.createdDate = createdDate;
+        this.modifiedDate = modifiedDate;
+        this.formSchema = formSchema;
+    }
 }
