@@ -1,22 +1,24 @@
 import { defaultDialogContentProps, defaultDialogProps, DialogConfirmationActions, KBPFormEditor } from '@/components';
-import { useMutationSuccessErrorCallback, usePostFormDefinitions } from '@/services';
+import { useGetFormDefinition, useMutationSuccessErrorCallback, usePutFormDefinitions } from '@/services';
 import { FormEditor } from '@bpmn-io/form-js';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import { DialogProps, useSession } from '@toolpad/core';
 import { useRef } from 'react';
 
-export const NewFormDefinitionDialog = ({ open, onClose }: DialogProps) => {
+export const UpdateFormDefinitionDialog = ({ open, onClose, payload: id }: DialogProps<number>) => {
   const formEditorRef = useRef<FormEditor | null>(null);
 
   const session = useSession();
   const userId = session?.user?.id;
 
   const {
-    mutate: postFormDefinition,
-    isPending: isPendingPostFormDefinition,
-    status: statusPostFormDefinition,
-    error: errorPostFormDefinition,
-  } = usePostFormDefinitions();
+    mutate: putFormDefinition,
+    isPending: isPendingPutFormDefinition,
+    status: statusPutFormDefinition,
+    error: errorPutFormDefinition,
+  } = usePutFormDefinitions();
+
+  const { data: formDefinition, isLoading: isFormDefinitionLoading } = useGetFormDefinition(id);
 
   const handleClose = () => {
     void onClose();
@@ -27,12 +29,13 @@ export const NewFormDefinitionDialog = ({ open, onClose }: DialogProps) => {
       id: string;
       versionTag?: string;
     } = formEditorRef.current?.getSchema();
-    if (!formSchema || !userId) {
+    if (!formSchema || !userId || !formDefinition) {
       return;
     }
-    postFormDefinition({
-      createdDate: new Date(),
-      createdBy: userId,
+    putFormDefinition({
+      id: formDefinition.id,
+      createdDate: formDefinition.createdDate,
+      createdBy: formDefinition.createdBy,
       modifiedDate: new Date(),
       formId: formSchema.id,
       formSchema,
@@ -42,18 +45,20 @@ export const NewFormDefinitionDialog = ({ open, onClose }: DialogProps) => {
   };
 
   useMutationSuccessErrorCallback({
-    mutationStatus: statusPostFormDefinition,
-    successMessage: 'Form submitted successfully',
-    error: errorPostFormDefinition,
+    mutationStatus: statusPutFormDefinition,
+    successMessage: 'Form updated successfully',
+    error: errorPutFormDefinition,
   });
+
+  const isLoading = isPendingPutFormDefinition || isFormDefinitionLoading;
 
   return (
     <Dialog {...defaultDialogProps} onClose={() => onClose()} open={open}>
       <DialogTitle>Set backup account</DialogTitle>
       <DialogContent {...defaultDialogContentProps}>
-        <KBPFormEditor formEditorRef={formEditorRef} />
+        <KBPFormEditor formEditorRef={formEditorRef} initialSchema={formDefinition?.formSchema} />
       </DialogContent>
-      <DialogConfirmationActions onConfirm={handleConfirm} onCancel={handleClose} isLoading={isPendingPostFormDefinition} />
+      <DialogConfirmationActions onConfirm={handleConfirm} onCancel={handleClose} isLoading={isLoading} confirmLabel="Update" />
     </Dialog>
   );
 };

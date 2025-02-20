@@ -18,6 +18,7 @@
 // ];
 
 import { KBPFormViewer, PdfDesigner, TabSheet, type CustomKBPFormEventName } from '@/components';
+import { useNotifications } from '@toolpad/core';
 import { useState } from 'react';
 
 // export const Dashboard = () => {
@@ -101,6 +102,7 @@ const DashboardPdfEditor = () => {
 };
 
 export const Dashboard = () => {
+  const notification = useNotifications();
   const [tabItems, setTabItems] = useState([
     {
       label: 'Form',
@@ -121,6 +123,18 @@ export const Dashboard = () => {
   const closeHandler = (index: number) => {
     setTabItems((prev) => prev.filter((_, i) => i !== index));
   };
+
+  return (
+    <>
+      <button
+        onClick={() => {
+          notification.show('Hello', { severity: 'success' });
+        }}
+      >
+        C
+      </button>
+    </>
+  );
 
   return <TabSheet tabItems={tabItems} />;
 };

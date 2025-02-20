@@ -1,10 +1,7 @@
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { ComponentProps } from 'react';
 import { ContainerBox } from '@/components';
+import { DataGrid, GridToolbar, type DataGridProps, type GridValidRowModel } from '@mui/x-data-grid';
 
-export type KBPDataGridProps = ComponentProps<typeof DataGrid>;
-
-export const KBPDataGrid = (props: KBPDataGridProps) => {
+export const KBPDataGrid = <R extends GridValidRowModel = any>(props: DataGridProps<R>) => {
   return (
     <ContainerBox>
       <DataGrid

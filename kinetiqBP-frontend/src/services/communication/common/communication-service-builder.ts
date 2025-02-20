@@ -27,6 +27,7 @@ const makeRequest = async <T>(url: string, requestOption: RequestInit) => {
     ...requestOption,
     headers: {
       Authorization: `Bearer ${getAccessToken()}`,
+      'Content-Type': 'application/json',
     },
   };
   return await handleResponse<T>(url, options);
@@ -50,7 +51,7 @@ export const postFormData = async <T>(url: string, data: FormData) =>
     body: data,
   });
 
-export const put = async <T, R>(url: string, data: R) =>
+export const put = async <T, R = unknown>(url: string, data: R) =>
   await makeRequest<T>(url, {
     method: 'PUT',
     body: JSON.stringify(data),

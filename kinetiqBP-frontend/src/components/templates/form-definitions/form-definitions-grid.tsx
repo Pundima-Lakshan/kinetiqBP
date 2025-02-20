@@ -1,34 +1,13 @@
-import { KBPDataGrid, WorkflowMoreDialog, WorkflowStartDialog } from '@/components';
-import { useState } from 'react';
-import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
-import { Button, IconButton } from '@mui/material';
+import { KBPDataGrid, UpdateFormDefinitionDialog } from '@/components';
+import type { FormDefinition } from '@/services';
+import { dateToString } from '@/utils';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
+import { IconButton } from '@mui/material';
+import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useDialogs } from '@toolpad/core';
+import { useState } from 'react';
 
-export interface FormDefinitionsRowModel {
-  id: string;
-  name: string;
-  description: string;
-  version: string;
-  created: string;
-  modified: string;
-}
-
-const StartWorkflowInstance = (params: GridRenderCellParams<FormDefinitionsRowModel>) => {
-  const dialogs = useDialogs();
-  return (
-    <Button
-      variant="text"
-      size="small"
-      tabIndex={params.hasFocus ? 0 : -1}
-      onClick={() => {
-        void dialogs.open(WorkflowStartDialog, params)
-      }}
-    >
-      Start
-    </Button>
-  );
-};
+export type FormDefinitionsRowModel = FormDefinition;
 
 const ShowMoreActions = (params: GridRenderCellParams<FormDefinitionsRowModel>) => {
   const dialogs = useDialogs();
@@ -39,7 +18,7 @@ const ShowMoreActions = (params: GridRenderCellParams<FormDefinitionsRowModel>) 
       size="small"
       tabIndex={params.hasFocus ? 0 : -1}
       onClick={() => {
-        void dialogs.open(WorkflowMoreDialog, params)
+        void dialogs.open(UpdateFormDefinitionDialog, params.row.id);
       }}
     >
       <OpenInFullIcon />
@@ -52,46 +31,44 @@ interface FormDefinitionsGridProps {
 }
 
 export const FormDefinitionsGrid = ({ data }: FormDefinitionsGridProps) => {
-  const [columns] = useState<GridColDef[]>(() => {
+  const [columns] = useState<GridColDef<FormDefinitionsRowModel>[]>(() => {
     return [
-      { field: 'id', headerName: 'ID', description: 'Unique identifier for the workflow', flex: 1, minWidth: 100 },
-      { field: 'name', headerName: 'Name', description: 'Name of the workflow', flex: 1, minWidth: 150 },
       {
-        field: 'description',
-        headerName: 'Description',
-        description: 'Detailed description of the workflow',
-        flex: 2,
-        minWidth: 200,
+        field: 'formId',
+        headerName: 'Form Id',
+        description: 'Form Id given at the form creation',
+        flex: 1,
+        minWidth: 100,
       },
       {
         field: 'version',
-        headerName: 'Version',
-        description: 'Version number of the workflow',
-        flex: 1,
+        headerName: 'Form Version',
+        description: 'Form version',
+        flex: 0.5,
         minWidth: 100,
       },
       {
-        field: 'created',
-        headerName: 'Created',
-        description: 'Creation date of the workflow',
+        field: 'createdBy',
+        headerName: 'Created By',
+        description: 'User who created the form',
         flex: 1,
         minWidth: 150,
       },
       {
-        field: 'modified',
-        headerName: 'Modified',
-        description: 'Last modification date of the workflow',
+        field: 'createdDate',
+        headerName: 'Created Date',
+        description: 'Date when the form was created',
         flex: 1,
         minWidth: 150,
+        valueFormatter: dateToString,
       },
       {
-        field: 'start',
-        headerName: '',
-        description: 'Create an instance from this definition',
-        flex: 0.3,
-        minWidth: 100,
-        align: 'center',
-        renderCell: StartWorkflowInstance,
+        field: 'modifiedDate',
+        headerName: 'Modified Date',
+        description: 'Date when the form was last modified',
+        flex: 1,
+        minWidth: 150,
+        valueFormatter: dateToString,
       },
       {
         field: 'more',

@@ -6,7 +6,7 @@ import { useService } from 'bpmn-js-properties-panel';
 
 import { useEffect, useState } from '@bpmn-io/properties-panel/preact/hooks';
 
-import { fetchFlowableGroups } from '@/services';
+import { getFlowableGroups } from '@/services';
 
 export function CandidateGroups(props) {
     const { element, id } = props;
@@ -28,7 +28,7 @@ export function CandidateGroups(props) {
     const [groups, setGroups] = useState([]);
   
     useEffect(() => {
-      fetchFlowableGroups().then((group) => {
+      getFlowableGroups.then((group) => {
         setGroups(group.data);
       });
     }, [setGroups]);

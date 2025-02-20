@@ -6,7 +6,7 @@ import { useService } from 'bpmn-js-properties-panel';
 
 import { useEffect, useState } from '@bpmn-io/properties-panel/preact/hooks';
 
-import { fetchFlowableUsers } from '@/services';
+import { getFlowableUsers } from '@/services';
 
 export function CandidateUsers(props) {
     const { element, id } = props;
@@ -28,7 +28,7 @@ export function CandidateUsers(props) {
     const [users, setUsers] = useState([]);
   
     useEffect(() => {
-      fetchFlowableUsers().then((users) => {
+      getFlowableUsers().then((users) => {
         setUsers(users.data);
       });
     }, [setUsers]);

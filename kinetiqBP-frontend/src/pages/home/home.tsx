@@ -5,16 +5,14 @@ import { KBPPageHeader } from '@/pages/home/page-header.tsx';
 import { muiTheme } from '@/styles';
 import { Button, Container } from '@mui/material';
 import LinearProgress from '@mui/material/LinearProgress';
-import { DialogsProvider, NotificationsProvider, PageContainer } from '@toolpad/core';
+import { DialogsProvider, PageContainer } from '@toolpad/core';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { ReactRouterAppProvider } from '@toolpad/core/react-router';
-import { useAuth } from 'react-oidc-context';
 import { Outlet } from 'react-router';
 import { useAuthInitialization } from './auth-initialization.ts';
 
 export const Home = () => {
-  const { authentication, session } = useAuthInitialization();
-  const { user, isLoading, signinRedirect } = useAuth();
+  const { authentication, session, user, isLoading, signinRedirect } = useAuthInitialization();
 
   if (isLoading) {
     return (
@@ -57,11 +55,9 @@ export const Home = () => {
             header: KBPPageHeader,
           }}
         >
-          <NotificationsProvider>
-            <DialogsProvider>
-              <Outlet />
-            </DialogsProvider>
-          </NotificationsProvider>
+          <DialogsProvider>
+            <Outlet />
+          </DialogsProvider>
         </PageContainer>
       </DashboardLayout>
     </ReactRouterAppProvider>
