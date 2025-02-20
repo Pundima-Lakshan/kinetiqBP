@@ -1,4 +1,4 @@
-import formAssignmentProps from './parts/userAssignmentProps.js';
+import formAssignmentProps from './parts/FormAssignmentProps';
 
 import { is } from 'bpmn-js/lib/util/ModelUtil';
 

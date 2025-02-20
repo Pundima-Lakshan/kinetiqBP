@@ -1,6 +1,6 @@
-import UserAssignmentPropertiesProvider from './UserAssignmentPropertiesProvider.js';
+import FormAssignmentPropertiesProvider from './FormAssignmentPropertiesProvider.js';
 
-export const UserAssignmentPropertiesProviderModule = {
-  __init__: [ 'userAssignmentPropertiesProvider' ],
-  userAssignmentPropertiesProvider: [ 'type', UserAssignmentPropertiesProvider ]
+export const FormAssignmentPropertiesProviderModule = {
+  __init__: ['formAssignmentPropertiesProvider'],
+  formAssignmentPropertiesProvider: ['type', FormAssignmentPropertiesProvider],
 };

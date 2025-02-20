@@ -1,0 +1,24 @@
+{
+  "name": "Form Assignment",
+  "prefix": "uiService",
+  "uri": "http://formAssignment",
+  "xml": {
+    "tagAlias": "lowerCase"
+  },
+  "associations": [],
+  "types": [
+    {
+      "name": "FormAssignmentUserTask",
+      "extends": [
+        "bpmn:UserTask"
+      ],
+      "properties": [
+        {
+          "name": "form",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    }
+  ]
+}

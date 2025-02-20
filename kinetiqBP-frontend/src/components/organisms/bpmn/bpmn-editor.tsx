@@ -8,8 +8,8 @@ import { BpmnPropertiesPanelModule, BpmnPropertiesProviderModule } from 'bpmn-js
 import BpmnModeler from 'bpmn-js/lib/Modeler';
 import React, { useEffect, useRef, useState } from 'react';
 
-import { userAssignmentModdleDescriptor } from './common/descriptors';
-import { UserAssignmentPropertiesProviderModule } from './common/provider';
+import { formAssignmentModdleDescriptor, userAssignmentModdleDescriptor } from './common/descriptors';
+import { FormAssignmentPropertiesProviderModule, UserAssignmentPropertiesProviderModule } from './common/provider';
 
 import { DEFAULT_BPMN_DIAGRAM_XML_PATH } from '@/utils';
 
@@ -46,9 +46,15 @@ export const KBPBpmnEditor = ({ diagramXml, bpmnModelerRef }: ReactBpmnEditorPro
       propertiesPanel: {
         parent: propertiesPanelRef.current,
       },
-      additionalModules: [BpmnPropertiesPanelModule, BpmnPropertiesProviderModule, UserAssignmentPropertiesProviderModule],
+      additionalModules: [
+        BpmnPropertiesPanelModule,
+        BpmnPropertiesProviderModule,
+        UserAssignmentPropertiesProviderModule,
+        FormAssignmentPropertiesProviderModule,
+      ],
       moddleExtensions: {
         userAssignment: userAssignmentModdleDescriptor,
+        formAssignment: formAssignmentModdleDescriptor,
       },
     });
 
