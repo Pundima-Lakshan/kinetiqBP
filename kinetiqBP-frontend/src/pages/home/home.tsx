@@ -1,6 +1,7 @@
 import { SidebarFooterAccount, ToolbarAccount } from '@/components';
 import { brandiung, navigation } from '@/configs';
 import { getEnvs } from '@/env.ts';
+import { AsyncStateObservers } from '@/observers/index.ts';
 import { KBPPageHeader } from '@/pages/home/page-header.tsx';
 import { muiTheme } from '@/styles';
 import { Button, Container } from '@mui/material';
@@ -56,6 +57,7 @@ export const Home = () => {
           }}
         >
           <DialogsProvider>
+            <AsyncStateObservers />
             <Outlet />
           </DialogsProvider>
         </PageContainer>

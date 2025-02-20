@@ -38,12 +38,20 @@ export const getFlowableGroups = async () => {
   return await get<GenericFlowableListResponse<FlowableGroup>>(`${flowable_rest_url}/identity/groups`);
 };
 
+export interface UiServiceUser {
+  id: string;
+  username: string;
+  firstname: string | null;
+  lastname: string | null;
+  email: string | null;
+}
+
 export interface FormDefinition {
   id: number;
   formId: string;
   description: string;
   version: string;
-  createdBy: string;
+  createdBy: UiServiceUser;
   createdDate: Date;
   modifiedDate: Date;
   formSchema: Record<string, unknown>;
@@ -57,7 +65,9 @@ export const getFormDefinition = async (id: number) => {
   return await get<FormDefinition>(`${ui_service_url}/form-definitions/${id}`);
 };
 
-type PostFormDefinitionArg = Omit<FormDefinition, 'id'>;
+type PostFormDefinitionArg = Omit<FormDefinition, 'id' | 'createdBy'> & {
+  createdBy: string;
+};
 
 export const postFormDefinition = async (args: PostFormDefinitionArg) => {
   return await post<FormDefinition>(`${ui_service_url}/form-definitions`, args);

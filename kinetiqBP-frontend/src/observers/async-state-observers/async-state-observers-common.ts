@@ -38,9 +38,9 @@ export const useAsyncStateObserversCommon = ({ cacheType = 'query', setIsLoading
      */
     if (event.action.type === 'success') {
       setIsLoading(false);
-      if (cacheType === 'mutation') {
-        notifications.show('Action successful');
-      }
+      // if (cacheType === 'mutation') {
+      //   notifications.show('Action successful');
+      // }
       return;
     }
 
@@ -49,7 +49,7 @@ export const useAsyncStateObserversCommon = ({ cacheType = 'query', setIsLoading
      */
     if (event.action.type === 'error') {
       setIsLoading(false);
-      notifications.show(event.action.error.content?.message ?? event.action.error.message ?? 'Error');
+      // notifications.show(event.action.error.content?.message ?? event.action.error.message ?? 'Error');
       return;
     }
 
@@ -58,7 +58,9 @@ export const useAsyncStateObserversCommon = ({ cacheType = 'query', setIsLoading
      */
     if (event.action.type === 'failed') {
       setIsLoading(false);
-      notifications.show('Something went wrong retrying');
+      notifications.show('Something went wrong retrying', {
+        severity: 'error',
+      });
       return;
     }
 
@@ -67,7 +69,9 @@ export const useAsyncStateObserversCommon = ({ cacheType = 'query', setIsLoading
      */
     if (event.action.type === 'pause') {
       setIsLoading(false);
-      notifications.show('No Internet Connection');
+      notifications.show('No Internet Connection', {
+        severity: 'warning',
+      });
       return;
     }
 

@@ -1,5 +1,5 @@
 import { KBPDataGrid, UpdateFormDefinitionDialog } from '@/components';
-import type { FormDefinition } from '@/services';
+import type { FormDefinition, UiServiceUser } from '@/services';
 import { dateToString } from '@/utils';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import { IconButton } from '@mui/material';
@@ -28,9 +28,10 @@ const ShowMoreActions = (params: GridRenderCellParams<FormDefinitionsRowModel>) 
 
 interface FormDefinitionsGridProps {
   data: FormDefinitionsRowModel[];
+  loading: boolean;
 }
 
-export const FormDefinitionsGrid = ({ data }: FormDefinitionsGridProps) => {
+export const FormDefinitionsGrid = ({ data, loading }: FormDefinitionsGridProps) => {
   const [columns] = useState<GridColDef<FormDefinitionsRowModel>[]>(() => {
     return [
       {
@@ -53,6 +54,7 @@ export const FormDefinitionsGrid = ({ data }: FormDefinitionsGridProps) => {
         description: 'User who created the form',
         flex: 1,
         minWidth: 150,
+        valueFormatter: (value: UiServiceUser) => `${value.firstname} ${value.lastname}`,
       },
       {
         field: 'createdDate',
@@ -82,5 +84,5 @@ export const FormDefinitionsGrid = ({ data }: FormDefinitionsGridProps) => {
     ];
   });
 
-  return <KBPDataGrid rows={data} columns={columns} />;
+  return <KBPDataGrid rows={data} columns={columns} loading={loading} />;
 };

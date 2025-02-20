@@ -10,6 +10,10 @@ export const KBPDataGrid = <R extends GridValidRowModel = any>(props: DataGridPr
           toolbar: {
             showQuickFilter: true,
           },
+          loadingOverlay: {
+            variant: 'linear-progress',
+            noRowsVariant: 'linear-progress',
+          },
         }}
         {...props}
       />

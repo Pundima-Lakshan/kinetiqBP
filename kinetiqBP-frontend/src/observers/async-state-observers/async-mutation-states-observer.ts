@@ -2,6 +2,7 @@ import { useAsyncStateObserversCommon, type AsyncStateObserversCommonParams } fr
 import { queryClient } from '@/providers';
 import { type InvalidationConfig } from '@/services';
 import { type MutationCacheNotifyEvent } from '@tanstack/react-query';
+import { useEffect } from 'react';
 
 export interface AsyncMutationStatesObserverParams extends AsyncStateObserversCommonParams {
   invalidationConfig: InvalidationConfig;
@@ -13,17 +14,19 @@ export const useAsyncMutationStatesObserver = (params: AsyncMutationStatesObserv
     cacheType: 'mutation',
   });
 
-  const mutationObserverCallback = (event: MutationCacheNotifyEvent) => {
-    if (event.type !== 'updated') {
-      return;
-    }
-    handleEventAction(event);
-    handleQueryInvalidation(event, queryClient, params.invalidationConfig);
-  };
+  useEffect(() => {
+    const mutationObserverCallback = (event: MutationCacheNotifyEvent) => {
+      if (event.type !== 'updated') {
+        return;
+      }
+      handleEventAction(event);
+      handleQueryInvalidation(event, queryClient, params.invalidationConfig);
+    };
 
-  const unsubscribe = queryClient.getMutationCache().subscribe(mutationObserverCallback);
+    const unsubscribe = queryClient.getMutationCache().subscribe(mutationObserverCallback);
 
-  return {
-    unsubscribe,
-  };
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 };

@@ -1,9 +1,9 @@
 import { KBPDataGrid, WorkflowMoreDialog, WorkflowStartDialog } from '@/components';
-import { useState } from 'react';
-import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
-import { Button, IconButton } from '@mui/material';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
+import { Button, IconButton } from '@mui/material';
+import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useDialogs } from '@toolpad/core';
+import { useState } from 'react';
 
 export interface TasksRowModel {
   id: string;
@@ -105,5 +105,5 @@ export const TasksGrid = ({ data }: TasksGridProps) => {
     ];
   });
 
-  return <KBPDataGrid rows={data} columns={columns} />;
+  return <KBPDataGrid rows={data} columns={columns} loading />;
 };

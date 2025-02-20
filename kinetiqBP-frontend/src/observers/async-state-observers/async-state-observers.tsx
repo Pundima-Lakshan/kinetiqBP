@@ -6,26 +6,32 @@ import {
   type AsyncMutationStatesObserverParams,
   type AsyncStateObserversCommonParams,
 } from '@/observers';
-import { useEffect } from 'react';
+import { invalidationConfig } from '@/services';
+import { Box, LinearProgress } from '@mui/material';
+import { useLoaderActions } from './loader-actions';
 
 export type AsyncStateObserversProps = Omit<AsyncStateObserversCommonParams, 'cacheType' | 'channel' | 'setIsLoading'> &
-  Omit<AsyncMutationStatesObserverParams, 'cacheType' | 'channel' | 'setIsLoading'>;
+  Omit<AsyncMutationStatesObserverParams, 'cacheType' | 'channel' | 'setIsLoading' | 'invalidationConfig'>;
 
 export const AsyncStateObservers = ({ ...rest }: AsyncStateObserversProps) => {
-  const { unsubscribe: queryUnsub } = useAsyncQueryStatesObserver({
-    setIsLoading: () => {},
+  const { isLoading, setIsLoading } = useLoaderActions();
+
+  useAsyncQueryStatesObserver({
+    setIsLoading,
   });
-  const { unsubscribe: mutationUnsub } = useAsyncMutationStatesObserver({
+  useAsyncMutationStatesObserver({
     ...rest,
-    setIsLoading: () => {},
+    invalidationConfig,
+    setIsLoading,
   });
 
-  useEffect(() => {
-    return () => {
-      queryUnsub();
-      mutationUnsub();
-    };
-  }, [rest]);
-
-  return <></>;
+  return (
+    <>
+      {isLoading && (
+        <Box sx={{ width: '100%', position: 'absolute', top: 0, left: 0, zIndex: 9999 }}>
+          <LinearProgress />
+        </Box>
+      )}
+    </>
+  );
 };
