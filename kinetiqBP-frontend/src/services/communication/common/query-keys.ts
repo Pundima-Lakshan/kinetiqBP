@@ -5,4 +5,8 @@ export const queryKeys = {
 
   formDefinitions: 'formDefinitions',
   formDefinition: 'formDefinition',
+
+  workflowDefinitions: 'workflowDefinitions',
+  workflowDefinition: 'workflowDefinition',
+  workflowDefinitionResourceData: 'workflowDefinitionResourceData',
 };

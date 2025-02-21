@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useSyncedState } from '@/utils';
 import BpmnJS from 'bpmn-js';
 import { Canvas } from 'bpmn-js/lib/features/context-pad/ContextPadProvider';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface ReactBpmnProps {
   url?: string;
   diagramXml?: string;
-  onLoading?: () => void;
+  onLoading?: (state: boolean) => void;
   onError?: (error: Error) => void;
   onShown?: (warnings: Array<Error>) => void;
 }
@@ -13,7 +14,7 @@ interface ReactBpmnProps {
 export const KBPBpmnViewer: React.FC<ReactBpmnProps> = ({ url, diagramXml, onLoading, onError, onShown }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [bpmnViewer, setBpmnViewer] = useState<BpmnJS | null>(null);
-  const [localDiagramXML, setLocalDiagramXML] = useState<string | undefined>(diagramXml);
+  const { state: localDiagramXML, setState: setLocalDiagramXML } = useSyncedState({ getter: () => diagramXml, deps: [diagramXml] });
 
   const handleError = (error: Error) => {
     if (onError) {
@@ -22,11 +23,9 @@ export const KBPBpmnViewer: React.FC<ReactBpmnProps> = ({ url, diagramXml, onLoa
   };
 
   const handleShown = (warnings: Array<Error>) => {
-    if (onShown) {
-      onShown(warnings);
-    }
+    onShown?.(warnings);
   };
-  
+
   useEffect(() => {
     if (!containerRef.current) return;
 
@@ -57,28 +56,27 @@ export const KBPBpmnViewer: React.FC<ReactBpmnProps> = ({ url, diagramXml, onLoa
       void displayDiagram(diagramXml);
     }
   }, [url, diagramXml, bpmnViewer]);
-  
+
   const displayDiagram = async (xml: string) => {
     if (bpmnViewer) {
       const importResult = await bpmnViewer.importXML(xml);
-      console.log(importResult);
+      if (importResult.warnings.length > 0) console.warn(importResult.warnings);
     }
   };
-  
+
   const fetchDiagram = (url: string) => {
-    handleLoading();
+    handleLoading(true);
     fetch(url)
       .then((response) => response.text())
       .then((text) => setLocalDiagramXML(text))
-      .catch((err) => handleError(err));
+      .catch((err) => handleError(err))
+      .finally(() => handleLoading(false));
   };
-  
-  const handleLoading = () => {
-    if (onLoading) {
-      onLoading();
-    }
+
+  const handleLoading = (state: boolean) => {
+    onLoading?.(state);
   };
-  
+
   useEffect(() => {
     if (localDiagramXML) {
       displayDiagram(localDiagramXML);

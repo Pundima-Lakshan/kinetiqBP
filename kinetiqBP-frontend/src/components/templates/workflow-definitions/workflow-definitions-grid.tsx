@@ -1,18 +1,12 @@
-import { KBPDataGrid, WorkflowMoreDialog, WorkflowStartDialog } from '@/components';
+import { KBPDataGrid, ViewWorkflowDefinitionDialog, WorkflowStartDialog } from '@/components';
+import type { WorkFlowDefinition } from '@/services';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import { Button, IconButton } from '@mui/material';
 import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useDialogs } from '@toolpad/core';
 import { useState } from 'react';
 
-export interface WorkflowDefinitionsRowModel {
-  id: string;
-  name: string;
-  description: string;
-  version: string;
-  created: string;
-  modified: string;
-}
+export type WorkflowDefinitionsRowModel = WorkFlowDefinition;
 
 const StartWorkflowInstance = (params: GridRenderCellParams<WorkflowDefinitionsRowModel>) => {
   const dialogs = useDialogs();
@@ -39,7 +33,7 @@ const ShowMoreActions = (params: GridRenderCellParams<WorkflowDefinitionsRowMode
       size="small"
       tabIndex={params.hasFocus ? 0 : -1}
       onClick={() => {
-        void dialogs.open(WorkflowMoreDialog, params);
+        void dialogs.open(ViewWorkflowDefinitionDialog, params.row.id);
       }}
     >
       <OpenInFullIcon />
@@ -49,38 +43,31 @@ const ShowMoreActions = (params: GridRenderCellParams<WorkflowDefinitionsRowMode
 
 interface WorkflowDefinitionsGridProps {
   data: WorkflowDefinitionsRowModel[];
+  loading: boolean;
 }
 
-export const WorkflowDefinitionsGrid = ({ data }: WorkflowDefinitionsGridProps) => {
+export const WorkflowDefinitionsGrid = ({ data, loading }: WorkflowDefinitionsGridProps) => {
   const [columns] = useState<GridColDef[]>(() => {
     return [
-      { field: 'id', headerName: 'ID', description: 'Unique identifier for the workflow', flex: 1, minWidth: 100 },
       { field: 'name', headerName: 'Name', description: 'Name of the workflow', flex: 1, minWidth: 150 },
       {
         field: 'description',
         headerName: 'Description',
         description: 'Detailed description of the workflow',
-        flex: 2,
+        flex: 1,
         minWidth: 200,
       },
       {
-        field: 'version',
-        headerName: 'Version',
-        description: 'Version number of the workflow',
-        flex: 1,
-        minWidth: 100,
-      },
-      {
-        field: 'created',
-        headerName: 'Created',
-        description: 'Creation date of the workflow',
-        flex: 1,
+        field: 'category',
+        headerName: 'Category',
+        description: 'Cateogry of the workflow',
+        flex: 1.5,
         minWidth: 150,
       },
       {
-        field: 'modified',
-        headerName: 'Modified',
-        description: 'Last modification date of the workflow',
+        field: 'suspended',
+        headerName: 'Suspended',
+        description: 'Whether the workflow is suspended',
         flex: 1,
         minWidth: 150,
       },
@@ -105,5 +92,5 @@ export const WorkflowDefinitionsGrid = ({ data }: WorkflowDefinitionsGridProps) 
     ];
   });
 
-  return <KBPDataGrid rows={data} columns={columns} loading />;
+  return <KBPDataGrid rows={data} columns={columns} loading={loading} />;
 };

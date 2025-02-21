@@ -5,4 +5,5 @@ export type InvalidationConfig = Record<keyof typeof mutationKeys, Array<Array<k
 export const invalidationConfig: InvalidationConfig = {
   dummy: [],
   formDefinition: [['formDefinitions']],
+  workflowDefinition: [['workflowDefinitions']],
 };

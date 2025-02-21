@@ -2,8 +2,8 @@ import { Button, DialogActions } from '@mui/material';
 import { ReactNode } from 'react';
 
 export interface DialogConfirmationActionsProps {
-  onConfirm: () => void;
-  onCancel: () => void;
+  onConfirm?: () => void;
+  onCancel?: () => void;
   confirmLabel?: string;
   cancelLabel?: string;
   otherActions?: ReactNode[];
@@ -21,12 +21,16 @@ export const DialogConfirmationActions = ({
   return (
     <DialogActions>
       {...otherActions}
-      <Button autoFocus onClick={onCancel} variant="outlined" loading={isLoading}>
-        {cancelLabel ?? 'Cancel'}
-      </Button>
-      <Button onClick={onConfirm} variant="contained" loading={isLoading}>
-        {confirmLabel ?? 'Save'}
-      </Button>
+      {onCancel && (
+        <Button autoFocus onClick={onCancel} variant="outlined" loading={isLoading}>
+          {cancelLabel ?? 'Cancel'}
+        </Button>
+      )}
+      {onConfirm && (
+        <Button onClick={onConfirm} variant="contained" loading={isLoading}>
+          {confirmLabel ?? 'Save'}
+        </Button>
+      )}
     </DialogActions>
   );
 };

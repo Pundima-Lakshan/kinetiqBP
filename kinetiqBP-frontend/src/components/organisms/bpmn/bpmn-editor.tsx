@@ -11,7 +11,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { formAssignmentModdleDescriptor, userAssignmentModdleDescriptor } from './common/descriptors';
 import { FormAssignmentPropertiesProviderModule, UserAssignmentPropertiesProviderModule } from './common/provider';
 
-import { DEFAULT_BPMN_DIAGRAM_XML_PATH } from '@/utils';
+import { DEFAULT_BPMN_DIAGRAM_XML_PATH, useSyncedState } from '@/utils';
 
 interface ReactBpmnEditorProps {
   diagramXml?: string;
@@ -24,7 +24,7 @@ export const KBPBpmnEditor = ({ diagramXml, bpmnModelerRef }: ReactBpmnEditorPro
   const propertiesPanelRef = useRef<HTMLDivElement>(null);
 
   const [diagramError, setDiagramError] = useState<string | null>(null);
-  const [diagram, setDiagram] = useState(diagramXml);
+  const { state: diagram, setState: setDiagram } = useSyncedState({ getter: () => diagramXml, deps: [diagramXml] });
 
   useEffect(() => {
     if (diagram) {

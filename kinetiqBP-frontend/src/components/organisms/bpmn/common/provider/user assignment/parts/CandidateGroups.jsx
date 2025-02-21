@@ -28,7 +28,7 @@ export function CandidateGroups(props) {
 
   useEffect(() => {
     try {
-      getFlowableGroups.then((group) => {
+      getFlowableGroups().then((group) => {
         setGroups(group.data);
       });
     } catch (error) {

@@ -1,5 +1,5 @@
 import { getEnvs } from '@/env';
-import { get, post, put } from './common';
+import { get, post, postFormData, put } from './common';
 
 const flowable_rest_url = getEnvs().VITE_FLOWABLE_REST_URL;
 const ui_service_url = getEnvs().VITE_UI_SERVICE_URL;
@@ -75,4 +75,38 @@ export const postFormDefinition = async (args: PostFormDefinitionArg) => {
 
 export const putFormDefinition = async (args: FormDefinition) => {
   return await put<FormDefinition>(`${ui_service_url}/form-definitions/${args.id}`, args);
+};
+
+export type WorkFlowDefinition = {
+  id: string;
+  url: string;
+  key: string;
+  version: number;
+  name: string;
+  description: string | null;
+  tenantId: string;
+  deploymentId: string;
+  deploymentUrl: string;
+  resource: string;
+  diagramResource: string;
+  category: string;
+  graphicalNotationDefined: boolean;
+  suspended: boolean;
+  startFormDefined: boolean;
+};
+
+export const getWorkflowDefinitions = async () => {
+  return await get<GenericFlowableListResponse<WorkFlowDefinition>>(`${flowable_rest_url}/repository/process-definitions`);
+};
+
+export const getWorkflowDefinitionResourceData = async (processDefinitionId: string) => {
+  return await get<string>(`${flowable_rest_url}/repository/process-definitions/${processDefinitionId}/resourcedata`, {
+    responseType: 'text',
+  });
+};
+
+export const postWorkflowDefinition = async (bpmnXml: Blob) => {
+  const workFlowFormData = new FormData();
+  workFlowFormData.append('file', bpmnXml);
+  return await postFormData<WorkFlowDefinition>(`${flowable_rest_url}/repository/deployments`, workFlowFormData);
 };

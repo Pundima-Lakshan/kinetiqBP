@@ -1,4 +1,6 @@
-const handleResponse = async <T>(url: string, requestOption: RequestInit) => {
+type ResponseType = 'json' | 'blob' | 'text';
+
+const handleResponse = async <T>(url: string, requestOption: RequestInit, responseType: ResponseType = 'json') => {
   const response = await fetch(url, requestOption);
   if (!response.ok) {
     throw {
@@ -6,6 +8,9 @@ const handleResponse = async <T>(url: string, requestOption: RequestInit) => {
       statusText: response.statusText,
       content: await response.json(),
     };
+  }
+  if (responseType === 'text') {
+    return (await response.text()) as T;
   }
   return (await response.json()) as T;
 };
@@ -22,7 +27,7 @@ const getAccessToken = () => {
   return access_token_string;
 };
 
-const makeRequest = async <T>(url: string, requestOption: RequestInit) => {
+const makeRequest = async <T>(url: string, requestOption: RequestInit, responseType: ResponseType = 'json') => {
   const options: RequestInit = {
     ...requestOption,
     headers: {
@@ -30,13 +35,29 @@ const makeRequest = async <T>(url: string, requestOption: RequestInit) => {
       'Content-Type': 'application/json',
     },
   };
+  return await handleResponse<T>(url, options, responseType);
+};
+
+const makeFormRequest = async <T>(url: string, requestOption: RequestInit) => {
+  const options: RequestInit = {
+    ...requestOption,
+    headers: {
+      Authorization: `Bearer ${getAccessToken()}`,
+    },
+  };
   return await handleResponse<T>(url, options);
 };
 
-export const get = async <T>(url: string, queries?: Array<Record<string, string>>) => {
+interface GetOptions {
+  queries?: Array<Record<string, string>>;
+  responseType?: ResponseType;
+}
+
+export const get = async <T>(url: string, options?: GetOptions) => {
+  const { queries, responseType } = options ?? {};
   const urlQuery = queries?.map((query) => `${Object.keys(query)[0]}=${Object.values(query)[0]}`).join('&');
   const urlWithQuery = urlQuery ? `${url}?${urlQuery}` : url;
-  return await makeRequest<T>(urlWithQuery, { method: 'GET' });
+  return await makeRequest<T>(urlWithQuery, { method: 'GET' }, responseType);
 };
 
 export const post = async <T, R = unknown>(url: string, data: R) =>
@@ -46,7 +67,7 @@ export const post = async <T, R = unknown>(url: string, data: R) =>
   });
 
 export const postFormData = async <T>(url: string, data: FormData) =>
-  await makeRequest<T>(url, {
+  await makeFormRequest<T>(url, {
     method: 'POST',
     body: data,
   });
