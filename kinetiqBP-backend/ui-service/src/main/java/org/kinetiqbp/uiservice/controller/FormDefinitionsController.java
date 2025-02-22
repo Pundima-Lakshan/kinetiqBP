@@ -27,7 +27,7 @@ public class FormDefinitionsController {
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<FormDefinition> getFormDefinitionById(@PathVariable Long id) {
+    ResponseEntity<FormDefinition> getFormDefinitionById(@PathVariable Integer id) {
         FormDefinition response = formDefinitionsService.getFormDefinitionById(id);
         return ResponseEntity.ok(response);
     }
@@ -58,5 +58,11 @@ public class FormDefinitionsController {
                 formDefinitionPutRequest.getFormSchema());
         FormDefinition response = formDefinitionsService.updateFormDefinition(updatedFormDefinition);
         return ResponseEntity.ok(response);
+    }
+    
+    @DeleteMapping("/{id}")
+    ResponseEntity<Void> deleteFormDefinition(@PathVariable Integer id) {
+        formDefinitionsService.deleteFormDefinition(id);
+        return ResponseEntity.noContent().build();
     }
 }

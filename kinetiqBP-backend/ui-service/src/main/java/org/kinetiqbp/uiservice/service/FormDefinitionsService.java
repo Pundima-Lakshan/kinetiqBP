@@ -32,12 +32,16 @@ public class FormDefinitionsService {
     public FormDefinition updateFormDefinition(FormDefinition formDefinition) {
         return formDefinitionsRepository.save(formDefinition);
     }
+    
+    public void deleteFormDefinition(Integer id) {
+       formDefinitionsRepository.deleteById(id);
+    }
 
     public List<FormDefinition> getFormDefinitions() {
         return formDefinitionsRepository.findAll();
     }
     
-    public FormDefinition getFormDefinitionById(Long id) {
+    public FormDefinition getFormDefinitionById(Integer id) {
         return formDefinitionsRepository.findById(id).orElseThrow();
     }
 }
