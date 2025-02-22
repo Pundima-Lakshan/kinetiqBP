@@ -1,4 +1,4 @@
-type ResponseType = 'json' | 'blob' | 'text';
+type ResponseType = 'json' | 'blob' | 'text' | 'none';
 
 const handleResponse = async <T>(url: string, requestOption: RequestInit, responseType: ResponseType = 'json') => {
   const response = await fetch(url, requestOption);
@@ -8,6 +8,9 @@ const handleResponse = async <T>(url: string, requestOption: RequestInit, respon
       statusText: response.statusText,
       content: await response.json(),
     };
+  }
+  if (responseType === 'none') {
+    return null as T;
   }
   if (responseType === 'text') {
     return (await response.text()) as T;
@@ -78,7 +81,17 @@ export const put = async <T, R = unknown>(url: string, data: R) =>
     body: JSON.stringify(data),
   });
 
-export const remove = async <T>(url: string) => await makeRequest<T>(url, { method: 'DELETE' });
+interface RemoveOptions {
+  queries?: Array<Record<string, string>>;
+  responseType?: ResponseType;
+}
+
+export const remove = async <T>(url: string, options?: RemoveOptions) => {
+  const { queries, responseType } = options ?? {};
+  const urlQuery = queries?.map((query) => `${Object.keys(query)[0]}=${Object.values(query)[0]}`).join('&');
+  const urlWithQuery = urlQuery ? `${url}?${urlQuery}` : url;
+  return await makeRequest<T>(urlWithQuery, { method: 'DELETE' }, responseType);
+};
 
 export const getBlob = async <T>(url: string, options: RequestInit = {}) => {
   const response = await fetch(url, {

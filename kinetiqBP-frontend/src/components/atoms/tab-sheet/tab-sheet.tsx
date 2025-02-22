@@ -11,11 +11,11 @@ export interface TabItem {
   closeHandler?: () => void;
 }
 
-export interface TabsLayoutProps {
+export interface TabSheetProps {
   tabItems: TabItem[];
 }
 
-export const TabSheet = ({ tabItems }: TabsLayoutProps) => {
+export const TabSheet = ({ tabItems }: TabSheetProps) => {
   const [activeTabIndex, setActiveTabIndex] = React.useState(0);
 
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {

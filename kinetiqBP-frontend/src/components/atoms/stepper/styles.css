@@ -1,0 +1,7 @@
+.vertical-stepper {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-width: 250px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+}

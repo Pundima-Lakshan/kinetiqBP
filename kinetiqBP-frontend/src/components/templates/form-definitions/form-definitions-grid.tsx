@@ -1,8 +1,9 @@
-import { KBPDataGrid, UpdateFormDefinitionDialog } from '@/components';
+import { KBPDataGrid, RemoveFormDefinitionDialog, UpdateFormDefinitionDialog } from '@/components';
 import type { FormDefinition, UiServiceUser } from '@/services';
 import { dateToString } from '@/utils';
+import DeleteIcon from '@mui/icons-material/Delete';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
-import { IconButton } from '@mui/material';
+import { Button, IconButton } from '@mui/material';
 import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useDialogs } from '@toolpad/core';
 import { useState } from 'react';
@@ -23,6 +24,23 @@ const ShowMoreActions = (params: GridRenderCellParams<FormDefinitionsRowModel>) 
     >
       <OpenInFullIcon />
     </IconButton>
+  );
+};
+
+const RemoveFormDefinition = (params: GridRenderCellParams<FormDefinitionsRowModel>) => {
+  const dialogs = useDialogs();
+  return (
+    <Button
+      variant="text"
+      color="error"
+      size="small"
+      tabIndex={params.hasFocus ? 0 : -1}
+      onClick={() => {
+        void dialogs.open(RemoveFormDefinitionDialog, params.row.id);
+      }}
+    >
+      <DeleteIcon color="error" />
+    </Button>
   );
 };
 
@@ -71,6 +89,15 @@ export const FormDefinitionsGrid = ({ data, loading }: FormDefinitionsGridProps)
         flex: 1,
         minWidth: 150,
         valueFormatter: dateToString,
+      },
+      {
+        field: 'delete',
+        headerName: '',
+        description: 'Delete this form definition',
+        flex: 0.3,
+        minWidth: 100,
+        align: 'center',
+        renderCell: RemoveFormDefinition,
       },
       {
         field: 'more',

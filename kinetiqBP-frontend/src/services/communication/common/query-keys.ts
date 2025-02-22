@@ -9,4 +9,8 @@ export const queryKeys = {
   workflowDefinitions: 'workflowDefinitions',
   workflowDefinition: 'workflowDefinition',
   workflowDefinitionResourceData: 'workflowDefinitionResourceData',
-};
+  workflowDefinitionModel: 'workflowDefinitionModel',
+
+  workflowInstances: 'workflowInstances',
+  workflowInstance: 'workflowInstance',
+} as const;

@@ -1,5 +1,12 @@
 import { queryKeys, useQueryBuilder } from './common';
-import { getFlowableUsers, getFormDefinition, getFormDefinitions, getWorkflowDefinitionResourceData, getWorkflowDefinitions } from './http';
+import {
+  getFlowableUsers,
+  getFormDefinition,
+  getFormDefinitions,
+  getWorkFlowDefinitionModel,
+  getWorkflowDefinitionResourceData,
+  getWorkflowDefinitions,
+} from './http';
 
 export const useGetFlowableUsers = () => {
   return useQueryBuilder({
@@ -17,7 +24,7 @@ export const useGetFormDefinitions = () => {
 
 export const useGetFormDefinition = (id: number) => {
   return useQueryBuilder({
-    queryKey: [queryKeys.formDefinitions, id],
+    queryKey: [queryKeys.formDefinition, id],
     queryFn: async () => {
       return await getFormDefinition(id);
     },
@@ -31,11 +38,20 @@ export const useGetWorkflowDefinitions = () => {
   });
 };
 
-export const useGetWorkflowDefinitionResourceData = (processDefinitionId: string) => {
+export const useGetWorkflowDefinitionResourceData = (workflowDefinitionId: string) => {
   return useQueryBuilder({
-    queryKey: [queryKeys.workflowDefinitionResourceData, processDefinitionId],
+    queryKey: [queryKeys.workflowDefinitionResourceData, workflowDefinitionId],
     queryFn: async () => {
-      return await getWorkflowDefinitionResourceData(processDefinitionId);
+      return await getWorkflowDefinitionResourceData(workflowDefinitionId);
+    },
+  });
+};
+
+export const useGetWorkFlowDefinitionModel = (workflowDefinitionId: string) => {
+  return useQueryBuilder({
+    queryKey: [queryKeys.workflowDefinitionModel, workflowDefinitionId],
+    queryFn: async () => {
+      return await getWorkFlowDefinitionModel(workflowDefinitionId);
     },
   });
 };

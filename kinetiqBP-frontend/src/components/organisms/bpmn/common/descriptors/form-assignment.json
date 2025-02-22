@@ -10,7 +10,8 @@
     {
       "name": "FormAssignmentUserTask",
       "extends": [
-        "bpmn:UserTask"
+        "bpmn:UserTask",
+        "bpmn:StartEvent"
       ],
       "properties": [
         {

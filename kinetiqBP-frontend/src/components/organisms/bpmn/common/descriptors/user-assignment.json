@@ -1,7 +1,7 @@
 {
   "name": "User Assignment",
   "prefix": "flowable",
-  "uri": "http://userAssignment",
+  "uri": "http://flowable.org/bpmn",
   "xml": {
     "tagAlias": "lowerCase"
   },
@@ -9,9 +9,7 @@
   "types": [
     {
       "name": "UserAssignmentUserTask",
-      "extends": [
-        "bpmn:UserTask"
-      ],
+      "extends": ["bpmn:UserTask"],
       "properties": [
         {
           "name": "assignee",

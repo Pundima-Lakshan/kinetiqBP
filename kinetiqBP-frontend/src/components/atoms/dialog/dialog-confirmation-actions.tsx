@@ -3,9 +3,11 @@ import { ReactNode } from 'react';
 
 export interface DialogConfirmationActionsProps {
   onConfirm?: () => void;
+  onRemove?: () => void;
   onCancel?: () => void;
   confirmLabel?: string;
   cancelLabel?: string;
+  removeLabel?: string;
   otherActions?: ReactNode[];
   isLoading: boolean;
 }
@@ -13,8 +15,10 @@ export interface DialogConfirmationActionsProps {
 export const DialogConfirmationActions = ({
   onConfirm,
   onCancel,
+  onRemove,
   confirmLabel,
   cancelLabel,
+  removeLabel,
   otherActions = [],
   isLoading,
 }: DialogConfirmationActionsProps) => {
@@ -29,6 +33,11 @@ export const DialogConfirmationActions = ({
       {onConfirm && (
         <Button onClick={onConfirm} variant="contained" loading={isLoading}>
           {confirmLabel ?? 'Save'}
+        </Button>
+      )}
+      {onRemove && (
+        <Button onClick={onRemove} variant="contained" color="error" loading={isLoading}>
+          {removeLabel ?? 'Remove'}
         </Button>
       )}
     </DialogActions>

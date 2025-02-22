@@ -7,7 +7,7 @@ const LOW_PRIORITY = 500;
 export default function FormAssignmentPropertiesProvider(propertiesPanel, translate) {
   this.getGroups = function (element) {
     return function (groups) {
-      if (is(element, 'bpmn:UserTask')) {
+      if (is(element, 'bpmn:UserTask') | is(element, 'bpmn:StartEvent')) {
         groups.push(createFormAssignmentGroup(element, translate));
       }
 

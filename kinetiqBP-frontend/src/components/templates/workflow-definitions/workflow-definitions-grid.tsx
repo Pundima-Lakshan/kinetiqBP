@@ -1,5 +1,6 @@
-import { KBPDataGrid, ViewWorkflowDefinitionDialog, WorkflowStartDialog } from '@/components';
+import { KBPDataGrid, RemoveWorkflowDefinitionDialog, ViewWorkflowDefinitionDialog, WorkflowStartDialog } from '@/components';
 import type { WorkFlowDefinition } from '@/services';
+import DeleteIcon from '@mui/icons-material/Delete';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import { Button, IconButton } from '@mui/material';
 import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
@@ -16,7 +17,7 @@ const StartWorkflowInstance = (params: GridRenderCellParams<WorkflowDefinitionsR
       size="small"
       tabIndex={params.hasFocus ? 0 : -1}
       onClick={() => {
-        void dialogs.open(WorkflowStartDialog, params);
+        void dialogs.open(WorkflowStartDialog, params.row.id);
       }}
     >
       Start
@@ -38,6 +39,23 @@ const ShowMoreActions = (params: GridRenderCellParams<WorkflowDefinitionsRowMode
     >
       <OpenInFullIcon />
     </IconButton>
+  );
+};
+
+const RemoveWorkflowDefinition = (params: GridRenderCellParams<WorkflowDefinitionsRowModel>) => {
+  const dialogs = useDialogs();
+  return (
+    <Button
+      variant="text"
+      color="error"
+      size="small"
+      tabIndex={params.hasFocus ? 0 : -1}
+      onClick={() => {
+        void dialogs.open(RemoveWorkflowDefinitionDialog, { workflowDefinitionId: params.row.id, deploymentId: params.row.deploymentId });
+      }}
+    >
+      <DeleteIcon color="error" />
+    </Button>
   );
 };
 
@@ -79,6 +97,15 @@ export const WorkflowDefinitionsGrid = ({ data, loading }: WorkflowDefinitionsGr
         minWidth: 100,
         align: 'center',
         renderCell: StartWorkflowInstance,
+      },
+      {
+        field: 'delete',
+        headerName: '',
+        description: 'Delete this workflow definition',
+        flex: 0.3,
+        minWidth: 100,
+        align: 'center',
+        renderCell: RemoveWorkflowDefinition,
       },
       {
         field: 'more',

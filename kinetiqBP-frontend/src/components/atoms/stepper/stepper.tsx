@@ -5,6 +5,9 @@ import StepButton from '@mui/material/StepButton';
 import Stepper from '@mui/material/Stepper';
 import * as React from 'react';
 import { ContainerBox } from '../container-box';
+
+import './styles.css';
+
 interface KBPStepperProps {
   steps: {
     label: string;
@@ -22,7 +25,6 @@ interface Completed {
 }
 
 export const KBPStepper = ({ steps, allCompletedComponent }: KBPStepperProps) => {
-  const [localSteps] = React.useState(steps);
   const [activeStep, setActiveStep] = React.useState(() => {
     return steps.findIndex((step) => !step.completed);
   });
@@ -34,7 +36,7 @@ export const KBPStepper = ({ steps, allCompletedComponent }: KBPStepperProps) =>
   });
 
   const totalSteps = () => {
-    return localSteps.length;
+    return steps.length;
   };
 
   const completedSteps = () => {
@@ -50,7 +52,7 @@ export const KBPStepper = ({ steps, allCompletedComponent }: KBPStepperProps) =>
   };
 
   const handleNext = () => {
-    const newActiveStep = isLastStep() && !allStepsCompleted() ? localSteps.findIndex((_step, i) => !(i in completed)) : activeStep + 1;
+    const newActiveStep = isLastStep() && !allStepsCompleted() ? steps.findIndex((_step, i) => !(i in completed)) : activeStep + 1;
     setActiveStep(newActiveStep);
   };
 
@@ -77,9 +79,9 @@ export const KBPStepper = ({ steps, allCompletedComponent }: KBPStepperProps) =>
   };
 
   return (
-    <ContainerBox>
-      <Stepper nonLinear activeStep={activeStep}>
-        {localSteps.map((step, index) => (
+    <ContainerBox style={{ display: 'flex', flexDirection: 'row', gap: '0 16px' }}>
+      <Stepper nonLinear activeStep={activeStep} orientation="vertical" connector={null} className="vertical-stepper">
+        {steps.map((step, index) => (
           <Step key={step.label} completed={completed[index]} style={{ padding: '16px' }} disabled={step.disabled}>
             <StepButton color={completed[index] ? 'success' : 'inherit'} onClick={handleStep(index)} style={{ padding: '16px' }}>
               {step.label}
@@ -87,7 +89,7 @@ export const KBPStepper = ({ steps, allCompletedComponent }: KBPStepperProps) =>
           </Step>
         ))}
       </Stepper>
-      <ContainerBox style={{ height: 'calc(100% - 56px)' }}>
+      <ContainerBox style={{ width: 'calc(100% - 56px)' }}>
         {allStepsCompleted() && allCompletedComponent ? (
           <>
             {allCompletedComponent}
@@ -109,7 +111,7 @@ export const KBPStepper = ({ steps, allCompletedComponent }: KBPStepperProps) =>
               <Button onClick={handleNext} sx={{ mr: 1 }}>
                 Next
               </Button>
-              {activeStep !== localSteps.length &&
+              {activeStep !== steps.length &&
                 (completed[activeStep] ? (
                   <Button disabled={true}>{'Completed'}</Button>
                 ) : (

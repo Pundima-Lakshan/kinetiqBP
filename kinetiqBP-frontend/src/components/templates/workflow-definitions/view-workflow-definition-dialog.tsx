@@ -6,11 +6,12 @@ import BpmnModeler from 'bpmn-js/lib/Modeler';
 import { useRef } from 'react';
 import { useDownloadActions } from './download-actions.tsx';
 
-export const ViewWorkflowDefinitionDialog = ({ open, onClose, payload }: DialogProps<string>) => {
+export const ViewWorkflowDefinitionDialog = ({ open, onClose, payload: workflowDefinitionId }: DialogProps<string>) => {
   const bpmnModelerRef = useRef<BpmnModeler | null>(null);
   const { getDownloadActions } = useDownloadActions({ bpmnModelerRef });
 
-  const { data: workFlowDefinitionResourceData, isLoading: isLoadingWorkFlowDefinitionResourceData } = useGetWorkflowDefinitionResourceData(payload);
+  const { data: workFlowDefinitionResourceData, isLoading: isLoadingWorkFlowDefinitionResourceData } =
+    useGetWorkflowDefinitionResourceData(workflowDefinitionId);
 
   const handleConfirm = () => {
     void onClose();
