@@ -1,5 +1,5 @@
 import { defaultDialogContentProps, defaultDialogProps, DialogConfirmationActions, KBPFormEditor } from '@/components';
-import { useGetFormDefinition, useMutationSuccessErrorCallback, usePutFormDefinitions } from '@/services';
+import { useGetFormDefinition, useMutationSuccessErrorCallback, usePutFormDefinitions, type FormSchema } from '@/services';
 import { FormEditor } from '@bpmn-io/form-js';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import { DialogProps, useSession } from '@toolpad/core';
@@ -25,10 +25,7 @@ export const UpdateFormDefinitionDialog = ({ open, onClose, payload: id }: Dialo
   };
 
   const handleConfirm = () => {
-    const formSchema: {
-      id: string;
-      versionTag?: string;
-    } = formEditorRef.current?.getSchema();
+    const formSchema: FormSchema = formEditorRef.current?.getSchema();
     if (!formSchema || !userId || !formDefinition) {
       return;
     }
@@ -54,7 +51,7 @@ export const UpdateFormDefinitionDialog = ({ open, onClose, payload: id }: Dialo
 
   return (
     <Dialog {...defaultDialogProps} onClose={() => onClose()} open={open}>
-      <DialogTitle>Set backup account</DialogTitle>
+      <DialogTitle>Update form definition</DialogTitle>
       <DialogContent {...defaultDialogContentProps}>
         <KBPFormEditor formEditorRef={formEditorRef} initialSchema={formDefinition?.formSchema} />
       </DialogContent>

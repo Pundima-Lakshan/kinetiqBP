@@ -26,12 +26,12 @@ export const DialogConfirmationActions = ({
     <DialogActions>
       {...otherActions}
       {onCancel && (
-        <Button autoFocus onClick={onCancel} variant="outlined" loading={isLoading}>
+        <Button autoFocus onClick={onCancel} variant="outlined" color="warning" loading={isLoading}>
           {cancelLabel ?? 'Cancel'}
         </Button>
       )}
       {onConfirm && (
-        <Button onClick={onConfirm} variant="contained" loading={isLoading}>
+        <Button onClick={onConfirm} variant="contained" color="success" loading={isLoading}>
           {confirmLabel ?? 'Save'}
         </Button>
       )}

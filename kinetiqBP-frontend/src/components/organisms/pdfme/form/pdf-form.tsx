@@ -1,11 +1,10 @@
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { checkTemplate, getInputFromTemplate, Template } from '@pdfme/common';
 import { Form as PdfMeForm, Viewer as PdfMeViewer } from '@pdfme/ui';
 import { useEffect, useRef, useState } from 'react';
 import { generatePDF, getFontsData, getPlugins, getTemplateByPreset, handleLoadTemplate, isJsonString } from '../helper';
 
+import { FileInputFormControl } from '@/components/molecules';
 import { Box, Button, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material';
-import { VisuallyHiddenInput } from '../helper-components';
 import './styles.css';
 
 type Mode = 'form' | 'viewer';
@@ -138,12 +137,7 @@ export const PdfForm = () => {
           </RadioGroup>
         </FormControl>
 
-        <FormControl size="small">
-          <Button component="label" role={undefined} variant="contained" tabIndex={-1} startIcon={<CloudUploadIcon />}>
-            Load Template
-            <VisuallyHiddenInput type="file" accept="application/json" onChange={(e) => handleLoadTemplate(e, ui.current)} />
-          </Button>
-        </FormControl>
+        <FileInputFormControl handleChange={(e) => handleLoadTemplate(e, ui.current)} label="Load Template" />
 
         <FormControl size="small">
           <Button variant="outlined" onClick={onGetInputs}>

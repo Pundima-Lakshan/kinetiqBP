@@ -1,21 +1,25 @@
-import { defaultDialogContentProps, defaultDialogProps, DialogConfirmationActions, KBPBpmnEditor } from '@/components';
-import { useMutationSuccessErrorCallback, usePostWorkFlowDefinitions } from '@/services/index.ts';
+import { defaultDialogContentProps, defaultDialogProps, DialogConfirmationActions, KBPBpmnEditor, type KBPCustomEditorEvent } from '@/components';
+import { useMutationSuccessErrorCallback, usePostWorkflowDefinitions } from '@/services/index.ts';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
-import { DialogProps } from '@toolpad/core';
+import { DialogProps, useDialogs } from '@toolpad/core';
 import BpmnModeler from 'bpmn-js/lib/Modeler';
 import { useRef } from 'react';
-import { useDownloadActions } from './download-actions.tsx';
+import { ViewFormDefinitionDialog } from '../form-definitions/view-form-definition-dialog.tsx';
+import { useDownloadActions, useUploadActions } from './dialog-actions.tsx';
 
 export const NewWorkflowDefinitionDialog = ({ open, onClose }: DialogProps) => {
   const bpmnModelerRef = useRef<BpmnModeler | null>(null);
   const { getDownloadActions } = useDownloadActions({ bpmnModelerRef });
+  const { getUploadActions } = useUploadActions({ bpmnModelerRef });
+
+  const dialogs = useDialogs();
 
   const {
-    mutate: postWorkFlowDefinitions,
-    isPending: isPendingPostWorkFlowDefinitions,
-    status: statusPostWorkFlowDefinitions,
-    error: errorPostWorkFlowDefinitions,
-  } = usePostWorkFlowDefinitions();
+    mutate: postWorkflowDefinitions,
+    isPending: isPendingPostWorkflowDefinitions,
+    status: statusPostWorkflowDefinitions,
+    error: errorPostWorkflowDefinitions,
+  } = usePostWorkflowDefinitions();
 
   const handleClose = () => {
     void onClose();
@@ -32,7 +36,7 @@ export const NewWorkflowDefinitionDialog = ({ open, onClose }: DialogProps) => {
           throw new Error('No XML found');
         }
         const bpmnXml = new File([xml], 'data.bpmn20.xml', { type: 'application/xml' });
-        postWorkFlowDefinitions(bpmnXml);
+        postWorkflowDefinitions(bpmnXml);
       })
       .catch((error) => {
         console.error('Error exporting XML:', error);
@@ -40,22 +44,33 @@ export const NewWorkflowDefinitionDialog = ({ open, onClose }: DialogProps) => {
   };
 
   useMutationSuccessErrorCallback({
-    mutationStatus: statusPostWorkFlowDefinitions,
+    mutationStatus: statusPostWorkflowDefinitions,
     successMessage: 'Workflow submitted successfully',
-    error: errorPostWorkFlowDefinitions,
+    error: errorPostWorkflowDefinitions,
   });
+
+  const onEventHandler = (name: KBPCustomEditorEvent, event: unknown) => {
+    if (name === 'fileViewer.open' && event && typeof event === 'object' && 'formId' in event) {
+      if (event.formId == '') {
+        dialogs.alert('No form selected');
+        return;
+      }
+      const formId = Number(event.formId);
+      dialogs.open(ViewFormDefinitionDialog, formId);
+    }
+  };
 
   return (
     <Dialog {...defaultDialogProps} onClose={() => onClose()} open={open}>
-      <DialogTitle>Set backup account</DialogTitle>
+      <DialogTitle>New workflow definition</DialogTitle>
       <DialogContent {...defaultDialogContentProps}>
-        <KBPBpmnEditor bpmnModelerRef={bpmnModelerRef} />
+        <KBPBpmnEditor bpmnModelerRef={bpmnModelerRef} onEventHandler={onEventHandler} />
       </DialogContent>
       <DialogConfirmationActions
         onConfirm={handleConfirm}
         onCancel={handleClose}
-        otherActions={getDownloadActions()}
-        isLoading={isPendingPostWorkFlowDefinitions}
+        otherActions={[...getUploadActions(), ...getDownloadActions()]}
+        isLoading={isPendingPostWorkflowDefinitions}
       />
     </Dialog>
   );

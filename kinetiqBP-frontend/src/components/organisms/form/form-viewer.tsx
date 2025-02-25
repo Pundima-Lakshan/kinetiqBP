@@ -1,5 +1,6 @@
+import type { FormSchema } from '@/services';
 import { useSyncedRef } from '@/utils';
-import { Form, Schema } from '@bpmn-io/form-js';
+import { Form } from '@bpmn-io/form-js';
 import { useEffect, useRef } from 'react';
 import { customKBPFormFieldEventNames, type CustomKBPFormEventName } from './extension/custom-events';
 import { RangeFieldPropertiesProvider } from './extension/properties-panel';
@@ -8,8 +9,8 @@ export interface KBPFormViewerProps {
   submitHandler: (event: unknown) => void;
   changedHandler?: (event: unknown) => void;
   customEventHandler?: (event: { event: unknown; name: CustomKBPFormEventName }) => void;
-  schema: Schema;
-  data: Record<string, unknown>;
+  schema: FormSchema;
+  data?: Record<string, unknown>;
 }
 
 export const KBPFormViewer = ({ changedHandler, submitHandler, schema, data, customEventHandler }: KBPFormViewerProps) => {

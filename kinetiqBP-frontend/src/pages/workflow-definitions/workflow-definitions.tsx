@@ -2,7 +2,7 @@ import { WorkflowDefinitionsGrid } from '@/components';
 import { useGetWorkflowDefinitions } from '@/services';
 
 export const WorkflowDefinitions = () => {
-  const { data: workflowDefinitions, isLoading: isLoadingWorkFlowDefinitions } = useGetWorkflowDefinitions();
+  const { data: workflowDefinitions, isLoading: isLoadingWorkflowDefinitions } = useGetWorkflowDefinitions();
 
-  return <WorkflowDefinitionsGrid data={workflowDefinitions?.data ?? []} loading={isLoadingWorkFlowDefinitions} />;
+  return <WorkflowDefinitionsGrid data={workflowDefinitions?.data ?? []} loading={isLoadingWorkflowDefinitions} />;
 };

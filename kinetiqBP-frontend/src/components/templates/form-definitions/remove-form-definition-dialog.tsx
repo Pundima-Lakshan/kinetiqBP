@@ -51,7 +51,7 @@ export const RemoveFormDefinitionDialog = ({ open, onClose, payload: id }: Dialo
 
   return (
     <Dialog {...defaultDialogProps} onClose={() => onClose()} open={open}>
-      <DialogTitle>Set backup account</DialogTitle>
+      <DialogTitle>Remove form definition</DialogTitle>
       <DialogContent {...defaultDialogContentProps}>
         <KBPFormEditor formEditorRef={formEditorRef} initialSchema={formDefinition?.formSchema} />
       </DialogContent>

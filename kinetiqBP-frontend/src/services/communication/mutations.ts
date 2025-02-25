@@ -5,7 +5,7 @@ import {
   postWorkflowDefinition,
   putFormDefinition,
   removeFormDefinition,
-  removeWorkFlowDefinition,
+  removeWorkflowDefinition,
 } from './http';
 
 export const usePostFormDefinitions = () => {
@@ -29,23 +29,23 @@ export const useRemoveFormDefinition = () => {
   });
 };
 
-export const usePostWorkFlowDefinitions = () => {
+export const usePostWorkflowDefinitions = () => {
   return useMutationBuilder({
     mutationKey: [mutationKeys.workflowDefinition, mutationType.post],
     mutationFn: postWorkflowDefinition,
   });
 };
 
-export const usePostStartWorkFlowInstance = () => {
+export const usePostStartWorkflowInstance = () => {
   return useMutationBuilder({
     mutationKey: [mutationKeys.workflowInstance, mutationType.post],
     mutationFn: postStartWorkflowInstance,
   });
 };
 
-export const useRemoveWorkFlowDefinition = () => {
+export const useRemoveWorkflowDefinition = () => {
   return useMutationBuilder({
     mutationKey: [mutationKeys.workflowDefinition, mutationType.remove],
-    mutationFn: removeWorkFlowDefinition,
+    mutationFn: removeWorkflowDefinition,
   });
 };

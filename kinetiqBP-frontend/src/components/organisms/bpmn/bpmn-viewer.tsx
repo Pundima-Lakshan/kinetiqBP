@@ -1,7 +1,11 @@
+import 'bpmn-js-bpmnlint/dist/assets/css/bpmn-js-bpmnlint.css';
+
 import { useSyncedState } from '@/utils';
 import BpmnJS from 'bpmn-js';
+import lintModule from 'bpmn-js-bpmnlint';
 import { Canvas } from 'bpmn-js/lib/features/context-pad/ContextPadProvider';
 import React, { useEffect, useRef, useState } from 'react';
+import { bundle as bpmnlintConfig } from './common/linting';
 
 interface ReactBpmnProps {
   url?: string;
@@ -29,7 +33,13 @@ export const KBPBpmnViewer: React.FC<ReactBpmnProps> = ({ url, diagramXml, onLoa
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const viewer = new BpmnJS({ container: containerRef.current });
+    const viewer = new BpmnJS({
+      container: containerRef.current,
+      additionalModules: [lintModule],
+      linting: {
+        bpmnlint: bpmnlintConfig,
+      },
+    });
     setBpmnViewer(viewer);
 
     viewer.on('import.done', (event: { error: Error | null; warnings: Array<Error> }) => {

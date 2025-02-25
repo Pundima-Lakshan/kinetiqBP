@@ -1,10 +1,11 @@
+import type { FormSchema } from '@/services';
 import { FormEditor, Schema } from '@bpmn-io/form-js';
 import React, { useEffect, useRef } from 'react';
 import { RangeFieldPropertiesProvider } from './extension/properties-panel';
 import { FileEditorField, RangeField } from './extension/render';
 
 export interface KBPFormEditorProps {
-  initialSchema?: Schema;
+  initialSchema?: FormSchema;
   formEditorRef: React.MutableRefObject<FormEditor | null>;
 }
 

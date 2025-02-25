@@ -1,9 +1,8 @@
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { FileInputFormControl } from '@/components/molecules/file-field-form-control.tsx';
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, type SelectChangeEvent } from '@mui/material';
 import { checkTemplate, cloneDeep, Lang, Template } from '@pdfme/common';
 import { Designer } from '@pdfme/ui';
 import React, { useEffect, useRef, useState } from 'react';
-import { VisuallyHiddenInput } from '../helper-components.tsx';
 import {
   downloadJsonFile,
   generatePDF,
@@ -159,26 +158,15 @@ export const PdfDesigner = () => {
           </Select>
         </FormControl>
 
-        <FormControl size="small">
-          <Button component="label" role={undefined} variant="contained" tabIndex={-1} startIcon={<CloudUploadIcon />}>
-            Upload BasePDF
-            <VisuallyHiddenInput type="file" accept="application/pdf" onChange={onChangeBasePDF} />
-          </Button>
-        </FormControl>
+        <FileInputFormControl handleChange={onChangeBasePDF} label="Upload BasePDF" />
 
-        <FormControl size="small">
-          <Button component="label" role={undefined} variant="contained" tabIndex={-1} startIcon={<CloudUploadIcon />}>
-            Upload Template
-            <VisuallyHiddenInput
-              type="file"
-              accept="application/json"
-              onChange={(e) => {
-                handleLoadTemplate(e as React.ChangeEvent<HTMLInputElement>, designer.current);
-                setTemplatePreset(customTemplatePresetKey);
-              }}
-            />
-          </Button>
-        </FormControl>
+        <FileInputFormControl
+          handleChange={(e) => {
+            handleLoadTemplate(e as React.ChangeEvent<HTMLInputElement>, designer.current);
+            setTemplatePreset(customTemplatePresetKey);
+          }}
+          label="Upload Template"
+        />
 
         <FormControl size="small">
           <Button variant="outlined" onClick={onDownloadTemplate}>

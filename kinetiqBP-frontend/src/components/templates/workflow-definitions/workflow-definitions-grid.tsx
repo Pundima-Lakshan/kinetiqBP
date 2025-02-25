@@ -1,5 +1,5 @@
 import { KBPDataGrid, RemoveWorkflowDefinitionDialog, ViewWorkflowDefinitionDialog, WorkflowStartDialog } from '@/components';
-import type { WorkFlowDefinition } from '@/services';
+import type { WorkflowDefinition } from '@/services';
 import DeleteIcon from '@mui/icons-material/Delete';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import { Button, IconButton } from '@mui/material';
@@ -7,7 +7,7 @@ import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useDialogs } from '@toolpad/core';
 import { useState } from 'react';
 
-export type WorkflowDefinitionsRowModel = WorkFlowDefinition;
+export type WorkflowDefinitionsRowModel = WorkflowDefinition;
 
 const StartWorkflowInstance = (params: GridRenderCellParams<WorkflowDefinitionsRowModel>) => {
   const dialogs = useDialogs();
@@ -17,7 +17,7 @@ const StartWorkflowInstance = (params: GridRenderCellParams<WorkflowDefinitionsR
       size="small"
       tabIndex={params.hasFocus ? 0 : -1}
       onClick={() => {
-        void dialogs.open(WorkflowStartDialog, params.row.id);
+        void dialogs.open(WorkflowStartDialog, { workflowDefinitionId: params.row.id, workflowName: params.row.name });
       }}
     >
       Start

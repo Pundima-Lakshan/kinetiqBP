@@ -2,7 +2,6 @@ import { KBPDataGrid } from '@/components';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import { Button, IconButton } from '@mui/material';
 import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
-import { useDialogs } from '@toolpad/core';
 import { useState } from 'react';
 
 export interface TasksRowModel {
@@ -15,7 +14,6 @@ export interface TasksRowModel {
 }
 
 const StartWorkflowInstance = (params: GridRenderCellParams<TasksRowModel>) => {
-  const dialogs = useDialogs();
   return (
     <Button
       variant="text"
@@ -31,7 +29,6 @@ const StartWorkflowInstance = (params: GridRenderCellParams<TasksRowModel>) => {
 };
 
 const ShowMoreActions = (params: GridRenderCellParams<TasksRowModel>) => {
-  const dialogs = useDialogs();
   return (
     <IconButton
       aria-label="more"

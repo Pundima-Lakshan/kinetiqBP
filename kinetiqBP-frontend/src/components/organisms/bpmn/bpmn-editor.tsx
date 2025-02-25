@@ -1,9 +1,11 @@
 import '@bpmn-io/properties-panel/assets/properties-panel.css';
+import 'bpmn-js-bpmnlint/dist/assets/css/bpmn-js-bpmnlint.css';
 import 'bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css';
 import 'bpmn-js/dist/assets/bpmn-js.css';
 import 'bpmn-js/dist/assets/diagram-js.css';
 import './style.css';
 
+import lintModule from 'bpmn-js-bpmnlint';
 import { BpmnPropertiesPanelModule, BpmnPropertiesProviderModule } from 'bpmn-js-properties-panel';
 import BpmnModeler from 'bpmn-js/lib/Modeler';
 import React, { useEffect, useRef, useState } from 'react';
@@ -12,13 +14,19 @@ import { formAssignmentModdleDescriptor, userAssignmentModdleDescriptor } from '
 import { FormAssignmentPropertiesProviderModule, UserAssignmentPropertiesProviderModule } from './common/provider';
 
 import { DEFAULT_BPMN_DIAGRAM_XML_PATH, useSyncedState } from '@/utils';
+import type { KBPCustomEditorEvent } from './common/constants';
+
+import { bundle as bpmnlintConfig } from './common/linting';
+
+type OnEventHandler = (name: KBPCustomEditorEvent, event: unknown) => void;
 
 interface ReactBpmnEditorProps {
   diagramXml?: string;
   bpmnModelerRef?: React.MutableRefObject<BpmnModeler | null>;
+  onEventHandler?: OnEventHandler;
 }
 
-export const KBPBpmnEditor = ({ diagramXml, bpmnModelerRef }: ReactBpmnEditorProps) => {
+export const KBPBpmnEditor = ({ diagramXml, bpmnModelerRef, onEventHandler }: ReactBpmnEditorProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLDivElement>(null);
   const propertiesPanelRef = useRef<HTMLDivElement>(null);
@@ -47,6 +55,7 @@ export const KBPBpmnEditor = ({ diagramXml, bpmnModelerRef }: ReactBpmnEditorPro
         parent: propertiesPanelRef.current,
       },
       additionalModules: [
+        lintModule,
         BpmnPropertiesPanelModule,
         BpmnPropertiesProviderModule,
         UserAssignmentPropertiesProviderModule,
@@ -56,6 +65,13 @@ export const KBPBpmnEditor = ({ diagramXml, bpmnModelerRef }: ReactBpmnEditorPro
         userAssignment: userAssignmentModdleDescriptor,
         formAssignment: formAssignmentModdleDescriptor,
       },
+      linting: {
+        bpmnlint: bpmnlintConfig,
+      },
+    });
+
+    modeler.on('fileViewer.open', (event: unknown) => {
+      onEventHandler?.('fileViewer.open', event);
     });
 
     if (bpmnModelerRef) {

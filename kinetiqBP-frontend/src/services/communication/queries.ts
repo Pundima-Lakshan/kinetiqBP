@@ -1,11 +1,12 @@
-import { queryKeys, useQueryBuilder } from './common';
+import { queryKeys, useQueryBuilder, type ModifiedUseQueryOptions } from './common';
 import {
   getFlowableUsers,
   getFormDefinition,
   getFormDefinitions,
-  getWorkFlowDefinitionModel,
-  getWorkflowDefinitionResourceData,
+  getWorkflowDefinitionModel,
   getWorkflowDefinitions,
+  getWorkflowDefinitionXml,
+  type FormDefinition,
 } from './http';
 
 export const useGetFlowableUsers = () => {
@@ -22,12 +23,20 @@ export const useGetFormDefinitions = () => {
   });
 };
 
-export const useGetFormDefinition = (id: number) => {
+interface GetFormDefinitionsOptions {
+  enabled?: boolean;
+  select?: ModifiedUseQueryOptions<FormDefinition>['select'];
+}
+
+export const useGetFormDefinition = (id: number, options?: GetFormDefinitionsOptions) => {
+  const { enabled = true, select } = options ?? {};
   return useQueryBuilder({
     queryKey: [queryKeys.formDefinition, id],
     queryFn: async () => {
       return await getFormDefinition(id);
     },
+    enabled,
+    select,
   });
 };
 
@@ -38,20 +47,20 @@ export const useGetWorkflowDefinitions = () => {
   });
 };
 
-export const useGetWorkflowDefinitionResourceData = (workflowDefinitionId: string) => {
+export const useGetWorkflowDefinitionXml = (workflowDefinitionId: string) => {
   return useQueryBuilder({
-    queryKey: [queryKeys.workflowDefinitionResourceData, workflowDefinitionId],
+    queryKey: [queryKeys.workflowDefinitionXml, workflowDefinitionId],
     queryFn: async () => {
-      return await getWorkflowDefinitionResourceData(workflowDefinitionId);
+      return await getWorkflowDefinitionXml(workflowDefinitionId);
     },
   });
 };
 
-export const useGetWorkFlowDefinitionModel = (workflowDefinitionId: string) => {
+export const useGetWorkflowDefinitionModel = (workflowDefinitionId: string) => {
   return useQueryBuilder({
     queryKey: [queryKeys.workflowDefinitionModel, workflowDefinitionId],
     queryFn: async () => {
-      return await getWorkFlowDefinitionModel(workflowDefinitionId);
+      return await getWorkflowDefinitionModel(workflowDefinitionId);
     },
   });
 };

@@ -46,6 +46,25 @@ export interface UiServiceUser {
   email: string | null;
 }
 
+type Component = {
+  label: string;
+  type: 'textfield' | 'button';
+  layout: {
+    row: string;
+    columns: string | null;
+  };
+  id: string;
+  [p: string]: unknown;
+};
+
+export interface FormSchema {
+  components: Component[];
+  type: string;
+  id: string;
+  schemaVersion: number;
+  versionTag: string;
+}
+
 export interface FormDefinition {
   id: number;
   formId: string;
@@ -54,7 +73,7 @@ export interface FormDefinition {
   createdBy: UiServiceUser;
   createdDate: Date;
   modifiedDate: Date;
-  formSchema: Record<string, unknown>;
+  formSchema: FormSchema;
 }
 
 export const getFormDefinitions = async () => {
@@ -81,7 +100,7 @@ export const removeFormDefinition = async (id: number) => {
   return await remove<null>(`${ui_service_url}/form-definitions/${id}`, { responseType: 'none' });
 };
 
-export type WorkFlowDefinition = {
+export type WorkflowDefinition = {
   id: string;
   url: string;
   key: string;
@@ -100,19 +119,19 @@ export type WorkFlowDefinition = {
 };
 
 export const getWorkflowDefinitions = async () => {
-  return await get<GenericFlowableListResponse<WorkFlowDefinition>>(`${flowable_rest_url}/repository/process-definitions`);
+  return await get<GenericFlowableListResponse<WorkflowDefinition>>(`${flowable_rest_url}/repository/process-definitions`);
 };
 
-export const getWorkflowDefinitionResourceData = async (processDefinitionId: string) => {
+export const getWorkflowDefinitionXml = async (processDefinitionId: string) => {
   return await get<string>(`${flowable_rest_url}/repository/process-definitions/${processDefinitionId}/resourcedata`, {
     responseType: 'text',
   });
 };
 
 export const postWorkflowDefinition = async (bpmnXml: Blob) => {
-  const workFlowFormData = new FormData();
-  workFlowFormData.append('file', bpmnXml);
-  return await postFormData<WorkFlowDefinition>(`${flowable_rest_url}/repository/deployments`, workFlowFormData);
+  const workflowFormData = new FormData();
+  workflowFormData.append('file', bpmnXml);
+  return await postFormData<WorkflowDefinition>(`${flowable_rest_url}/repository/deployments`, workflowFormData);
 };
 
 interface PostStartWorkflowInstanceArg {
@@ -134,7 +153,42 @@ type ExtensionAttribute = {
   namespace: string;
 };
 
-type Process = unknown;
+type ValuedDataObject = unknown;
+type EventListener = unknown;
+type FlowableListener = unknown;
+type Lane = unknown;
+type IOSpecification = unknown;
+type FlowElementsContainer = unknown;
+type ExtensionElement = unknown;
+
+interface FlowElement {
+  name: string;
+  documentation: string;
+  executionListeners: FlowableListener[];
+  parentContainer: FlowElementsContainer;
+  id: string;
+  xmlRowNumber: number;
+  xmlColumnNumber: number;
+  extensionElements: Record<string, ExtensionElement[]>;
+  attributes: Record<string, ExtensionAttribute[]>;
+}
+
+interface Process {
+  name: string;
+  executable: boolean;
+  documentation: string;
+  ioSpecification: IOSpecification;
+  executionListeners: FlowableListener[];
+  lanes: Lane[];
+  flowElementList: FlowElement[];
+  dataObjects: ValuedDataObject[];
+  artifactList: Artifact[];
+  candidateStarterUsers: string[];
+  candidateStarterGroups: string[];
+  eventListeners: EventListener[];
+  flowElementMap: Record<string, FlowElement>;
+  artifactMap: Record<string, Artifact>;
+}
 
 type GraphicInfo = unknown;
 
@@ -190,12 +244,13 @@ type BpmnModel = {
   eventSupport?: any;
   exporter?: string;
   exporterVersion?: string;
+  mainProcess: Process;
 };
 
-export const getWorkFlowDefinitionModel = async (processDefinitionId: string) => {
+export const getWorkflowDefinitionModel = async (processDefinitionId: string) => {
   return await get<BpmnModel>(`${flowable_rest_url}/repository/process-definitions/${processDefinitionId}/model`);
 };
 
-export const removeWorkFlowDefinition = async (deploymentId: string) => {
+export const removeWorkflowDefinition = async (deploymentId: string) => {
   return await remove<null>(`${flowable_rest_url}/repository/deployments/${deploymentId}`, { queries: [{ cascade: 'true' }], responseType: 'none' });
 };

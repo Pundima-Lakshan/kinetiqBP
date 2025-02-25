@@ -1,10 +1,10 @@
 import { defaultDialogContentProps, defaultDialogProps, DialogConfirmationActions, KBPBpmnEditor } from '@/components';
-import { useGetWorkflowDefinitionResourceData, useMutationSuccessErrorCallback, useRemoveWorkFlowDefinition } from '@/services/index.ts';
+import { useGetWorkflowDefinitionXml, useMutationSuccessErrorCallback, useRemoveWorkflowDefinition } from '@/services/index.ts';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import { DialogProps, useDialogs } from '@toolpad/core';
 import BpmnModeler from 'bpmn-js/lib/Modeler';
 import { useRef } from 'react';
-import { useDownloadActions } from './download-actions.tsx';
+import { useDownloadActions } from './dialog-actions.tsx';
 
 interface RemoveWorkflowDefinitionDialogPayload {
   workflowDefinitionId: string;
@@ -17,16 +17,16 @@ export const RemoveWorkflowDefinitionDialog = ({ open, onClose, payload }: Dialo
 
   const dialogs = useDialogs();
 
-  const { data: workFlowDefinitionResourceData, isLoading: isLoadingWorkFlowDefinitionResourceData } = useGetWorkflowDefinitionResourceData(
+  const { data: workflowDefinitionResourceData, isLoading: isLoadingWorkflowDefinitionResourceData } = useGetWorkflowDefinitionXml(
     payload.workflowDefinitionId,
   );
 
   const {
-    mutate: removeWorkFlowDefinition,
-    isPending: isPendingRemoveWorkFlowDefinition,
-    status: statusRemoveWorkFlowDefinition,
-    error: errorRemoveWorkFlowDefinition,
-  } = useRemoveWorkFlowDefinition();
+    mutate: removeWorkflowDefinition,
+    isPending: isPendingRemoveWorkflowDefinition,
+    status: statusRemoveWorkflowDefinition,
+    error: errorRemoveWorkflowDefinition,
+  } = useRemoveWorkflowDefinition();
 
   const handleRemove = () => {
     dialogs
@@ -39,26 +39,26 @@ export const RemoveWorkflowDefinitionDialog = ({ open, onClose, payload }: Dialo
         if (!confirmed) {
           return;
         }
-        removeWorkFlowDefinition(payload.deploymentId);
+        removeWorkflowDefinition(payload.deploymentId);
       });
   };
 
   useMutationSuccessErrorCallback({
-    error: errorRemoveWorkFlowDefinition,
-    mutationStatus: statusRemoveWorkFlowDefinition,
+    error: errorRemoveWorkflowDefinition,
+    mutationStatus: statusRemoveWorkflowDefinition,
     successMessage: 'Workflow definition removed successfully',
     onSuccess: () => {
       void onClose();
     },
   });
 
-  const isLoading = isPendingRemoveWorkFlowDefinition || isLoadingWorkFlowDefinitionResourceData;
+  const isLoading = isPendingRemoveWorkflowDefinition || isLoadingWorkflowDefinitionResourceData;
 
   return (
     <Dialog {...defaultDialogProps} onClose={() => onClose()} open={open}>
-      <DialogTitle>Set backup account</DialogTitle>
+      <DialogTitle>Remove workflow definition</DialogTitle>
       <DialogContent {...defaultDialogContentProps}>
-        <KBPBpmnEditor diagramXml={workFlowDefinitionResourceData} />
+        <KBPBpmnEditor diagramXml={workflowDefinitionResourceData} bpmnModelerRef={bpmnModelerRef} />
       </DialogContent>
       <DialogConfirmationActions onRemove={handleRemove} otherActions={getDownloadActions()} isLoading={isLoading} />
     </Dialog>

@@ -7,7 +7,7 @@ export type AsyncStateObserversCommonParams = {
   setIsLoading: (isLoading: boolean) => void;
 };
 
-export const useAsyncStateObserversCommon = ({ cacheType = 'query', setIsLoading }: AsyncStateObserversCommonParams) => {
+export const useAsyncStateObserversCommon = ({ setIsLoading }: AsyncStateObserversCommonParams) => {
   const notifications = useNotifications();
 
   const handleEventAction = (event: QueryCacheNotifyEvent | MutationCacheNotifyEvent) => {

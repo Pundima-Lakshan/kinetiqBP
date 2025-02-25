@@ -1,8 +1,7 @@
-import { KBPDataGrid, WorkflowMoreDialog, WorkflowStartDialog } from '@/components';
+import { KBPDataGrid } from '@/components';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import { Button, IconButton } from '@mui/material';
 import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
-import { useDialogs } from '@toolpad/core';
 import { useState } from 'react';
 
 export interface WorkflowInstancesRowModel {
@@ -15,14 +14,13 @@ export interface WorkflowInstancesRowModel {
 }
 
 const StartWorkflowInstance = (params: GridRenderCellParams<WorkflowInstancesRowModel>) => {
-  const dialogs = useDialogs();
   return (
     <Button
       variant="text"
       size="small"
       tabIndex={params.hasFocus ? 0 : -1}
       onClick={() => {
-        void dialogs.open(WorkflowStartDialog, params);
+        // void dialogs.open(WorkflowStartDialog, params);
       }}
     >
       Start
@@ -31,7 +29,6 @@ const StartWorkflowInstance = (params: GridRenderCellParams<WorkflowInstancesRow
 };
 
 const ShowMoreActions = (params: GridRenderCellParams<WorkflowInstancesRowModel>) => {
-  const dialogs = useDialogs();
   return (
     <IconButton
       aria-label="more"
@@ -39,7 +36,7 @@ const ShowMoreActions = (params: GridRenderCellParams<WorkflowInstancesRowModel>
       size="small"
       tabIndex={params.hasFocus ? 0 : -1}
       onClick={() => {
-        void dialogs.open(WorkflowMoreDialog, params);
+        // void dialogs.open(WorkflowMoreDialog, params);
       }}
     >
       <OpenInFullIcon />

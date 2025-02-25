@@ -1,12 +1,26 @@
-import { DownloadAction } from './download-action.tsx';
-import { MutableRefObject } from 'react';
+import { FileInputFormControl } from '@/components/molecules';
+import { Button } from '@mui/material';
 import BpmnModeler from 'bpmn-js/lib/Modeler';
+import { MutableRefObject, type ChangeEvent } from 'react';
 
-interface DownloadActionsProps {
+interface DownloadXmlActionProps {
+  handleAction: () => void;
+  label: string;
+}
+
+export const CommonAction = ({ handleAction, label }: DownloadXmlActionProps) => {
+  return (
+    <Button onClick={handleAction} variant="text">
+      {label}
+    </Button>
+  );
+};
+
+interface CommonActionsProps {
   bpmnModelerRef: MutableRefObject<BpmnModeler | null>;
 }
 
-export const useDownloadActions = ({ bpmnModelerRef }: DownloadActionsProps) => {
+export const useDownloadActions = ({ bpmnModelerRef }: CommonActionsProps) => {
   const handleXmlDownload = () => {
     if (!bpmnModelerRef.current) {
       return;
@@ -60,11 +74,28 @@ export const useDownloadActions = ({ bpmnModelerRef }: DownloadActionsProps) => 
   };
 
   const getDownloadActions = () => [
-    <DownloadAction key={'xml-download'} handleDownload={handleXmlDownload} label={'XML'} />,
-    <DownloadAction key={'svg-download'} handleDownload={handleSvgDownload} label={'SVG'} />,
+    <CommonAction key={'xml-download'} handleAction={handleXmlDownload} label={'Download XML'} />,
+    <CommonAction key={'svg-download'} handleAction={handleSvgDownload} label={'Download SVG'} />,
   ];
 
   return {
     getDownloadActions,
+  };
+};
+
+export const useUploadActions = ({ bpmnModelerRef }: CommonActionsProps) => {
+  const handleXmlUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files?.length === 1) {
+      const xmlFile = e.target.files[0];
+      xmlFile.text().then((xmlText) => {
+        void bpmnModelerRef.current?.importXML(xmlText);
+      });
+    }
+  };
+
+  const getUploadActions = () => [<FileInputFormControl handleChange={handleXmlUpload} label="Upload XML" accept=".xml" />];
+
+  return {
+    getUploadActions,
   };
 };
