@@ -3,15 +3,17 @@ import {
   getFlowableUsers,
   getFormDefinition,
   getFormDefinitions,
+  getUiServiceUsers,
   getWorkflowDefinitionModel,
   getWorkflowDefinitions,
   getWorkflowDefinitionXml,
+  getWorkflowInstances,
   type FormDefinition,
 } from './http';
 
 export const useGetFlowableUsers = () => {
   return useQueryBuilder({
-    queryKey: [queryKeys.users],
+    queryKey: [queryKeys.flowableUsers],
     queryFn: getFlowableUsers,
   });
 };
@@ -62,5 +64,19 @@ export const useGetWorkflowDefinitionModel = (workflowDefinitionId: string) => {
     queryFn: async () => {
       return await getWorkflowDefinitionModel(workflowDefinitionId);
     },
+  });
+};
+
+export const useGetWorkflowInstances = () => {
+  return useQueryBuilder({
+    queryKey: [queryKeys.workflowInstances],
+    queryFn: getWorkflowInstances,
+  });
+};
+
+export const useGetUiServiceUsers = () => {
+  return useQueryBuilder({
+    queryKey: [queryKeys.uiServiceUsers],
+    queryFn: getUiServiceUsers,
   });
 };

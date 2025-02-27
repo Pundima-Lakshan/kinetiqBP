@@ -4,7 +4,9 @@ import {
   postStartWorkflowInstance,
   postWorkflowDefinition,
   putFormDefinition,
+  putProcessInstanceVariables,
   removeFormDefinition,
+  removeProcessInstance,
   removeWorkflowDefinition,
 } from './http';
 
@@ -47,5 +49,19 @@ export const useRemoveWorkflowDefinition = () => {
   return useMutationBuilder({
     mutationKey: [mutationKeys.workflowDefinition, mutationType.remove],
     mutationFn: removeWorkflowDefinition,
+  });
+};
+
+export const usePutProcessInstanceVariables = () => {
+  return useMutationBuilder({
+    mutationKey: [mutationKeys.processInstanceVariables],
+    mutationFn: putProcessInstanceVariables,
+  });
+};
+
+export const useRemoveProcessInstance = () => {
+  return useMutationBuilder({
+    mutationKey: [mutationKeys.workflowInstance],
+    mutationFn: removeProcessInstance,
   });
 };

@@ -1,94 +1,105 @@
-import { KBPDataGrid } from '@/components';
-import OpenInFullIcon from '@mui/icons-material/OpenInFull';
+import { KBPDataGrid, StatusIcon } from '@/components';
+import { browserRoutesCollection, getPath } from '@/configs';
+import type { UiServiceUser, WorkFlowInstance } from '@/services';
+import { dateToString, getUiServiceUserFullName } from '@/utils';
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Button, IconButton } from '@mui/material';
 import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
+import { useDialogs } from '@toolpad/core';
 import { useState } from 'react';
+import { Link } from 'react-router';
+import { RemoveProcessInstanceDialog } from './remove-process-instance-dialog';
 
-export interface WorkflowInstancesRowModel {
-  id: string;
-  name: string;
-  description: string;
-  version: string;
-  created: string;
-  modified: string;
-}
-
-const StartWorkflowInstance = (params: GridRenderCellParams<WorkflowInstancesRowModel>) => {
-  return (
-    <Button
-      variant="text"
-      size="small"
-      tabIndex={params.hasFocus ? 0 : -1}
-      onClick={() => {
-        // void dialogs.open(WorkflowStartDialog, params);
-      }}
-    >
-      Start
-    </Button>
-  );
+export type WorkflowInstancesRowModel = WorkFlowInstance & {
+  startedUser?: UiServiceUser;
 };
 
 const ShowMoreActions = (params: GridRenderCellParams<WorkflowInstancesRowModel>) => {
+  const linkTo = `${getPath(browserRoutesCollection.WorkflowInstances.segment)}/${params.row.processDefinitionId}/${params.row.id}`;
   return (
-    <IconButton
-      aria-label="more"
-      color="primary"
+    <Link to={linkTo}>
+      <IconButton aria-label="more" color="primary" size="small" tabIndex={params.hasFocus ? 0 : -1}>
+        <ArrowOutwardIcon />
+      </IconButton>
+    </Link>
+  );
+};
+
+const RemoveFormDefinition = (params: GridRenderCellParams<WorkflowInstancesRowModel>) => {
+  const dialogs = useDialogs();
+  return (
+    <Button
+      variant="text"
+      color="error"
       size="small"
       tabIndex={params.hasFocus ? 0 : -1}
       onClick={() => {
-        // void dialogs.open(WorkflowMoreDialog, params);
+        void dialogs.open(RemoveProcessInstanceDialog, { processInstanceId: params.row.id });
       }}
     >
-      <OpenInFullIcon />
-    </IconButton>
+      <DeleteIcon color="error" />
+    </Button>
   );
 };
 
 interface WorkflowInstancesGridProps {
   data: WorkflowInstancesRowModel[];
+  isLoading: boolean;
 }
 
-export const WorkflowInstancesGrid = ({ data }: WorkflowInstancesGridProps) => {
-  const [columns] = useState<GridColDef[]>(() => {
+export const WorkflowInstancesGrid = ({ data, isLoading }: WorkflowInstancesGridProps) => {
+  const [columns] = useState<GridColDef<WorkflowInstancesRowModel>[]>(() => {
     return [
-      { field: 'id', headerName: 'ID', description: 'Unique identifier for the workflow', flex: 1, minWidth: 100 },
-      { field: 'name', headerName: 'Name', description: 'Name of the workflow', flex: 1, minWidth: 150 },
       {
-        field: 'description',
-        headerName: 'Description',
-        description: 'Detailed description of the workflow',
+        field: 'processDefinitionName',
+        headerName: 'Workflow definition name',
+        description: 'Name of the the process definition of the process instance',
         flex: 2,
         minWidth: 200,
       },
       {
-        field: 'version',
-        headerName: 'Version',
-        description: 'Version number of the workflow',
+        field: 'startTime',
+        headerName: 'Started time',
+        description: 'Creation date of the process',
+        flex: 2.5,
+        minWidth: 150,
+        valueFormatter: dateToString,
+      },
+      {
+        field: 'startedUser',
+        headerName: 'Started User',
+        description: 'Workflow instance initiated user',
         flex: 1,
         minWidth: 100,
+        valueFormatter: getUiServiceUserFullName,
       },
       {
-        field: 'created',
-        headerName: 'Created',
-        description: 'Creation date of the workflow',
+        field: 'suspended',
+        headerName: 'Is suspended',
         flex: 1,
         minWidth: 150,
+        align: 'center',
+        headerAlign: 'center',
+        renderCell: (params: GridRenderCellParams<WorkflowInstancesRowModel>) => <StatusIcon status={params.row.suspended ? 'done' : 'not'} />,
       },
       {
-        field: 'modified',
-        headerName: 'Modified',
-        description: 'Last modification date of the workflow',
+        field: 'ended',
+        headerName: 'Is ended',
         flex: 1,
         minWidth: 150,
+        align: 'center',
+        headerAlign: 'center',
+        renderCell: (params: GridRenderCellParams<WorkflowInstancesRowModel>) => <StatusIcon status={params.row.ended ? 'done' : 'not'} />,
       },
       {
-        field: 'start',
+        field: 'remove',
         headerName: '',
-        description: 'Create an instance from this definition',
+        description: 'Remove process instance',
         flex: 0.3,
         minWidth: 100,
         align: 'center',
-        renderCell: StartWorkflowInstance,
+        renderCell: RemoveFormDefinition,
       },
       {
         field: 'more',
@@ -102,5 +113,5 @@ export const WorkflowInstancesGrid = ({ data }: WorkflowInstancesGridProps) => {
     ];
   });
 
-  return <KBPDataGrid rows={data} columns={columns} loading />;
+  return <KBPDataGrid rows={data} columns={columns} loading={isLoading} />;
 };

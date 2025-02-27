@@ -1,5 +1,16 @@
 import { PdfDesigner, PdfForm } from '@/components';
-import { Dashboard, FormDefinitions, Heatmaps, Home, Statistics, Tasks, WorkflowDefinitions, WorkflowInstances } from '@/pages';
+import {
+  Dashboard,
+  FormDefinitions,
+  Heatmaps,
+  Home,
+  PageNotFound,
+  Statistics,
+  Tasks,
+  WorkflowDefinitions,
+  WorkFlowInstance,
+  WorkflowInstances,
+} from '@/pages';
 import { createBrowserRouter } from 'react-router';
 
 export const browserRoutesCollection = {
@@ -14,7 +25,9 @@ export const browserRoutesCollection = {
   Heatmap: { segment: 'heatmap', title: 'Heatmap' },
 };
 
-const getPath = (segment: string) => {
+export const PAGE_NOT_FOUND_PATH = '/page-not-found';
+
+export const getPath = (segment: string) => {
   return `/${segment}`;
 };
 
@@ -33,6 +46,10 @@ export const browserRouter = createBrowserRouter([
       {
         path: getPath(browserRoutesCollection.WorkflowInstances.segment),
         Component: WorkflowInstances,
+      },
+      {
+        path: `${getPath(browserRoutesCollection.WorkflowInstances.segment)}/:workflowDefinitionId/:workflowInstanceId`,
+        Component: WorkFlowInstance,
       },
       {
         path: getPath(browserRoutesCollection.FormDefinitions.segment),
@@ -61,6 +78,10 @@ export const browserRouter = createBrowserRouter([
       {
         path: getPath(browserRoutesCollection.Tasks.segment),
         Component: Tasks,
+      },
+      {
+        path: PAGE_NOT_FOUND_PATH,
+        Component: PageNotFound,
       },
     ],
   },

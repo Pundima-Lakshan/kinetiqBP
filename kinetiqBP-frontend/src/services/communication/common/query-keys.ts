@@ -1,7 +1,8 @@
 export const queryKeys = {
   dummy: 'dummy',
 
-  users: 'users',
+  flowableUsers: 'flowableUsers',
+  uiServiceUsers: 'uiServiceUsers',
 
   formDefinitions: 'formDefinitions',
   formDefinition: 'formDefinition',

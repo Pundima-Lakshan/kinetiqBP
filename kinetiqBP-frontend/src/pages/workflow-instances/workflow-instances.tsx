@@ -1,32 +1,34 @@
-import { WorkflowInstancesGrid } from '@/components';
+import { WorkflowInstancesGrid, type WorkflowInstancesRowModel } from '@/components';
+import { useGetUiServiceUsers, useGetWorkflowInstances } from '@/services';
+import { useEffect, useState } from 'react';
 
 export const WorkflowInstances = () => {
-  const dummyData = [
-    {
-      id: '1',
-      name: 'Workflow 1',
-      description: 'Description 1',
-      version: '1.0',
-      created: '2023-01-01',
-      modified: '2023-01-02',
-    },
-    {
-      id: '2',
-      name: 'Workflow 2',
-      description: 'Description 2',
-      version: '1.1',
-      created: '2023-02-01',
-      modified: '2023-02-02',
-    },
-    {
-      id: '3',
-      name: 'Workflow 3',
-      description: 'Description 3',
-      version: '2.0',
-      created: '2023-03-01',
-      modified: '2023-03-02',
-    },
-  ];
+  const { data: workflowInstances, isLoading: isLoadingWorkflowInstances } = useGetWorkflowInstances();
+  const { data: uiServiceUsers, isLoading: isLoadingUiServiceUsers } = useGetUiServiceUsers();
 
-  return <WorkflowInstancesGrid data={dummyData} />;
+  const [workflowInstanceData, setWorkflowInstanceData] = useState<Array<WorkflowInstancesRowModel>>([]);
+
+  useEffect(() => {
+    if (!workflowInstances?.data || !uiServiceUsers) return;
+
+    const usersMap = new Map(
+      uiServiceUsers.map((user) => {
+        return [user.id, user];
+      }),
+    );
+
+    const usersAddedData = workflowInstances.data.map((instance) => {
+      const startedUser = usersMap.get(instance.startUserId);
+      return {
+        ...instance,
+        startedUser,
+      };
+    });
+
+    setWorkflowInstanceData(usersAddedData);
+  }, [workflowInstances, uiServiceUsers]);
+
+  const isLoading = isLoadingWorkflowInstances || isLoadingUiServiceUsers;
+
+  return <WorkflowInstancesGrid data={workflowInstanceData} isLoading={isLoading} />;
 };

@@ -136,13 +136,23 @@ export const postWorkflowDefinition = async (bpmnXml: Blob) => {
 
 interface PostStartWorkflowInstanceArg {
   processDefinitionId: string;
-  variables: Array<Record<string, unknown>>;
+  startUserId: string;
 }
 
-export const postStartWorkflowInstance = async ({ processDefinitionId, variables }: PostStartWorkflowInstanceArg) => {
-  return await post(`${flowable_rest_url}/runtime/process-instances`, {
+export interface ProcessInstanceResponse {
+  id: string;
+  processDefinitionId: string;
+  businessKey: string;
+  suspended: boolean;
+  ended: boolean;
+  startTime: Date;
+  startUserId: string;
+}
+
+export const postStartWorkflowInstance = async ({ processDefinitionId, startUserId }: PostStartWorkflowInstanceArg) => {
+  return await post<ProcessInstanceResponse>(`${ui_service_url}/process-api/runtime/process-instances`, {
     processDefinitionId,
-    variables,
+    startUserId,
   });
 };
 
@@ -253,4 +263,61 @@ export const getWorkflowDefinitionModel = async (processDefinitionId: string) =>
 
 export const removeWorkflowDefinition = async (deploymentId: string) => {
   return await remove<null>(`${flowable_rest_url}/repository/deployments/${deploymentId}`, { queries: [{ cascade: 'true' }], responseType: 'none' });
+};
+
+export type RestVariable = {
+  name: string;
+  type: 'string' | 'number';
+  value: string;
+  scope?: string;
+};
+
+export interface WorkFlowInstance {
+  id: string;
+  url: string;
+  name: string;
+  businessKey: string;
+  businessStatus: string;
+  suspended: boolean;
+  ended: boolean;
+  processDefinitionId: string;
+  processDefinitionUrl: string;
+  processDefinitionName: string;
+  processDefinitionDescription: string;
+  activityId: string;
+  startUserId: string;
+  startTime: Date;
+  superProcessInstanceId: string;
+  variables: RestVariable[];
+  callbackId: string;
+  callbackType: string;
+  referenceId: string;
+  referenceType: string;
+  propagatedStageInstanceId: string;
+  tenantId: string;
+}
+
+export const getWorkflowInstances = async () => {
+  return await get<GenericFlowableListResponse<WorkFlowInstance>>(`${flowable_rest_url}/runtime/process-instances`, {
+    queries: [{ size: '500' }],
+  });
+};
+
+export const getUiServiceUsers = async () => {
+  return await get<Array<UiServiceUser>>(`${ui_service_url}/users`);
+};
+
+export const removeProcessInstance = async (processInstanceId: string) => {
+  return await remove(`${flowable_rest_url}/runtime/process-instances/${processInstanceId}`, {
+    responseType: 'none',
+  });
+};
+
+interface PutProcessInstanceVariablesArg {
+  variables: Array<RestVariable>;
+  processInstanceId: string;
+}
+
+export const putProcessInstanceVariables = async (arg: PutProcessInstanceVariablesArg) => {
+  return await put(`${flowable_rest_url}/runtime/process-instances/${arg.processInstanceId}/variables`, arg.variables);
 };

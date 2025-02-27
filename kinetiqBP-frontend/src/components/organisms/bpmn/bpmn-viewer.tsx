@@ -4,8 +4,18 @@ import { useSyncedState } from '@/utils';
 import BpmnJS from 'bpmn-js';
 import lintModule from 'bpmn-js-bpmnlint';
 import { Canvas } from 'bpmn-js/lib/features/context-pad/ContextPadProvider';
+import type Modeling from 'bpmn-js/lib/features/modeling/Modeling';
+import type { Element } from 'bpmn-js/lib/features/modeling/Modeling';
 import React, { useEffect, useRef, useState } from 'react';
+import { getColors, type BpmnElementColorState } from './common';
 import { bundle as bpmnlintConfig } from './common/linting';
+
+import './style.css';
+
+interface ElementsCollection {
+  elements: Element[];
+  color?: BpmnElementColorState;
+}
 
 interface ReactBpmnProps {
   url?: string;
@@ -13,9 +23,10 @@ interface ReactBpmnProps {
   onLoading?: (state: boolean) => void;
   onError?: (error: Error) => void;
   onShown?: (warnings: Array<Error>) => void;
+  elementsToColor?: Array<ElementsCollection>;
 }
 
-export const KBPBpmnViewer: React.FC<ReactBpmnProps> = ({ url, diagramXml, onLoading, onError, onShown }) => {
+export const KBPBpmnViewer: React.FC<ReactBpmnProps> = ({ url, diagramXml, onLoading, onError, onShown, elementsToColor }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [bpmnViewer, setBpmnViewer] = useState<BpmnJS | null>(null);
   const { state: localDiagramXML, setState: setLocalDiagramXML } = useSyncedState({ getter: () => diagramXml, deps: [diagramXml] });
@@ -58,19 +69,15 @@ export const KBPBpmnViewer: React.FC<ReactBpmnProps> = ({ url, diagramXml, onLoa
     return () => viewer.destroy();
   }, []);
 
-  // Load and display diagram when `url` or `diagramXml` changes
-  useEffect(() => {
-    if (url) {
-      fetchDiagram(url);
-    } else if (diagramXml) {
-      void displayDiagram(diagramXml);
-    }
-  }, [url, diagramXml, bpmnViewer]);
-
-  const displayDiagram = async (xml: string) => {
+  const displayDiagram = async (xml: string, elementsToColor: ReactBpmnProps['elementsToColor']) => {
     if (bpmnViewer) {
       const importResult = await bpmnViewer.importXML(xml);
       if (importResult.warnings.length > 0) console.warn(importResult.warnings);
+
+      const modeling: Modeling = bpmnViewer.get('modeling');
+      elementsToColor?.forEach((elementCollection) => {
+        modeling.setColor(elementCollection.elements, getColors(elementCollection.color));
+      });
     }
   };
 
@@ -88,10 +95,18 @@ export const KBPBpmnViewer: React.FC<ReactBpmnProps> = ({ url, diagramXml, onLoa
   };
 
   useEffect(() => {
-    if (localDiagramXML) {
-      displayDiagram(localDiagramXML);
+    if (url) {
+      fetchDiagram(url);
+    } else if (diagramXml) {
+      void displayDiagram(diagramXml, elementsToColor);
     }
-  }, [localDiagramXML]);
+  }, [url, diagramXml, bpmnViewer, elementsToColor]);
 
-  return <div className="react-bpmn-diagram-container" ref={containerRef}></div>;
+  useEffect(() => {
+    if (localDiagramXML) {
+      displayDiagram(localDiagramXML, elementsToColor);
+    }
+  }, [localDiagramXML, elementsToColor]);
+
+  return <div className="bpmn-viewer-container" ref={containerRef}></div>;
 };

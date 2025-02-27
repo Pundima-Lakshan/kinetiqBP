@@ -1,4 +1,6 @@
-import { KBPStepper } from '@/components';
+import { WorkFlowProgress } from '@/components';
+import { Button } from '@mui/material';
+import { useDialogs } from '@toolpad/core';
 
 const steps = [
   {
@@ -44,8 +46,20 @@ const steps = [
   { index: 22, label: 'Finish', completed: false, component: <div>Step 23</div>, onComplete: () => {} },
 ];
 
+const BpmnProgressButton = () => {
+  const dialogs = useDialogs();
+  const handleViewProgress = () => {
+    dialogs.alert('This is progress');
+  };
+  return (
+    <Button color="inherit" onClick={handleViewProgress}>
+      View Progress
+    </Button>
+  );
+};
+
 export const Dashboard = () => {
-  return <KBPStepper steps={steps} />;
+  return <WorkFlowProgress />;
 };
 
 // export const DashboardForm = () => {

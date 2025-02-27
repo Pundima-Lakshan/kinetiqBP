@@ -78,7 +78,7 @@ export const WorkflowDefinitionsGrid = ({ data, loading }: WorkflowDefinitionsGr
       {
         field: 'category',
         headerName: 'Category',
-        description: 'Cateogry of the workflow',
+        description: 'Category of the workflow',
         flex: 1.5,
         minWidth: 150,
       },

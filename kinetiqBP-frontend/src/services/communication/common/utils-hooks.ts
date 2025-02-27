@@ -2,38 +2,46 @@ import type { DefaultError, MutationStatus } from '@tanstack/react-query';
 import { useNotifications } from '@toolpad/core';
 import { useEffect } from 'react';
 
-interface MutationSuccessErrorCallback {
-  onSuccess?: () => void;
+interface MutationSuccessErrorCallback<T = unknown> {
+  onSuccess?: (data?: T) => void;
   onError?: () => void;
   mutationStatus: MutationStatus;
   successMessage?: string;
   errorMessage?: string;
   error: DefaultError | null;
+  explicit?: boolean;
+  data?: T;
 }
 
-export const useMutationSuccessErrorCallback = ({
+export const useMutationSuccessErrorCallback = <T = unknown>({
   onSuccess,
   onError,
   mutationStatus,
   errorMessage,
   successMessage,
   error,
-}: MutationSuccessErrorCallback) => {
+  explicit,
+  data,
+}: MutationSuccessErrorCallback<T>) => {
   const notification = useNotifications();
 
   useEffect(() => {
     if (mutationStatus === 'success') {
-      notification.show(successMessage ?? 'Success', {
-        severity: 'success',
-      });
-      onSuccess?.();
+      if (explicit ? !!successMessage : true) {
+        notification.show(successMessage ?? 'Success', {
+          severity: 'success',
+        });
+      }
+      onSuccess?.(data);
       return;
     }
 
     if (mutationStatus === 'error') {
-      notification.show(errorMessage ?? 'Failed', {
-        severity: 'error',
-      });
+      if (explicit ? !!errorMessage : true) {
+        notification.show(errorMessage ?? 'Failed', {
+          severity: 'error',
+        });
+      }
       console.error(error);
       onError?.();
       return;

@@ -51,12 +51,12 @@ const makeFormRequest = async <T>(url: string, requestOption: RequestInit) => {
   return await handleResponse<T>(url, options);
 };
 
-interface GetOptions {
+interface CommonOptions {
   queries?: Array<Record<string, string>>;
   responseType?: ResponseType;
 }
 
-export const get = async <T>(url: string, options?: GetOptions) => {
+export const get = async <T>(url: string, options?: CommonOptions) => {
   const { queries, responseType } = options ?? {};
   const urlQuery = queries?.map((query) => `${Object.keys(query)[0]}=${Object.values(query)[0]}`).join('&');
   const urlWithQuery = urlQuery ? `${url}?${urlQuery}` : url;
@@ -75,18 +75,14 @@ export const postFormData = async <T>(url: string, data: FormData) =>
     body: data,
   });
 
-export const put = async <T, R = unknown>(url: string, data: R) =>
-  await makeRequest<T>(url, {
+export const put = async <T, R = unknown>(url: string, data: R) => {
+  return await makeRequest<T>(url, {
     method: 'PUT',
     body: JSON.stringify(data),
   });
+};
 
-interface RemoveOptions {
-  queries?: Array<Record<string, string>>;
-  responseType?: ResponseType;
-}
-
-export const remove = async <T>(url: string, options?: RemoveOptions) => {
+export const remove = async <T>(url: string, options?: CommonOptions) => {
   const { queries, responseType } = options ?? {};
   const urlQuery = queries?.map((query) => `${Object.keys(query)[0]}=${Object.values(query)[0]}`).join('&');
   const urlWithQuery = urlQuery ? `${url}?${urlQuery}` : url;

@@ -36,6 +36,7 @@ export const navigation: Navigation = [
   },
   {
     segment: browserRoutesCollection.WorkflowInstances.segment,
+    pattern: `${browserRoutesCollection.WorkflowInstances.segment}{/:workflowDefinitionId}?{/:workflowInstanceId}?`,
     title: browserRoutesCollection.WorkflowInstances.title,
     icon: <AssignmentIcon />,
   },

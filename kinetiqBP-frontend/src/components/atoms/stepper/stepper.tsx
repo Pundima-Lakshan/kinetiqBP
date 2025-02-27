@@ -6,6 +6,7 @@ import Stepper from '@mui/material/Stepper';
 import * as React from 'react';
 import { ContainerBox } from '../container-box';
 
+import { Typography } from '@mui/material';
 import './styles.css';
 
 interface KBPStepperProps {
@@ -18,13 +19,15 @@ interface KBPStepperProps {
     onComplete: () => void;
   }[];
   allCompletedComponent?: React.ReactNode;
+  additionalActions?: React.ReactNode[];
+  stepperHeader: string;
 }
 
 interface Completed {
   [k: number]: boolean;
 }
 
-export const KBPStepper = ({ steps, allCompletedComponent }: KBPStepperProps) => {
+export const KBPStepper = ({ steps, allCompletedComponent, additionalActions, stepperHeader }: KBPStepperProps) => {
   const [activeStep, setActiveStep] = React.useState(() => {
     return steps.findIndex((step) => !step.completed);
   });
@@ -80,15 +83,18 @@ export const KBPStepper = ({ steps, allCompletedComponent }: KBPStepperProps) =>
 
   return (
     <ContainerBox style={{ display: 'flex', flexDirection: 'row', gap: '0 16px' }}>
-      <Stepper nonLinear activeStep={activeStep} orientation="vertical" connector={null} className="vertical-stepper">
-        {steps.map((step, index) => (
-          <Step key={step.label} completed={completed[index]} style={{ padding: '16px' }} disabled={step.disabled}>
-            <StepButton color={completed[index] ? 'success' : 'inherit'} onClick={handleStep(index)} style={{ padding: '16px' }}>
-              {step.label}
-            </StepButton>
-          </Step>
-        ))}
-      </Stepper>
+      <Box style={{ display: 'flex', flexDirection: 'column', gap: '8px 0' }}>
+        <Typography className="stepper-header">{stepperHeader}</Typography>
+        <Stepper nonLinear activeStep={activeStep} orientation="vertical" connector={null} className="vertical-stepper">
+          {steps.map((step, index) => (
+            <Step key={step.label} completed={completed[index]} style={{ padding: '16px' }} disabled={step.disabled}>
+              <StepButton color={completed[index] ? 'success' : 'inherit'} onClick={handleStep(index)} style={{ padding: '16px' }}>
+                {step.label}
+              </StepButton>
+            </Step>
+          ))}
+        </Stepper>
+      </Box>
       <ContainerBox style={{ width: 'calc(100% - 56px)' }}>
         {allStepsCompleted() && allCompletedComponent ? (
           <>
@@ -107,6 +113,8 @@ export const KBPStepper = ({ steps, allCompletedComponent }: KBPStepperProps) =>
               <Button color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
                 Back
               </Button>
+              <Box sx={{ flex: '1 1 auto' }} />
+              {additionalActions}
               <Box sx={{ flex: '1 1 auto' }} />
               <Button onClick={handleNext} sx={{ mr: 1 }}>
                 Next
