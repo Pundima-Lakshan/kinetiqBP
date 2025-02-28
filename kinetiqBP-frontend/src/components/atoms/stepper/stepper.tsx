@@ -1,26 +1,31 @@
+import { useSyncedState } from '@/utils';
+import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Step from '@mui/material/Step';
 import StepButton from '@mui/material/StepButton';
 import Stepper from '@mui/material/Stepper';
-import * as React from 'react';
+import { Fragment } from 'react/jsx-runtime';
 import { ContainerBox } from '../container-box';
 
-import { Typography } from '@mui/material';
+import { StepperLabel } from './stepper-label';
 import './styles.css';
 
+export interface KbpStep {
+  labels: (string | null)[];
+  index: number;
+  completed?: boolean;
+  disabled?: boolean;
+  component: React.ReactNode;
+  onComplete: () => void;
+}
+
 interface KBPStepperProps {
-  steps: {
-    label: string;
-    index: number;
-    completed?: boolean;
-    disabled?: boolean;
-    component: React.ReactNode;
-    onComplete: () => void;
-  }[];
+  steps: KbpStep[];
   allCompletedComponent?: React.ReactNode;
   additionalActions?: React.ReactNode[];
   stepperHeader: string;
+  isLoading?: boolean;
 }
 
 interface Completed {
@@ -28,14 +33,21 @@ interface Completed {
 }
 
 export const KBPStepper = ({ steps, allCompletedComponent, additionalActions, stepperHeader }: KBPStepperProps) => {
-  const [activeStep, setActiveStep] = React.useState(() => {
-    return steps.findIndex((step) => !step.completed);
+  const { state: activeStep, setState: setActiveStep } = useSyncedState({
+    getter: () => {
+      return steps.findIndex((step) => !step.completed);
+    },
+    deps: [steps],
   });
-  const [completed, setCompleted] = React.useState<Completed>(() => {
-    return steps.reduce((acc: Completed, step) => {
-      if (step.completed) acc[step.index] = step.completed;
-      return acc;
-    }, {});
+
+  const { state: completed, setState: setCompleted } = useSyncedState<Completed>({
+    getter: () => {
+      return steps.reduce((acc: Completed, step) => {
+        if (step.completed) acc[step.index] = step.completed;
+        return acc;
+      }, {});
+    },
+    deps: [steps],
   });
 
   const totalSteps = () => {
@@ -72,7 +84,7 @@ export const KBPStepper = ({ steps, allCompletedComponent, additionalActions, st
       ...completed,
       [_activeStep]: true,
     });
-    steps[_activeStep].onComplete();
+    steps[_activeStep]?.onComplete();
     handleNext();
   };
 
@@ -87,9 +99,9 @@ export const KBPStepper = ({ steps, allCompletedComponent, additionalActions, st
         <Typography className="stepper-header">{stepperHeader}</Typography>
         <Stepper nonLinear activeStep={activeStep} orientation="vertical" connector={null} className="vertical-stepper">
           {steps.map((step, index) => (
-            <Step key={step.label} completed={completed[index]} style={{ padding: '16px' }} disabled={step.disabled}>
+            <Step key={`step-${step.index}`} completed={completed[index]} style={{ padding: '16px' }} disabled={step.disabled}>
               <StepButton color={completed[index] ? 'success' : 'inherit'} onClick={handleStep(index)} style={{ padding: '16px' }}>
-                {step.label}
+                <StepperLabel key={`step-label-${step.index}`} labels={step.labels} index={step.index} />
               </StepButton>
             </Step>
           ))}
@@ -106,24 +118,28 @@ export const KBPStepper = ({ steps, allCompletedComponent, additionalActions, st
           </>
         ) : (
           <>
-            <ContainerBox style={{ height: 'calc(100% - 36.5px)', padding: '24px' }}>
-              <ContainerBox style={{ overflowY: 'auto' }}>{steps[activeStep].component}</ContainerBox>
+            <ContainerBox key="stepper-step-component" style={{ height: 'calc(100% - 36.5px)', padding: '8px' }}>
+              <ContainerBox style={{ overflowY: 'auto' }}>{steps[activeStep]?.component}</ContainerBox>
             </ContainerBox>
-            <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-              <Button color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
+            <Box key="stepper-buttons" sx={{ display: 'flex', flexDirection: 'row' }}>
+              <Button key="stepper-button-back" color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
                 Back
               </Button>
-              <Box sx={{ flex: '1 1 auto' }} />
-              {additionalActions}
-              <Box sx={{ flex: '1 1 auto' }} />
-              <Button onClick={handleNext} sx={{ mr: 1 }}>
+              <Box key="stepper-button-spacing-left" sx={{ flex: '1 1 auto' }} />
+              {additionalActions?.map((action, i) => <Fragment key={`action-${i}`}>{action}</Fragment>)}
+              <Box key="stepper-button-spacing-right" sx={{ flex: '1 1 auto' }} />
+              <Button key="stepper-button-next" onClick={handleNext} sx={{ mr: 1 }}>
                 Next
               </Button>
               {activeStep !== steps.length &&
                 (completed[activeStep] ? (
-                  <Button disabled={true}>{'Completed'}</Button>
+                  <Button key={`completed-${activeStep}`} disabled={true}>
+                    Completed
+                  </Button>
                 ) : (
-                  <Button onClick={() => handleComplete(activeStep)}>{completedSteps() === totalSteps() - 1 ? 'Finish' : 'Complete Step'}</Button>
+                  <Button key={`complete-step-${activeStep}`} onClick={() => handleComplete(activeStep)}>
+                    Complete Step
+                  </Button>
                 ))}
             </Box>
           </>

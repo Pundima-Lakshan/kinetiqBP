@@ -1,7 +1,7 @@
 import { DialogConfirmationActions } from '@/components/atoms';
-import { BpmnToXml, KBPFormViewer, type KBPFormViewerRefObj } from '@/components/organisms';
+import { BpmnToXml, INITIATOR, KBPFormViewer, type KBPFormViewerRefObj } from '@/components/organisms';
 import { defaultDialogContentProps } from '@/components/utils';
-import { getRestVariables } from '@/logic';
+import { getRestVariablesFromData } from '@/logic';
 import {
   useGetFormDefinition,
   useGetWorkflowDefinitionModel,
@@ -92,14 +92,20 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
       return;
     }
 
-    return getRestVariables(formDefinition.formSchema, submitResponse.data);
+    return getRestVariablesFromData(formDefinition.formSchema, submitResponse.data);
   };
 
   const handleSubmitProcessVariables = (processInstanceResponse?: ProcessInstanceResponse) => {
-    if (noStartForm || !processInstanceResponse) return;
+    if (noStartForm || !processInstanceResponse || !loggedInUserId) return;
 
     const data = getFormData();
     if (!data) return;
+
+    data.push({
+      name: INITIATOR,
+      type: 'string',
+      value: loggedInUserId,
+    });
 
     putProcessInstanceVariables({
       processInstanceId: processInstanceResponse.id,

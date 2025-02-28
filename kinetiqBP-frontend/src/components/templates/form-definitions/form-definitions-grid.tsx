@@ -1,6 +1,6 @@
 import { KBPDataGrid, RemoveFormDefinitionDialog, UpdateFormDefinitionDialog } from '@/components';
 import type { FormDefinition } from '@/services';
-import { dateToString, getUiServiceUserFullName } from '@/utils';
+import { dateToString, getUiUserFullName } from '@/utils';
 import DeleteIcon from '@mui/icons-material/Delete';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import { Button, IconButton } from '@mui/material';
@@ -72,7 +72,7 @@ export const FormDefinitionsGrid = ({ data, loading }: FormDefinitionsGridProps)
         description: 'User who created the form',
         flex: 1,
         minWidth: 150,
-        valueFormatter: getUiServiceUserFullName,
+        valueFormatter: getUiUserFullName,
       },
       {
         field: 'createdDate',

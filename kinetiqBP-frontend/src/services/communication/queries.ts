@@ -3,6 +3,9 @@ import {
   getFlowableUsers,
   getFormDefinition,
   getFormDefinitions,
+  getHistoricActivityInstance,
+  getHistoricTaskInstance,
+  getProcessInstanceVariables,
   getUiServiceUsers,
   getWorkflowDefinitionModel,
   getWorkflowDefinitions,
@@ -78,5 +81,30 @@ export const useGetUiServiceUsers = () => {
   return useQueryBuilder({
     queryKey: [queryKeys.uiServiceUsers],
     queryFn: getUiServiceUsers,
+  });
+};
+
+export const useGetHistoricActivity = (workflowInstanceId: string) => {
+  return useQueryBuilder({
+    queryKey: [queryKeys.historicActivityInstances, workflowInstanceId],
+    queryFn: async () => {
+      return getHistoricActivityInstance({ processInstanceId: workflowInstanceId });
+    },
+  });
+};
+
+export const useGetHistoricTaskInstance = (taskId: string, enabled: boolean) => {
+  return useQueryBuilder({
+    queryKey: [queryKeys.historicTaskInstance, taskId],
+    queryFn: async () => getHistoricTaskInstance(taskId),
+    enabled,
+  });
+};
+
+export const useGetProcessInstanceVariables = (processInstanceId: string, enabled: boolean) => {
+  return useQueryBuilder({
+    queryKey: [queryKeys.processInstanceVariables, processInstanceId],
+    queryFn: async () => getProcessInstanceVariables(processInstanceId),
+    enabled,
   });
 };

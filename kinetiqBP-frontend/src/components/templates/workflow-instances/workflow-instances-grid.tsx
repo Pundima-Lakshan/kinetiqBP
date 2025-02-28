@@ -1,7 +1,7 @@
 import { KBPDataGrid, StatusIcon } from '@/components';
 import { browserRoutesCollection, getPath } from '@/configs';
 import type { UiServiceUser, WorkFlowInstance } from '@/services';
-import { dateToString, getUiServiceUserFullName } from '@/utils';
+import { dateToString, getUiUserFullName } from '@/utils';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Button, IconButton } from '@mui/material';
@@ -51,6 +51,7 @@ interface WorkflowInstancesGridProps {
 export const WorkflowInstancesGrid = ({ data, isLoading }: WorkflowInstancesGridProps) => {
   const [columns] = useState<GridColDef<WorkflowInstancesRowModel>[]>(() => {
     return [
+      { field: 'id', headerName: 'Workflow Instance Id', description: 'Workflow Instance Id', flex: 2, minWidth: 200 },
       {
         field: 'processDefinitionName',
         headerName: 'Workflow definition name',
@@ -72,22 +73,22 @@ export const WorkflowInstancesGrid = ({ data, isLoading }: WorkflowInstancesGrid
         description: 'Workflow instance initiated user',
         flex: 1,
         minWidth: 100,
-        valueFormatter: getUiServiceUserFullName,
+        valueFormatter: getUiUserFullName,
       },
       {
         field: 'suspended',
-        headerName: 'Is suspended',
-        flex: 1,
-        minWidth: 150,
+        headerName: 'Suspended',
+        flex: 0.5,
+        minWidth: 60,
         align: 'center',
         headerAlign: 'center',
         renderCell: (params: GridRenderCellParams<WorkflowInstancesRowModel>) => <StatusIcon status={params.row.suspended ? 'done' : 'not'} />,
       },
       {
         field: 'ended',
-        headerName: 'Is ended',
-        flex: 1,
-        minWidth: 150,
+        headerName: 'Ended',
+        flex: 0.5,
+        minWidth: 60,
         align: 'center',
         headerAlign: 'center',
         renderCell: (params: GridRenderCellParams<WorkflowInstancesRowModel>) => <StatusIcon status={params.row.ended ? 'done' : 'not'} />,
@@ -96,8 +97,8 @@ export const WorkflowInstancesGrid = ({ data, isLoading }: WorkflowInstancesGrid
         field: 'remove',
         headerName: '',
         description: 'Remove process instance',
-        flex: 0.3,
-        minWidth: 100,
+        flex: 0.2,
+        minWidth: 60,
         align: 'center',
         renderCell: RemoveFormDefinition,
       },

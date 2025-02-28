@@ -108,3 +108,91 @@
   width: 100%;
   height: 100%;
 }
+
+/* 🎯 BPMN Shape Styling (Tasks, Events, etc.) */
+.bpmn-state-success:not(.djs-connection) .djs-visual > :nth-child(1) {
+  stroke: #1e7e34 !important; /* Dark Green */
+  fill: rgba(40, 167, 69, 0.15) !important; /* Light Green, 15% opacity */
+}
+
+.bpmn-state-error:not(.djs-connection) .djs-visual > :nth-child(1) {
+  stroke: #a71d2a !important; /* Dark Red */
+  fill: rgba(220, 53, 69, 0.15) !important; /* Light Red, 15% opacity */
+}
+
+.bpmn-state-info:not(.djs-connection) .djs-visual > :nth-child(1) {
+  stroke: #117a8b !important; /* Dark Cyan */
+  fill: rgba(23, 162, 184, 0.15) !important; /* Light Blue, 15% opacity */
+}
+
+.bpmn-state-warning:not(.djs-connection) .djs-visual > :nth-child(1) {
+  stroke: #d39e00 !important; /* Dark Yellow */
+  fill: rgba(255, 193, 7, 0.15) !important; /* Light Yellow, 15% opacity */
+}
+
+/* 🎯 BPMN Connection Styling (Flows, Arrows, etc.) */
+.bpmn-state-success.djs-connection .djs-visual path {
+  stroke: #1e7e34 !important; /* Dark Green */
+  fill: none !important;
+  stroke-opacity: 0.9;
+}
+
+.bpmn-state-error.djs-connection .djs-visual path {
+  stroke: #a71d2a !important; /* Dark Red */
+  fill: none !important;
+  stroke-opacity: 0.9;
+}
+
+.bpmn-state-info.djs-connection .djs-visual path {
+  stroke: #117a8b !important; /* Dark Cyan */
+  fill: none !important;
+  stroke-opacity: 0.9;
+}
+
+.bpmn-state-warning.djs-connection .djs-visual path {
+  stroke: #d39e00 !important; /* Dark Yellow */
+  fill: none !important;
+  stroke-opacity: 0.9;
+}
+
+/* 🎯 Arrow Marker Styling */
+.bpmn-state-success.djs-connection marker path {
+  stroke: #1e7e34 !important;
+  fill: #1e7e34 !important;
+}
+
+.bpmn-state-error.djs-connection marker path {
+  stroke: #a71d2a !important;
+  fill: #a71d2a !important;
+}
+
+.bpmn-state-info.djs-connection marker path {
+  stroke: #117a8b !important;
+  fill: #117a8b !important;
+}
+
+.bpmn-state-warning.djs-connection marker path {
+  stroke: #d39e00 !important;
+  fill: #d39e00 !important;
+}
+
+/* 🎯 User Icon Styling (inside BPMN tasks) */
+.bpmn-state-success .djs-visual path {
+  stroke: #1e7e34 !important; /* Dark Green */
+  fill: rgba(40, 167, 69, 0.15) !important; /* Light Green, 15% opacity */
+}
+
+.bpmn-state-error .djs-visual path {
+  stroke: #a71d2a !important; /* Dark Red */
+  fill: rgba(220, 53, 69, 0.15) !important; /* Light Red, 15% opacity */
+}
+
+.bpmn-state-info .djs-visual path {
+  stroke: #117a8b !important; /* Dark Cyan */
+  fill: rgba(23, 162, 184, 0.15) !important; /* Light Blue, 15% opacity */
+}
+
+.bpmn-state-warning .djs-visual path {
+  stroke: #d39e00 !important; /* Dark Yellow */
+  fill: rgba(255, 193, 7, 0.15) !important; /* Light Yellow, 15% opacity */
+}

@@ -6,7 +6,7 @@ import { customKBPFormFieldEventNames, type CustomKBPFormEventName } from './ext
 import { RangeFieldPropertiesProvider } from './extension/properties-panel';
 import { FileEditorField, RangeField } from './extension/render';
 export interface KBPFormViewerProps {
-  submitHandler: (event: unknown) => void;
+  submitHandler?: (event: unknown) => void;
   changedHandler?: (event: unknown) => void;
   customEventHandler?: (event: { event: unknown; name: CustomKBPFormEventName }) => void;
   schema: FormSchema;
@@ -53,15 +53,23 @@ export const KBPFormViewer = forwardRef(
       formRef.current = form;
 
       const initializeForm = async () => {
+        if (!submitHandler) {
+          schema.components.forEach((component) => {
+            component.readonly = true;
+          });
+          const filteredComponents = schema.components.filter((component) => component.type !== 'button');
+          schema.components = filteredComponents;
+        }
+
         const { warnings } = await form.importSchema(schema, data);
-        console.warn('Form <warnings>', warnings);
+        if (warnings.length > 0) console.warn('Form <warnings>', warnings);
 
         form.on('submit', (event: unknown) => {
           if (programmaticEventRef.current > 0) {
             programmaticEventRef.current -= 1;
             return;
           }
-          submitHandlerRef.current(event);
+          submitHandlerRef.current?.(event);
         });
 
         form.on('changed', 500, (event: unknown) => {

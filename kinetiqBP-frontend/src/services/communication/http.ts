@@ -13,7 +13,7 @@ interface GenericFlowableListResponse<T> {
   size: number;
 }
 
-interface FlowableUser {
+export interface FlowableUser {
   id: string;
   firstName: string;
   lastName: string;
@@ -54,6 +54,7 @@ type Component = {
     columns: string | null;
   };
   id: string;
+  readonly?: boolean;
   [p: string]: unknown;
 };
 
@@ -226,7 +227,7 @@ type Artifact = unknown;
 
 type Resource = unknown;
 
-type BpmnModel = {
+export type BpmnModel = {
   definitionsAttributes: Record<string, ExtensionAttribute[]>;
   processes: Process[];
   locationMap: Record<string, GraphicInfo>;
@@ -320,4 +321,78 @@ interface PutProcessInstanceVariablesArg {
 
 export const putProcessInstanceVariables = async (arg: PutProcessInstanceVariablesArg) => {
   return await put(`${flowable_rest_url}/runtime/process-instances/${arg.processInstanceId}/variables`, arg.variables);
+};
+
+export const getProcessInstanceVariables = async (processInstanceId: string) => {
+  return await get<Array<RestVariable>>(`${flowable_rest_url}/runtime/process-instances/${processInstanceId}/variables`);
+};
+
+export type ActivityType = 'startEvent' | 'endEvent' | 'userTask';
+
+export interface ActivityInstance {
+  id: string;
+  activityId: string;
+  activityName: string | null;
+  activityType: ActivityType;
+  processDefinitionId: string;
+  processDefinitionUrl: string;
+  processInstanceId: string;
+  processInstanceUrl: string;
+  executionId: string;
+  taskId: string;
+  calledProcessInstanceId: string | null;
+  assignee: string | null;
+  startTime: string;
+  endTime: string | null;
+  durationInMillis: number | null;
+  tenantId: string;
+}
+
+interface GetHistoricActivityInstanceArg {
+  processInstanceId: string;
+}
+
+export const getHistoricActivityInstance = async (arg: GetHistoricActivityInstanceArg) => {
+  return await get<GenericFlowableListResponse<ActivityInstance>>(`${flowable_rest_url}/history/historic-activity-instances`, {
+    queries: [{ processInstanceId: arg.processInstanceId }],
+  });
+};
+
+type HistoricTaskInstance = {
+  id: string;
+  processDefinitionId: string;
+  processDefinitionUrl: string;
+  processInstanceId: string;
+  processInstanceUrl: string;
+  executionId: string;
+  name: string | null;
+  description: string | null;
+  deleteReason: string | null;
+  owner: string | null;
+  assignee: string | null;
+  startTime: string;
+  endTime: string | null;
+  durationInMillis: number | null;
+  workTimeInMillis: number | null;
+  claimTime: string | null;
+  taskDefinitionKey: string;
+  formKey: string | null;
+  priority: number;
+  dueDate: string | null;
+  parentTaskId: string | null;
+  url: string;
+  variables: RestVariable[];
+  scopeDefinitionId: string | null;
+  scopeId: string | null;
+  subScopeId: string | null;
+  scopeType: string | null;
+  propagatedStageInstanceId: string | null;
+  tenantId: string;
+  category: string | null;
+};
+
+export const getHistoricTaskInstance = async (taskId: string) => {
+  return await get<GenericFlowableListResponse<HistoricTaskInstance>>(`${flowable_rest_url}/history/historic-task-instances`, {
+    queries: [{ taskId }, { includeProcessVariables: 'true' }, { processFinished: 'false' }],
+  });
 };

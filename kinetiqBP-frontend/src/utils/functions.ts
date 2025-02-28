@@ -1,6 +1,8 @@
 import type { UiServiceUser } from '@/services';
 
-export const dateToString = (date: string | Date) => {
+export const dateToString = (date: string | Date | null | undefined) => {
+  if (!date) return '';
+
   const _date = new Date(date);
 
   if (isNaN(_date.getTime())) {
@@ -21,4 +23,4 @@ export const dateToString = (date: string | Date) => {
   return _date.toLocaleString('en-US', options);
 };
 
-export const getUiServiceUserFullName = (value?: UiServiceUser) => `${value?.firstname ?? ''} ${value?.lastname ?? ''}`;
+export const getUiUserFullName = (value?: UiServiceUser) => `${value?.firstname ?? ''} ${value?.lastname ?? ''}`;

@@ -4,16 +4,16 @@ import { useSyncedState } from '@/utils';
 import BpmnJS from 'bpmn-js';
 import lintModule from 'bpmn-js-bpmnlint';
 import { Canvas } from 'bpmn-js/lib/features/context-pad/ContextPadProvider';
-import type Modeling from 'bpmn-js/lib/features/modeling/Modeling';
-import type { Element } from 'bpmn-js/lib/features/modeling/Modeling';
+import moveCanvasModule from 'diagram-js/lib/navigation/movecanvas';
+import zoomScrollModule from 'diagram-js/lib/navigation/zoomscroll';
 import React, { useEffect, useRef, useState } from 'react';
-import { getColors, type BpmnElementColorState } from './common';
+import { type BpmnElementColorState } from './common';
 import { bundle as bpmnlintConfig } from './common/linting';
 
 import './style.css';
 
-interface ElementsCollection {
-  elements: Element[];
+export interface ElementsCollection {
+  elementIds: string[];
   color?: BpmnElementColorState;
 }
 
@@ -46,7 +46,7 @@ export const KBPBpmnViewer: React.FC<ReactBpmnProps> = ({ url, diagramXml, onLoa
 
     const viewer = new BpmnJS({
       container: containerRef.current,
-      additionalModules: [lintModule],
+      additionalModules: [lintModule, moveCanvasModule, zoomScrollModule],
       linting: {
         bpmnlint: bpmnlintConfig,
       },
@@ -74,9 +74,12 @@ export const KBPBpmnViewer: React.FC<ReactBpmnProps> = ({ url, diagramXml, onLoa
       const importResult = await bpmnViewer.importXML(xml);
       if (importResult.warnings.length > 0) console.warn(importResult.warnings);
 
-      const modeling: Modeling = bpmnViewer.get('modeling');
+      const canvas: Canvas = bpmnViewer.get('canvas');
+
       elementsToColor?.forEach((elementCollection) => {
-        modeling.setColor(elementCollection.elements, getColors(elementCollection.color));
+        elementCollection.elementIds.forEach((id) => {
+          canvas.addMarker(id, elementCollection.color);
+        });
       });
     }
   };

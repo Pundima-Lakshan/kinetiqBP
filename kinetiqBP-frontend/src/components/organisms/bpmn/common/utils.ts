@@ -1,4 +1,3 @@
-import type { Colors } from 'bpmn-js/lib/util/Types';
 import BpmnModdle from 'bpmn-moddle';
 
 type BpmnElementType = 'bpmn:StartEvent';
@@ -28,34 +27,4 @@ export class BpmnToXml {
   };
 }
 
-export type BpmnElementColorState = 'success' | 'error' | 'info' | 'warning';
-
-export const getColors = (colorState?: BpmnElementColorState): Colors => {
-  switch (colorState) {
-    case 'success':
-      return {
-        fill: '#a3d9a5',
-        stroke: '#28a745',
-      };
-    case 'error':
-      return {
-        fill: '#f5b5b5',
-        stroke: '#dc3545',
-      };
-    case 'info':
-      return {
-        fill: '#b3dcef',
-        stroke: '#17a2b8',
-      };
-    case 'warning':
-      return {
-        fill: '#f9e3a1',
-        stroke: '#ffc107',
-      };
-    default:
-      return {
-        fill: '#d6d6d6',
-        stroke: '#6c757d',
-      };
-  }
-};
+export type BpmnElementColorState = 'bpmn-state-success' | 'bpmn-state-error' | 'bpmn-state-info' | 'bpmn-state-warning';

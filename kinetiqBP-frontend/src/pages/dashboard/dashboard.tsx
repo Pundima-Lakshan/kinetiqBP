@@ -1,4 +1,3 @@
-import { WorkFlowProgress } from '@/components';
 import { Button } from '@mui/material';
 import { useDialogs } from '@toolpad/core';
 
@@ -59,7 +58,7 @@ const BpmnProgressButton = () => {
 };
 
 export const Dashboard = () => {
-  return <WorkFlowProgress />;
+  return <></>;
 };
 
 // export const DashboardForm = () => {
