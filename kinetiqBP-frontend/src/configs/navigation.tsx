@@ -67,6 +67,18 @@ export const navigation: Navigation = [
   },
   {
     kind: 'header',
+    title: 'General',
+  },
+  {
+    segment: browserRoutesCollection.Users.segment,
+    title: browserRoutesCollection.Users.title,
+    icon: <DescriptionIcon />,
+  },
+  {
+    kind: 'divider',
+  },
+  {
+    kind: 'header',
     title: 'Analytics',
   },
   {

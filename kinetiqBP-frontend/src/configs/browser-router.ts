@@ -7,6 +7,7 @@ import {
   PageNotFound,
   Statistics,
   Tasks,
+  Users,
   WorkflowDefinitions,
   WorkFlowInstance,
   WorkflowInstances,
@@ -23,6 +24,7 @@ export const browserRoutesCollection = {
   FormViewer: { segment: 'form-viewer', title: 'Form Viewer' },
   Statistics: { segment: 'statistics', title: 'Statistics' },
   Heatmap: { segment: 'heatmap', title: 'Heatmap' },
+  Users: { segment: 'users', title: 'Users' },
 };
 
 export const PAGE_NOT_FOUND_PATH = '/page-not-found';
@@ -78,6 +80,10 @@ export const browserRouter = createBrowserRouter([
       {
         path: getPath(browserRoutesCollection.Tasks.segment),
         Component: Tasks,
+      },
+      {
+        path: getPath(browserRoutesCollection.Users.segment),
+        Component: Users,
       },
       {
         path: PAGE_NOT_FOUND_PATH,

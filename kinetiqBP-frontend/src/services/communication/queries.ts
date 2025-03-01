@@ -1,5 +1,8 @@
 import { queryKeys, useQueryBuilder, type ModifiedUseQueryOptions } from './common';
 import {
+  getFlowableUser,
+  getFlowableUserInfo,
+  getFlowableUserInfoList,
   getFlowableUsers,
   getFormDefinition,
   getFormDefinitions,
@@ -11,6 +14,7 @@ import {
   getWorkflowDefinitions,
   getWorkflowDefinitionXml,
   getWorkflowInstances,
+  type FlowableUserInfoKey,
   type FormDefinition,
 } from './http';
 
@@ -18,6 +22,28 @@ export const useGetFlowableUsers = () => {
   return useQueryBuilder({
     queryKey: [queryKeys.flowableUsers],
     queryFn: getFlowableUsers,
+  });
+};
+
+export const useGetFlowableUser = (userId: string) => {
+  return useQueryBuilder({
+    queryKey: [queryKeys.flowableUser, userId],
+    queryFn: async () => getFlowableUser(userId),
+  });
+};
+
+export const useGetFlowableUserInfoList = (userId: string) => {
+  return useQueryBuilder({
+    queryKey: [queryKeys.flowableUserInfoList, userId],
+    queryFn: async () => getFlowableUserInfoList(userId),
+  });
+};
+
+export const useGetFlowableUserInfo = (userId: string, userInfoKey: FlowableUserInfoKey, enabled: boolean) => {
+  return useQueryBuilder({
+    queryKey: [queryKeys.flowableUserInfo, userId, userInfoKey],
+    queryFn: async () => getFlowableUserInfo(userId, userInfoKey),
+    enabled,
   });
 };
 

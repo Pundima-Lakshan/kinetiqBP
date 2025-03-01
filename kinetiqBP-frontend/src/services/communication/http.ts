@@ -27,6 +27,29 @@ export const getFlowableUsers = async () => {
   return await get<GenericFlowableListResponse<FlowableUser>>(`${flowable_rest_url}/identity/users`);
 };
 
+export const getFlowableUser = async (userId: string) => {
+  return await get<FlowableUser>(`${flowable_rest_url}/identity/users/${userId}`);
+};
+
+export type FlowableUserInfoKey = 'emp_no' | 'faculty' | 'dep' | 'invalid';
+export interface FlowableUserInfoListItem {
+  key: FlowableUserInfoKey;
+  url: string;
+}
+
+export const getFlowableUserInfoList = async (userId: string) => {
+  return await get<Array<FlowableUserInfoListItem>>(`${flowable_rest_url}/identity/users/${userId}/info`);
+};
+
+interface FlowableUserInfo {
+  key: FlowableUserInfoKey;
+  value: string;
+}
+
+export const getFlowableUserInfo = async (userId: string, userInfoKey: FlowableUserInfoKey) => {
+  return await get<FlowableUserInfo>(`${flowable_rest_url}/identity/users/${userId}/info/${userInfoKey}`);
+};
+
 interface FlowableGroup {
   id: string;
   name: string;

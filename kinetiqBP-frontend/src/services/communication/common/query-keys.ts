@@ -2,6 +2,10 @@ export const queryKeys = {
   dummy: 'dummy',
 
   flowableUsers: 'flowableUsers',
+  flowableUser: 'flowableUser',
+  flowableUserInfoList: 'flowableUserInfoList',
+  flowableUserInfo: 'flowableUserInfo',
+
   uiServiceUsers: 'uiServiceUsers',
 
   formDefinitions: 'formDefinitions',

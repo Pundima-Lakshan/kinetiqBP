@@ -62,7 +62,7 @@ interface ActivityInstanceProps {
   minWidth?: string;
 }
 
-export const ActivityStatus = ({ defaultValue, label, minWidth }: ActivityInstanceProps) => {
+const ActivityStatus = ({ defaultValue, label, minWidth }: ActivityInstanceProps) => {
   return (
     <TextField
       key={`${label}-${defaultValue}`}
