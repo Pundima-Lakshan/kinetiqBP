@@ -15,6 +15,9 @@ export default defineConfig({
   server: {
     port: 13403, // Set the port to your desired value
   },
+  preview: {
+    port: 13403,
+  },
   optimizeDeps: {
     exclude: ['@pundima-lakshan/bpmn-form-extended'],
   },
