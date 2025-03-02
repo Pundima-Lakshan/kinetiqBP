@@ -7,4 +7,5 @@ export const invalidationConfig: InvalidationConfig = {
   formDefinition: [['formDefinitions']],
   workflowDefinition: [['workflowDefinitions']],
   workflowInstance: [['workflowInstances']],
+  processInstanceVariables: [],
 };

@@ -44,6 +44,9 @@ importers:
       '@pdfme/ui':
         specifier: 5.2.11
         version: 5.2.11(@pdfme/common@5.2.11(antd@5.22.7(date-fns@4.1.0)(luxon@3.5.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(form-render@2.5.1(@types/react@18.3.12)(antd@5.22.7(date-fns@4.1.0)(luxon@3.5.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@pdfme/schemas@5.2.11(@pdfme/common@5.2.11(antd@5.22.7(date-fns@4.1.0)(luxon@3.5.0)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(form-render@2.5.1(@types/react@18.3.12)(antd@5.22.7(date-fns@4.1.0)(luxon@3.5.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))))(@types/react@18.3.12)(date-fns@4.1.0)(luxon@3.5.0)
+      '@pundima-lakshan/bpmn-form-extended':
+        specifier: 0.1.3
+        version: 0.1.3(@bpmn-io/form-js@1.11.3(@lezer/common@1.2.3))(@lezer/common@1.2.3)
       '@tanstack/react-query':
         specifier: 5.66.0
         version: 5.66.0(react@18.3.1)
@@ -52,9 +55,9 @@ importers:
         version: 5.66.9(@tanstack/react-query@5.66.0(react@18.3.1))(react@18.3.1)
       '@toolpad/core':
         specifier: 0.12.0
-        version: 0.12.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@mui/icons-material@6.4.0(@mui/material@6.4.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@mui/material@6.4.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react-router@7.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(vite@5.4.10(@types/node@22.10.2)(lightningcss@1.29.1))
+        version: 0.12.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@mui/icons-material@6.4.0(@mui/material@6.4.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@mui/material@6.4.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react-router@7.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(vite@5.4.10(@types/node@22.10.2)(lightningcss@1.29.1)(terser@5.39.0))
       '@types/bpmn-moddle':
-        specifier: ^5.1.11
+        specifier: 5.1.11
         version: 5.1.11
       '@types/jsonwebtoken':
         specifier: 9.0.7
@@ -75,7 +78,7 @@ importers:
         specifier: 0.36.0
         version: 0.36.0
       bpmn-moddle:
-        specifier: ^9.0.1
+        specifier: 9.0.1
         version: 9.0.1
       camunda-bpmn-moddle:
         specifier: 7.0.1
@@ -122,6 +125,9 @@ importers:
       signature_pad:
         specifier: 5.0.4
         version: 5.0.4
+      terser:
+        specifier: 5.39.0
+        version: 5.39.0
     devDependencies:
       '@eslint/js':
         specifier: 9.13.0
@@ -134,7 +140,7 @@ importers:
         version: 18.3.1
       '@vitejs/plugin-react':
         specifier: 4.3.3
-        version: 4.3.3(vite@5.4.10(@types/node@22.10.2)(lightningcss@1.29.1))
+        version: 4.3.3(vite@5.4.10(@types/node@22.10.2)(lightningcss@1.29.1)(terser@5.39.0))
       eslint:
         specifier: 9.13.0
         version: 9.13.0(jiti@2.4.2)
@@ -167,7 +173,7 @@ importers:
         version: 8.11.0(eslint@9.13.0(jiti@2.4.2))(typescript@5.6.2)
       vite:
         specifier: 5.4.10
-        version: 5.4.10(@types/node@22.10.2)(lightningcss@1.29.1)
+        version: 5.4.10(@types/node@22.10.2)(lightningcss@1.29.1)(terser@5.39.0)
 
 packages:
 
@@ -356,6 +362,9 @@ packages:
 
   '@bpmn-io/form-js@1.11.3':
     resolution: {integrity: sha512-KDeTtHoOS7FwBkRRFU9aBGQCEA9zhbj/KI1tzpmplUxJm25jqVvrCWnorJ0rxXuJrbnHkftSItAdi+SdgyV19w==}
+
+  '@bpmn-io/properties-panel@3.21.0':
+    resolution: {integrity: sha512-r1Y8lEmZMCgetmB7w0GtJibv9ORbcsEGQL9Pn/W+67Tc9GaVoG1OCpVUubKw4RY3WU3q8OcXxNf8nccroYhI9g==}
 
   '@bpmn-io/properties-panel@3.25.0':
     resolution: {integrity: sha512-SRGgj8uJc1Yyjcht2g36Q+xKR7sTx5VZXvcwDrdmQKlx5Y3nRmvmMjDGzeGDJDb7pNU1DSlaBJic84uISDBMWg==}
@@ -727,6 +736,9 @@ packages:
     resolution: {integrity: sha512-R8gLRTZeyp03ymzP/6Lil/28tGeGEzhx1q2k703KGWRAI1VdvPIXdG70VJc2pAMw3NA6JKL5hhFu1sJX0Mnn/A==}
     engines: {node: '>=6.0.0'}
 
+  '@jridgewell/source-map@0.3.6':
+    resolution: {integrity: sha512-1ZJTZebgqllO79ue2bm3rIGud/bOe0pP5BjSRCRxxYkEZS8STV7zN84UBbiYu7jy+eCKSnVIUgoWWE/tt+shMQ==}
+
   '@jridgewell/sourcemap-codec@1.5.0':
     resolution: {integrity: sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ==}
 
@@ -1095,6 +1107,11 @@ packages:
 
   '@popperjs/core@2.11.8':
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
+
+  '@pundima-lakshan/bpmn-form-extended@0.1.3':
+    resolution: {integrity: sha512-AM7gUp4AphDE4+OKBNijkxXQyyJ6uwRDYdC6rTuAueN5RvKEMW1lKrvCkzg2gVlbruVVpTxj19AVFznxk0ABog==}
+    peerDependencies:
+      '@bpmn-io/form-js': 1.9.0
 
   '@rc-component/async-validator@5.0.4':
     resolution: {integrity: sha512-qgGdcVIF604M9EqjNF0hbUTz42bz/RDtxWdWuU5EQe3hi7M8ob54B6B35rOsvX5eSvIHIzT9iH1R3n+hk3CGfg==}
@@ -1611,6 +1628,9 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
 
+  buffer-from@1.1.2:
+    resolution: {integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==}
+
   buffer@6.0.3:
     resolution: {integrity: sha512-FTiCpNxtwiZZHEZbcbTIcZjERVICn9yq/pDFkTl95/AxzD1naBctN7YO68riM/gLSDY7sdrMby8hofADYuuqOA==}
 
@@ -1705,6 +1725,9 @@ packages:
   color@4.2.3:
     resolution: {integrity: sha512-1rXeuUUiGGrykh+CeBdu5Ie7OJwinCgQY0bc7GCRxy5xVHy+moaqkpL/jqQq0MtQOeYcrqEz4abc5f0KtU7W4A==}
     engines: {node: '>=12.5.0'}
+
+  commander@2.20.3:
+    resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
 
   component-classes@1.2.6:
     resolution: {integrity: sha512-hPFGULxdwugu1QWW3SvVOCUHLzO34+a2J6Wqy0c5ASQkfi9/8nZcBB0ZohaEbXOQlCflMAEMmEWk7u7BVs4koA==}
@@ -1879,6 +1902,9 @@ packages:
     resolution: {integrity: sha512-+pyxeQGBSdLiZX0/tmmsm2qZSvm9YtVzod5W3RMHSTR7VrkUMD6E7EX/W9JQv3ebxO7oIdqFmytmNDDpSHnYEw==}
     peerDependencies:
       diagram-js: '*'
+
+  diagram-js@14.3.3:
+    resolution: {integrity: sha512-RVeLZ+5Ph9swzd4pE8EAONiVcGgxYmrf2iiYM/NmCKrJKUZ6xobO2jHmXEXw1iz9OdvGQgLstjdYlHxJJs2jCg==}
 
   diagram-js@15.2.4:
     resolution: {integrity: sha512-8v0U8AY6a5Vd6Cys5MdN7+yYRhs294/Q4ixkER/3v2ZPSbVCnK9XfbeYbB5QQfoCMkBnY7WBbLbcjvRNHTxnpw==}
@@ -2702,6 +2728,9 @@ packages:
   min-dash@4.2.2:
     resolution: {integrity: sha512-qbhSYUxk6mBaF096B3JOQSumXbKWHenmT97cSpdNzgkWwGjhjhE/KZODCoDNhI2I4C9Cb6R/Q13S4BYkUSXoXQ==}
 
+  min-dash@4.2.3:
+    resolution: {integrity: sha512-VLMYQI5+FcD9Ad24VcB08uA83B07OhueAlZ88jBK6PyupTvEJwllTMUqMy0wPGYs7pZUEtEEMWdHB63m3LtEcg==}
+
   min-dom@3.2.1:
     resolution: {integrity: sha512-v6YCmnDzxk4rRJntWTUiwggLupPw/8ZSRqUq0PDaBwVZEO/wYzCH4SKVBV+KkEvf3u0XaWHly5JEosPtqRATZA==}
 
@@ -3430,8 +3459,15 @@ packages:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
     engines: {node: '>=0.10.0'}
 
+  source-map-support@0.5.21:
+    resolution: {integrity: sha512-uBHU3L3czsIyYXKX88fdrGovxdSCoTGDRZ6SYXtSRxLZUzHg5P/66Ht6uoUlHu9EZod+inXhKo3qQgwXUT/y1w==}
+
   source-map@0.5.7:
     resolution: {integrity: sha512-LbrmJOMUSdEVxIKvdcJzQC+nQhe8FUZQTXQy6+I75skNgn3OoQ0DZA8YnFa7gp8tqtL3KPf1kmo0R5DoApeSGQ==}
+    engines: {node: '>=0.10.0'}
+
+  source-map@0.6.1:
+    resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
     engines: {node: '>=0.10.0'}
 
   spdx-correct@3.2.0:
@@ -3519,6 +3555,11 @@ packages:
     peerDependencies:
       diagram-js: ^11.3.0 || ^12 || ^13 || ^14 || ^15
       inferno: ^5.0.5
+
+  terser@5.39.0:
+    resolution: {integrity: sha512-LBAhFyLho16harJoWMg/nZsQYgTrg5jXOn2nCYjRUcZZEdE3qa2zb8QEDRUGVZBW4rlazf2fxkg8tztybTaqWw==}
+    engines: {node: '>=10'}
+    hasBin: true
 
   text-table@0.2.0:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
@@ -4060,6 +4101,18 @@ snapshots:
     transitivePeerDependencies:
       - '@lezer/common'
 
+  '@bpmn-io/properties-panel@3.21.0(@lezer/common@1.2.3)':
+    dependencies:
+      '@bpmn-io/feel-editor': 1.9.1(@lezer/common@1.2.3)
+      '@codemirror/view': 6.34.2
+      classnames: 2.5.1
+      feelers: 1.4.0
+      focus-trap: 7.6.1
+      min-dash: 4.2.2
+      min-dom: 4.2.1
+    transitivePeerDependencies:
+      - '@lezer/common'
+
   '@bpmn-io/properties-panel@3.25.0(@lezer/common@1.2.3)':
     dependencies:
       '@bpmn-io/feel-editor': 1.9.1(@lezer/common@1.2.3)
@@ -4429,6 +4482,11 @@ snapshots:
   '@jridgewell/resolve-uri@3.1.2': {}
 
   '@jridgewell/set-array@1.2.1': {}
+
+  '@jridgewell/source-map@0.3.6':
+    dependencies:
+      '@jridgewell/gen-mapping': 0.3.5
+      '@jridgewell/trace-mapping': 0.3.25
 
   '@jridgewell/sourcemap-codec@1.5.0': {}
 
@@ -4803,6 +4861,17 @@ snapshots:
 
   '@popperjs/core@2.11.8': {}
 
+  '@pundima-lakshan/bpmn-form-extended@0.1.3(@bpmn-io/form-js@1.11.3(@lezer/common@1.2.3))(@lezer/common@1.2.3)':
+    dependencies:
+      '@bpmn-io/form-js': 1.11.3(@lezer/common@1.2.3)
+      '@bpmn-io/properties-panel': 3.21.0(@lezer/common@1.2.3)
+      classnames: 2.5.1
+      diagram-js: 14.3.3
+      ids: 1.0.5
+      min-dash: 4.2.3
+    transitivePeerDependencies:
+      - '@lezer/common'
+
   '@rc-component/async-validator@5.0.4':
     dependencies:
       '@babel/runtime': 7.26.0
@@ -4972,7 +5041,7 @@ snapshots:
       '@tanstack/query-core': 5.66.0
       react: 18.3.1
 
-  '@toolpad/core@0.12.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@mui/icons-material@6.4.0(@mui/material@6.4.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@mui/material@6.4.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react-router@7.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(vite@5.4.10(@types/node@22.10.2)(lightningcss@1.29.1))':
+  '@toolpad/core@0.12.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@mui/icons-material@6.4.0(@mui/material@6.4.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@mui/material@6.4.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react-router@7.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(vite@5.4.10(@types/node@22.10.2)(lightningcss@1.29.1)(terser@5.39.0))':
     dependencies:
       '@babel/runtime': 7.26.0
       '@mui/icons-material': 6.4.0(@mui/material@6.4.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.12)(react@18.3.1)
@@ -4980,7 +5049,7 @@ snapshots:
       '@mui/material': 6.4.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react@18.3.1))(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mui/utils': 6.3.1(@types/react@18.3.12)(react@18.3.1)
       '@toolpad/utils': 0.12.0(react@18.3.1)
-      '@vitejs/plugin-react': 4.3.4(vite@5.4.10(@types/node@22.10.2)(lightningcss@1.29.1))
+      '@vitejs/plugin-react': 4.3.4(vite@5.4.10(@types/node@22.10.2)(lightningcss@1.29.1)(terser@5.39.0))
       client-only: 0.0.1
       invariant: 2.2.4
       path-to-regexp: 6.3.0
@@ -5169,25 +5238,25 @@ snapshots:
       '@typescript-eslint/types': 8.11.0
       eslint-visitor-keys: 3.4.3
 
-  '@vitejs/plugin-react@4.3.3(vite@5.4.10(@types/node@22.10.2)(lightningcss@1.29.1))':
+  '@vitejs/plugin-react@4.3.3(vite@5.4.10(@types/node@22.10.2)(lightningcss@1.29.1)(terser@5.39.0))':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/plugin-transform-react-jsx-self': 7.25.9(@babel/core@7.26.0)
       '@babel/plugin-transform-react-jsx-source': 7.25.9(@babel/core@7.26.0)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 5.4.10(@types/node@22.10.2)(lightningcss@1.29.1)
+      vite: 5.4.10(@types/node@22.10.2)(lightningcss@1.29.1)(terser@5.39.0)
     transitivePeerDependencies:
       - supports-color
 
-  '@vitejs/plugin-react@4.3.4(vite@5.4.10(@types/node@22.10.2)(lightningcss@1.29.1))':
+  '@vitejs/plugin-react@4.3.4(vite@5.4.10(@types/node@22.10.2)(lightningcss@1.29.1)(terser@5.39.0))':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/plugin-transform-react-jsx-self': 7.25.9(@babel/core@7.26.0)
       '@babel/plugin-transform-react-jsx-source': 7.25.9(@babel/core@7.26.0)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 5.4.10(@types/node@22.10.2)(lightningcss@1.29.1)
+      vite: 5.4.10(@types/node@22.10.2)(lightningcss@1.29.1)(terser@5.39.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -5498,6 +5567,8 @@ snapshots:
       node-releases: 2.0.18
       update-browserslist-db: 1.1.1(browserslist@4.24.2)
 
+  buffer-from@1.1.2: {}
+
   buffer@6.0.3:
     dependencies:
       base64-js: 1.5.1
@@ -5602,6 +5673,8 @@ snapshots:
     dependencies:
       color-convert: 2.0.1
       color-string: 1.9.1
+
+  commander@2.20.3: {}
 
   component-classes@1.2.6:
     dependencies:
@@ -5774,6 +5847,18 @@ snapshots:
       diagram-js: 15.2.4
       min-dash: 4.2.2
       min-dom: 4.2.1
+
+  diagram-js@14.3.3:
+    dependencies:
+      '@bpmn-io/diagram-js-ui': 0.2.3
+      clsx: 2.1.1
+      didi: 10.2.2
+      inherits-browser: 0.1.0
+      min-dash: 4.2.2
+      min-dom: 4.2.1
+      object-refs: 0.4.0
+      path-intersection: 3.1.0
+      tiny-svg: 3.1.3
 
   diagram-js@15.2.4:
     dependencies:
@@ -6791,6 +6876,8 @@ snapshots:
 
   min-dash@4.2.2: {}
 
+  min-dash@4.2.3: {}
+
   min-dom@3.2.1:
     dependencies:
       component-event: 0.1.4
@@ -7729,7 +7816,14 @@ snapshots:
 
   source-map-js@1.2.1: {}
 
+  source-map-support@0.5.21:
+    dependencies:
+      buffer-from: 1.1.2
+      source-map: 0.6.1
+
   source-map@0.5.7: {}
+
+  source-map@0.6.1: {}
 
   spdx-correct@3.2.0:
     dependencies:
@@ -7825,6 +7919,13 @@ snapshots:
       min-dash: 4.2.2
       min-dom: 4.2.1
       selection-ranges: 4.0.2
+
+  terser@5.39.0:
+    dependencies:
+      '@jridgewell/source-map': 0.3.6
+      acorn: 8.14.0
+      commander: 2.20.3
+      source-map-support: 0.5.21
 
   text-table@0.2.0: {}
 
@@ -7965,7 +8066,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  vite@5.4.10(@types/node@22.10.2)(lightningcss@1.29.1):
+  vite@5.4.10(@types/node@22.10.2)(lightningcss@1.29.1)(terser@5.39.0):
     dependencies:
       esbuild: 0.21.5
       postcss: 8.4.47
@@ -7974,6 +8075,7 @@ snapshots:
       '@types/node': 22.10.2
       fsevents: 2.3.3
       lightningcss: 1.29.1
+      terser: 5.39.0
 
   w3c-keyname@2.2.8: {}
 

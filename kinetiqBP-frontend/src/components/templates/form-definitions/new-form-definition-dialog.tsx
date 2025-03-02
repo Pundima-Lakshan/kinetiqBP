@@ -4,12 +4,15 @@ import { FormEditor } from '@bpmn-io/form-js';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import { DialogProps, useSession } from '@toolpad/core';
 import { useRef } from 'react';
+import { useDownloadActions } from './dialog-actions';
 
 export const NewFormDefinitionDialog = ({ open, onClose }: DialogProps) => {
   const formEditorRef = useRef<FormEditor | null>(null);
 
   const session = useSession();
   const userId = session?.user?.id;
+
+  const { getDownloadActions } = useDownloadActions({ formEditorRef });
 
   const {
     mutate: postFormDefinition,
@@ -50,7 +53,12 @@ export const NewFormDefinitionDialog = ({ open, onClose }: DialogProps) => {
       <DialogContent {...defaultDialogContentProps}>
         <KBPFormEditor formEditorRef={formEditorRef} />
       </DialogContent>
-      <DialogConfirmationActions onConfirm={handleConfirm} onCancel={handleClose} isLoading={isPendingPostFormDefinition} />
+      <DialogConfirmationActions
+        onConfirm={handleConfirm}
+        onCancel={handleClose}
+        isLoading={isPendingPostFormDefinition}
+        otherActions={getDownloadActions()}
+      />
     </Dialog>
   );
 };

@@ -1,14 +1,11 @@
 import type { FormSchema } from '@/services';
 import { useSyncedRef } from '@/utils';
-import { Form } from '@bpmn-io/form-js';
+import { Form } from '@pundima-lakshan/bpmn-form-extended';
 import { forwardRef, useEffect, useImperativeHandle, useRef, type ForwardedRef } from 'react';
-import { customKBPFormFieldEventNames, type CustomKBPFormEventName } from './extension/custom-events';
-import { RangeFieldPropertiesProvider } from './extension/properties-panel';
-import { FileEditorField, RangeField } from './extension/render';
 export interface KBPFormViewerProps {
   submitHandler?: (event: unknown) => void;
   changedHandler?: (event: unknown) => void;
-  customEventHandler?: (event: { event: unknown; name: CustomKBPFormEventName }) => void;
+  customEventHandler?: (event: { event: unknown; name: any }) => void;
   schema: FormSchema;
   data?: Record<string, unknown>;
 }
@@ -27,7 +24,7 @@ type KBPFormViewerRef = ForwardedRef<KBPFormViewerRefObj>;
 
 export const KBPFormViewer = forwardRef(
   ({ changedHandler, submitHandler, schema, data, customEventHandler }: KBPFormViewerProps, ref: KBPFormViewerRef) => {
-    const formRef = useRef<Form | null>(null);
+    const formRef = useRef<typeof Form | null>(null);
     const formContainerRef = useRef<HTMLDivElement | null>(null);
     const submitHandlerRef = useSyncedRef({ value: submitHandler });
     const changedHandlerRef = useSyncedRef({ value: changedHandler });
@@ -47,9 +44,7 @@ export const KBPFormViewer = forwardRef(
     useEffect(() => {
       const form = new Form({
         container: formContainerRef.current,
-        additionalModules: [RangeField, FileEditorField],
-        properties: [RangeFieldPropertiesProvider],
-      });
+      }).extendedForm;
       formRef.current = form;
 
       const initializeForm = async () => {
@@ -83,7 +78,7 @@ export const KBPFormViewer = forwardRef(
         });
 
         form.on('fileEditor.open', (event: unknown) => {
-          customEventHandler?.({ event, name: customKBPFormFieldEventNames.fileEditorOpen });
+          customEventHandler?.({ event, name: 'fileEditor.open' });
         });
       };
 

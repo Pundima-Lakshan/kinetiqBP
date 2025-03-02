@@ -1,20 +1,7 @@
+import { CommonAction } from '@/components/atoms';
 import { FileInputFormControl } from '@/components/molecules';
-import { Button } from '@mui/material';
 import BpmnModeler from 'bpmn-js/lib/Modeler';
 import { MutableRefObject, type ChangeEvent } from 'react';
-
-interface DownloadXmlActionProps {
-  handleAction: () => void;
-  label: string;
-}
-
-export const CommonAction = ({ handleAction, label }: DownloadXmlActionProps) => {
-  return (
-    <Button onClick={handleAction} variant="text">
-      {label}
-    </Button>
-  );
-};
 
 interface CommonActionsProps {
   bpmnModelerRef: MutableRefObject<BpmnModeler | null>;

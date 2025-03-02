@@ -1,12 +1,13 @@
+import '@pundima-lakshan/bpmn-form-extended/dist/assets/styles.css';
+
 import type { FormSchema } from '@/services';
-import { FormEditor, Schema } from '@bpmn-io/form-js';
-import React, { useEffect, useRef } from 'react';
-import { RangeFieldPropertiesProvider } from './extension/properties-panel';
-import { FileEditorField, RangeField } from './extension/render';
+import { Schema } from '@bpmn-io/form-js';
+import { FormEditor } from '@pundima-lakshan/bpmn-form-extended';
+import { useEffect, useRef, type MutableRefObject } from 'react';
 
 export interface KBPFormEditorProps {
   initialSchema?: FormSchema;
-  formEditorRef: React.MutableRefObject<FormEditor | null>;
+  formEditorRef: MutableRefObject<typeof FormEditor | null>;
 }
 
 const defaultSchema: Schema = {
@@ -20,9 +21,7 @@ export const KBPFormEditor = ({ initialSchema, formEditorRef }: KBPFormEditorPro
   useEffect(() => {
     const formEditor = new FormEditor({
       container: editorContainerRef.current,
-      additionalModules: [RangeField, FileEditorField],
-      properties: [RangeFieldPropertiesProvider],
-    });
+    }).extendedForm;
     formEditorRef.current = formEditor;
 
     const initializeEditor = async () => {
