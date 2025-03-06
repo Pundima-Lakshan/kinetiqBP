@@ -4,11 +4,13 @@ import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import { DialogProps } from '@toolpad/core';
 import BpmnModeler from 'bpmn-js/lib/Modeler';
 import { useRef } from 'react';
-import { useDownloadActions } from './dialog-actions.tsx';
+import { useDownloadActions, useEventHandlerActions } from './dialog-actions.tsx';
 
 export const ViewWorkflowDefinitionDialog = ({ open, onClose, payload: workflowDefinitionId }: DialogProps<string>) => {
   const bpmnModelerRef = useRef<BpmnModeler | null>(null);
+
   const { getDownloadActions } = useDownloadActions({ bpmnModelerRef });
+  const { onEventHandler } = useEventHandlerActions();
 
   const { data: workflowDefinitionResourceData, isLoading: isLoadingWorkflowDefinitionResourceData } =
     useGetWorkflowDefinitionXml(workflowDefinitionId);
@@ -21,7 +23,7 @@ export const ViewWorkflowDefinitionDialog = ({ open, onClose, payload: workflowD
     <Dialog {...defaultDialogProps} onClose={() => onClose()} open={open}>
       <DialogTitle>View workflow definition</DialogTitle>
       <DialogContent {...defaultDialogContentProps}>
-        <KBPBpmnEditor diagramXml={workflowDefinitionResourceData} bpmnModelerRef={bpmnModelerRef} />
+        <KBPBpmnEditor diagramXml={workflowDefinitionResourceData} bpmnModelerRef={bpmnModelerRef} onEventHandler={onEventHandler} />
       </DialogContent>
       <DialogConfirmationActions
         onConfirm={handleConfirm}

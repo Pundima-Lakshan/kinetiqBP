@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import { DialogProps, useDialogs } from '@toolpad/core';
 import BpmnModeler from 'bpmn-js/lib/Modeler';
 import { useRef } from 'react';
-import { useDownloadActions } from './dialog-actions.tsx';
+import { useDownloadActions, useEventHandlerActions } from './dialog-actions.tsx';
 
 interface RemoveWorkflowDefinitionDialogPayload {
   workflowDefinitionId: string;
@@ -13,7 +13,9 @@ interface RemoveWorkflowDefinitionDialogPayload {
 
 export const RemoveWorkflowDefinitionDialog = ({ open, onClose, payload }: DialogProps<RemoveWorkflowDefinitionDialogPayload>) => {
   const bpmnModelerRef = useRef<BpmnModeler | null>(null);
+
   const { getDownloadActions } = useDownloadActions({ bpmnModelerRef });
+  const { onEventHandler } = useEventHandlerActions();
 
   const dialogs = useDialogs();
 
@@ -58,7 +60,7 @@ export const RemoveWorkflowDefinitionDialog = ({ open, onClose, payload }: Dialo
     <Dialog {...defaultDialogProps} onClose={() => onClose()} open={open}>
       <DialogTitle>Remove workflow definition</DialogTitle>
       <DialogContent {...defaultDialogContentProps}>
-        <KBPBpmnEditor diagramXml={workflowDefinitionResourceData} bpmnModelerRef={bpmnModelerRef} />
+        <KBPBpmnEditor diagramXml={workflowDefinitionResourceData} bpmnModelerRef={bpmnModelerRef} onEventHandler={onEventHandler} />
       </DialogContent>
       <DialogConfirmationActions onRemove={handleRemove} otherActions={getDownloadActions()} isLoading={isLoading} />
     </Dialog>

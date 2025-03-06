@@ -21,7 +21,8 @@ export function Form(props) {
   const [forms, setForms] = useState([]);
 
   const getValue = () => {
-    return element.businessObject.form || '';
+    localSelectValueRef.current = element.businessObject.form || '';
+    return localSelectValueRef.current
   };
 
   const setValue = (value) => {

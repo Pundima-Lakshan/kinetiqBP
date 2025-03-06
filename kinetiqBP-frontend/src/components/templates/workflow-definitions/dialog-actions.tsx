@@ -1,7 +1,10 @@
 import { CommonAction } from '@/components/atoms';
 import { FileInputFormControl } from '@/components/molecules';
+import type { KBPCustomEditorEvent } from '@/components/organisms';
+import { useDialogs } from '@toolpad/core';
 import BpmnModeler from 'bpmn-js/lib/Modeler';
 import { MutableRefObject, type ChangeEvent } from 'react';
+import { ViewFormDefinitionDialog } from '../form-definitions/view-form-definition-dialog';
 
 interface CommonActionsProps {
   bpmnModelerRef: MutableRefObject<BpmnModeler | null>;
@@ -84,5 +87,24 @@ export const useUploadActions = ({ bpmnModelerRef }: CommonActionsProps) => {
 
   return {
     getUploadActions,
+  };
+};
+
+export const useEventHandlerActions = () => {
+  const dialogs = useDialogs();
+
+  const onEventHandler = (name: KBPCustomEditorEvent, event: unknown) => {
+    if (name === 'fileViewer.open' && event && typeof event === 'object' && 'formId' in event) {
+      if (event.formId == '') {
+        dialogs.alert('No form selected');
+        return;
+      }
+      const formId = Number(event.formId);
+      dialogs.open(ViewFormDefinitionDialog, formId);
+    }
+  };
+
+  return {
+    onEventHandler,
   };
 };
