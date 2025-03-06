@@ -68,7 +68,7 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
         dialogs.alert('No start event found for the workflow');
         return;
       }
-      const startForms = workflowDefinitionModel.mainProcess.flowElementMap[id].attributes.form;
+      const startForms = workflowDefinitionModel.mainProcess.flowElementMap[id].attributes.form ?? [];
       if (startForms.length > 1) {
         dialogs.alert('There are multiple start forms (currently not supported)');
         return;
@@ -125,7 +125,7 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
     if (!loggedInUserId) return;
 
     const data = getFormData();
-    if (!data) return;
+    if (formDefinition && !data) return;
 
     postStartWorkflowInstance({ processDefinitionId: workflowStartDialogPayload.workflowDefinitionId, startUserId: loggedInUserId });
   };

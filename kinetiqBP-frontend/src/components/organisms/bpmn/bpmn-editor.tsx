@@ -11,7 +11,11 @@ import BpmnModeler from 'bpmn-js/lib/Modeler';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { formAssignmentModdleDescriptor, userAssignmentModdleDescriptor } from './common/descriptors';
-import { FormAssignmentPropertiesProviderModule, UserAssignmentPropertiesProviderModule } from './common/provider';
+import {
+  ConditionAssignmentPropertiesProviderModule,
+  FormAssignmentPropertiesProviderModule,
+  UserAssignmentPropertiesProviderModule,
+} from './common/provider';
 
 import { DEFAULT_BPMN_DIAGRAM_XML_PATH, useSyncedState } from '@/utils';
 import type { KBPCustomEditorEvent } from './common/constants';
@@ -60,6 +64,7 @@ export const KBPBpmnEditor = ({ diagramXml, bpmnModelerRef, onEventHandler }: Re
         BpmnPropertiesProviderModule,
         UserAssignmentPropertiesProviderModule,
         FormAssignmentPropertiesProviderModule,
+        ConditionAssignmentPropertiesProviderModule,
       ],
       moddleExtensions: {
         userAssignment: userAssignmentModdleDescriptor,

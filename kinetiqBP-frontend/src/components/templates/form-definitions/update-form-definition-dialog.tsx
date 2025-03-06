@@ -4,12 +4,15 @@ import { FormEditor } from '@bpmn-io/form-js';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import { DialogProps, useSession } from '@toolpad/core';
 import { useRef } from 'react';
+import { useDownloadActions } from './dialog-actions';
 
 export const UpdateFormDefinitionDialog = ({ open, onClose, payload: id }: DialogProps<number>) => {
   const formEditorRef = useRef<FormEditor | null>(null);
 
   const session = useSession();
   const userId = session?.user?.id;
+
+  const { getDownloadActions } = useDownloadActions({ formEditorRef });
 
   const {
     mutate: putFormDefinition,
@@ -55,7 +58,13 @@ export const UpdateFormDefinitionDialog = ({ open, onClose, payload: id }: Dialo
       <DialogContent {...defaultDialogContentProps}>
         <KBPFormEditor formEditorRef={formEditorRef} initialSchema={formDefinition?.formSchema} />
       </DialogContent>
-      <DialogConfirmationActions onConfirm={handleConfirm} onCancel={handleClose} isLoading={isLoading} confirmLabel="Update" />
+      <DialogConfirmationActions
+        onConfirm={handleConfirm}
+        onCancel={handleClose}
+        isLoading={isLoading}
+        confirmLabel="Update"
+        otherActions={getDownloadActions()}
+      />
     </Dialog>
   );
 };

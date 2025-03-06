@@ -45,6 +45,7 @@ export const NewFormDefinitionDialog = ({ open, onClose }: DialogProps) => {
     mutationStatus: statusPostFormDefinition,
     successMessage: 'Form submitted successfully',
     error: errorPostFormDefinition,
+    onSuccess: handleClose,
   });
 
   return (
