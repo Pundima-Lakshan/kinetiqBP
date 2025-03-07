@@ -1,5 +1,6 @@
 'use client';
 
+import { LoaderLinear } from '@/components';
 import {
   useAsyncMutationStatesObserver,
   useAsyncQueryStatesObserver,
@@ -7,7 +8,6 @@ import {
   type AsyncStateObserversCommonParams,
 } from '@/observers';
 import { invalidationConfig } from '@/services';
-import { Box, LinearProgress } from '@mui/material';
 import { useLoaderActions } from './loader-actions';
 
 export type AsyncStateObserversProps = Omit<AsyncStateObserversCommonParams, 'cacheType' | 'channel' | 'setIsLoading'> &
@@ -25,13 +25,5 @@ export const AsyncStateObservers = ({ ...rest }: AsyncStateObserversProps) => {
     setIsLoading,
   });
 
-  return (
-    <>
-      {isLoading && (
-        <Box sx={{ width: '100%', position: 'absolute', top: 0, left: 0, zIndex: 9999 }}>
-          <LinearProgress />
-        </Box>
-      )}
-    </>
-  );
+  return <>{isLoading && <LoaderLinear />}</>;
 };

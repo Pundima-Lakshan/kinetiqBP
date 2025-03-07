@@ -6,6 +6,7 @@ import {
   putFormDefinition,
   putProcessInstanceVariables,
   removeFormDefinition,
+  removeHistoricProcessInstance,
   removeProcessInstance,
   removeWorkflowDefinition,
 } from './http';
@@ -63,5 +64,12 @@ export const useRemoveProcessInstance = () => {
   return useMutationBuilder({
     mutationKey: [mutationKeys.workflowInstance],
     mutationFn: removeProcessInstance,
+  });
+};
+
+export const useRemoveHistoricProcessInstance = () => {
+  return useMutationBuilder({
+    mutationKey: [mutationKeys.workflowInstance],
+    mutationFn: removeHistoricProcessInstance,
   });
 };

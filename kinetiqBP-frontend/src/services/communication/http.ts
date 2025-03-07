@@ -327,12 +327,51 @@ export const getWorkflowInstances = async () => {
   });
 };
 
+export type HistoricWorkflowInstance = {
+  id: string;
+  url: string;
+  name: string | null;
+  businessKey: string | null;
+  businessStatus: string | null;
+  processDefinitionId: string;
+  processDefinitionUrl: string;
+  processDefinitionName: string;
+  processDefinitionDescription: string | null;
+  startTime: Date;
+  endTime: Date | null;
+  durationInMillis: number | null;
+  startUserId: string;
+  startActivityId: string;
+  endActivityId: string | null;
+  deleteReason: string | null;
+  superProcessInstanceId: string | null;
+  variables: RestVariable[];
+  callbackId: string | null;
+  callbackType: string | null;
+  referenceId: string | null;
+  referenceType: string | null;
+  propagatedStageInstanceId: string | null;
+  tenantId: string;
+};
+
+export const getWorkflowHistoricInstances = async () => {
+  return await get<GenericFlowableListResponse<HistoricWorkflowInstance>>(`${flowable_rest_url}/history/historic-process-instances`, {
+    queries: [{ size: '500' }, { includeProcessVariables: 'true' }],
+  });
+};
+
 export const getUiServiceUsers = async () => {
   return await get<Array<UiServiceUser>>(`${ui_service_url}/users`);
 };
 
 export const removeProcessInstance = async (processInstanceId: string) => {
   return await remove(`${flowable_rest_url}/runtime/process-instances/${processInstanceId}`, {
+    responseType: 'none',
+  });
+};
+
+export const removeHistoricProcessInstance = async (historicProcessInstanceId: string) => {
+  return await remove(`${flowable_rest_url}/history/historic-process-instances/${historicProcessInstanceId}`, {
     responseType: 'none',
   });
 };
@@ -344,6 +383,21 @@ interface PutProcessInstanceVariablesArg {
 
 export const putProcessInstanceVariables = async (arg: PutProcessInstanceVariablesArg) => {
   return await put(`${flowable_rest_url}/runtime/process-instances/${arg.processInstanceId}/variables`, arg.variables);
+};
+
+interface HistoricVariableProcessInstance {
+  id: string;
+  processInstanceId: string;
+  processInstanceUrl: string;
+  taskId: string | null;
+  executionId: string;
+  variable: RestVariable;
+}
+
+export const getHistoricProcessInstanceVariables = async (processInstanceId: string) => {
+  return await get<GenericFlowableListResponse<HistoricVariableProcessInstance>>(`${flowable_rest_url}/history/historic-variable-instances`, {
+    queries: [{ processInstanceId }],
+  });
 };
 
 export const getProcessInstanceVariables = async (processInstanceId: string) => {
@@ -416,6 +470,6 @@ type HistoricTaskInstance = {
 
 export const getHistoricTaskInstance = async (taskId: string) => {
   return await get<GenericFlowableListResponse<HistoricTaskInstance>>(`${flowable_rest_url}/history/historic-task-instances`, {
-    queries: [{ taskId }, { includeProcessVariables: 'true' }, { processFinished: 'false' }],
+    queries: [{ taskId }, { includeProcessVariables: 'true' }],
   });
 };

@@ -82,6 +82,11 @@ export const navigation: Navigation = [
     title: 'Analytics',
   },
   {
+    segment: browserRoutesCollection.WorkflowHistoricInstances.segment,
+    title: browserRoutesCollection.WorkflowHistoricInstances.title,
+    icon: <DescriptionIcon />,
+  },
+  {
     segment: browserRoutesCollection.Statistics.segment,
     title: browserRoutesCollection.Statistics.title,
     icon: <DescriptionIcon />,

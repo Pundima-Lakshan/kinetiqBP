@@ -7,12 +7,14 @@ import {
   getFormDefinition,
   getFormDefinitions,
   getHistoricActivityInstance,
+  getHistoricProcessInstanceVariables,
   getHistoricTaskInstance,
   getProcessInstanceVariables,
   getUiServiceUsers,
   getWorkflowDefinitionModel,
   getWorkflowDefinitions,
   getWorkflowDefinitionXml,
+  getWorkflowHistoricInstances,
   getWorkflowInstances,
   type FlowableUserInfoKey,
   type FormDefinition,
@@ -103,6 +105,13 @@ export const useGetWorkflowInstances = () => {
   });
 };
 
+export const useGetWorkflowHistoricInstances = () => {
+  return useQueryBuilder({
+    queryKey: [queryKeys.historicWorkflowInstance],
+    queryFn: getWorkflowHistoricInstances,
+  });
+};
+
 export const useGetUiServiceUsers = () => {
   return useQueryBuilder({
     queryKey: [queryKeys.uiServiceUsers],
@@ -131,6 +140,14 @@ export const useGetProcessInstanceVariables = (processInstanceId: string, enable
   return useQueryBuilder({
     queryKey: [queryKeys.processInstanceVariables, processInstanceId],
     queryFn: async () => getProcessInstanceVariables(processInstanceId),
+    enabled,
+  });
+};
+
+export const useGetHistoricProcessInstanceVariables = (processInstanceId: string, enabled: boolean) => {
+  return useQueryBuilder({
+    queryKey: [queryKeys.historicProcessInstanceVariables, processInstanceId],
+    queryFn: async () => getHistoricProcessInstanceVariables(processInstanceId),
     enabled,
   });
 };

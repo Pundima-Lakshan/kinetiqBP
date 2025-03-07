@@ -112,22 +112,43 @@
 /* 🎯 BPMN Shape Styling (Tasks, Events, etc.) */
 .bpmn-state-success:not(.djs-connection) .djs-visual > :nth-child(1) {
   stroke: #1e7e34 !important; /* Dark Green */
-  fill: rgba(40, 167, 69, 0.15) !important; /* Light Green, 15% opacity */
+  fill: rgba(40, 167, 69, 0.08) !important; /* Lighter Green */
 }
 
 .bpmn-state-error:not(.djs-connection) .djs-visual > :nth-child(1) {
   stroke: #a71d2a !important; /* Dark Red */
-  fill: rgba(220, 53, 69, 0.15) !important; /* Light Red, 15% opacity */
+  fill: rgba(220, 53, 69, 0.08) !important; /* Lighter Red */
 }
 
 .bpmn-state-info:not(.djs-connection) .djs-visual > :nth-child(1) {
   stroke: #117a8b !important; /* Dark Cyan */
-  fill: rgba(23, 162, 184, 0.15) !important; /* Light Blue, 15% opacity */
+  fill: rgba(23, 162, 184, 0.08) !important; /* Lighter Blue */
 }
 
 .bpmn-state-warning:not(.djs-connection) .djs-visual > :nth-child(1) {
   stroke: #d39e00 !important; /* Dark Yellow */
-  fill: rgba(255, 193, 7, 0.15) !important; /* Light Yellow, 15% opacity */
+  fill: rgba(255, 193, 7, 0.08) !important; /* Lighter Yellow */
+}
+
+/* 🎯 User Icon Styling (inside BPMN tasks) */
+.bpmn-state-success .djs-visual path {
+  stroke: #1e7e34 !important; /* Dark Green */
+  fill: rgba(40, 167, 69, 0.08) !important; /* Lighter Green */
+}
+
+.bpmn-state-error .djs-visual path {
+  stroke: #a71d2a !important; /* Dark Red */
+  fill: rgba(220, 53, 69, 0.08) !important; /* Lighter Red */
+}
+
+.bpmn-state-info .djs-visual path {
+  stroke: #117a8b !important; /* Dark Cyan */
+  fill: rgba(23, 162, 184, 0.08) !important; /* Lighter Blue */
+}
+
+.bpmn-state-warning .djs-visual path {
+  stroke: #d39e00 !important; /* Dark Yellow */
+  fill: rgba(255, 193, 7, 0.08) !important; /* Lighter Yellow */
 }
 
 /* 🎯 BPMN Connection Styling (Flows, Arrows, etc.) */
@@ -174,25 +195,4 @@
 .bpmn-state-warning.djs-connection marker path {
   stroke: #d39e00 !important;
   fill: #d39e00 !important;
-}
-
-/* 🎯 User Icon Styling (inside BPMN tasks) */
-.bpmn-state-success .djs-visual path {
-  stroke: #1e7e34 !important; /* Dark Green */
-  fill: rgba(40, 167, 69, 0.15) !important; /* Light Green, 15% opacity */
-}
-
-.bpmn-state-error .djs-visual path {
-  stroke: #a71d2a !important; /* Dark Red */
-  fill: rgba(220, 53, 69, 0.15) !important; /* Light Red, 15% opacity */
-}
-
-.bpmn-state-info .djs-visual path {
-  stroke: #117a8b !important; /* Dark Cyan */
-  fill: rgba(23, 162, 184, 0.15) !important; /* Light Blue, 15% opacity */
-}
-
-.bpmn-state-warning .djs-visual path {
-  stroke: #d39e00 !important; /* Dark Yellow */
-  fill: rgba(255, 193, 7, 0.15) !important; /* Light Yellow, 15% opacity */
 }

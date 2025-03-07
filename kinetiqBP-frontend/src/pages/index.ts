@@ -7,5 +7,6 @@ export * from './statistics.tsx';
 export * from './tasks';
 export * from './users';
 export * from './workflow-definitions';
+export * from './workflow-historic-instances';
 export * from './workflow-instance';
 export * from './workflow-instances';

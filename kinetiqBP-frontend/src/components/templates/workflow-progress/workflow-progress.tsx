@@ -17,7 +17,7 @@ export const WorkFlowProgress = ({ workflowDefinitionId, workflowInstanceId }: W
     if (!historicActivityInstances?.data || !workflowDefinitionModel) return;
 
     const _steps: Array<KbpStep> = historicActivityInstances.data
-      .map((instance, index) => {
+      .map((instance) => {
         if (!bpmnActivityTypes.eventsType.includes(instance.activityType) && !bpmnActivityTypes.taskType.includes(instance.activityType)) return;
         const formDefinitionId = workflowDefinitionModel.mainProcess.flowElementMap[instance.activityId]?.attributes.form?.[0]?.value;
         return {
@@ -28,13 +28,16 @@ export const WorkFlowProgress = ({ workflowDefinitionId, workflowInstanceId }: W
               formDefinitionId={formDefinitionId ? Number(formDefinitionId) : undefined}
             />
           ),
-          index,
           labels: [instance.activityName, instance.activityId],
           onComplete: () => {},
           completed: !!instance.endTime,
         };
       })
-      .filter((i) => !!i);
+      .filter((i) => !!i)
+      .map((instance, index) => ({
+        ...instance,
+        index,
+      }));
 
     setSteps(_steps);
   }, [historicActivityInstances, workflowDefinitionModel]);

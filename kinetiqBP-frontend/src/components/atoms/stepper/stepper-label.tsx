@@ -1,19 +1,21 @@
+import { Typography } from '@mui/material';
 import { Fragment } from 'react/jsx-runtime';
 
 interface StepperLabelProps {
   labels: (string | null)[];
   index: number;
+  activeIndex: number;
 }
 
-export const StepperLabel = ({ labels, index }: StepperLabelProps) => {
+export const StepperLabel = ({ labels, index, activeIndex }: StepperLabelProps) => {
   return (
     <Fragment key={index}>
-      {labels.map((label, index) => (
-        <Fragment key={index}>
+      {labels.map((label, _index) => (
+        <Fragment key={_index}>
           {label && (
-            <p key={`${label}-${index}`} style={{ padding: 0, margin: 0 }}>
+            <Typography key={`${label}-${_index}`} color={activeIndex === index ? 'info' : 'textPrimary'} style={{ padding: 0, margin: 0 }}>
               {label}
-            </p>
+            </Typography>
           )}
         </Fragment>
       ))}

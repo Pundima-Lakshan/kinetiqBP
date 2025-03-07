@@ -1,7 +1,7 @@
 {
-  "name": "Form Assignment",
+  "name": "UI Service Moddle",
   "prefix": "uiService",
-  "uri": "http://formAssignment",
+  "uri": "http://uiServiceXml",
   "xml": {
     "tagAlias": "lowerCase"
   },
@@ -13,6 +13,17 @@
       "properties": [
         {
           "name": "form",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "DynamicVariableAssignmentUserTask",
+      "extends": ["bpmn:UserTask"],
+      "properties": [
+        {
+          "name": "dynamicVariable",
           "isAttr": true,
           "type": "String"
         }

@@ -10,9 +10,10 @@ import { BpmnPropertiesPanelModule, BpmnPropertiesProviderModule } from 'bpmn-js
 import BpmnModeler from 'bpmn-js/lib/Modeler';
 import React, { useEffect, useRef, useState } from 'react';
 
-import { formAssignmentModdleDescriptor, userAssignmentModdleDescriptor } from './common/descriptors';
+import { flowableModdleDescriptor, uiServiceModdleDescriptor } from './common/descriptors';
 import {
   ConditionAssignmentPropertiesProviderModule,
+  DynamicVariableAssignmentPropertiesProviderModule,
   FormAssignmentPropertiesProviderModule,
   UserAssignmentPropertiesProviderModule,
 } from './common/provider';
@@ -65,10 +66,11 @@ export const KBPBpmnEditor = ({ diagramXml, bpmnModelerRef, onEventHandler }: Re
         UserAssignmentPropertiesProviderModule,
         FormAssignmentPropertiesProviderModule,
         ConditionAssignmentPropertiesProviderModule,
+        DynamicVariableAssignmentPropertiesProviderModule,
       ],
       moddleExtensions: {
-        userAssignment: userAssignmentModdleDescriptor,
-        formAssignment: formAssignmentModdleDescriptor,
+        flowable: flowableModdleDescriptor,
+        uiService: uiServiceModdleDescriptor,
       },
       linting: {
         bpmnlint: bpmnlintConfig,

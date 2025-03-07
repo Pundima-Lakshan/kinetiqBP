@@ -7,6 +7,8 @@ export const mutationKeys = {
 
   workflowInstance: 'workflowInstance',
 
+  historicWorkflowInstance: 'historicWorkflowInstance',
+
   processInstanceVariables: 'processInstanceVariables',
 } as const;
 

@@ -1,5 +1,5 @@
-import formAssignmentModdleDescriptor from './form-assignment.json';
+import flowableModdleDescriptor from './flowable.json';
 import magicModdleDescriptor from './magic.json';
-import userAssignmentModdleDescriptor from './user-assignment.json';
+import uiServiceModdleDescriptor from './ui-service.json';
 
-export { formAssignmentModdleDescriptor, magicModdleDescriptor, userAssignmentModdleDescriptor };
+export { flowableModdleDescriptor, magicModdleDescriptor, uiServiceModdleDescriptor };

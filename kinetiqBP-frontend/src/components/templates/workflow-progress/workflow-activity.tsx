@@ -3,8 +3,8 @@ import { KBPFormViewer } from '@/components/organisms';
 import { getDataFromRestVariables } from '@/logic';
 import {
   useGetFormDefinition,
+  useGetHistoricProcessInstanceVariables,
   useGetHistoricTaskInstance,
-  useGetProcessInstanceVariables,
   useGetUiServiceUsers,
   type ActivityInstance,
 } from '@/services';
@@ -23,7 +23,7 @@ export const WorkflowActivity = ({ activityInstance, formDefinitionId }: Workflo
     enabled: formDefinitionId != null,
   });
   const { data: historicTaskInstance } = useGetHistoricTaskInstance(activityInstance.taskId, !!activityInstance.taskId);
-  const { data: processInstanceVariables } = useGetProcessInstanceVariables(activityInstance.processInstanceId, !activityInstance.taskId);
+  const { data: processInstanceVariables } = useGetHistoricProcessInstanceVariables(activityInstance.processInstanceId, !activityInstance.taskId);
 
   const [formData, setFormData] = useState<Record<string, unknown> | undefined>(undefined);
 
@@ -31,7 +31,11 @@ export const WorkflowActivity = ({ activityInstance, formDefinitionId }: Workflo
     if (!!activityInstance.taskId) {
       setFormData(getDataFromRestVariables(historicTaskInstance?.data[0]?.variables ?? []));
     } else {
-      setFormData(getDataFromRestVariables(processInstanceVariables ?? []));
+      const variables =
+        processInstanceVariables?.data.map((d) => ({
+          ...d.variable,
+        })) ?? [];
+      setFormData(getDataFromRestVariables(variables));
     }
   }, [activityInstance.taskId, processInstanceVariables, historicTaskInstance]);
 

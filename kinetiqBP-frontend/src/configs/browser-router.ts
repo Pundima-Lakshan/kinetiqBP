@@ -12,12 +12,14 @@ import {
   WorkFlowInstance,
   WorkflowInstances,
 } from '@/pages';
+import { WorkflowHistoricInstances } from '@/pages/workflow-historic-instances';
 import { createBrowserRouter } from 'react-router';
 
 export const browserRoutesCollection = {
   Dashboard: { segment: '', title: 'Dashboard' },
   WorkflowDefinitions: { segment: 'workflow-definitions', title: 'Workflow Definitions' },
   WorkflowInstances: { segment: 'workflow-instances', title: 'Workflow Instances' },
+  WorkflowHistoricInstances: { segment: 'workflow-historic-instances', title: 'Workflow Historic Instances' },
   FormDefinitions: { segment: 'form-definitions', title: 'Form Definitions' },
   Tasks: { segment: 'tasks', title: 'Tasks' },
   FormDesigner: { segment: 'form-designer', title: 'Form Designer' },
@@ -51,6 +53,14 @@ export const browserRouter = createBrowserRouter([
       },
       {
         path: `${getPath(browserRoutesCollection.WorkflowInstances.segment)}/:workflowDefinitionId/:workflowInstanceId`,
+        Component: WorkFlowInstance,
+      },
+      {
+        path: getPath(browserRoutesCollection.WorkflowHistoricInstances.segment),
+        Component: WorkflowHistoricInstances,
+      },
+      {
+        path: `${getPath(browserRoutesCollection.WorkflowHistoricInstances.segment)}/:workflowDefinitionId/:workflowInstanceId`,
         Component: WorkFlowInstance,
       },
       {

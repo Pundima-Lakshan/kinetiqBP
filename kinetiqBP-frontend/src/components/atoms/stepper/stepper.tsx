@@ -8,6 +8,7 @@ import Stepper from '@mui/material/Stepper';
 import { Fragment } from 'react/jsx-runtime';
 import { ContainerBox } from '../container-box';
 
+import { DefaultAllCompletedComponent } from '@/components/templates/workflow-progress/default-all-completed-component';
 import { StepperLabel } from './stepper-label';
 import './styles.css';
 
@@ -26,16 +27,19 @@ interface KBPStepperProps {
   additionalActions?: React.ReactNode[];
   stepperHeader: string;
   isLoading?: boolean;
+  showAllCompleted?: boolean;
 }
 
 interface Completed {
   [k: number]: boolean;
 }
 
-export const KBPStepper = ({ steps, allCompletedComponent, additionalActions, stepperHeader }: KBPStepperProps) => {
+export const KBPStepper = ({ steps, allCompletedComponent, additionalActions, stepperHeader, showAllCompleted }: KBPStepperProps) => {
   const { state: activeStep, setState: setActiveStep } = useSyncedState({
     getter: () => {
-      return steps.findIndex((step) => !step.completed);
+      const stepIndex = steps.findIndex((step) => !step.completed);
+      if (stepIndex === -1) return steps.length - 1;
+      return stepIndex;
     },
     deps: [steps],
   });
@@ -99,18 +103,19 @@ export const KBPStepper = ({ steps, allCompletedComponent, additionalActions, st
         <Typography className="stepper-header">{stepperHeader}</Typography>
         <Stepper nonLinear activeStep={activeStep} orientation="vertical" connector={null} className="vertical-stepper">
           {steps.map((step, index) => (
-            <Step key={`step-${step.index}`} completed={completed[index]} style={{ padding: '16px' }} disabled={step.disabled}>
+            <Step key={`step-${(step.index, step.labels[0])}`} completed={completed[index]} style={{ padding: '16px' }} disabled={step.disabled}>
               <StepButton color={completed[index] ? 'success' : 'inherit'} onClick={handleStep(index)} style={{ padding: '16px' }}>
-                <StepperLabel key={`step-label-${step.index}`} labels={step.labels} index={step.index} />
+                <StepperLabel key={`step-label-${(step.index, step.labels[0])}`} labels={step.labels} index={step.index} activeIndex={activeStep} />
               </StepButton>
             </Step>
           ))}
         </Stepper>
       </Box>
       <ContainerBox style={{ width: 'calc(100% - 56px)' }}>
-        {allStepsCompleted() && allCompletedComponent ? (
+        {showAllCompleted && allStepsCompleted() ? (
           <>
             {allCompletedComponent}
+            {!allCompletedComponent && <DefaultAllCompletedComponent />}
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Box sx={{ flex: '1 1 auto' }} />
               <Button onClick={handleReset}>Reset</Button>

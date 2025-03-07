@@ -1,4 +1,4 @@
-import { DialogConfirmationActions } from '@/components/atoms';
+import { ContainerBox, DialogConfirmationActions, LoaderLinear } from '@/components/atoms';
 import { BpmnToXml, INITIATOR, KBPFormViewer, type KBPFormViewerRefObj } from '@/components/organisms';
 import { defaultDialogContentProps } from '@/components/utils';
 import { getRestVariablesFromData } from '@/logic';
@@ -25,7 +25,7 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
   const dialogs = useDialogs();
 
   const [startFormId, setStartFormId] = useState<null | number>(null);
-  const [noStartForm, setNoStartForm] = useState(false);
+  const [noStartForm, setNoStartForm] = useState({ form: false, start: false });
 
   const kbpFormViewerRef = useRef<KBPFormViewerRefObj | null>(null);
 
@@ -74,7 +74,8 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
         return;
       }
       if (startForms.length === 0) {
-        setNoStartForm(true);
+        setNoStartForm((prev) => ({ ...prev, form: true }));
+
         return;
       }
       setStartFormId(Number(startForms[0].value));
@@ -96,7 +97,7 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
   };
 
   const handleSubmitProcessVariables = (processInstanceResponse?: ProcessInstanceResponse) => {
-    if (noStartForm || !processInstanceResponse || !loggedInUserId) return;
+    if (noStartForm.form || !processInstanceResponse || !loggedInUserId) return;
 
     const data = getFormData();
     if (!data) return;
@@ -114,7 +115,7 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
   };
 
   useEffect(() => {
-    if (!noStartForm || !loggedInUserId) return;
+    if (!noStartForm.form || !noStartForm.start || !loggedInUserId) return;
     postStartWorkflowInstance({
       processDefinitionId: workflowStartDialogPayload.workflowDefinitionId,
       startUserId: loggedInUserId,
@@ -125,8 +126,10 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
     if (!loggedInUserId) return;
 
     const data = getFormData();
-    if (formDefinition && !data) return;
-
+    if (formDefinition && !data) {
+      setNoStartForm((prev) => ({ ...prev, start: true }));
+      return;
+    }
     postStartWorkflowInstance({ processDefinitionId: workflowStartDialogPayload.workflowDefinitionId, startUserId: loggedInUserId });
   };
 
@@ -153,9 +156,15 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
 
   return (
     <Dialog fullWidth open={open} onClose={() => onClose()} closeAfterTransition={false}>
-      <DialogTitle>Start workflow instance {workflowStartDialogPayload.workflowName}</DialogTitle>
+      <DialogTitle>Start workflow instance: {workflowStartDialogPayload.workflowName}</DialogTitle>
       <DialogContent {...defaultDialogContentProps}>
         {formDefinition && <KBPFormViewer schema={formDefinition.formSchema} submitHandler={() => {}} ref={kbpFormViewerRef} />}
+        {!isLoading && !formDefinition && (
+          <ContainerBox centerItems typography>
+            No form to fill, You can start right away
+          </ContainerBox>
+        )}
+        {isLoading && <LoaderLinear />}
       </DialogContent>
       <DialogConfirmationActions onConfirm={handleConfirm} confirmLabel="Start" isLoading={isLoading} />
     </Dialog>
