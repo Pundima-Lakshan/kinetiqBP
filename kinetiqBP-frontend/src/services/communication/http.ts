@@ -69,9 +69,11 @@ export interface UiServiceUser {
   email: string | null;
 }
 
+export type FormSchemaType = 'textfield' | 'number' | 'checkbox' | 'textarea' | 'datetime' | 'image' | 'button';
+
 type Component = {
   label: string;
-  type: 'textfield' | 'button';
+  type: FormSchemaType;
   layout: {
     row: string;
     columns: string | null;
@@ -83,10 +85,10 @@ type Component = {
 
 export interface FormSchema {
   components: Component[];
-  type: string;
   id: string;
   schemaVersion: number;
   versionTag: string;
+  type: 'default';
 }
 
 export interface FormDefinition {
@@ -180,7 +182,7 @@ export const postStartWorkflowInstance = async ({ processDefinitionId, startUser
   });
 };
 
-type ExtensionAttribute = {
+export type ExtensionAttribute = {
   name: string;
   value: string;
   namespacePrefix: string;
@@ -291,8 +293,8 @@ export const removeWorkflowDefinition = async (deploymentId: string) => {
 
 export type RestVariable = {
   name: string;
-  type: 'string' | 'number';
-  value: string;
+  type: 'string' | 'number' | 'boolean';
+  value: string | number | boolean;
   scope?: string;
 };
 
@@ -431,7 +433,7 @@ interface GetHistoricActivityInstanceArg {
 
 export const getHistoricActivityInstance = async (arg: GetHistoricActivityInstanceArg) => {
   return await get<GenericFlowableListResponse<ActivityInstance>>(`${flowable_rest_url}/history/historic-activity-instances`, {
-    queries: [{ processInstanceId: arg.processInstanceId }],
+    queries: [{ processInstanceId: arg.processInstanceId }, { sort: 'endTime' }],
   });
 };
 
@@ -472,4 +474,23 @@ export const getHistoricTaskInstance = async (taskId: string) => {
   return await get<GenericFlowableListResponse<HistoricTaskInstance>>(`${flowable_rest_url}/history/historic-task-instances`, {
     queries: [{ taskId }, { includeProcessVariables: 'true' }],
   });
+};
+
+interface PostTaskActionArg {
+  taskId: string;
+  action?: 'complete';
+  variables?: RestVariable[];
+}
+
+export const postTaskAction = async ({ action = 'complete', taskId, variables }: PostTaskActionArg) => {
+  return await post(
+    `${flowable_rest_url}/runtime/tasks/${taskId}`,
+    {
+      action,
+      variables,
+    },
+    {
+      responseType: 'none',
+    },
+  );
 };

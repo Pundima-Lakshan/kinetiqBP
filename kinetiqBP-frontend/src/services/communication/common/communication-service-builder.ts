@@ -63,11 +63,17 @@ export const get = async <T>(url: string, options?: CommonOptions) => {
   return await makeRequest<T>(urlWithQuery, { method: 'GET' }, responseType);
 };
 
-export const post = async <T, R = unknown>(url: string, data: R) =>
-  await makeRequest<T>(url, {
-    method: 'POST',
-    body: JSON.stringify(data),
-  });
+export const post = async <T, R = unknown>(url: string, data: R, options?: CommonOptions) => {
+  const { responseType } = options ?? {};
+  return await makeRequest<T>(
+    url,
+    {
+      method: 'POST',
+      body: JSON.stringify(data),
+    },
+    responseType,
+  );
+};
 
 export const postFormData = async <T>(url: string, data: FormData) =>
   await makeFormRequest<T>(url, {

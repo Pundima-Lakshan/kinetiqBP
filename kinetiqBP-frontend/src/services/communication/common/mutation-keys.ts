@@ -10,6 +10,8 @@ export const mutationKeys = {
   historicWorkflowInstance: 'historicWorkflowInstance',
 
   processInstanceVariables: 'processInstanceVariables',
+
+  task: 'task',
 } as const;
 
 export const mutationType = {

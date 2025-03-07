@@ -31,10 +31,9 @@ export const useDynamicBreadcrumbs = (): { title: string; breadcrumbs: Breadcrum
   switch (activePage?.title) {
     case browserRoutesCollection.WorkflowInstances.title: {
       const breadcrumbs = getWorkflowInstanceBreadcrumbs();
-      const { workflowInstanceId } = params;
       return {
         breadcrumbs,
-        title: breadcrumbs.length > 1 ? `Workflow Instance ${workflowInstanceId}` : activePage.title,
+        title: activePage.title,
       };
     }
   }

@@ -2,6 +2,7 @@ import { mutationKeys, mutationType, useMutationBuilder } from './common';
 import {
   postFormDefinition,
   postStartWorkflowInstance,
+  postTaskAction,
   postWorkflowDefinition,
   putFormDefinition,
   putProcessInstanceVariables,
@@ -55,21 +56,28 @@ export const useRemoveWorkflowDefinition = () => {
 
 export const usePutProcessInstanceVariables = () => {
   return useMutationBuilder({
-    mutationKey: [mutationKeys.processInstanceVariables],
+    mutationKey: [mutationKeys.processInstanceVariables, mutationType.put],
     mutationFn: putProcessInstanceVariables,
   });
 };
 
 export const useRemoveProcessInstance = () => {
   return useMutationBuilder({
-    mutationKey: [mutationKeys.workflowInstance],
+    mutationKey: [mutationKeys.workflowInstance, mutationType.remove],
     mutationFn: removeProcessInstance,
   });
 };
 
 export const useRemoveHistoricProcessInstance = () => {
   return useMutationBuilder({
-    mutationKey: [mutationKeys.workflowInstance],
+    mutationKey: [mutationKeys.workflowInstance, mutationType.remove],
     mutationFn: removeHistoricProcessInstance,
+  });
+};
+
+export const usePostTaskAction = () => {
+  return useMutationBuilder({
+    mutationKey: [mutationKeys.task, mutationType.post],
+    mutationFn: postTaskAction,
   });
 };

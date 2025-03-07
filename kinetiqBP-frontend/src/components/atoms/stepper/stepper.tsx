@@ -1,3 +1,4 @@
+import { DefaultAllCompletedComponent } from '@/components/templates/workflow-progress/default-all-completed-component';
 import { useSyncedState } from '@/utils';
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -7,8 +8,6 @@ import StepButton from '@mui/material/StepButton';
 import Stepper from '@mui/material/Stepper';
 import { Fragment } from 'react/jsx-runtime';
 import { ContainerBox } from '../container-box';
-
-import { DefaultAllCompletedComponent } from '@/components/templates/workflow-progress/default-all-completed-component';
 import { StepperLabel } from './stepper-label';
 import './styles.css';
 
@@ -18,27 +17,26 @@ export interface KbpStep {
   completed?: boolean;
   disabled?: boolean;
   component: React.ReactNode;
-  onComplete: () => void;
+  onComplete?: () => Promise<boolean>;
 }
 
 interface KBPStepperProps {
   steps: KbpStep[];
   allCompletedComponent?: React.ReactNode;
   additionalActions?: React.ReactNode[];
-  stepperHeader: string;
+  stepperHeaders: string[];
   isLoading?: boolean;
-  showAllCompleted?: boolean;
 }
 
 interface Completed {
   [k: number]: boolean;
 }
 
-export const KBPStepper = ({ steps, allCompletedComponent, additionalActions, stepperHeader, showAllCompleted }: KBPStepperProps) => {
+export const KBPStepper = ({ steps, allCompletedComponent, additionalActions, stepperHeaders }: KBPStepperProps) => {
   const { state: activeStep, setState: setActiveStep } = useSyncedState({
     getter: () => {
       const stepIndex = steps.findIndex((step) => !step.completed);
-      if (stepIndex === -1) return steps.length - 1;
+      if (stepIndex === -1) return -2;
       return stepIndex;
     },
     deps: [steps],
@@ -84,23 +82,25 @@ export const KBPStepper = ({ steps, allCompletedComponent, additionalActions, st
   };
 
   const handleComplete = (_activeStep: number) => {
-    setCompleted({
-      ...completed,
-      [_activeStep]: true,
+    steps[_activeStep]?.onComplete?.().then((isCompleted) => {
+      if (!isCompleted) return;
+      setCompleted({
+        ...completed,
+        [_activeStep]: true,
+      });
+      handleNext();
     });
-    steps[_activeStep]?.onComplete();
-    handleNext();
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
-    setCompleted({});
   };
 
   return (
     <ContainerBox style={{ display: 'flex', flexDirection: 'row', gap: '0 16px' }}>
       <Box style={{ display: 'flex', flexDirection: 'column', gap: '8px 0' }}>
-        <Typography className="stepper-header">{stepperHeader}</Typography>
+        <Box className="stepper-header">
+          {stepperHeaders.map((header, index) => {
+            if (!header) return;
+            return <Typography key={header + index}>{header}</Typography>;
+          })}
+        </Box>
         <Stepper nonLinear activeStep={activeStep} orientation="vertical" connector={null} className="vertical-stepper">
           {steps.map((step, index) => (
             <Step key={`step-${(step.index, step.labels[0])}`} completed={completed[index]} style={{ padding: '16px' }} disabled={step.disabled}>
@@ -112,14 +112,10 @@ export const KBPStepper = ({ steps, allCompletedComponent, additionalActions, st
         </Stepper>
       </Box>
       <ContainerBox style={{ width: 'calc(100% - 56px)' }}>
-        {showAllCompleted && allStepsCompleted() ? (
+        {activeStep === -2 && allStepsCompleted() ? (
           <>
             {allCompletedComponent}
             {!allCompletedComponent && <DefaultAllCompletedComponent />}
-            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-              <Box sx={{ flex: '1 1 auto' }} />
-              <Button onClick={handleReset}>Reset</Button>
-            </Box>
           </>
         ) : (
           <>
@@ -142,7 +138,7 @@ export const KBPStepper = ({ steps, allCompletedComponent, additionalActions, st
                     Completed
                   </Button>
                 ) : (
-                  <Button key={`complete-step-${activeStep}`} onClick={() => handleComplete(activeStep)}>
+                  <Button key={`complete-step-${activeStep}`} disabled={!steps[activeStep]?.onComplete} onClick={() => handleComplete(activeStep)}>
                     Complete Step
                   </Button>
                 ))}

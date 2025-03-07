@@ -2,6 +2,8 @@ import { SelectEntry, TextFieldEntry } from '@bpmn-io/properties-panel';
 
 import { useService } from 'bpmn-js-properties-panel';
 
+import { dynamicFormEntries } from '@/components/organisms';
+
 export default function ItemProps(props) {
   const { item, element, idPrefix, updateItem } = props;
 
@@ -75,32 +77,7 @@ function Type(props) {
   };
 
   const getOptions = () => {
-    return [
-      {
-        label: 'Text',
-        value: 'textfield',
-      },
-      {
-        label: 'Number',
-        value: 'number',
-      },
-      {
-        label: 'True or False',
-        value: 'checkbox',
-      },
-      {
-        label: 'Text area',
-        value: 'textarea',
-      },
-      {
-        label: 'Date Time',
-        value: 'datetime',
-      },
-      {
-        label: 'Image',
-        value: 'image',
-      },
-    ];
+    return dynamicFormEntries;
   };
 
   return SelectEntry({

@@ -8,6 +8,7 @@ export interface KBPFormViewerProps {
   customEventHandler?: (event: { event: unknown; name: any }) => void;
   schema: FormSchema;
   data?: Record<string, unknown>;
+  isReadOnly?: boolean;
 }
 
 interface FormSubmit {
@@ -18,12 +19,13 @@ interface FormSubmit {
 
 export interface KBPFormViewerRefObj {
   getSubmitResponse: () => FormSubmit | undefined;
+  getSchema: () => FormSchema;
 }
 
-type KBPFormViewerRef = ForwardedRef<KBPFormViewerRefObj>;
+export type KBPFormViewerRef = ForwardedRef<KBPFormViewerRefObj | null>;
 
 export const KBPFormViewer = forwardRef(
-  ({ changedHandler, submitHandler, schema, data, customEventHandler }: KBPFormViewerProps, ref: KBPFormViewerRef) => {
+  ({ changedHandler, submitHandler, schema, data, customEventHandler, isReadOnly }: KBPFormViewerProps, ref: KBPFormViewerRef) => {
     const formRef = useRef<typeof Form | null>(null);
     const formContainerRef = useRef<HTMLDivElement | null>(null);
     const submitHandlerRef = useSyncedRef({ value: submitHandler });
@@ -36,8 +38,12 @@ export const KBPFormViewer = forwardRef(
         programmaticEventRef.current += 2;
         return formRef.current?.submit();
       };
+      const getSchema = () => {
+        return formRef.current._state.schema;
+      };
       return {
         getSubmitResponse,
+        getSchema,
       };
     }, []);
 
@@ -48,7 +54,7 @@ export const KBPFormViewer = forwardRef(
       formRef.current = form;
 
       const initializeForm = async () => {
-        if (!submitHandler) {
+        if (isReadOnly) {
           schema.components.forEach((component) => {
             component.readonly = true;
           });

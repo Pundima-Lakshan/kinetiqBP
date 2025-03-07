@@ -1,5 +1,5 @@
 import { ContainerBox } from '@/components/atoms';
-import { KBPFormViewer } from '@/components/organisms';
+import { createDynamicForm, KBPFormViewer, type KBPFormViewerRef } from '@/components/organisms';
 import { getDataFromRestVariables } from '@/logic';
 import {
   useGetFormDefinition,
@@ -7,17 +7,22 @@ import {
   useGetHistoricTaskInstance,
   useGetUiServiceUsers,
   type ActivityInstance,
+  type ExtensionAttribute,
+  type FormSchema,
 } from '@/services';
 import { dateToString, getUiUserFullName } from '@/utils';
 import { FormControl, TextField } from '@mui/material';
+import { useSession } from '@toolpad/core';
 import { useEffect, useState } from 'react';
 
 interface WorkflowActivityProps {
   activityInstance: ActivityInstance;
   formDefinitionId?: number;
+  dynamicVariables?: ExtensionAttribute[];
+  kbpFormViewerRef: KBPFormViewerRef;
 }
 
-export const WorkflowActivity = ({ activityInstance, formDefinitionId }: WorkflowActivityProps) => {
+export const WorkflowActivity = ({ activityInstance, formDefinitionId, dynamicVariables, kbpFormViewerRef }: WorkflowActivityProps) => {
   const { data: uiUsers = [] } = useGetUiServiceUsers();
   const { data: formDefinition } = useGetFormDefinition(formDefinitionId ?? -1, {
     enabled: formDefinitionId != null,
@@ -25,7 +30,12 @@ export const WorkflowActivity = ({ activityInstance, formDefinitionId }: Workflo
   const { data: historicTaskInstance } = useGetHistoricTaskInstance(activityInstance.taskId, !!activityInstance.taskId);
   const { data: processInstanceVariables } = useGetHistoricProcessInstanceVariables(activityInstance.processInstanceId, !activityInstance.taskId);
 
+  const [dynamicFormDefinition, setDynamicFormDefinition] = useState<FormSchema | null>(null);
+
   const [formData, setFormData] = useState<Record<string, unknown> | undefined>(undefined);
+
+  const session = useSession();
+  const isLoggedInUserAssignee = session?.user?.id === activityInstance.assignee;
 
   useEffect(() => {
     if (!!activityInstance.taskId) {
@@ -38,6 +48,15 @@ export const WorkflowActivity = ({ activityInstance, formDefinitionId }: Workflo
       setFormData(getDataFromRestVariables(variables));
     }
   }, [activityInstance.taskId, processInstanceVariables, historicTaskInstance]);
+
+  useEffect(() => {
+    if (formDefinitionId != null || dynamicVariables == null) {
+      setDynamicFormDefinition(null);
+      return;
+    }
+    const schema = createDynamicForm(dynamicVariables);
+    setDynamicFormDefinition(schema);
+  }, [dynamicVariables, formDefinitionId]);
 
   const assignee = uiUsers.find((u) => u.id === activityInstance.assignee);
 
@@ -54,7 +73,12 @@ export const WorkflowActivity = ({ activityInstance, formDefinitionId }: Workflo
         <ActivityStatus label="Assignee" defaultValue={assignee ? getUiUserFullName(assignee) : null} />
       </FormControl>
       <ContainerBox style={{ height: 'calc(100% - 82px)', padding: '8px 0 0 0' }}>
-        {formDefinition?.formSchema && <KBPFormViewer schema={formDefinition.formSchema} data={formData} />}
+        {formDefinition?.formSchema && (
+          <KBPFormViewer schema={formDefinition.formSchema} data={formData} ref={kbpFormViewerRef} isReadOnly={!isLoggedInUserAssignee} />
+        )}
+        {dynamicFormDefinition && (
+          <KBPFormViewer schema={dynamicFormDefinition} data={formData} ref={kbpFormViewerRef} isReadOnly={!isLoggedInUserAssignee} />
+        )}
       </ContainerBox>
     </ContainerBox>
   );

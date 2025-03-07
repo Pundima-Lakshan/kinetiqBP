@@ -1,7 +1,7 @@
 import { ContainerBox, DialogConfirmationActions, LoaderLinear } from '@/components/atoms';
 import { BpmnToXml, INITIATOR, KBPFormViewer, type KBPFormViewerRefObj } from '@/components/organisms';
 import { defaultDialogContentProps } from '@/components/utils';
-import { getRestVariablesFromData } from '@/logic';
+import { getFormData } from '@/logic';
 import {
   useGetFormDefinition,
   useGetWorkflowDefinitionModel,
@@ -82,24 +82,13 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
     });
   }, [workflowDefinitionModel, workflowDefinitionXml]);
 
-  const getFormData = () => {
-    if (!formDefinition) return;
-
-    const submitResponse = kbpFormViewerRef.current?.getSubmitResponse();
-    if (!submitResponse) return;
-
-    if (Object.keys(submitResponse.errors).length > 0) {
-      dialogs.alert('Fill the form correctly');
-      return;
-    }
-
-    return getRestVariablesFromData(formDefinition.formSchema, submitResponse.data);
-  };
-
   const handleSubmitProcessVariables = (processInstanceResponse?: ProcessInstanceResponse) => {
     if (noStartForm.form || !processInstanceResponse || !loggedInUserId) return;
 
-    const data = getFormData();
+    const data = getFormData({
+      dialogs,
+      kbpFormViewerRef,
+    });
     if (!data) return;
 
     data.push({
@@ -124,8 +113,10 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
 
   const handleConfirm = () => {
     if (!loggedInUserId) return;
-
-    const data = getFormData();
+    const data = getFormData({
+      dialogs,
+      kbpFormViewerRef,
+    });
     if (formDefinition && !data) {
       setNoStartForm((prev) => ({ ...prev, start: true }));
       return;
@@ -158,7 +149,7 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
     <Dialog fullWidth open={open} onClose={() => onClose()} closeAfterTransition={false}>
       <DialogTitle>Start workflow instance: {workflowStartDialogPayload.workflowName}</DialogTitle>
       <DialogContent {...defaultDialogContentProps}>
-        {formDefinition && <KBPFormViewer schema={formDefinition.formSchema} submitHandler={() => {}} ref={kbpFormViewerRef} />}
+        {formDefinition && <KBPFormViewer schema={formDefinition.formSchema} ref={kbpFormViewerRef} />}
         {!isLoading && !formDefinition && (
           <ContainerBox centerItems typography>
             No form to fill, You can start right away

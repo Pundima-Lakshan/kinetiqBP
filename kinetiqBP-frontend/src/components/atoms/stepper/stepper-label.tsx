@@ -13,7 +13,12 @@ export const StepperLabel = ({ labels, index, activeIndex }: StepperLabelProps) 
       {labels.map((label, _index) => (
         <Fragment key={_index}>
           {label && (
-            <Typography key={`${label}-${_index}`} color={activeIndex === index ? 'info' : 'textPrimary'} style={{ padding: 0, margin: 0 }}>
+            <Typography
+              key={`${label}-${_index}`}
+              color={activeIndex === index ? 'info' : 'textPrimary'}
+              fontSize={_index === 0 ? undefined : '0.9em'}
+              style={{ padding: 0, margin: 0 }}
+            >
               {label}
             </Typography>
           )}

@@ -65,9 +65,7 @@ export const useGetFormDefinition = (id: number, options?: GetFormDefinitionsOpt
   const { enabled = true, select } = options ?? {};
   return useQueryBuilder({
     queryKey: [queryKeys.formDefinition, id],
-    queryFn: async () => {
-      return await getFormDefinition(id);
-    },
+    queryFn: async () => await getFormDefinition(id),
     enabled,
     select,
   });

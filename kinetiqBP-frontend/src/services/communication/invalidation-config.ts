@@ -8,4 +8,6 @@ export const invalidationConfig: InvalidationConfig = {
   workflowDefinition: [['workflowDefinitions']],
   workflowInstance: [['workflowInstances']],
   processInstanceVariables: [],
+  historicWorkflowInstance: [],
+  task: [['historicActivityInstances']],
 };
