@@ -1,4 +1,4 @@
-import { TextFieldEntry } from '@bpmn-io/properties-panel';
+import { SelectEntry, TextFieldEntry } from '@bpmn-io/properties-panel';
 
 import { useService } from 'bpmn-js-properties-panel';
 
@@ -74,12 +74,42 @@ function Type(props) {
     return item.type;
   };
 
-  return TextFieldEntry({
+  const getOptions = () => {
+    return [
+      {
+        label: 'Text',
+        value: 'textfield',
+      },
+      {
+        label: 'Number',
+        value: 'number',
+      },
+      {
+        label: 'True or False',
+        value: 'checkbox',
+      },
+      {
+        label: 'Text area',
+        value: 'textarea',
+      },
+      {
+        label: 'Date Time',
+        value: 'datetime',
+      },
+      {
+        label: 'Image',
+        value: 'image',
+      },
+    ];
+  };
+
+  return SelectEntry({
     element: item,
     id: idPrefix + '-type',
     label: translate('Type'),
-    getValue,
     setValue,
+    getValue,
+    getOptions,
     debounce,
   });
 }
