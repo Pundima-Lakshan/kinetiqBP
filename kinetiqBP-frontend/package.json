@@ -13,7 +13,6 @@
   "dependencies": {
     "@bpmn-io/form-js": "1.11.3",
     "@bpmn-io/properties-panel": "3.25.0",
-    "@pundima-lakshan/bpmn-form-extended": "0.1.5",
     "@emotion/react": "11.13.3",
     "@emotion/styled": "11.13.0",
     "@mui/icons-material": "6.4.0",
@@ -24,6 +23,7 @@
     "@pdfme/generator": "5.2.11",
     "@pdfme/schemas": "5.2.11",
     "@pdfme/ui": "5.2.11",
+    "@pundima-lakshan/bpmn-form-extended": "0.1.5",
     "@tanstack/react-query": "5.66.0",
     "@tanstack/react-query-devtools": "5.66.9",
     "@toolpad/core": "0.12.0",
@@ -68,5 +68,6 @@
     "typescript": "5.6.2",
     "typescript-eslint": "8.11.0",
     "vite": "5.4.10"
-  }
+  },
+  "packageManager": "pnpm@9.12.3+sha512.cce0f9de9c5a7c95bef944169cc5dfe8741abfb145078c0d508b868056848a87c81e626246cb60967cbd7fd29a6c062ef73ff840d96b3c86c40ac92cf4a813ee"
 }

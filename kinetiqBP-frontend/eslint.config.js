@@ -1,4 +1,4 @@
-import js from '@eslint/js';
+import { js } from '@eslint';
 import preactConfig from 'eslint-config-preact';
 import prettierPlugin from 'eslint-config-prettier';
 import reactPlugin from 'eslint-plugin-react';
