@@ -148,7 +148,7 @@ export const translations: { label: string; value: string }[] = [
   { value: 'es', label: 'Spanish' },
 ];
 
-export const generatePDF = async (currentRef: Designer | Form | Viewer | null) => {
+export const downloadPDF = async (currentRef: Designer | Form | Viewer | null) => {
   if (!currentRef) return;
   const template = currentRef.getTemplate();
   const options = currentRef.getOptions();
@@ -176,6 +176,34 @@ export const generatePDF = async (currentRef: Designer | Form | Viewer | null) =
   }
 };
 
+export const generatePdf = async (currentRef: Designer | Form | Viewer | null) => {
+  if (!currentRef) return;
+  const template = currentRef.getTemplate();
+  const options = currentRef.getOptions();
+  const inputs =
+    typeof (currentRef as Viewer | Form).getInputs === 'function' ? (currentRef as Viewer | Form).getInputs() : getInputFromTemplate(template);
+  const font = await getFontsData();
+
+  try {
+    const pdf = await generate({
+      template,
+      inputs,
+      options: {
+        font,
+        lang: options.lang,
+        title: 'pdfme',
+      },
+      plugins: getPlugins(),
+    });
+
+    const blob = new Blob([pdf.buffer], { type: 'application/pdf' });
+    return blob;
+  } catch (e) {
+    alert(e + '\n\nCheck the console for full stack trace');
+    throw e;
+  }
+};
+
 export const isJsonString = (str: string) => {
   try {
     JSON.parse(str);
@@ -196,8 +224,10 @@ export const getTemplatePresets = (): {
   { key: 'custom', label: 'Custom', template: getBlankTemplate },
 ];
 
-export const getTemplateByPreset = (templatePreset: string): Template => {
+export const getTemplateByPreset = (templatePreset: string, basePdf?: string | ArrayBuffer | Uint8Array): Template => {
   const templatePresets = getTemplatePresets();
   const preset = templatePresets.find((preset) => preset.key === templatePreset);
-  return preset ? preset.template() : templatePresets[0].template();
+  const template = preset ? preset.template() : templatePresets[0].template();
+  if (basePdf) template.basePdf = basePdf;
+  return template;
 };

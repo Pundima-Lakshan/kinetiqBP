@@ -2,10 +2,11 @@ import { FileInputFormControl } from '@/components/molecules/file-field-form-con
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, type SelectChangeEvent } from '@mui/material';
 import { checkTemplate, cloneDeep, Lang, Template } from '@pdfme/common';
 import { Designer } from '@pdfme/ui';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { ForwardedRef, forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import {
   downloadJsonFile,
-  generatePDF,
+  downloadPDF,
+  generatePdf,
   getFontsData,
   getPlugins,
   getTemplateByPreset,
@@ -15,36 +16,51 @@ import {
   translations,
 } from '../helper.ts';
 
-const initialTemplatePresetKey = 'invoice';
+const initialTemplatePresetKey = 'blank';
 const customTemplatePresetKey = 'custom';
 
 const templatePresets = getTemplatePresets();
 
-export const PdfDesigner = () => {
-  const designerRef = useRef<HTMLDivElement | null>(null);
-  const designer = useRef<Designer | null>(null);
+export interface PdfDesignerProps {
+  initialTemplate?: Template;
+  initialTemplatePreset?: string;
+  initialPdf?: ArrayBuffer | Uint8Array | string;
+  initialPdfName?: string;
+}
+
+export interface PdfDesignerRefObj {
+  generatePdf: () => Promise<File | undefined>;
+}
+
+export type PdfDesignerRef = ForwardedRef<PdfDesignerRefObj>;
+
+export const PdfDesignerRenderer = (
+  { initialPdf, initialPdfName, initialTemplate, initialTemplatePreset }: PdfDesignerProps,
+  ref: PdfDesignerRef,
+) => {
+  const designerElementRef = useRef<HTMLDivElement | null>(null);
+  const designerRef = useRef<Designer | null>(null);
   const [lang, setLang] = useState<Lang>('en');
-  const [templatePreset, setTemplatePreset] = useState<string>(localStorage.getItem('templatePreset') || initialTemplatePresetKey);
+  const [templatePreset, setTemplatePreset] = useState<string>(initialTemplatePreset ?? initialTemplatePresetKey);
+  const [template, setTemplate] = useState<Template>(initialTemplate ?? getTemplateByPreset(templatePreset, initialPdf));
+
+  useImperativeHandle(ref, () => {
+    return {
+      generatePdf: async () => {
+        if (!designerRef.current) return;
+        const result = await generatePdf(designerRef.current);
+        if (!result) return;
+        return new File([result], initialPdfName ?? 'updated.pdf', { type: 'application/pdf' });
+      },
+    };
+  }, []);
 
   const buildDesigner = () => {
-    let template: Template = getTemplateByPreset(localStorage.getItem('templatePreset') || '');
-    try {
-      const templateString = localStorage.getItem('template');
-      if (templateString) {
-        setTemplatePreset(customTemplatePresetKey);
-      }
-
-      const templateJson = templateString ? JSON.parse(templateString) : getTemplateByPreset(localStorage.getItem('templatePreset') || '');
-      checkTemplate(templateJson);
-      template = templateJson as Template;
-    } catch {
-      localStorage.removeItem('template');
-    }
-
+    checkTemplate(template);
     getFontsData().then((font) => {
-      if (designerRef.current) {
-        designer.current = new Designer({
-          domContainer: designerRef.current,
+      if (designerElementRef.current) {
+        designerRef.current = new Designer({
+          domContainer: designerElementRef.current,
           template,
           options: {
             font,
@@ -65,10 +81,6 @@ export const PdfDesigner = () => {
           },
           plugins: getPlugins(),
         });
-        designer.current.onSaveTemplate(onSaveTemplate);
-        designer.current.onChangeTemplate(() => {
-          setTemplatePreset(customTemplatePresetKey);
-        });
       }
     });
   };
@@ -76,43 +88,44 @@ export const PdfDesigner = () => {
   const onChangeBasePDF = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target && e.target.files) {
       readFile(e.target.files[0], 'dataURL').then(async (basePdf) => {
-        if (designer.current) {
-          designer.current.updateTemplate(
-            Object.assign(cloneDeep(designer.current.getTemplate()), {
-              basePdf,
-            }),
-          );
+        if (designerRef.current) {
+          let clearFields = false;
+          if (window.confirm('Do you want to clear the existing fields ?')) {
+            clearFields = true;
+          }
+          const updatedTemplate = clearFields ? { basePdf, schemas: [{}] } : { basePdf };
+          designerRef.current.updateTemplate(Object.assign(cloneDeep(designerRef.current.getTemplate()), updatedTemplate));
+          setTemplatePreset(customTemplatePresetKey);
+          e.target.value = '';
         }
       });
     }
   };
 
-  const onDownloadTemplate = () => {
-    if (designer.current) {
-      downloadJsonFile(designer.current.getTemplate(), 'template');
-      console.log(designer.current.getTemplate());
+  const onClearFields = () => {
+    if (designerRef.current) {
+      designerRef.current.updateTemplate(Object.assign(cloneDeep(designerRef.current.getTemplate()), { schemas: [{}] }));
+      setTemplatePreset(customTemplatePresetKey);
     }
   };
 
-  const onSaveTemplate = (template?: Template) => {
-    if (designer.current) {
-      localStorage.setItem('template', JSON.stringify(template || designer.current.getTemplate()));
-      alert('Saved!');
+  const onDownloadTemplate = () => {
+    if (designerRef.current) {
+      downloadJsonFile(designerRef.current.getTemplate(), 'template');
     }
   };
 
   const onChangeTemplatePresets = (e: SelectChangeEvent) => {
     setTemplatePreset(e.target.value);
-    localStorage.setItem('template', JSON.stringify(getTemplateByPreset(localStorage.getItem('templatePreset') || '')));
-    localStorage.removeItem('template');
-    localStorage.setItem('templatePreset', e.target.value);
-    buildDesigner();
+    const newTemplate = getTemplateByPreset(e.target.value);
+    setTemplate(newTemplate);
+    designerRef.current?.updateTemplate(newTemplate);
   };
 
   useEffect(() => {
     buildDesigner();
     return () => {
-      designer.current?.destroy();
+      designerRef.current?.destroy();
     };
   }, []);
 
@@ -144,8 +157,8 @@ export const PdfDesigner = () => {
             label="Language"
             onChange={(e) => {
               setLang(e.target.value as Lang);
-              if (designer.current) {
-                designer.current.updateOptions({ lang: e.target.value as Lang });
+              if (designerRef.current) {
+                designerRef.current.updateOptions({ lang: e.target.value as Lang });
               }
             }}
             value={lang}
@@ -158,15 +171,20 @@ export const PdfDesigner = () => {
           </Select>
         </FormControl>
 
-        <FileInputFormControl handleChange={onChangeBasePDF} label="Upload BasePDF" />
+        <FileInputFormControl handleChange={onChangeBasePDF} label="Upload BasePDF" accept=".pdf" />
 
         <FileInputFormControl
           handleChange={(e) => {
-            handleLoadTemplate(e as React.ChangeEvent<HTMLInputElement>, designer.current);
-            setTemplatePreset(customTemplatePresetKey);
+            handleLoadTemplate(e as React.ChangeEvent<HTMLInputElement>, designerRef.current);
           }}
           label="Upload Template"
         />
+
+        <FormControl size="small">
+          <Button variant="outlined" onClick={onClearFields}>
+            Clear Fields
+          </Button>
+        </FormControl>
 
         <FormControl size="small">
           <Button variant="outlined" onClick={onDownloadTemplate}>
@@ -175,18 +193,14 @@ export const PdfDesigner = () => {
         </FormControl>
 
         <FormControl size="small">
-          <Button variant="outlined" onClick={() => onSaveTemplate()}>
-            Save Template
-          </Button>
-        </FormControl>
-
-        <FormControl size="small">
-          <Button variant="outlined" onClick={() => generatePDF(designer.current)}>
+          <Button variant="outlined" onClick={() => downloadPDF(designerRef.current)}>
             Generate PDF
           </Button>
         </FormControl>
       </Box>
-      <div ref={designerRef} style={{ width: '100%', height: `calc(100% - 40px)` }} />
+      <div ref={designerElementRef} style={{ width: '100%', height: `calc(100% - 40px)` }} />
     </div>
   );
 };
+
+export const PdfDesigner = forwardRef(PdfDesignerRenderer);

@@ -23,7 +23,7 @@
     "@pdfme/generator": "5.2.11",
     "@pdfme/schemas": "5.2.11",
     "@pdfme/ui": "5.2.11",
-    "@pundima-lakshan/bpmn-form-extended": "0.1.5",
+    "@pundima-lakshan/bpmn-form-extended": "0.1.12",
     "@tanstack/react-query": "5.66.0",
     "@tanstack/react-query-devtools": "5.66.9",
     "@toolpad/core": "0.12.0",

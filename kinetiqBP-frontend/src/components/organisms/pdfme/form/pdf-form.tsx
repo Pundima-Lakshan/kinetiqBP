@@ -1,7 +1,7 @@
 import { checkTemplate, getInputFromTemplate, Template } from '@pdfme/common';
 import { Form as PdfMeForm, Viewer as PdfMeViewer } from '@pdfme/ui';
 import { useEffect, useRef, useState } from 'react';
-import { generatePDF, getFontsData, getPlugins, getTemplateByPreset, handleLoadTemplate, isJsonString } from '../helper';
+import { downloadPDF, getFontsData, getPlugins, getTemplateByPreset, handleLoadTemplate, isJsonString } from '../helper';
 
 import { FileInputFormControl } from '@/components/molecules';
 import { Box, Button, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material';
@@ -164,7 +164,7 @@ export const PdfForm = () => {
         </FormControl>
 
         <FormControl size="small">
-          <Button variant="outlined" onClick={() => generatePDF(ui.current)} color="success">
+          <Button variant="outlined" onClick={() => downloadPDF(ui.current)} color="success">
             Generate PDF
           </Button>
         </FormControl>

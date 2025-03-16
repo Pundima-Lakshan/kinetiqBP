@@ -1,8 +1,10 @@
-import { ContainerBox, DialogConfirmationActions, LoaderLinear } from '@/components/atoms';
-import { BpmnToXml, INITIATOR, KBPFormViewer, type KBPFormViewerRefObj } from '@/components/organisms';
-import { defaultDialogContentProps } from '@/components/utils';
+import { ContainerBox, DialogConfirmationActions, LoaderLinear, RadioGroupDialog } from '@/components/atoms';
+import { BpmnToXml, FormViewerCustomEventNames, INITIATOR, KBPFormViewer, type KBPFormViewerRefObj } from '@/components/organisms';
+import { defaultDialogContentProps, defaultDialogProps } from '@/components/utils';
 import { getFormData } from '@/logic';
 import {
+  FormComponent,
+  FormSchemaType,
   useGetFormDefinition,
   useGetWorkflowDefinitionModel,
   useGetWorkflowDefinitionXml,
@@ -15,6 +17,7 @@ import {
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import { DialogProps, useDialogs, useSession } from '@toolpad/core';
 import { useEffect, useRef, useState } from 'react';
+import { PdfEditorDialog } from '../common';
 
 interface WorkflowStartDialogPayload {
   workflowDefinitionId: string;
@@ -28,6 +31,7 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
   const [noStartForm, setNoStartForm] = useState({ form: false, start: false });
 
   const kbpFormViewerRef = useRef<KBPFormViewerRefObj | null>(null);
+  const [formData, setFormData] = useState<Record<string, unknown>>({});
 
   const session = useSession();
   const loggedInUserId = session?.user?.id;
@@ -82,6 +86,46 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
     });
   }, [workflowDefinitionModel, workflowDefinitionXml]);
 
+  useEffect(() => {
+    if (!workflowDefinitionModel || !workflowDefinitionXml || !formDefinition) return;
+
+    const getValue = ({ type, keyValueGetter }: { type: FormSchemaType; keyValueGetter: () => { label: string; value: string | number } }) => {
+      switch (type) {
+        case 'textarea':
+        case 'textfield': {
+          return keyValueGetter().label;
+        }
+        case 'select': {
+          return keyValueGetter();
+        }
+      }
+    };
+
+    const autoInitializedData: Record<string, unknown> = {};
+
+    formDefinition.formSchema.components.forEach((field) => {
+      if (field.type !== 'textfield' && field.type !== 'select' && field.type !== 'textarea') return;
+      let value = undefined;
+      switch (field.autoInitialize?.predef) {
+        case 'initiator-fullname': {
+          value = getValue({
+            type: field.type,
+            keyValueGetter: () => ({
+              label: session?.user?.name ?? '',
+              value: session?.user?.id ?? '',
+            }),
+          });
+        }
+      }
+      autoInitializedData[field.key] = value;
+    });
+
+    setFormData((prev) => ({
+      ...prev,
+      ...autoInitializedData,
+    }));
+  }, [workflowDefinitionXml, workflowDefinitionModel, formDefinition]);
+
   const handleSubmitProcessVariables = (processInstanceResponse?: ProcessInstanceResponse) => {
     if (noStartForm.form || !processInstanceResponse || !loggedInUserId) return;
 
@@ -124,6 +168,30 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
     postStartWorkflowInstance({ processDefinitionId: workflowStartDialogPayload.workflowDefinitionId, startUserId: loggedInUserId });
   };
 
+  const customEventHandler = async ({ event, name }: { event: unknown; name: FormViewerCustomEventNames }) => {
+    switch (name) {
+      case 'fileEditor.open': {
+        const typedEvent = event as { files: File[]; index: number; field: FormComponent };
+        const files = typedEvent.files;
+        let filesSelectIndex = 0;
+        if (files.length > 1) {
+          const result = await dialogs.open(RadioGroupDialog, { label: 'File to edit', options: files.map((f, i) => ({ label: f.name, value: i })) });
+          if (result != null) {
+            filesSelectIndex = Number(result.value);
+          }
+        }
+        const result = await dialogs.open(PdfEditorDialog, { pdfFile: files[filesSelectIndex] });
+        if (result) {
+          files[filesSelectIndex] = result.newPdf;
+          setFormData((prev) => ({
+            ...prev,
+            [typedEvent.field.key]: files,
+          }));
+        }
+      }
+    }
+  };
+
   useMutationSuccessErrorCallback({
     mutationStatus: statusPostStartWorkflowInstance,
     error: errorPostStartWorkflowInstance,
@@ -146,10 +214,12 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
     isPendingPutProcessInstanceVariables;
 
   return (
-    <Dialog fullWidth open={open} onClose={() => onClose()} closeAfterTransition={false}>
+    <Dialog {...defaultDialogProps} fullWidth open={open} onClose={() => onClose()} closeAfterTransition={false}>
       <DialogTitle>Start workflow instance: {workflowStartDialogPayload.workflowName}</DialogTitle>
       <DialogContent {...defaultDialogContentProps}>
-        {formDefinition && <KBPFormViewer schema={formDefinition.formSchema} ref={kbpFormViewerRef} />}
+        {formDefinition && (
+          <KBPFormViewer schema={formDefinition.formSchema} ref={kbpFormViewerRef} data={formData} customEventHandler={customEventHandler} />
+        )}
         {!isLoading && !formDefinition && (
           <ContainerBox centerItems typography>
             No form to fill, You can start right away
@@ -157,7 +227,7 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
         )}
         {isLoading && <LoaderLinear />}
       </DialogContent>
-      <DialogConfirmationActions onConfirm={handleConfirm} confirmLabel="Start" isLoading={isLoading} />
+      <DialogConfirmationActions onConfirm={handleConfirm} confirmLabel="Start" onCancel={() => onClose()} isLoading={isLoading} />
     </Dialog>
   );
 };
