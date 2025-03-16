@@ -2,10 +2,13 @@ import type { FormSchema } from '@/services';
 import { useSyncedRef } from '@/utils';
 import { Form } from '@pundima-lakshan/bpmn-form-extended';
 import { forwardRef, useEffect, useImperativeHandle, useRef, type ForwardedRef } from 'react';
+
+export type FormViewerCustomEventNames = 'fileEditor.open';
+
 export interface KBPFormViewerProps {
   submitHandler?: (event: unknown) => void;
   changedHandler?: (event: unknown) => void;
-  customEventHandler?: (event: { event: unknown; name: any }) => void;
+  customEventHandler?: (event: { event: unknown; name: FormViewerCustomEventNames }) => void;
   schema: FormSchema;
   data?: Record<string, unknown>;
   isReadOnly?: boolean;
