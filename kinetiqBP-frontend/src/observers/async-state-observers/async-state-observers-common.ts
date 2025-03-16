@@ -7,7 +7,7 @@ export type AsyncStateObserversCommonParams = {
   setIsLoading: (isLoading: boolean) => void;
 };
 
-export const useAsyncStateObserversCommon = ({ setIsLoading }: AsyncStateObserversCommonParams) => {
+export const useAsyncStateObserversCommon = ({ setIsLoading, cacheType }: AsyncStateObserversCommonParams) => {
   const notifications = useNotifications();
 
   const handleEventAction = (event: QueryCacheNotifyEvent | MutationCacheNotifyEvent) => {
@@ -38,9 +38,9 @@ export const useAsyncStateObserversCommon = ({ setIsLoading }: AsyncStateObserve
      */
     if (event.action.type === 'success') {
       setIsLoading(false);
-      // if (cacheType === 'mutation') {
-      //   notifications.show('Action successful');
-      // }
+      if (cacheType === 'mutation') {
+        notifications.show('Action successful');
+      }
       return;
     }
 
@@ -49,7 +49,7 @@ export const useAsyncStateObserversCommon = ({ setIsLoading }: AsyncStateObserve
      */
     if (event.action.type === 'error') {
       setIsLoading(false);
-      // notifications.show(event.action.error.content?.message ?? event.action.error.message ?? 'Error');
+      notifications.show(event.action.error.content?.message ?? event.action.error.message ?? 'Error');
       return;
     }
 

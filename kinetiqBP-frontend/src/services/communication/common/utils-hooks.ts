@@ -26,6 +26,8 @@ export const useMutationSuccessErrorCallback = <T = unknown>({
   const notification = useNotifications();
 
   useEffect(() => {
+    return; // TODO rmove this
+
     if (mutationStatus === 'success') {
       if (explicit ? !!successMessage : true) {
         notification.show(successMessage ?? 'Success', {
