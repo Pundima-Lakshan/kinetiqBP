@@ -1,6 +1,5 @@
 import { getEnvs } from '@/env';
 import { get, post, postFormData, put, remove } from './common';
-
 const flowable_rest_url = getEnvs().VITE_FLOWABLE_REST_URL;
 const ui_service_url = getEnvs().VITE_UI_SERVICE_URL;
 
@@ -69,9 +68,9 @@ export interface UiServiceUser {
   email: string | null;
 }
 
-export type FormSchemaType = 'textfield' | 'number' | 'checkbox' | 'textarea' | 'datetime' | 'image' | 'button';
+export type FormSchemaType = 'textfield' | 'number' | 'checkbox' | 'textarea' | 'datetime' | 'image' | 'button' | 'select';
 
-type Component = {
+export type FormComponent = {
   label: string;
   type: FormSchemaType;
   layout: {
@@ -80,11 +79,16 @@ type Component = {
   };
   id: string;
   readonly?: boolean;
+  autoInitialize?: {
+    predef?: AutoInitializedOptionsPreDef;
+    custom?: string;
+  };
+  key: string;
   [p: string]: unknown;
 };
 
 export interface FormSchema {
-  components: Component[];
+  components: FormComponent[];
   id: string;
   schemaVersion: number;
   versionTag: string;
@@ -182,9 +186,20 @@ export const postStartWorkflowInstance = async ({ processDefinitionId, startUser
   });
 };
 
+export type AutoInitializedOptionsPreDef =
+  | 'initiator-fullname'
+  | 'initiator-emp-no'
+  | 'initiator-position'
+  | 'initiator-faculty'
+  | 'initiator-department'
+  | 'assignee-fullname'
+  | 'assignee-emp-no'
+  | 'assignee-faculty'
+  | 'assignee-department';
+
 export type ExtensionAttribute = {
   name: string;
-  value: string;
+  value: string | AutoInitializedOptionsPreDef;
   namespacePrefix: string;
   namespace: string;
 };
