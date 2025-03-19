@@ -4,6 +4,13 @@ import { Session } from '@toolpad/core/AppProvider';
 import { useMemo, useState } from 'react';
 import { useAuth } from 'react-oidc-context';
 
+export interface KbpSession extends Session {
+  permissions: {
+    roles: string[];
+    groups: string[];
+  };
+}
+
 export const useAuthInitialization = () => {
   const { user, signinRedirect, removeUser, isLoading } = useAuth();
 
@@ -14,6 +21,10 @@ export const useAuthInitialization = () => {
           id: 'dummyId',
           name: 'dummy',
           email: 'dummy@gmail.com',
+        },
+        permissions: {
+          roles: [],
+          groups: [],
         },
       };
     }
@@ -27,10 +38,14 @@ export const useAuthInitialization = () => {
         email: user.profile.email,
         image: user.profile.picture,
       },
+      permissions: {
+        roles: user.scopes,
+        groups: user.scopes,
+      },
     };
   };
 
-  const [session, setSession] = useState<Session | null>(() => getSession());
+  const [session, setSession] = useState<KbpSession | null>(() => getSession());
   useNonInitialEffect(() => {
     setSession(getSession());
   }, [user]);

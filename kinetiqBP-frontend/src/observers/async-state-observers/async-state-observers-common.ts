@@ -1,6 +1,7 @@
 import { type InvalidationConfig, type mutationKeys } from '@/services';
 import { type MutationCacheNotifyEvent, type QueryCacheNotifyEvent, type QueryClient } from '@tanstack/react-query';
 import { useNotifications } from '@toolpad/core';
+import { useAuth } from 'react-oidc-context';
 
 export type AsyncStateObserversCommonParams = {
   cacheType?: 'query' | 'mutation';
@@ -9,6 +10,8 @@ export type AsyncStateObserversCommonParams = {
 
 export const useAsyncStateObserversCommon = ({ setIsLoading, cacheType }: AsyncStateObserversCommonParams) => {
   const notifications = useNotifications();
+
+  const { removeUser } = useAuth();
 
   const handleEventAction = (event: QueryCacheNotifyEvent | MutationCacheNotifyEvent) => {
     if (event.type !== 'updated') {
@@ -49,7 +52,13 @@ export const useAsyncStateObserversCommon = ({ setIsLoading, cacheType }: AsyncS
      */
     if (event.action.type === 'error') {
       setIsLoading(false);
-      notifications.show(event.action.error.content?.message ?? event.action.error.message ?? 'Error');
+      notifications.show(event.action.error.statusText ?? 'Error');
+
+      if (event.action.error.status === 401) {
+        console.error('Unauthorized');
+        void removeUser();
+      }
+
       return;
     }
 

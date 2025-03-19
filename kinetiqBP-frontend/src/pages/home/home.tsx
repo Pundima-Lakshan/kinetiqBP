@@ -1,4 +1,3 @@
-import { SidebarFooterAccount, ToolbarAccount } from '@/components';
 import { brandiung, navigation } from '@/configs';
 import { getEnvs } from '@/env.ts';
 import { AsyncStateObservers } from '@/observers/index.ts';

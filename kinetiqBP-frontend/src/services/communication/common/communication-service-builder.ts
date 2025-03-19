@@ -6,7 +6,7 @@ const handleResponse = async <T>(url: string, requestOption: RequestInit, respon
     throw {
       status: response.status,
       statusText: response.statusText,
-      content: await response.json(),
+      content: response.body,
     };
   }
   if (responseType === 'none') {
