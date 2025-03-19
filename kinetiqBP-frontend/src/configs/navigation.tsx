@@ -6,6 +6,10 @@ import type { Navigation } from '@toolpad/core/AppProvider';
 
 export const navigation: Navigation = [
   {
+    kind: 'header',
+    title: 'Main',
+  },
+  {
     segment: browserRoutesCollection.Dashboard.segment,
     title: browserRoutesCollection.Dashboard.title,
     icon: <DashboardIcon />,

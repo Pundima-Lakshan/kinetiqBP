@@ -2,24 +2,6 @@ import { useMemo } from 'react';
 import { Account, AccountPreview, AccountPreviewProps, SidebarFooterProps } from '@toolpad/core';
 import { Divider, Stack } from '@mui/material';
 
-const AccountSidebarPreview = (props: AccountPreviewProps & { mini: boolean }) => {
-  const { handleClick, open, mini } = props;
-  return (
-    <Stack direction="column" p={0} overflow="hidden">
-      <Divider />
-      <AccountPreview variant={mini ? 'condensed' : 'expanded'} handleClick={handleClick} open={open} />
-    </Stack>
-  );
-};
-
-const createPreviewComponent = (mini: boolean) => {
-  const PreviewComponent = (props: AccountPreviewProps) => {
-    return <AccountSidebarPreview {...props} mini={mini} />;
-  }
-
-  return PreviewComponent;
-};
-
 export const SidebarFooterAccount = ({ mini }: SidebarFooterProps) => {
   const PreviewComponent = useMemo(() => createPreviewComponent(mini), [mini]);
   return (
@@ -58,4 +40,22 @@ export const SidebarFooterAccount = ({ mini }: SidebarFooterProps) => {
       }}
     />
   );
+};
+
+const AccountSidebarPreview = (props: AccountPreviewProps & { mini: boolean }) => {
+  const { handleClick, open, mini } = props;
+  return (
+    <Stack direction="column" p={0} overflow="hidden">
+      <Divider />
+      <AccountPreview variant={mini ? 'condensed' : 'expanded'} handleClick={handleClick} open={open} />
+    </Stack>
+  );
+};
+
+const createPreviewComponent = (mini: boolean) => {
+  const PreviewComponent = (props: AccountPreviewProps) => {
+    return <AccountSidebarPreview {...props} mini={mini} />;
+  };
+
+  return PreviewComponent;
 };

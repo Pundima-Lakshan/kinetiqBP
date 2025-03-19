@@ -44,11 +44,7 @@ export const Home = () => {
 
   return (
     <ReactRouterAppProvider navigation={navigation} branding={brandiung} theme={muiTheme} authentication={authentication} session={session}>
-      <DashboardLayout
-        defaultSidebarCollapsed
-        slots={{ toolbarAccount: ToolbarAccount, sidebarFooter: SidebarFooterAccount }}
-        sx={{ height: '100%', width: '100%' }}
-      >
+      <DashboardLayout defaultSidebarCollapsed sx={{ height: '100%', width: '100%' }}>
         <PageContainer
           style={{ display: 'flex', flex: 1, border: 0, maxWidth: '100%', width: '100%', maxHeight: '100%', height: '100%', overflow: 'hidden' }}
           id="page-container"
