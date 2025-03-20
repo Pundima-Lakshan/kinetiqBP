@@ -3,7 +3,7 @@ import { useSyncedRef } from '@/utils';
 import { Form } from '@pundima-lakshan/bpmn-form-extended';
 import { forwardRef, useEffect, useImperativeHandle, useRef, type ForwardedRef } from 'react';
 
-export type FormViewerCustomEventNames = 'fileEditor.open';
+export type FormViewerCustomEventNames = 'fileEditor.open' | 'pdfTemplate.edit' | 'pdfTemplate.new';
 
 export interface KBPFormViewerProps {
   submitHandler?: (event: unknown) => void;
@@ -27,77 +27,88 @@ export interface KBPFormViewerRefObj {
 
 export type KBPFormViewerRef = ForwardedRef<KBPFormViewerRefObj | null>;
 
-export const KBPFormViewer = forwardRef(
-  ({ changedHandler, submitHandler, schema, data, customEventHandler, isReadOnly }: KBPFormViewerProps, ref: KBPFormViewerRef) => {
-    const formRef = useRef<typeof Form | null>(null);
-    const formContainerRef = useRef<HTMLDivElement | null>(null);
-    const submitHandlerRef = useSyncedRef({ value: submitHandler });
-    const changedHandlerRef = useSyncedRef({ value: changedHandler });
+export const KbpFormViewerRender = (
+  { changedHandler, submitHandler, schema, data, customEventHandler, isReadOnly }: KBPFormViewerProps,
+  ref: KBPFormViewerRef,
+) => {
+  const formRef = useRef<typeof Form | null>(null);
+  const formContainerRef = useRef<HTMLDivElement | null>(null);
+  const submitHandlerRef = useSyncedRef({ value: submitHandler });
+  const changedHandlerRef = useSyncedRef({ value: changedHandler });
 
-    const programmaticEventRef = useRef(2);
+  const programmaticEventRef = useRef(2);
 
-    useImperativeHandle(ref, () => {
-      const getSubmitResponse = () => {
-        programmaticEventRef.current += 2;
-        return formRef.current?.submit();
-      };
-      const getSchema = () => {
-        return formRef.current._state.schema;
-      };
-      return {
-        getSubmitResponse,
-        getSchema,
-      };
-    }, []);
+  useImperativeHandle(ref, () => {
+    const getSubmitResponse = () => {
+      programmaticEventRef.current += 2;
+      return formRef.current?.submit();
+    };
+    const getSchema = () => {
+      return formRef.current._state.schema;
+    };
+    return {
+      getSubmitResponse,
+      getSchema,
+    };
+  }, []);
 
-    useEffect(() => {
-      const form = new Form({
-        container: formContainerRef.current,
-      }).extendedForm;
-      formRef.current = form;
+  useEffect(() => {
+    const form = new Form({
+      container: formContainerRef.current,
+    }).extendedForm;
+    formRef.current = form;
 
-      const initializeForm = async () => {
-        if (isReadOnly) {
-          schema.components.forEach((component) => {
-            component.readonly = true;
-          });
-          const filteredComponents = schema.components.filter((component) => component.type !== 'button');
-          schema.components = filteredComponents;
+    const initializeForm = async () => {
+      if (isReadOnly) {
+        schema.components.forEach((component) => {
+          component.readonly = true;
+        });
+        const filteredComponents = schema.components.filter((component) => component.type !== 'button');
+        schema.components = filteredComponents;
+      }
+
+      const { warnings } = await form.importSchema(schema, data);
+      if (warnings.length > 0) console.warn('Form <warnings>', warnings);
+
+      form.on('submit', (event: unknown) => {
+        if (programmaticEventRef.current > 0) {
+          programmaticEventRef.current -= 1;
+          return;
         }
+        submitHandlerRef.current?.(event);
+      });
 
-        const { warnings } = await form.importSchema(schema, data);
-        if (warnings.length > 0) console.warn('Form <warnings>', warnings);
+      form.on('changed', 500, (event: unknown) => {
+        if (programmaticEventRef.current > 0) {
+          programmaticEventRef.current -= 1;
+          return;
+        }
+        programmaticEventRef.current += 2;
+        const submitResult = form.submit();
+        changedHandlerRef.current?.({ event, submitResult });
+      });
 
-        form.on('submit', (event: unknown) => {
-          if (programmaticEventRef.current > 0) {
-            programmaticEventRef.current -= 1;
-            return;
-          }
-          submitHandlerRef.current?.(event);
-        });
+      form.on('fileEditor.open', (event: unknown) => {
+        customEventHandler?.({ event, name: 'fileEditor.open' });
+      });
 
-        form.on('changed', 500, (event: unknown) => {
-          if (programmaticEventRef.current > 0) {
-            programmaticEventRef.current -= 1;
-            return;
-          }
-          programmaticEventRef.current += 2;
-          const submitResult = form.submit();
-          changedHandlerRef.current?.({ event, submitResult });
-        });
+      form.on('pdfTemplate.new', (event: unknown) => {
+        customEventHandler?.({ event, name: 'pdfTemplate.new' });
+      });
 
-        form.on('fileEditor.open', (event: unknown) => {
-          customEventHandler?.({ event, name: 'fileEditor.open' });
-        });
-      };
+      form.on('pdfTemplate.edit', (event: unknown) => {
+        customEventHandler?.({ event, name: 'pdfTemplate.edit' });
+      });
+    };
 
-      void initializeForm();
+    void initializeForm();
 
-      return () => {
-        form.destroy();
-      };
-    }, [changedHandlerRef, data, schema, submitHandlerRef]);
+    return () => {
+      form.destroy();
+    };
+  }, [changedHandlerRef, data, schema, submitHandlerRef]);
 
-    return <div ref={formContainerRef} style={{ width: '100%', height: '100%' }} />;
-  },
-);
+  return <div ref={formContainerRef} style={{ width: '100%', height: '100%' }} />;
+};
+
+export const KBPFormViewer = forwardRef(KbpFormViewerRender);

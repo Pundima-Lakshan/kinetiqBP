@@ -30,6 +30,7 @@ export interface PdfDesignerProps {
 
 export interface PdfDesignerRefObj {
   generatePdf: () => Promise<File | undefined>;
+  generateStringifiedTemplate: () => string | undefined;
 }
 
 export type PdfDesignerRef = ForwardedRef<PdfDesignerRefObj>;
@@ -51,6 +52,10 @@ export const PdfDesignerRenderer = (
         const result = await generatePdf(designerRef.current);
         if (!result) return;
         return new File([result], initialPdfName ?? 'updated.pdf', { type: 'application/pdf' });
+      },
+      generateStringifiedTemplate: () => {
+        if (!designerRef.current) return;
+        return JSON.stringify(designerRef.current.getTemplate());
       },
     };
   }, []);

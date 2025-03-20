@@ -45,8 +45,8 @@ importers:
         specifier: 5.2.11
         version: 5.2.11(@pdfme/common@5.2.11(antd@5.22.7(date-fns@4.1.0)(luxon@3.5.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(form-render@2.5.1(@types/react@18.3.12)(antd@5.22.7(date-fns@4.1.0)(luxon@3.5.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@pdfme/schemas@5.2.11(@pdfme/common@5.2.11(antd@5.22.7(date-fns@4.1.0)(luxon@3.5.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(form-render@2.5.1(@types/react@18.3.12)(antd@5.22.7(date-fns@4.1.0)(luxon@3.5.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))))(@types/react@18.3.12)(date-fns@4.1.0)(luxon@3.5.0)
       '@pundima-lakshan/bpmn-form-extended':
-        specifier: 0.1.12
-        version: 0.1.12(@bpmn-io/form-js@1.11.3(@lezer/common@1.2.3))(@lezer/common@1.2.3)
+        specifier: 0.1.15
+        version: 0.1.15(@bpmn-io/form-js@1.11.3(@lezer/common@1.2.3))(@lezer/common@1.2.3)
       '@tanstack/react-query':
         specifier: 5.66.0
         version: 5.66.0(react@18.3.1)
@@ -1108,8 +1108,8 @@ packages:
   '@popperjs/core@2.11.8':
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
 
-  '@pundima-lakshan/bpmn-form-extended@0.1.12':
-    resolution: {integrity: sha512-1eBAuNJsxX9x+IH8+kSRb0d45QyD1ggiiVkpM0v9w36kx+NVffJ2+IJ+dxNaxh5GjuWrDzOgnQ6Ds0+Pbs9eEg==}
+  '@pundima-lakshan/bpmn-form-extended@0.1.15':
+    resolution: {integrity: sha512-q0GjxvAfpGn8Pjtw4gN108pETiSpy1ajS9VcaZmpxxzq0JIys8UmzGOijKhNPT/M1fj7uqK6Xkt535T9LsRNYw==}
     peerDependencies:
       '@bpmn-io/form-js': 1.9.0
 
@@ -4856,7 +4856,7 @@ snapshots:
 
   '@popperjs/core@2.11.8': {}
 
-  '@pundima-lakshan/bpmn-form-extended@0.1.12(@bpmn-io/form-js@1.11.3(@lezer/common@1.2.3))(@lezer/common@1.2.3)':
+  '@pundima-lakshan/bpmn-form-extended@0.1.15(@bpmn-io/form-js@1.11.3(@lezer/common@1.2.3))(@lezer/common@1.2.3)':
     dependencies:
       '@bpmn-io/form-js': 1.11.3(@lezer/common@1.2.3)
       '@bpmn-io/properties-panel': 3.21.0(@lezer/common@1.2.3)

@@ -170,22 +170,24 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
 
   const customEventHandler = async ({ event, name }: { event: unknown; name: FormViewerCustomEventNames }) => {
     switch (name) {
-      case 'fileEditor.open': {
-        const typedEvent = event as { files: File[]; index: number; field: FormComponent };
-        const files = typedEvent.files;
-        let filesSelectIndex = 0;
-        if (files.length > 1) {
-          const result = await dialogs.open(RadioGroupDialog, { label: 'File to edit', options: files.map((f, i) => ({ label: f.name, value: i })) });
-          if (result != null) {
-            filesSelectIndex = Number(result.value);
-          }
-        }
-        const result = await dialogs.open(PdfEditorDialog, { pdfFile: files[filesSelectIndex] });
+      case 'pdfTemplate.new': {
+        const typedEvent = event as { files: (string | ArrayBuffer)[]; index: number; field: FormComponent };
+        const result = await dialogs.open(PdfEditorDialog, { pdfFile: typedEvent.files[0] });
         if (result) {
-          files[filesSelectIndex] = result.newPdf;
           setFormData((prev) => ({
             ...prev,
-            [typedEvent.field.key]: files,
+            [typedEvent.field.key]: result.stringifiedTemplate,
+          }));
+        }
+        break;
+      }
+      case 'pdfTemplate.edit': {
+        const typedEvent = event as { files: string[]; index: number; field: FormComponent };
+        const result = await dialogs.open(PdfEditorDialog, { templateFile: typedEvent.files[0] });
+        if (result) {
+          setFormData((prev) => ({
+            ...prev,
+            [typedEvent.field.key]: result.stringifiedTemplate,
           }));
         }
       }

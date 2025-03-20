@@ -1,39 +1,34 @@
-import { DialogConfirmationActions, LoaderLinear } from '@/components/atoms';
+import { DialogConfirmationActions } from '@/components/atoms';
 import { PdfDesigner, PdfDesignerRefObj } from '@/components/organisms';
 import { defaultDialogContentProps, defaultDialogProps } from '@/components/utils';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
+import { Template } from '@pdfme/common';
 import { DialogProps } from '@toolpad/core';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 interface PdfEditorDialogPayload {
-  pdfFile: File;
+  pdfFile?: string | ArrayBuffer;
+  templateFile?: string;
 }
 
 interface PdfEditorDialogResult {
-  newPdf: File;
+  stringifiedTemplate: string | void;
 }
 
 export const PdfEditorDialog = ({ open, onClose, payload }: DialogProps<PdfEditorDialogPayload, PdfEditorDialogResult | void>) => {
-  const [initialPdf, setInitialPdf] = useState<ArrayBuffer | undefined>();
+  const [initialPdf] = useState<ArrayBuffer | string | undefined>(payload.pdfFile);
+  const [initialTemplate] = useState<Template | undefined>(() => {
+    if (!payload.templateFile) return;
+    return JSON.parse(payload.templateFile);
+  });
 
   const pdfDesignerRef = useRef<PdfDesignerRefObj>(null);
 
-  useEffect(() => {
-    payload.pdfFile
-      .arrayBuffer()
-      .then((ab) => {
-        setInitialPdf(ab);
-      })
-      .catch((error) => {
-        console.error(`Error in getting the arraybuffer ${error}`);
-      });
-  }, [payload.pdfFile]);
-
-  const handleConfirm = async () => {
-    const result = await pdfDesignerRef.current?.generatePdf();
+  const handleConfirm = () => {
+    const result = pdfDesignerRef.current?.generateStringifiedTemplate();
     if (result) {
       void onClose({
-        newPdf: result,
+        stringifiedTemplate: result,
       });
     }
   };
@@ -43,7 +38,7 @@ export const PdfEditorDialog = ({ open, onClose, payload }: DialogProps<PdfEdito
       <DialogTitle>Edit Pdf</DialogTitle>
       <DialogContent {...defaultDialogContentProps}>
         {initialPdf && <PdfDesigner initialPdf={initialPdf} ref={pdfDesignerRef} />}
-        {!initialPdf && <LoaderLinear />}
+        {initialTemplate && <PdfDesigner initialTemplate={initialTemplate} ref={pdfDesignerRef} />}
       </DialogContent>
       <DialogConfirmationActions onConfirm={handleConfirm} confirmLabel="Update Pdf" onCancel={() => onClose()} isLoading={false} />
     </Dialog>
