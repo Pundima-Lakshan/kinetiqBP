@@ -8,7 +8,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PdfTemplateFilesPostRequestData {
+public class PdfTemplatePostRequestData {
     @NonNull
     private String id;
 

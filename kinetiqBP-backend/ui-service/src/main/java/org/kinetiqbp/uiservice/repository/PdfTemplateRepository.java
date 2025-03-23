@@ -1,4 +1,7 @@
 package org.kinetiqbp.uiservice.repository;
 
-public interface PdfTemplateRepository {
+import org.kinetiqbp.uiservice.model.PdfTemplate;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PdfTemplateRepository extends JpaRepository<PdfTemplate, String> {
 }
