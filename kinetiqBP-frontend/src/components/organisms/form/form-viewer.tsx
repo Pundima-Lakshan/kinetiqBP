@@ -106,7 +106,7 @@ export const KbpFormViewerRender = (
     return () => {
       form.destroy();
     };
-  }, [changedHandlerRef, data, schema, submitHandlerRef]);
+  }, [changedHandlerRef, data, schema, isReadOnly, submitHandlerRef]);
 
   return <div ref={formContainerRef} style={{ width: '100%', height: '100%' }} />;
 };
