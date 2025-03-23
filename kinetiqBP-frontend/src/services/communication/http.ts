@@ -535,3 +535,24 @@ export const postPdfTemplate = async ({ files, pdfTemplateEntries }: PostPdfTemp
 export const getPdfTemplates = async () => {
   return await get<Array<PdfTemplateEntry>>(`${ui_service_url}/pdf-templates`);
 };
+
+interface PdfTemplateUserInvolvement {
+  id: string;
+  date: Date;
+  pdfTemplate: PdfTemplateEntry;
+}
+
+interface GetPdfTemplateResponse {
+  id: string;
+  createdDate: Date;
+  createdBy: UiServiceUser;
+  modifiedDate: Date;
+  lastModifiedBy: UiServiceUser;
+  userInvolvements: PdfTemplateUserInvolvement[];
+  size: number;
+  versionId: string;
+}
+
+export const getPdfTemplate = async (pdfTemplateId: string) => {
+  return await get<GetPdfTemplateResponse>(`${ui_service_url}/pdf-templates/${pdfTemplateId}`);
+};

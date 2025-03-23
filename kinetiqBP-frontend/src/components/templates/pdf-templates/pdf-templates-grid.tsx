@@ -7,6 +7,7 @@ import { Button, IconButton } from '@mui/material';
 import type { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useDialogs } from '@toolpad/core';
 import { useState } from 'react';
+import { ViewPdfTemplateDialog } from './view-pdf-template-dialog';
 
 type PdfTemplateRowModel = PdfTemplateEntry;
 
@@ -56,7 +57,7 @@ const ShowMoreActions = (params: GridRenderCellParams<PdfTemplateRowModel>) => {
       size="small"
       tabIndex={params.hasFocus ? 0 : -1}
       onClick={() => {
-        // dialogs.open(ViewUserDialog, { userId: params.row.id });
+        dialogs.open(ViewPdfTemplateDialog, params.row.id);
       }}
     >
       <OpenInFullIcon />

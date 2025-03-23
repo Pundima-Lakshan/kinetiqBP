@@ -147,7 +147,7 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
   const customEventHandler = async ({ event, name }: { event: unknown; name: FormViewerCustomEventNames }) => {
     switch (name) {
       case 'pdfTemplate.new': {
-        const typedEvent = event as { files: (string | ArrayBuffer)[]; index: number; field: FormComponent };
+        const typedEvent = event as { files: File[]; index: number; field: FormComponent };
         const result = await dialogs.open(PdfEditorDialog, { pdfFile: typedEvent.files[0] });
         if (result) {
           setFormData((prev) => ({

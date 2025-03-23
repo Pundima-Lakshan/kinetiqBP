@@ -1,13 +1,13 @@
 import { DialogConfirmationActions } from '@/components/atoms';
-import { PdfDesigner, PdfDesignerRefObj } from '@/components/organisms';
+import { PdfDesigner, PdfDesignerRefObj, readFile } from '@/components/organisms';
 import { defaultDialogContentProps, defaultDialogProps } from '@/components/utils';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import { Template } from '@pdfme/common';
 import { DialogProps } from '@toolpad/core';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface PdfEditorDialogPayload {
-  pdfFile?: string | ArrayBuffer;
+  pdfFile?: File;
   templateFile?: string;
 }
 
@@ -21,7 +21,7 @@ export interface TemplateData {
 }
 
 export const PdfEditorDialog = ({ open, onClose, payload }: DialogProps<PdfEditorDialogPayload, PdfEditorDialogResult | void>) => {
-  const [initialPdf] = useState<ArrayBuffer | string | undefined>(payload.pdfFile);
+  const [initialPdf, setInitialPdf] = useState<ArrayBuffer | string | undefined>();
   const [initialTemplateData] = useState<TemplateData | undefined>(() => {
     if (!payload.templateFile) return;
     return JSON.parse(payload.templateFile);
@@ -35,11 +35,21 @@ export const PdfEditorDialog = ({ open, onClose, payload }: DialogProps<PdfEdito
       void onClose({
         stringifiedTemplateData: JSON.stringify({
           template: result,
-          fileName: initialTemplateData?.fileName ?? 'file',
+          fileName: payload.pdfFile?.name ?? initialTemplateData?.fileName ?? 'file',
         } satisfies TemplateData),
       });
     }
   };
+
+  useEffect(() => {
+    if (!payload.pdfFile) return;
+    readFile(payload.pdfFile, 'dataURL').then((result) => {
+      setInitialPdf(result);
+    });
+    return () => {
+      setInitialPdf(undefined);
+    };
+  }, [payload.pdfFile]);
 
   return (
     <Dialog {...defaultDialogProps} fullWidth open={open} onClose={() => onClose()} closeAfterTransition={false}>

@@ -27,4 +27,5 @@ export const queryKeys = {
   processInstanceVariables: 'processInstanceVariables',
 
   pdfTemplates: 'pdfTemplates',
+  pdfTemplate: 'pdfTemplate',
 } as const;
