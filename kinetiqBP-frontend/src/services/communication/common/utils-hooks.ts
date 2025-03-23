@@ -9,7 +9,6 @@ interface MutationSuccessErrorCallback<T = unknown> {
   successMessage?: string;
   errorMessage?: string;
   error: DefaultError | null;
-  explicit?: boolean;
   data?: T;
 }
 
@@ -20,17 +19,14 @@ export const useMutationSuccessErrorCallback = <T = unknown>({
   errorMessage,
   successMessage,
   error,
-  explicit,
   data,
 }: MutationSuccessErrorCallback<T>) => {
   const notification = useNotifications();
 
   useEffect(() => {
-    return; // TODO rmove this
-
     if (mutationStatus === 'success') {
-      if (explicit ? !!successMessage : true) {
-        notification.show(successMessage ?? 'Success', {
+      if (successMessage) {
+        notification.show(successMessage, {
           severity: 'success',
         });
       }
@@ -39,8 +35,8 @@ export const useMutationSuccessErrorCallback = <T = unknown>({
     }
 
     if (mutationStatus === 'error') {
-      if (explicit ? !!errorMessage : true) {
-        notification.show(errorMessage ?? 'Failed', {
+      if (errorMessage) {
+        notification.show(errorMessage, {
           severity: 'error',
         });
       }

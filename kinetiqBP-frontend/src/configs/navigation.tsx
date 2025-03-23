@@ -31,17 +31,30 @@ export const navigation: Navigation = [
   },
   {
     kind: 'header',
-    title: 'Workflows',
-  },
-  {
-    segment: browserRoutesCollection.WorkflowDefinitions.segment,
-    title: browserRoutesCollection.WorkflowDefinitions.title,
-    icon: <AssignmentIcon />,
+    title: 'Workflow Instances',
   },
   {
     segment: browserRoutesCollection.WorkflowInstances.segment,
     pattern: `${browserRoutesCollection.WorkflowInstances.segment}{/:workflowDefinitionId}?{/:workflowInstanceId}?`,
     title: browserRoutesCollection.WorkflowInstances.title,
+    icon: <AssignmentIcon />,
+  },
+  {
+    segment: browserRoutesCollection.PdfTemplates.segment,
+    pattern: `${browserRoutesCollection.PdfTemplates.segment}{/:pdfTemplateId}`,
+    title: browserRoutesCollection.PdfTemplates.title,
+    icon: <AssignmentIcon />,
+  },
+  {
+    kind: 'divider',
+  },
+  {
+    kind: 'header',
+    title: 'Workflow Definitions',
+  },
+  {
+    segment: browserRoutesCollection.WorkflowDefinitions.segment,
+    title: browserRoutesCollection.WorkflowDefinitions.title,
     icon: <AssignmentIcon />,
   },
   {

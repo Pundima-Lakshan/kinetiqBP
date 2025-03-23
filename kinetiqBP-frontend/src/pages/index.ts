@@ -10,3 +10,4 @@ export * from './workflow-definitions';
 export * from './workflow-historic-instances';
 export * from './workflow-instance';
 export * from './workflow-instances';
+export * from './pdf-templates';

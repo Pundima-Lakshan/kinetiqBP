@@ -1,6 +1,7 @@
 import { mutationKeys, mutationType, useMutationBuilder } from './common';
 import {
   postFormDefinition,
+  postPdfTemplate,
   postStartWorkflowInstance,
   postTaskAction,
   postWorkflowDefinition,
@@ -79,5 +80,12 @@ export const usePostTaskAction = () => {
   return useMutationBuilder({
     mutationKey: [mutationKeys.task, mutationType.post],
     mutationFn: postTaskAction,
+  });
+};
+
+export const usePostPdfTemplates = () => {
+  return useMutationBuilder({
+    mutationKey: [mutationKeys.pdfTemplate, mutationType.post],
+    mutationFn: postPdfTemplate,
   });
 };

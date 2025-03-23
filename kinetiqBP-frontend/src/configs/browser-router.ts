@@ -5,6 +5,7 @@ import {
   Heatmaps,
   Home,
   PageNotFound,
+  PdfTemplates,
   Statistics,
   Tasks,
   Users,
@@ -19,6 +20,7 @@ export const browserRoutesCollection = {
   Dashboard: { segment: '', title: 'Dashboard' },
   WorkflowDefinitions: { segment: 'workflow-definitions', title: 'Workflow Definitions' },
   WorkflowInstances: { segment: 'workflow-instances', title: 'Workflow Instances' },
+  PdfTemplates: { segment: 'pdf-templates', title: 'PDF Templates' },
   WorkflowHistoricInstances: { segment: 'workflow-historic-instances', title: 'Workflow Historic Instances' },
   FormDefinitions: { segment: 'form-definitions', title: 'Form Definitions' },
   Tasks: { segment: 'tasks', title: 'Tasks' },
@@ -58,6 +60,14 @@ export const browserRouter = createBrowserRouter([
       {
         path: getPath(browserRoutesCollection.WorkflowHistoricInstances.segment),
         Component: WorkflowHistoricInstances,
+      },
+      {
+        path: `${getPath(browserRoutesCollection.WorkflowHistoricInstances.segment)}/:workflowDefinitionId/:workflowInstanceId`,
+        Component: WorkFlowInstance,
+      },
+      {
+        path: getPath(browserRoutesCollection.PdfTemplates.segment),
+        Component: PdfTemplates,
       },
       {
         path: `${getPath(browserRoutesCollection.WorkflowHistoricInstances.segment)}/:workflowDefinitionId/:workflowInstanceId`,

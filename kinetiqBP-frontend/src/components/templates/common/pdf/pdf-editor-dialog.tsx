@@ -12,12 +12,17 @@ interface PdfEditorDialogPayload {
 }
 
 interface PdfEditorDialogResult {
-  stringifiedTemplate: string | void;
+  stringifiedTemplateData: string | void;
+}
+
+export interface TemplateData {
+  template: Template;
+  fileName: string;
 }
 
 export const PdfEditorDialog = ({ open, onClose, payload }: DialogProps<PdfEditorDialogPayload, PdfEditorDialogResult | void>) => {
   const [initialPdf] = useState<ArrayBuffer | string | undefined>(payload.pdfFile);
-  const [initialTemplate] = useState<Template | undefined>(() => {
+  const [initialTemplateData] = useState<TemplateData | undefined>(() => {
     if (!payload.templateFile) return;
     return JSON.parse(payload.templateFile);
   });
@@ -25,10 +30,13 @@ export const PdfEditorDialog = ({ open, onClose, payload }: DialogProps<PdfEdito
   const pdfDesignerRef = useRef<PdfDesignerRefObj>(null);
 
   const handleConfirm = () => {
-    const result = pdfDesignerRef.current?.generateStringifiedTemplate();
+    const result = pdfDesignerRef.current?.generateTemplate();
     if (result) {
       void onClose({
-        stringifiedTemplate: result,
+        stringifiedTemplateData: JSON.stringify({
+          template: result,
+          fileName: initialTemplateData?.fileName ?? 'file',
+        } satisfies TemplateData),
       });
     }
   };
@@ -38,7 +46,7 @@ export const PdfEditorDialog = ({ open, onClose, payload }: DialogProps<PdfEdito
       <DialogTitle>Edit Pdf</DialogTitle>
       <DialogContent {...defaultDialogContentProps}>
         {initialPdf && <PdfDesigner initialPdf={initialPdf} ref={pdfDesignerRef} />}
-        {initialTemplate && <PdfDesigner initialTemplate={initialTemplate} ref={pdfDesignerRef} />}
+        {initialTemplateData && <PdfDesigner initialTemplate={initialTemplateData.template} ref={pdfDesignerRef} />}
       </DialogContent>
       <DialogConfirmationActions onConfirm={handleConfirm} confirmLabel="Update Pdf" onCancel={() => onClose()} isLoading={false} />
     </Dialog>

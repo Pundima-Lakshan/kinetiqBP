@@ -9,6 +9,7 @@ import {
   getHistoricActivityInstance,
   getHistoricProcessInstanceVariables,
   getHistoricTaskInstance,
+  getPdfTemplates,
   getProcessInstanceVariables,
   getUiServiceUsers,
   getWorkflowDefinitionModel,
@@ -147,5 +148,12 @@ export const useGetHistoricProcessInstanceVariables = (processInstanceId: string
     queryKey: [queryKeys.historicProcessInstanceVariables, processInstanceId],
     queryFn: async () => getHistoricProcessInstanceVariables(processInstanceId),
     enabled,
+  });
+};
+
+export const useGetPdfTemplates = () => {
+  return useQueryBuilder({
+    queryKey: [queryKeys.pdfTemplates],
+    queryFn: getPdfTemplates,
   });
 };

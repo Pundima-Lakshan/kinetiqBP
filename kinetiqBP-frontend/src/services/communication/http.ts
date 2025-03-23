@@ -68,7 +68,7 @@ export interface UiServiceUser {
   email: string | null;
 }
 
-export type FormSchemaType = 'textfield' | 'number' | 'checkbox' | 'textarea' | 'datetime' | 'image' | 'button' | 'select';
+export type FormSchemaType = 'textfield' | 'number' | 'checkbox' | 'textarea' | 'datetime' | 'image' | 'button' | 'select' | 'pdf-template';
 
 export type FormComponent = {
   label: string;
@@ -508,4 +508,30 @@ export const postTaskAction = async ({ action = 'complete', taskId, variables }:
       responseType: 'none',
     },
   );
+};
+
+export interface PdfTemplateEntry {
+  id: string;
+  createdDate: Date;
+  modifiedDate: Date;
+  createdBy: string;
+  lastModifiedBy: string;
+}
+
+interface PostPdfTemplateArg {
+  files: File[];
+  pdfTemplateEntries: PdfTemplateEntry[];
+}
+
+export const postPdfTemplate = async ({ files, pdfTemplateEntries }: PostPdfTemplateArg) => {
+  const pdfTemplateFileFormData = new FormData();
+  files.forEach((file) => {
+    pdfTemplateFileFormData.append(`file-${file.name}`, file);
+  });
+  pdfTemplateFileFormData.append('data', JSON.stringify(pdfTemplateEntries));
+  return await postFormData(`${ui_service_url}/pdf-templates`, pdfTemplateFileFormData);
+};
+
+export const getPdfTemplates = async () => {
+  return await get<Array<PdfTemplateEntry>>(`${ui_service_url}/pdf-templates`);
 };

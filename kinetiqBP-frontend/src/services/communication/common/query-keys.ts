@@ -25,4 +25,6 @@ export const queryKeys = {
   historicProcessInstanceVariables: 'historicProcessInstanceVariables',
 
   processInstanceVariables: 'processInstanceVariables',
+
+  pdfTemplates: 'pdfTemplates',
 } as const;

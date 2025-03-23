@@ -12,6 +12,8 @@ export const mutationKeys = {
   processInstanceVariables: 'processInstanceVariables',
 
   task: 'task',
+
+  pdfTemplate: 'pdfTemplate',
 } as const;
 
 export const mutationType = {

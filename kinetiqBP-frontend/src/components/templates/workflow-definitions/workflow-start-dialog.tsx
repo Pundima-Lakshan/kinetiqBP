@@ -1,14 +1,16 @@
-import { ContainerBox, DialogConfirmationActions, LoaderLinear, RadioGroupDialog } from '@/components/atoms';
+import { ContainerBox, DialogConfirmationActions, LoaderLinear } from '@/components/atoms';
 import { BpmnToXml, FormViewerCustomEventNames, INITIATOR, KBPFormViewer, type KBPFormViewerRefObj } from '@/components/organisms';
 import { defaultDialogContentProps, defaultDialogProps } from '@/components/utils';
 import { getFormData } from '@/logic';
 import {
   FormComponent,
   FormSchemaType,
+  PdfTemplateEntry,
   useGetFormDefinition,
   useGetWorkflowDefinitionModel,
   useGetWorkflowDefinitionXml,
   useMutationSuccessErrorCallback,
+  usePostPdfTemplates,
   usePostStartWorkflowInstance,
   usePutProcessInstanceVariables,
   type FormDefinition,
@@ -51,6 +53,13 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
     error: errorPutProcessInstanceVariables,
   } = usePutProcessInstanceVariables();
 
+  const {
+    mutate: postPdfTemplates,
+    status: statusPostPdfTemplates,
+    isPending: isPendingPostPdfTemplates,
+    error: errorPostPdfTemplates,
+  } = usePostPdfTemplates();
+
   const { data: workflowDefinitionModel, isLoading: isLoadingWorkflowDefinitionModel } = useGetWorkflowDefinitionModel(
     workflowStartDialogPayload.workflowDefinitionId,
   );
@@ -63,6 +72,103 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
     enabled: startFormId != null,
     select: removeButtonsFromFormDefinition,
   });
+
+  const handleSubmitProcessData = (processInstanceResponse?: ProcessInstanceResponse) => {
+    if (noStartForm.form || !processInstanceResponse || !loggedInUserId) return;
+
+    const filesData = getFormData({
+      kbpFormViewerRef,
+      dialogs,
+      isFiles: true,
+    });
+
+    const data = getFormData({
+      dialogs,
+      kbpFormViewerRef,
+    });
+
+    if (!data) return;
+
+    if (filesData) {
+      filesData.forEach((fd) => {
+        const dataMap = new Map(
+          data.map((d, i) => {
+            return [d.name, { data: d, index: i }];
+          }),
+        );
+        const correspondingData = dataMap.get(fd.formKey);
+        if (!correspondingData) {
+          console.error('Not found corresponding form data item');
+          return;
+        }
+        data[correspondingData.index].value = fd.file.name;
+      });
+
+      const files = filesData.map((f) => f.file);
+      const pdfTemplateEntries: PdfTemplateEntry[] = filesData.map((f) => ({
+        id: f.file.name,
+        createdBy: loggedInUserId,
+        lastModifiedBy: loggedInUserId,
+        createdDate: new Date(),
+        modifiedDate: new Date(),
+      }));
+
+      postPdfTemplates({
+        files,
+        pdfTemplateEntries,
+      });
+    }
+
+    data.push({
+      name: INITIATOR,
+      type: 'string',
+      value: loggedInUserId,
+    });
+
+    putProcessInstanceVariables({
+      processInstanceId: processInstanceResponse.id,
+      variables: data,
+    });
+  };
+
+  const handleConfirm = () => {
+    if (!loggedInUserId) return;
+    const data = getFormData({
+      dialogs,
+      kbpFormViewerRef,
+    });
+    if (formDefinition && !data) {
+      setNoStartForm((prev) => ({ ...prev, start: true }));
+      return;
+    }
+    postStartWorkflowInstance({ processDefinitionId: workflowStartDialogPayload.workflowDefinitionId, startUserId: loggedInUserId });
+  };
+
+  const customEventHandler = async ({ event, name }: { event: unknown; name: FormViewerCustomEventNames }) => {
+    switch (name) {
+      case 'pdfTemplate.new': {
+        const typedEvent = event as { files: (string | ArrayBuffer)[]; index: number; field: FormComponent };
+        const result = await dialogs.open(PdfEditorDialog, { pdfFile: typedEvent.files[0] });
+        if (result) {
+          setFormData((prev) => ({
+            ...prev,
+            [typedEvent.field.key]: result.stringifiedTemplateData,
+          }));
+        }
+        break;
+      }
+      case 'pdfTemplate.edit': {
+        const typedEvent = event as { files: string[]; index: number; field: FormComponent };
+        const result = await dialogs.open(PdfEditorDialog, { templateFile: typedEvent.files[0] });
+        if (result) {
+          setFormData((prev) => ({
+            ...prev,
+            [typedEvent.field.key]: result.stringifiedTemplateData,
+          }));
+        }
+      }
+    }
+  };
 
   useEffect(() => {
     if (!workflowDefinitionModel || !workflowDefinitionXml) return;
@@ -126,27 +232,6 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
     }));
   }, [workflowDefinitionXml, workflowDefinitionModel, formDefinition]);
 
-  const handleSubmitProcessVariables = (processInstanceResponse?: ProcessInstanceResponse) => {
-    if (noStartForm.form || !processInstanceResponse || !loggedInUserId) return;
-
-    const data = getFormData({
-      dialogs,
-      kbpFormViewerRef,
-    });
-    if (!data) return;
-
-    data.push({
-      name: INITIATOR,
-      type: 'string',
-      value: loggedInUserId,
-    });
-
-    putProcessInstanceVariables({
-      processInstanceId: processInstanceResponse.id,
-      variables: data,
-    });
-  };
-
   useEffect(() => {
     if (!noStartForm.form || !noStartForm.start || !loggedInUserId) return;
     postStartWorkflowInstance({
@@ -155,57 +240,21 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
     });
   }, [noStartForm]);
 
-  const handleConfirm = () => {
-    if (!loggedInUserId) return;
-    const data = getFormData({
-      dialogs,
-      kbpFormViewerRef,
-    });
-    if (formDefinition && !data) {
-      setNoStartForm((prev) => ({ ...prev, start: true }));
-      return;
-    }
-    postStartWorkflowInstance({ processDefinitionId: workflowStartDialogPayload.workflowDefinitionId, startUserId: loggedInUserId });
-  };
-
-  const customEventHandler = async ({ event, name }: { event: unknown; name: FormViewerCustomEventNames }) => {
-    switch (name) {
-      case 'pdfTemplate.new': {
-        const typedEvent = event as { files: (string | ArrayBuffer)[]; index: number; field: FormComponent };
-        const result = await dialogs.open(PdfEditorDialog, { pdfFile: typedEvent.files[0] });
-        if (result) {
-          setFormData((prev) => ({
-            ...prev,
-            [typedEvent.field.key]: result.stringifiedTemplate,
-          }));
-        }
-        break;
-      }
-      case 'pdfTemplate.edit': {
-        const typedEvent = event as { files: string[]; index: number; field: FormComponent };
-        const result = await dialogs.open(PdfEditorDialog, { templateFile: typedEvent.files[0] });
-        if (result) {
-          setFormData((prev) => ({
-            ...prev,
-            [typedEvent.field.key]: result.stringifiedTemplate,
-          }));
-        }
-      }
-    }
-  };
-
   useMutationSuccessErrorCallback({
     mutationStatus: statusPostStartWorkflowInstance,
     error: errorPostStartWorkflowInstance,
-    explicit: true,
     data: dataPostStartWorkflowInstance,
-    onSuccess: handleSubmitProcessVariables,
+    onSuccess: handleSubmitProcessData,
   });
 
   useMutationSuccessErrorCallback({
     mutationStatus: statusPutProcessInstanceVariables,
-    successMessage: 'Workflow instance started successfully',
     error: errorPutProcessInstanceVariables,
+  });
+
+  useMutationSuccessErrorCallback({
+    mutationStatus: statusPostPdfTemplates,
+    error: errorPostPdfTemplates,
   });
 
   const isLoading =
@@ -213,7 +262,8 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
     isLoadingWorkflowDefinitionModel ||
     isPendingPostStartWorkflowInstance ||
     isLoadingFormDefinition ||
-    isPendingPutProcessInstanceVariables;
+    isPendingPutProcessInstanceVariables ||
+    isPendingPostPdfTemplates;
 
   return (
     <Dialog {...defaultDialogProps} fullWidth open={open} onClose={() => onClose()} closeAfterTransition={false}>
