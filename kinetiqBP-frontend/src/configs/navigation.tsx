@@ -67,16 +67,16 @@ export const navigation: Navigation = [
   },
   {
     kind: 'header',
-    title: 'Forms',
+    title: 'PDF Template Utils',
   },
   {
-    segment: browserRoutesCollection.FormDesigner.segment,
-    title: browserRoutesCollection.FormDesigner.title,
+    segment: browserRoutesCollection.PdfTemplateDesigner.segment,
+    title: browserRoutesCollection.PdfTemplateDesigner.title,
     icon: <DescriptionIcon />,
   },
   {
-    segment: browserRoutesCollection.FormViewer.segment,
-    title: browserRoutesCollection.FormViewer.title,
+    segment: browserRoutesCollection.PdfTemplateViewer.segment,
+    title: browserRoutesCollection.PdfTemplateViewer.title,
     icon: <DescriptionIcon />,
   },
   {

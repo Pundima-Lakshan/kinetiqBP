@@ -24,8 +24,8 @@ export const browserRoutesCollection = {
   WorkflowHistoricInstances: { segment: 'workflow-historic-instances', title: 'Workflow Historic Instances' },
   FormDefinitions: { segment: 'form-definitions', title: 'Form Definitions' },
   Tasks: { segment: 'tasks', title: 'Tasks' },
-  FormDesigner: { segment: 'form-designer', title: 'Form Designer' },
-  FormViewer: { segment: 'form-viewer', title: 'Form Viewer' },
+  PdfTemplateDesigner: { segment: 'pdf-template-designer', title: 'PDF Template Designer' },
+  PdfTemplateViewer: { segment: 'pdf-template-viewer', title: 'PDF Template Viewer' },
   Statistics: { segment: 'statistics', title: 'Statistics' },
   Heatmap: { segment: 'heatmap', title: 'Heatmap' },
   Users: { segment: 'users', title: 'Users' },
@@ -82,11 +82,11 @@ export const browserRouter = createBrowserRouter([
         Component: FormDefinitions,
       },
       {
-        path: getPath(browserRoutesCollection.FormDesigner.segment),
+        path: getPath(browserRoutesCollection.PdfTemplateDesigner.segment),
         Component: PdfDesigner,
       },
       {
-        path: getPath(browserRoutesCollection.FormViewer.segment),
+        path: getPath(browserRoutesCollection.PdfTemplateViewer.segment),
         Component: PdfForm,
       },
       {
