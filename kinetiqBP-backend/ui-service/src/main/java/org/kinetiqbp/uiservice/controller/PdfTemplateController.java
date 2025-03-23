@@ -6,15 +6,13 @@ import io.minio.Result;
 import io.minio.errors.*;
 import io.minio.messages.Item;
 import org.kinetiqbp.uiservice.dto.request.PdfTemplatePostRequestData;
+import org.kinetiqbp.uiservice.dto.response.PdfTemplateGetResponse;
 import org.kinetiqbp.uiservice.model.PdfTemplate;
 import org.kinetiqbp.uiservice.model.PdfTemplateUserInvolvement;
 import org.kinetiqbp.uiservice.service.PdfTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -45,6 +43,12 @@ public class PdfTemplateController {
         List<PdfTemplate> responses = pdfTemplateService.uploadFiles(filesList, pdfTemplateRequestDataEntries);
 
         return ResponseEntity.ok(responses);
+    }
+
+    @GetMapping("/{id}")
+    ResponseEntity<PdfTemplateGetResponse> getPdfTemplates(@PathVariable String id) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        PdfTemplateGetResponse response = pdfTemplateService.getPdfTemplate(id);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping

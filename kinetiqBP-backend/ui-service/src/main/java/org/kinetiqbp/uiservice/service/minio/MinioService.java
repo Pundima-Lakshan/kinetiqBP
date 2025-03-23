@@ -2,6 +2,7 @@ package org.kinetiqbp.uiservice.service.minio;
 
 import io.minio.ObjectWriteResponse;
 import io.minio.Result;
+import io.minio.StatObjectResponse;
 import io.minio.errors.*;
 import io.minio.messages.Item;
 import org.kinetiqbp.uiservice.configuration.minio.MinioConfiguration;
@@ -53,7 +54,7 @@ public class MinioService {
         minioServiceUtils.removeFile(minioConfiguration.getBucketName(), fileName);
     }
 
-    public String getFileStatusInfo(String fileName) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+    public StatObjectResponse getFileStatusInfo(String fileName) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         return minioServiceUtils.getFileStatusInfo(minioConfiguration.getBucketName(), fileName);
     }
 

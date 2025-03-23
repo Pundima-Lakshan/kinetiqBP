@@ -1,9 +1,11 @@
 package org.kinetiqbp.uiservice.service;
 
 import io.minio.Result;
+import io.minio.StatObjectResponse;
 import io.minio.errors.*;
 import io.minio.messages.Item;
 import org.kinetiqbp.uiservice.dto.request.PdfTemplatePostRequestData;
+import org.kinetiqbp.uiservice.dto.response.PdfTemplateGetResponse;
 import org.kinetiqbp.uiservice.model.PdfTemplate;
 import org.kinetiqbp.uiservice.model.PdfTemplateUserInvolvement;
 import org.kinetiqbp.uiservice.model.User;
@@ -93,6 +95,14 @@ public class PdfTemplateService {
 
     public List<PdfTemplate> getPdfTemplates() {
         return pdfTemplateRepository.findAll();
+    }
+
+    public PdfTemplateGetResponse getPdfTemplate(String id) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        PdfTemplate pdfTemplate = pdfTemplateRepository.findById(id).orElseThrow(() -> new NoSuchElementException("PDF template not found"));
+        StatObjectResponse statObjectResponse = minioService.getFileStatusInfo(id);
+        List<PdfTemplateUserInvolvement> userInvolvements = pdfTemplateUserInvolvementRepository.findAllByPdfTemplate(pdfTemplate);
+
+        return new PdfTemplateGetResponse(pdfTemplate, statObjectResponse, userInvolvements);
     }
 
     public List<PdfTemplateUserInvolvement> getPdfTemplateUserInvolvements() {
