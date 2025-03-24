@@ -109,6 +109,10 @@ public class PdfTemplateService {
         return pdfTemplateUserInvolvementRepository.findAll();
     }
 
+    public String getPreSignedObjectUrl(String filename) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        return minioService.getPreSignedObjectUrl(filename);
+    }
+
     public List<Result<Item>> listObjects() {
         return minioService.listObjects();
     }

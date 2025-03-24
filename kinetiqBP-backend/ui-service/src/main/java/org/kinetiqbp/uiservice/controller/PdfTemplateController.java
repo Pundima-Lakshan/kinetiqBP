@@ -51,6 +51,12 @@ public class PdfTemplateController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/file-url/{id}")
+    ResponseEntity<String> getPreSignedObjectUrl(@PathVariable String id) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        String response = pdfTemplateService.getPreSignedObjectUrl(id);
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping
     ResponseEntity<List<PdfTemplate>> getPdfTemplates() {
         List<PdfTemplate> templates = pdfTemplateService.getPdfTemplates();
