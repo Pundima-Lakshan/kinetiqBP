@@ -1,10 +1,10 @@
 import { ContainerBox, defaultDialogContentProps, defaultDialogProps, DialogConfirmationActions } from '@/components';
-import { useGetPdfTemplateVersions } from '@/services/index.ts';
+import { useGetPdfTemplate, useGetPdfTemplateVersions } from '@/services/index.ts';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import { DialogProps } from '@toolpad/core';
 
 export const ViewPdfTemplateDialog = ({ open, onClose, payload: pdfTemplateId }: DialogProps<string>) => {
-  const { data: pdfTemplateResponse, isLoading: isLoadingPdfTemplateResponse } = useGetPdfTemplateVersions(pdfTemplateId);
+  const { data: pdfTemplateResponse, isLoading: isLoadingPdfTemplateResponse } = useGetPdfTemplate(pdfTemplateId);
   const { data: pdfTemplateVersions, isLoading: isLoadingPdfTemplateVersions } = useGetPdfTemplateVersions(pdfTemplateId);
 
   const handleConfirm = () => {

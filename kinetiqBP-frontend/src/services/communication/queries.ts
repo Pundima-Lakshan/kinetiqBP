@@ -170,7 +170,7 @@ export const useGetPdfTemplate = (pdfTemplateId: string) => {
 
 export const useGetPdfTemplateVersions = (pdfTemplateId: string) => {
   return useQueryBuilder({
-    queryKey: [queryKeys.pdfTemplate, pdfTemplateId],
+    queryKey: [queryKeys.pdfTemplateVersions, pdfTemplateId],
     queryFn: async () => getPdfTemplateVersions(pdfTemplateId),
   });
 };
