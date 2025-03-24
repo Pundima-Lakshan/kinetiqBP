@@ -559,6 +559,10 @@ export const getPdfTemplate = async (pdfTemplateId: string) => {
   return await get<GetPdfTemplateResponse>(`${ui_service_url}/pdf-templates/${pdfTemplateId}`);
 };
 
+export const getPdfTemplateVersions = async (pdfTemplateId: string) => {
+  return await get<String[]>(`${ui_service_url}/pdf-templates/versions/${pdfTemplateId}`);
+};
+
 export interface TemplateData {
   template: Template;
   fileName: string;

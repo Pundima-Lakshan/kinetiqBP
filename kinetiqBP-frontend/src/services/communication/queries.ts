@@ -12,6 +12,7 @@ import {
   getPdfTemplate,
   getPdfTemplateData,
   getPdfTemplates,
+  getPdfTemplateVersions,
   getProcessInstanceVariables,
   getUiServiceUsers,
   getWorkflowDefinitionModel,
@@ -164,6 +165,13 @@ export const useGetPdfTemplate = (pdfTemplateId: string) => {
   return useQueryBuilder({
     queryKey: [queryKeys.pdfTemplate, pdfTemplateId],
     queryFn: async () => getPdfTemplate(pdfTemplateId),
+  });
+};
+
+export const useGetPdfTemplateVersions = (pdfTemplateId: string) => {
+  return useQueryBuilder({
+    queryKey: [queryKeys.pdfTemplate, pdfTemplateId],
+    queryFn: async () => getPdfTemplateVersions(pdfTemplateId),
   });
 };
 
