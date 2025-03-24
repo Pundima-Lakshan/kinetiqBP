@@ -6,7 +6,7 @@ import { AuthProvider } from 'react-oidc-context';
 export const oidcConfig: ComponentProps<typeof AuthProvider> = {
   authority: getEnvs().VITE_KEYCLOAK_URL,
   client_id: getEnvs().VITE_KEYCLOAK_CLIENT_ID,
-  redirect_uri: window.location.origin,
+  redirect_uri: window.location.toString(),
   loadUserInfo: true,
   revokeTokensOnSignout: true,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
