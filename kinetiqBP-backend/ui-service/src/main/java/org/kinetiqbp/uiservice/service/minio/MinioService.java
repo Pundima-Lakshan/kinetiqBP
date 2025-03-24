@@ -58,8 +58,16 @@ public class MinioService {
         return minioServiceUtils.getFileStatusInfo(minioConfiguration.getBucketName(), fileName);
     }
 
+    public StatObjectResponse getFileStatusInfo(String fileName, String versionId) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        return minioServiceUtils.getFileStatusInfo(minioConfiguration.getBucketName(), fileName, versionId);
+    }
+
     public String getPreSignedObjectUrl(String fileName) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         return minioServiceUtils.getPreSignedObjectUrl(minioConfiguration.getBucketName(), fileName);
+    }
+
+    public String getPreSignedObjectUrl(String fileName, String versionId) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        return minioServiceUtils.getPreSignedObjectUrl(minioConfiguration.getBucketName(), fileName, versionId);
     }
 
     public InputStream downloadFile(String fileName) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
@@ -72,6 +80,17 @@ public class MinioService {
 
     public List<Result<Item>> listObjects() {
         Iterable<Result<Item>> objects = minioServiceUtils.listObjects(minioConfiguration.getBucketName(), true);
+
+        List<Result<Item>> objectsList = new ArrayList<>();
+        for (Result<Item> object : objects) {
+            objectsList.add(object);
+        }
+
+        return objectsList;
+    }
+
+    public List<Result<Item>> listObjects(String prefix) {
+        Iterable<Result<Item>> objects = minioServiceUtils.listObjects(minioConfiguration.getBucketName(), prefix,true);
 
         List<Result<Item>> objectsList = new ArrayList<>();
         for (Result<Item> object : objects) {

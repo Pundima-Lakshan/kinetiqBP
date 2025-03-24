@@ -116,6 +116,7 @@ public class MinioServiceUtils {
                         .bucket(bucketName)
                         .prefix(prefix)
                         .recursive(recursive)
+                        .includeVersions(true)
                         .build());
     }
 
@@ -218,6 +219,15 @@ public class MinioServiceUtils {
                         .build());
     }
 
+    public StatObjectResponse getFileStatusInfo(String bucketName, String objectName, String versionId) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        return minioClient.statObject(
+                StatObjectArgs.builder()
+                        .bucket(bucketName)
+                        .object(objectName)
+                        .versionId(versionId)
+                        .build());
+    }
+
     public ObjectWriteResponse copyFile(String bucketName, String objectName, String srcBucketName, String srcObjectName) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         return minioClient.copyObject(
                 CopyObjectArgs.builder()
@@ -253,6 +263,15 @@ public class MinioServiceUtils {
         GetPresignedObjectUrlArgs args = GetPresignedObjectUrlArgs.builder()
                 .bucket(bucketName)
                 .object(objectName)
+                .method(Method.GET).build();
+        return minioClient.getPresignedObjectUrl(args);
+    }
+
+    public String getPreSignedObjectUrl(String bucketName, String objectName, String versionId) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        GetPresignedObjectUrlArgs args = GetPresignedObjectUrlArgs.builder()
+                .bucket(bucketName)
+                .object(objectName)
+                .versionId(versionId)
                 .method(Method.GET).build();
         return minioClient.getPresignedObjectUrl(args);
     }

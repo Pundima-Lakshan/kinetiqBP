@@ -21,6 +21,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/pdf-templates")
@@ -46,14 +47,28 @@ public class PdfTemplateController {
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<PdfTemplateGetResponse> getPdfTemplates(@PathVariable String id) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
-        PdfTemplateGetResponse response = pdfTemplateService.getPdfTemplate(id);
+    ResponseEntity<PdfTemplateGetResponse> getPdfTemplate(@PathVariable String id, @RequestParam Optional<String> versionId) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        PdfTemplateGetResponse response;
+
+        if (versionId.isPresent()) {
+            response = pdfTemplateService.getPdfTemplate(id, versionId.get());
+        } else {
+            response = pdfTemplateService.getPdfTemplate(id);
+        }
+
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/file-url/{id}")
-    ResponseEntity<String> getPreSignedObjectUrl(@PathVariable String id) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
-        String response = pdfTemplateService.getPreSignedObjectUrl(id);
+    ResponseEntity<String> getPreSignedObjectUrl(@PathVariable String id, @RequestParam Optional<String> versionId) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        String response;
+
+        if (versionId.isPresent()) {
+            response = pdfTemplateService.getPreSignedObjectUrl(id, versionId.get());
+        } else {
+            response = pdfTemplateService.getPreSignedObjectUrl(id);
+        }
+
         return ResponseEntity.ok(response);
     }
 
@@ -79,5 +94,17 @@ public class PdfTemplateController {
         }
 
         return ResponseEntity.ok(objectNames);
+    }
+
+    @GetMapping("/versions/{filename}")
+    ResponseEntity<List<String>> getPdfTemplateObjectVersions(@PathVariable String filename) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        List<Result<Item>> objects = pdfTemplateService.listObjects(filename);
+
+        List<String> versions = new ArrayList<>();
+        for (Result<Item> object : objects) {
+            versions.add(object.get().versionId());
+        }
+
+        return ResponseEntity.ok(versions);
     }
 }

@@ -23,6 +23,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class PdfTemplateService {
@@ -105,6 +106,14 @@ public class PdfTemplateService {
         return new PdfTemplateGetResponse(pdfTemplate, statObjectResponse, userInvolvements);
     }
 
+    public PdfTemplateGetResponse getPdfTemplate(String id, String versionId) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        PdfTemplate pdfTemplate = pdfTemplateRepository.findById(id).orElseThrow(() -> new NoSuchElementException("PDF template not found"));
+        StatObjectResponse statObjectResponse = minioService.getFileStatusInfo(id, versionId);
+        List<PdfTemplateUserInvolvement> userInvolvements = pdfTemplateUserInvolvementRepository.findAllByPdfTemplate(pdfTemplate);
+
+        return new PdfTemplateGetResponse(pdfTemplate, statObjectResponse, userInvolvements);
+    }
+
     public List<PdfTemplateUserInvolvement> getPdfTemplateUserInvolvements() {
         return pdfTemplateUserInvolvementRepository.findAll();
     }
@@ -113,7 +122,15 @@ public class PdfTemplateService {
         return minioService.getPreSignedObjectUrl(filename);
     }
 
+    public String getPreSignedObjectUrl(String filename, String versionId) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        return minioService.getPreSignedObjectUrl(filename, versionId);
+    }
+
     public List<Result<Item>> listObjects() {
         return minioService.listObjects();
+    }
+
+    public List<Result<Item>> listObjects(String prefix) {
+        return minioService.listObjects(prefix);
     }
 }
