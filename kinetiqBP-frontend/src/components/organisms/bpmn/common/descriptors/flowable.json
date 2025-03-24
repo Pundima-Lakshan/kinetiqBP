@@ -27,6 +27,17 @@
           "type": "String"
         }
       ]
+    },
+    {
+      "name": "MailServiceTask",
+      "extends": ["bpmn:ServiceTask"],
+      "properties": [
+        {
+          "name": "flowable:expression",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
     }
   ]
 }

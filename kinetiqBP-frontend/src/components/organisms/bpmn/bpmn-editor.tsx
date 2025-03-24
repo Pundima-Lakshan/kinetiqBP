@@ -16,6 +16,7 @@ import {
   DynamicVariableAssignmentPropertiesProviderModule,
   FormAssignmentPropertiesProviderModule,
   UserAssignmentPropertiesProviderModule,
+  MailTaskPropertiesProviderModule,
 } from './common/provider';
 
 import { DEFAULT_BPMN_DIAGRAM_XML_PATH, useSyncedState } from '@/utils';
@@ -67,6 +68,7 @@ export const KBPBpmnEditor = ({ diagramXml, bpmnModelerRef, onEventHandler }: Re
         FormAssignmentPropertiesProviderModule,
         ConditionAssignmentPropertiesProviderModule,
         DynamicVariableAssignmentPropertiesProviderModule,
+        MailTaskPropertiesProviderModule,
       ],
       moddleExtensions: {
         flowable: flowableModdleDescriptor,
