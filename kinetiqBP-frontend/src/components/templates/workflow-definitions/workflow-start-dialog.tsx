@@ -89,7 +89,7 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
 
     if (!data) return;
 
-    if (filesData) {
+    if (filesData && filesData.length > 0) {
       filesData.forEach((fd) => {
         const dataMap = new Map(
           data.map((d, i) => {
@@ -150,19 +150,24 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
         const typedEvent = event as { files: File[]; index: number; field: FormComponent };
         const result = await dialogs.open(PdfEditorDialog, { pdfFile: typedEvent.files[0] });
         if (result) {
+          const data = kbpFormViewerRef.current?.getSubmitResponse()?.data;
           setFormData((prev) => ({
             ...prev,
+            ...data,
             [typedEvent.field.key]: result.stringifiedTemplateData,
           }));
         }
         break;
       }
       case 'pdfTemplate.edit': {
+        // Here at runtime there should only TemplateData string files returned
         const typedEvent = event as { files: string[]; index: number; field: FormComponent };
         const result = await dialogs.open(PdfEditorDialog, { templateFile: typedEvent.files[0] });
         if (result) {
+          const data = kbpFormViewerRef.current?.getSubmitResponse()?.data;
           setFormData((prev) => ({
             ...prev,
+            ...data,
             [typedEvent.field.key]: result.stringifiedTemplateData,
           }));
         }

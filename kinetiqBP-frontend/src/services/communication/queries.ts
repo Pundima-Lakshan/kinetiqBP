@@ -10,6 +10,7 @@ import {
   getHistoricProcessInstanceVariables,
   getHistoricTaskInstance,
   getPdfTemplate,
+  getPdfTemplateData,
   getPdfTemplates,
   getProcessInstanceVariables,
   getUiServiceUsers,
@@ -163,5 +164,13 @@ export const useGetPdfTemplate = (pdfTemplateId: string) => {
   return useQueryBuilder({
     queryKey: [queryKeys.pdfTemplate, pdfTemplateId],
     queryFn: async () => getPdfTemplate(pdfTemplateId),
+  });
+};
+
+export const useGetPdfTemplateData = (pdfTemplateId: string) => {
+  return useQueryBuilder({
+    queryKey: [queryKeys.pdfTemplate, pdfTemplateId],
+    queryFn: async () => getPdfTemplateData(pdfTemplateId),
+    enabled: pdfTemplateId.length > 0,
   });
 };

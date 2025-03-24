@@ -1,9 +1,7 @@
 import type { KBPFormViewerRefObj } from '@/components/organisms';
-import type { FormSchema, RestVariable } from '@/services';
+import type { FormSchema, RestVariable, TemplateData } from '@/services';
 import type { DialogHook } from '@toolpad/core';
 import type { MutableRefObject } from 'react';
-import Ids from 'ids';
-import { TemplateData } from '@/components';
 
 interface GetFormDataCommon {
   kbpFormViewerRef: MutableRefObject<KBPFormViewerRefObj | null>;

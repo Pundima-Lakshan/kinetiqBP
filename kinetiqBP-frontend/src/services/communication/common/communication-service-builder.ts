@@ -108,3 +108,15 @@ export const getBlob = async <T>(url: string, options: RequestInit = {}) => {
 
   return (await response.blob()) as T;
 };
+
+export const downloadJson = async <T>(url: string) => {
+  const response = await fetch(url, {
+    method: 'GET',
+  });
+
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+
+  return (await response.json()) as T;
+};

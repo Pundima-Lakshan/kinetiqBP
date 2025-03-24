@@ -1,7 +1,8 @@
 import { ContainerBox } from '@/components/atoms';
-import { createDynamicForm, KBPFormViewer, type KBPFormViewerRef } from '@/components/organisms';
-import { getDataFromRestVariables } from '@/logic';
+import { createDynamicForm, FormViewerCustomEventNames, KBPFormViewer, KBPFormViewerRefObj } from '@/components/organisms';
+import { getDataFromRestVariables, getFormData } from '@/logic';
 import {
+  FormComponent,
   useGetFormDefinition,
   useGetHistoricProcessInstanceVariables,
   useGetHistoricTaskInstance,
@@ -12,17 +13,20 @@ import {
 } from '@/services';
 import { dateToString, getUiUserFullName } from '@/utils';
 import { FormControl, TextField } from '@mui/material';
-import { useSession } from '@toolpad/core';
-import { useEffect, useState } from 'react';
+import { useDialogs, useSession } from '@toolpad/core';
+import { MutableRefObject, useEffect, useState } from 'react';
+import { PdfEditorDialog } from '../common';
 
 interface WorkflowActivityProps {
   activityInstance: ActivityInstance;
   formDefinitionId?: number;
   dynamicVariables?: ExtensionAttribute[];
-  kbpFormViewerRef: KBPFormViewerRef;
+  kbpFormViewerRef: MutableRefObject<KBPFormViewerRefObj | null>;
 }
 
 export const WorkflowActivity = ({ activityInstance, formDefinitionId, dynamicVariables, kbpFormViewerRef }: WorkflowActivityProps) => {
+  const dialogs = useDialogs();
+
   const { data: uiUsers = [] } = useGetUiServiceUsers();
   const { data: formDefinition } = useGetFormDefinition(formDefinitionId ?? -1, {
     enabled: formDefinitionId != null,
@@ -33,6 +37,37 @@ export const WorkflowActivity = ({ activityInstance, formDefinitionId, dynamicVa
   const [dynamicFormDefinition, setDynamicFormDefinition] = useState<FormSchema | null>(null);
 
   const [formData, setFormData] = useState<Record<string, unknown> | undefined>(undefined);
+
+  const customEventHandler = async ({ event, name }: { event: unknown; name: FormViewerCustomEventNames }) => {
+    switch (name) {
+      case 'pdfTemplate.new': {
+        const typedEvent = event as { files: File[]; index: number; field: FormComponent };
+        const result = await dialogs.open(PdfEditorDialog, { pdfFile: typedEvent.files[0] });
+        if (result) {
+          const data = kbpFormViewerRef.current?.getSubmitResponse()?.data;
+          setFormData((prev) => ({
+            ...prev,
+            ...data,
+            [typedEvent.field.key]: result.stringifiedTemplateData,
+          }));
+        }
+        break;
+      }
+      case 'pdfTemplate.edit': {
+        // Here possibly both only file name and sometimes the TemplateData string may be returned
+        const typedEvent = event as { files: string[]; field: FormComponent; index: number };
+        const result = await dialogs.open(PdfEditorDialog, { templateFile: typedEvent.files[0], type: 'viewer' });
+        if (result) {
+          const data = kbpFormViewerRef.current?.getSubmitResponse()?.data;
+          setFormData((prev) => ({
+            ...prev,
+            ...data,
+            [typedEvent.field.key]: result.stringifiedTemplateData,
+          }));
+        }
+      }
+    }
+  };
 
   const session = useSession();
   const isLoggedInUserAssignee = session?.user?.id === activityInstance.assignee;
@@ -74,7 +109,13 @@ export const WorkflowActivity = ({ activityInstance, formDefinitionId, dynamicVa
       </FormControl>
       <ContainerBox style={{ height: 'calc(100% - 82px)', padding: '8px 0 0 0' }}>
         {formDefinition?.formSchema && (
-          <KBPFormViewer schema={formDefinition.formSchema} data={formData} ref={kbpFormViewerRef} isReadOnly={!isLoggedInUserAssignee} />
+          <KBPFormViewer
+            schema={formDefinition.formSchema}
+            data={formData}
+            ref={kbpFormViewerRef}
+            isReadOnly={!isLoggedInUserAssignee}
+            customEventHandler={customEventHandler}
+          />
         )}
         {dynamicFormDefinition && (
           <KBPFormViewer schema={dynamicFormDefinition} data={formData} ref={kbpFormViewerRef} isReadOnly={!isLoggedInUserAssignee} />

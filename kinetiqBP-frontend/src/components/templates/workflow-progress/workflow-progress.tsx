@@ -1,7 +1,14 @@
 import { KBPStepper, type KbpStep } from '@/components/atoms';
 import { bpmnActivityTypes, type KBPFormViewerRefObj } from '@/components/organisms';
 import { getFormData } from '@/logic';
-import { useGetHistoricActivity, useGetWorkflowDefinitionModel, useMutationSuccessErrorCallback, usePostTaskAction } from '@/services';
+import {
+  PdfTemplateEntry,
+  useGetHistoricActivity,
+  useGetWorkflowDefinitionModel,
+  useMutationSuccessErrorCallback,
+  usePostPdfTemplates,
+  usePostTaskAction,
+} from '@/services';
 import { useDialogs, useSession } from '@toolpad/core';
 import { useEffect, useRef, useState } from 'react';
 import { BpmnProgressButton, type BpmnProgressButtonProps } from './bpmn-progress-button';
@@ -13,14 +20,13 @@ export const WorkFlowProgress = ({ workflowDefinitionId, workflowInstanceId }: W
   const { data: historicActivityInstances, isLoading: isLoadingHistoricActivityInstances } = useGetHistoricActivity(workflowInstanceId);
   const { data: workflowDefinitionModel, isLoading: isLoadingWorkflowDefinitionModel } = useGetWorkflowDefinitionModel(workflowDefinitionId);
 
-  const {
-    mutate: postTaskAction,
-    error: errorPostTaskAction,
-    status: statusPostTaskAction,
-    isPending: isPendingPostTaskAction,
-  } = usePostTaskAction();
+  const { mutate: postTaskAction, isPending: isPendingPostTaskAction } = usePostTaskAction();
+
+  const { mutate: postPdfTemplates, isPending: isPendingPostPdfTemplate } = usePostPdfTemplates();
 
   const session = useSession();
+  const loggedInUserId = session?.user?.id;
+
   const dialogs = useDialogs();
 
   const [steps, setSteps] = useState<Array<KbpStep>>([]);
@@ -28,14 +34,56 @@ export const WorkFlowProgress = ({ workflowDefinitionId, workflowInstanceId }: W
   const kbpFormViewerRef = useRef<KBPFormViewerRefObj>(null);
 
   const onComplete = async (taskId: string) => {
+    if (!loggedInUserId) return false;
+
+    const filesData = getFormData({
+      kbpFormViewerRef,
+      dialogs,
+      isFiles: true,
+    });
+
     const data = getFormData({
       dialogs,
       kbpFormViewerRef,
     });
+
+    if (!data) return false;
+
+    if (filesData && filesData.length > 0) {
+      filesData.forEach((fd) => {
+        const dataMap = new Map(
+          data.map((d, i) => {
+            return [d.name, { data: d, index: i }];
+          }),
+        );
+        const correspondingData = dataMap.get(fd.formKey);
+        if (!correspondingData) {
+          console.error('Not found corresponding form data item');
+          return;
+        }
+        data[correspondingData.index].value = fd.file.name;
+      });
+
+      const files = filesData.map((f) => f.file);
+      const pdfTemplateEntries: PdfTemplateEntry[] = filesData.map((f) => ({
+        id: f.file.name,
+        createdBy: loggedInUserId,
+        lastModifiedBy: loggedInUserId,
+        createdDate: new Date(),
+        modifiedDate: new Date(),
+      }));
+
+      postPdfTemplates({
+        files,
+        pdfTemplateEntries,
+      });
+    }
+
     postTaskAction({
       taskId,
       variables: data,
     });
+
     return false;
   };
 
@@ -72,13 +120,7 @@ export const WorkFlowProgress = ({ workflowDefinitionId, workflowInstanceId }: W
     setSteps(_steps);
   }, [historicActivityInstances, workflowDefinitionModel]);
 
-  useMutationSuccessErrorCallback({
-    error: errorPostTaskAction,
-    mutationStatus: statusPostTaskAction,
-    successMessage: 'Task completed successfully',
-  });
-
-  const isLoading = isLoadingHistoricActivityInstances || isLoadingWorkflowDefinitionModel || isPendingPostTaskAction;
+  const isLoading = isLoadingHistoricActivityInstances || isLoadingWorkflowDefinitionModel || isPendingPostTaskAction || isPendingPostPdfTemplate;
 
   return (
     <KBPStepper

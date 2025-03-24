@@ -1,5 +1,7 @@
 import { getEnvs } from '@/env';
-import { get, post, postFormData, put, remove } from './common';
+import { downloadJson, get, post, postFormData, put, remove } from './common';
+import { Template } from '@pdfme/common';
+import { base64ToFile } from '@/components';
 const flowable_rest_url = getEnvs().VITE_FLOWABLE_REST_URL;
 const ui_service_url = getEnvs().VITE_UI_SERVICE_URL;
 
@@ -555,4 +557,16 @@ interface GetPdfTemplateResponse {
 
 export const getPdfTemplate = async (pdfTemplateId: string) => {
   return await get<GetPdfTemplateResponse>(`${ui_service_url}/pdf-templates/${pdfTemplateId}`);
+};
+
+export interface TemplateData {
+  template: Template;
+  fileName: string;
+}
+
+export const getPdfTemplateData = async (pdfTemplateId: string) => {
+  const url = await get<string>(`${ui_service_url}/pdf-templates/file-url/${pdfTemplateId}`, {
+    responseType: 'text',
+  });
+  return await downloadJson<Template>(url); // Here the basePdf file type will be base64 string
 };

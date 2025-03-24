@@ -28,4 +28,5 @@ export const queryKeys = {
 
   pdfTemplates: 'pdfTemplates',
   pdfTemplate: 'pdfTemplate',
+  pdfTemplateUrl: 'pdfTemplateUrl',
 } as const;
