@@ -105,5 +105,16 @@ export const WorkflowInstancesGrid = ({ data, isLoading }: WorkflowInstancesGrid
     ];
   });
 
-  return <KBPDataGrid rows={data} columns={columns} loading={isLoading} />;
+  return (
+    <KBPDataGrid
+      rows={data}
+      columns={columns}
+      loading={isLoading}
+      initialState={{
+        sorting: {
+          sortModel: [{ field: 'startTime', sort: 'desc' }],
+        },
+      }}
+    />
+  );
 };
