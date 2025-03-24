@@ -1,5 +1,5 @@
 import { getEnvs } from '@/env';
-import { downloadJson, get, post, postFormData, put, remove } from './common';
+import { downloadJson, get, getValidQueries, post, postFormData, put, remove } from './common';
 import { Template } from '@pdfme/common';
 import { base64ToFile } from '@/components';
 const flowable_rest_url = getEnvs().VITE_FLOWABLE_REST_URL;
@@ -340,9 +340,13 @@ export interface WorkFlowInstance {
   tenantId: string;
 }
 
-export const getWorkflowInstances = async () => {
+interface GetWorkflowInstancesArg {
+  involvedUser?: string | undefined;
+}
+
+export const getWorkflowInstances = async ({ involvedUser }: GetWorkflowInstancesArg) => {
   return await get<GenericFlowableListResponse<WorkFlowInstance>>(`${flowable_rest_url}/runtime/process-instances`, {
-    queries: [{ size: '500' }],
+    queries: getValidQueries([{ size: '500' }, { involvedUser }]),
   });
 };
 

@@ -100,10 +100,10 @@ export const useGetWorkflowDefinitionModel = (workflowDefinitionId: string) => {
   });
 };
 
-export const useGetWorkflowInstances = () => {
+export const useGetWorkflowInstances = (involvedUserId?: string | undefined) => {
   return useQueryBuilder({
-    queryKey: [queryKeys.workflowInstances],
-    queryFn: getWorkflowInstances,
+    queryKey: [queryKeys.workflowInstances, involvedUserId],
+    queryFn: async () => getWorkflowInstances({ involvedUser: involvedUserId }),
   });
 };
 

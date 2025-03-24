@@ -1,9 +1,12 @@
 import { WorkflowInstancesGrid, type WorkflowInstancesRowModel } from '@/components';
 import { useGetUiServiceUsers, useGetWorkflowInstances } from '@/services';
+import { useSession } from '@toolpad/core';
 import { useEffect, useState } from 'react';
 
 export const WorkflowInstances = () => {
-  const { data: workflowInstances, isLoading: isLoadingWorkflowInstances } = useGetWorkflowInstances();
+  const session = useSession();
+
+  const { data: workflowInstances, isLoading: isLoadingWorkflowInstances } = useGetWorkflowInstances(session?.user?.id ?? undefined);
   const { data: uiServiceUsers, isLoading: isLoadingUiServiceUsers } = useGetUiServiceUsers();
 
   const [workflowInstanceData, setWorkflowInstanceData] = useState<Array<WorkflowInstancesRowModel>>([]);
