@@ -68,6 +68,23 @@ export const readFile = (file: File | null, type: 'text' | 'dataURL' | 'arrayBuf
   });
 };
 
+type MimeType = 'application/pdf' | 'application/json';
+
+export const base64ToFile = (base64: string, filename: string, mimeType: MimeType) => {
+  const byteCharacters = atob(base64);
+
+  const byteArrays = new Uint8Array(byteCharacters.length);
+  for (let i = 0; i < byteCharacters.length; i++) {
+    byteArrays[i] = byteCharacters.charCodeAt(i);
+  }
+
+  const blob = new Blob([byteArrays], { type: mimeType });
+
+  const file = new File([blob], filename, { type: mimeType });
+
+  return file;
+};
+
 const getTemplateFromJsonFile = (file: File) => {
   return readFile(file, 'text').then((jsonStr) => {
     const template: Template = JSON.parse(jsonStr as string);
@@ -206,12 +223,11 @@ export const generatePdf = async (currentRef: Designer | Form | Viewer | null) =
 
 export const isJsonString = (str: string) => {
   try {
-    JSON.parse(str);
+    return JSON.parse(str);
   } catch (e) {
-    console.error(e);
+    console.warn(e);
     return false;
   }
-  return true;
 };
 
 export const getTemplatePresets = (): {

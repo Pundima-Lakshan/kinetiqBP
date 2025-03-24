@@ -7,7 +7,10 @@ import { FileInputFormControl } from '@/components/molecules';
 import { Box, Button, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material';
 import './styles.css';
 
-type Mode = 'form' | 'viewer';
+/*
+editor type is only for tempory type safety
+*/
+type Mode = 'form' | 'viewer' | 'editor';
 
 const initTemplate = () => {
   let template: Template = getTemplateByPreset(localStorage.getItem('templatePreset') || '');
@@ -25,24 +28,21 @@ const initTemplate = () => {
   return template;
 };
 
-export const PdfForm = () => {
+interface PdfFormProps {
+  initialMode?: Mode | undefined;
+  initialTemplate?: Template;
+  initialInputs?: Record<string, string>[];
+}
+
+export const PdfForm = ({ initialMode, initialTemplate, initialInputs }: PdfFormProps) => {
   const uiRef = useRef<HTMLDivElement | null>(null);
   const ui = useRef<PdfMeForm | PdfMeViewer | null>(null);
 
-  const [mode, setMode] = useState<Mode>((localStorage.getItem('mode') as Mode) ?? 'form');
+  const [mode, setMode] = useState<Mode>(initialMode ?? 'viewer');
 
   const buildUi = (mode: Mode) => {
-    const template = initTemplate();
-    let inputs = getInputFromTemplate(template);
-    try {
-      const inputsString = localStorage.getItem('inputs');
-      if (inputsString) {
-        const inputsJson = JSON.parse(inputsString);
-        inputs = inputsJson;
-      }
-    } catch {
-      localStorage.removeItem('inputs');
-    }
+    const template = initialTemplate ?? initTemplate();
+    let inputs = initialInputs ?? getInputFromTemplate(template);
 
     getFontsData().then((font) => {
       if (uiRef.current) {
@@ -69,7 +69,6 @@ export const PdfForm = () => {
   const onChangeMode = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value as Mode;
     setMode(value);
-    localStorage.setItem('mode', value);
     buildUi(value);
   };
 
@@ -86,7 +85,7 @@ export const PdfForm = () => {
     if (ui.current) {
       const prompt = window.prompt('Enter Inputs JSONString') || '';
       try {
-        const json = isJsonString(prompt) ? JSON.parse(prompt) : [{}];
+        const json = !!isJsonString(prompt) ? JSON.parse(prompt) : [{}];
         ui.current.setInputs(json);
       } catch (e) {
         alert(e);
@@ -94,16 +93,7 @@ export const PdfForm = () => {
     }
   };
 
-  const onSaveInputs = () => {
-    if (ui.current) {
-      const inputs = ui.current.getInputs();
-      localStorage.setItem('inputs', JSON.stringify(inputs));
-      alert('Saved!');
-    }
-  };
-
   const onResetInputs = () => {
-    localStorage.removeItem('inputs');
     if (ui.current) {
       const template = initTemplate();
       ui.current.setInputs(getInputFromTemplate(template));
@@ -131,7 +121,7 @@ export const PdfForm = () => {
         }}
       >
         <FormControl size="small">
-          <RadioGroup defaultValue="form" row onChange={onChangeMode}>
+          <RadioGroup defaultValue={mode} row onChange={onChangeMode}>
             <FormControlLabel value="form" control={<Radio />} label="Form" />
             <FormControlLabel value="viewer" control={<Radio />} label="Viewer" />
           </RadioGroup>
@@ -148,12 +138,6 @@ export const PdfForm = () => {
         <FormControl size="small">
           <Button variant="outlined" onClick={onSetInputs}>
             Set Inputs
-          </Button>
-        </FormControl>
-
-        <FormControl size="small">
-          <Button variant="outlined" onClick={onSaveInputs}>
-            Save Inputs
           </Button>
         </FormControl>
 
