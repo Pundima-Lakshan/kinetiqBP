@@ -17,7 +17,7 @@ export const BpmnProgressButton = ({ workflowInstanceId, workflowDefinitionId, a
   };
 
   return (
-    <Button color="inherit" onClick={handleViewProgress}>
+    <Button color="secondary" onClick={handleViewProgress}>
       View Detailed Progress
     </Button>
   );

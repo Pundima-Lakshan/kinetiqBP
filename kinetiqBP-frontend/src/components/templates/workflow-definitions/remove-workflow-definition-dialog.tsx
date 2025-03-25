@@ -48,7 +48,6 @@ export const RemoveWorkflowDefinitionDialog = ({ open, onClose, payload }: Dialo
   useMutationSuccessErrorCallback({
     error: errorRemoveWorkflowDefinition,
     mutationStatus: statusRemoveWorkflowDefinition,
-    successMessage: 'Workflow definition removed successfully',
     onSuccess: () => {
       void onClose();
     },
