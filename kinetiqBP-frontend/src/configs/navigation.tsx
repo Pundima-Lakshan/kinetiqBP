@@ -40,6 +40,11 @@ export const navigation: Navigation = [
     icon: <AssignmentIcon />,
   },
   {
+    segment: browserRoutesCollection.WorkflowHistoricInstances.segment,
+    title: browserRoutesCollection.WorkflowHistoricInstances.title,
+    icon: <DescriptionIcon />,
+  },
+  {
     segment: browserRoutesCollection.PdfTemplates.segment,
     pattern: `${browserRoutesCollection.PdfTemplates.segment}{/:pdfTemplateId}`,
     title: browserRoutesCollection.PdfTemplates.title,
@@ -97,11 +102,6 @@ export const navigation: Navigation = [
   {
     kind: 'header',
     title: 'Analytics',
-  },
-  {
-    segment: browserRoutesCollection.WorkflowHistoricInstances.segment,
-    title: browserRoutesCollection.WorkflowHistoricInstances.title,
-    icon: <DescriptionIcon />,
   },
   {
     segment: browserRoutesCollection.Statistics.segment,

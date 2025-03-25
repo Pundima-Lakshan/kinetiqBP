@@ -1,5 +1,5 @@
 import { getEnvs } from '@/env';
-import { downloadJson, get, getValidQueries, post, postFormData, put, remove } from './common';
+import { downloadJson, get, getValidQueries, post, postFormData, put, remove, removeUndefined } from './common';
 import { Template } from '@pdfme/common';
 import { base64ToFile } from '@/components';
 const flowable_rest_url = getEnvs().VITE_FLOWABLE_REST_URL;
@@ -377,9 +377,13 @@ export type HistoricWorkflowInstance = {
   tenantId: string;
 };
 
-export const getWorkflowHistoricInstances = async () => {
+interface GetHistoricWorkflowInstancesArg {
+  involvedUser?: string | undefined;
+}
+
+export const getWorkflowHistoricInstances = async (arg: GetHistoricWorkflowInstancesArg) => {
   return await get<GenericFlowableListResponse<HistoricWorkflowInstance>>(`${flowable_rest_url}/history/historic-process-instances`, {
-    queries: [{ size: '500' }, { includeProcessVariables: 'true' }],
+    queries: getValidQueries([{ size: '500' }, { includeProcessVariables: 'true' }, { involvedUser: arg.involvedUser }]),
   });
 };
 

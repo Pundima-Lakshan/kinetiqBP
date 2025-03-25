@@ -107,10 +107,10 @@ export const useGetWorkflowInstances = (involvedUserId?: string | undefined) => 
   });
 };
 
-export const useGetWorkflowHistoricInstances = () => {
+export const useGetWorkflowHistoricInstances = (involvedUser?: string) => {
   return useQueryBuilder({
-    queryKey: [queryKeys.historicWorkflowInstance],
-    queryFn: getWorkflowHistoricInstances,
+    queryKey: [queryKeys.historicWorkflowInstance, involvedUser],
+    queryFn: async () => getWorkflowHistoricInstances({ involvedUser }),
   });
 };
 
