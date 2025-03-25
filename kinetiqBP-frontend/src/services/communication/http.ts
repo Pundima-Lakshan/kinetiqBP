@@ -73,19 +73,19 @@ export interface UiServiceUser {
 export type FormSchemaType = 'text' | 'textfield' | 'number' | 'checkbox' | 'textarea' | 'datetime' | 'image' | 'button' | 'select' | 'pdf-template';
 
 export type FormComponent = {
-  label?: string;
   type: FormSchemaType;
+  id: string;
+  key?: string;
+  label?: string;
   layout?: {
     row?: string | null;
     columns?: string | null;
   };
-  id: string;
   readonly?: boolean;
   autoInitialize?: {
     predef?: AutoInitializedOptionsPreDef;
     custom?: string;
   };
-  key?: string;
   [p: string]: unknown;
 };
 

@@ -45,11 +45,14 @@ export const WorkflowActivity = ({ activityInstance, formDefinitionId, dynamicVa
         const result = await dialogs.open(PdfEditorDialog, { pdfFile: typedEvent.files[0] });
         if (result) {
           const data = kbpFormViewerRef.current?.getSubmitResponse()?.data;
-          setFormData((prev) => ({
-            ...prev,
-            ...data,
-            [typedEvent.field.key]: result.stringifiedTemplateData,
-          }));
+          const key = typedEvent.field.key;
+          if (key) {
+            setFormData((prev) => ({
+              ...prev,
+              ...data,
+              [key]: result.stringifiedTemplateData,
+            }));
+          }
         }
         break;
       }
@@ -59,11 +62,14 @@ export const WorkflowActivity = ({ activityInstance, formDefinitionId, dynamicVa
         const result = await dialogs.open(PdfEditorDialog, { templateFile: typedEvent.files[0], type: 'viewer' });
         if (result) {
           const data = kbpFormViewerRef.current?.getSubmitResponse()?.data;
-          setFormData((prev) => ({
-            ...prev,
-            ...data,
-            [typedEvent.field.key]: result.stringifiedTemplateData,
-          }));
+          const key = typedEvent.field.key;
+          if (key) {
+            setFormData((prev) => ({
+              ...prev,
+              ...data,
+              [key]: result.stringifiedTemplateData,
+            }));
+          }
         }
       }
     }
