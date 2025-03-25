@@ -70,14 +70,14 @@ export interface UiServiceUser {
   email: string | null;
 }
 
-export type FormSchemaType = 'textfield' | 'number' | 'checkbox' | 'textarea' | 'datetime' | 'image' | 'button' | 'select' | 'pdf-template';
+export type FormSchemaType = 'text' | 'textfield' | 'number' | 'checkbox' | 'textarea' | 'datetime' | 'image' | 'button' | 'select' | 'pdf-template';
 
 export type FormComponent = {
-  label: string;
+  label?: string;
   type: FormSchemaType;
-  layout: {
-    row: string;
-    columns: string | null;
+  layout?: {
+    row?: string | null;
+    columns?: string | null;
   };
   id: string;
   readonly?: boolean;
@@ -85,7 +85,7 @@ export type FormComponent = {
     predef?: AutoInitializedOptionsPreDef;
     custom?: string;
   };
-  key: string;
+  key?: string;
   [p: string]: unknown;
 };
 
@@ -315,7 +315,7 @@ export type RestVariable = {
   scope?: string;
 };
 
-export interface WorkFlowInstance {
+export interface ProcessInstance {
   id: string;
   url: string;
   name: string;
@@ -345,7 +345,7 @@ interface GetWorkflowInstancesArg {
 }
 
 export const getWorkflowInstances = async ({ involvedUser }: GetWorkflowInstancesArg) => {
-  return await get<GenericFlowableListResponse<WorkFlowInstance>>(`${flowable_rest_url}/runtime/process-instances`, {
+  return await get<GenericFlowableListResponse<ProcessInstance>>(`${flowable_rest_url}/runtime/process-instances`, {
     queries: getValidQueries([{ size: '500' }, { involvedUser }]),
   });
 };
@@ -577,4 +577,201 @@ export const getPdfTemplateData = async (pdfTemplateId: string) => {
     responseType: 'text',
   });
   return await downloadJson<Template>(url); // Here the basePdf file type will be base64 string
+};
+
+interface QueryActivityInstancesArgs {
+  start: number;
+  size: number;
+  sort: string;
+  order: string;
+  activityId: string;
+  activityInstanceId: string;
+  activityName: string;
+  activityType: string;
+  executionId: string;
+  finished: boolean;
+  taskAssignee: string;
+  processInstanceId: string;
+  processDefinitionId: string;
+  tenantId: string;
+  tenantIdLike: string;
+  withoutTenantId: boolean;
+}
+
+export const queryActivityInstances = async (args: Partial<QueryActivityInstancesArgs>) => {
+  return await post<GenericFlowableListResponse<ActivityInstance>>(`${flowable_rest_url}/query/activity-instances`, args);
+};
+
+interface QueryProcessInstancesArgs {
+  start: number;
+  size: number;
+  sort: string;
+  order: string;
+  processInstanceId: string;
+  processInstanceIds: string[];
+  processInstanceName: string;
+  processInstanceNameLike: string;
+  processInstanceNameLikeIgnoreCase: string;
+  processBusinessKey: string;
+  processBusinessKeyLike: string;
+  processBusinessKeyLikeIgnoreCase: string;
+  processBusinessStatus: string;
+  processBusinessStatusLike: string;
+  processBusinessStatusLikeIgnoreCase: string;
+  processDefinitionId: string;
+  processDefinitionIds: string[];
+  processDefinitionKey: string;
+  processDefinitionKeyLike: string;
+  processDefinitionKeyLikeIgnoreCase: string;
+  processDefinitionKeys: string[];
+  processDefinitionName: string;
+  processDefinitionNameLike: string;
+  processDefinitionNameLikeIgnoreCase: string;
+  processDefinitionCategory: string;
+  processDefinitionCategoryLike: string;
+  processDefinitionCategoryLikeIgnoreCase: string;
+  processDefinitionVersion: number;
+  processDefinitionEngineVersion: string;
+  rootScopeId: string;
+  parentScopeId: string;
+  deploymentId: string;
+  deploymentIdIn: string[];
+  superProcessInstanceId: string;
+  subProcessInstanceId: string;
+  excludeSubprocesses: boolean;
+  activeActivityId: string;
+  activeActivityIds: string[];
+  involvedUser: string;
+  startedBy: string;
+  startedBefore: Date;
+  startedAfter: Date;
+  suspended: boolean;
+  includeProcessVariables: boolean;
+  variables: RestVariable[];
+  callbackId: string;
+  callbackType: string;
+  tenantId: string;
+  tenantIdLike: string;
+  tenantIdLikeIgnoreCase: string;
+  withoutTenantId: boolean;
+}
+
+export const queryProcessInstances = async (args: Partial<QueryProcessInstancesArgs>) => {
+  return await post<GenericFlowableListResponse<ProcessInstance>>(`${flowable_rest_url}/query/process-instances`, args);
+};
+
+interface QueryTasksArgs {
+  start: number;
+  size: number;
+  sort: string;
+  order: string;
+  taskId: string;
+  name: string;
+  nameLike: string;
+  nameLikeIgnoreCase: string;
+  description: string;
+  descriptionLike: string;
+  priority: number;
+  minimumPriority: number;
+  maximumPriority: number;
+  assignee: string;
+  assigneeLike: string;
+  owner: string;
+  ownerLike: string;
+  unassigned: boolean;
+  delegationState: string;
+  candidateUser: string;
+  candidateGroup: string;
+  candidateGroupIn: string[];
+  ignoreAssignee: boolean;
+  involvedUser: string;
+  processInstanceId: string;
+  processInstanceIdWithChildren: string;
+  withoutProcessInstanceId: boolean;
+  processInstanceBusinessKey: string;
+  processInstanceBusinessKeyLike: string;
+  processDefinitionId: string;
+  processDefinitionKey: string;
+  processDefinitionName: string;
+  processDefinitionKeyLike: string;
+  processDefinitionNameLike: string;
+  executionId: string;
+  createdOn: Date; // Changed to Date
+  createdBefore: Date; // Changed to Date
+  createdAfter: Date; // Changed to Date
+  excludeSubTasks: boolean;
+  taskDefinitionKey: string;
+  taskDefinitionKeyLike: string;
+  taskDefinitionKeys: string[];
+  dueDate: Date | null; // Changed to Date
+  dueBefore: Date | null; // Changed to Date
+  dueAfter: Date | null; // Changed to Date
+  withoutDueDate: boolean;
+  active: boolean;
+  includeTaskLocalVariables: boolean;
+  includeProcessVariables: boolean;
+  scopeDefinitionId: string;
+  scopeId: string;
+  withoutScopeId: boolean;
+  scopeType: string;
+  propagatedStageInstanceId: string;
+  tenantId: string;
+  tenantIdLike: string;
+  withoutTenantId: boolean;
+  candidateOrAssigned: string;
+  category: string;
+  categoryIn: string[];
+  categoryNotIn: string[];
+  withoutCategory: boolean;
+  rootScopeId: string;
+  parentScopeId: string;
+  taskVariables: Array<{
+    name: string;
+    operation: 'equals' | 'notEqualsIgnoreCase';
+    value: unknown;
+    type: string;
+  }>;
+  processInstanceVariables: Array<{
+    name: string;
+    operation: 'lessThan' | 'lessThanOrEquals';
+    value: unknown;
+    type: string;
+  }>;
+}
+
+export interface TaskInstance {
+  id: string;
+  url: string;
+  owner: string | null;
+  assignee: string;
+  delegationState: string | null;
+  name: string;
+  description: string | null;
+  createTime: Date; // Changed to Date
+  dueDate: Date | null; // Changed to Date
+  priority: number;
+  suspended: boolean;
+  claimTime: string | null;
+  taskDefinitionKey: string;
+  scopeDefinitionId: string | null;
+  scopeId: string | null;
+  subScopeId: string | null;
+  scopeType: string | null;
+  propagatedStageInstanceId: string | null;
+  tenantId: string;
+  category: string | null;
+  formKey: string | null;
+  parentTaskId: string | null;
+  parentTaskUrl: string | null;
+  executionId: string;
+  executionUrl: string;
+  processInstanceId: string;
+  processInstanceUrl: string;
+  processDefinitionId: string;
+  processDefinitionUrl: string;
+  variables: RestVariable[];
+}
+
+export const queryTasks = async (args: Partial<QueryTasksArgs>) => {
+  return await post<GenericFlowableListResponse<TaskInstance>>(`${flowable_rest_url}/query/tasks`, args);
 };

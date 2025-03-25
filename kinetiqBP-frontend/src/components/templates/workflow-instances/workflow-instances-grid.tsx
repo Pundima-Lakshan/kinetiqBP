@@ -1,6 +1,6 @@
 import { KBPDataGrid, StatusIcon } from '@/components';
 import { browserRoutesCollection, getPath } from '@/configs';
-import type { UiServiceUser, WorkFlowInstance } from '@/services';
+import type { UiServiceUser, ProcessInstance } from '@/services';
 import { dateToString, getUiUserFullName } from '@/utils';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -11,7 +11,7 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import { RemoveProcessInstanceDialog } from './remove-process-instance-dialog';
 
-export type WorkflowInstancesRowModel = WorkFlowInstance & {
+export type WorkflowInstancesRowModel = ProcessInstance & {
   startedUser?: UiServiceUser;
 };
 

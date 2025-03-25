@@ -33,3 +33,12 @@ export const getValidQueries = (unfilteredQueries: Record<string, string | undef
     })
     .filter((q) => q != null);
 };
+
+export const removeUndefined = (obj: Record<string, unknown>) => {
+  Object.keys(obj).forEach((key) => {
+    if (obj[key] === undefined) {
+      delete obj[key];
+    }
+  });
+  return obj;
+};
