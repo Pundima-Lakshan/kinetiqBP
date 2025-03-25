@@ -36,5 +36,5 @@ export const KBPFormEditor = ({ initialSchema, formEditorRef }: KBPFormEditorPro
     };
   }, [formEditorRef, initialSchema]);
 
-  return <div id="form-editor" ref={editorContainerRef} style={{ width: '100%', height: '100%' }} />;
+  return <div id="form-editor" ref={editorContainerRef} style={{ width: '100%', height: '100%', overflowY: 'auto' }} />;
 };

@@ -108,7 +108,7 @@ export const KbpFormViewerRender = (
     };
   }, [changedHandlerRef, data, schema, isReadOnly, submitHandlerRef]);
 
-  return <div ref={formContainerRef} style={{ width: '100%', height: '100%' }} />;
+  return <div ref={formContainerRef} style={{ width: '100%', height: '100%', overflowY: 'auto' }} />;
 };
 
 export const KBPFormViewer = forwardRef(KbpFormViewerRender);
