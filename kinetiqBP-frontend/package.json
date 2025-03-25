@@ -17,6 +17,7 @@
     "@emotion/styled": "11.13.0",
     "@mui/icons-material": "6.4.0",
     "@mui/material": "6.4.0",
+    "@mui/x-charts": "^7.28.0",
     "@mui/x-data-grid": "7.23.6",
     "@mui/x-date-pickers": "7.23.6",
     "@pdfme/common": "5.2.11",
@@ -48,6 +49,7 @@
     "react-oidc-context": "3.2.0",
     "react-router": "7.1.1",
     "signature_pad": "5.0.4",
+    "swapy": "^1.0.5",
     "terser": "5.39.0"
   },
   "devDependencies": {
