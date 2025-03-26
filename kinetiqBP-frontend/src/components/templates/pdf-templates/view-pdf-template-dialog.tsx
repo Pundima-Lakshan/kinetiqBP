@@ -3,6 +3,7 @@ import { useGetPdfTemplate, useGetPdfTemplateVersions } from '@/services/index.t
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import { DialogProps, useDialogs } from '@toolpad/core';
 import { PdfTemplateDataForm } from './pdf-template-data-form';
+import { extractPdfTemplateFilename } from '@/utils';
 
 export const ViewPdfTemplateDialog = ({ open, onClose, payload: pdfTemplateId }: DialogProps<string>) => {
   const dialogs = useDialogs();
@@ -22,7 +23,7 @@ export const ViewPdfTemplateDialog = ({ open, onClose, payload: pdfTemplateId }:
 
   return (
     <Dialog {...defaultDialogProps} onClose={() => onClose()} open={open}>
-      <DialogTitle>View PDF Template: {pdfTemplateId} </DialogTitle>
+      <DialogTitle>View PDF Template: {extractPdfTemplateFilename(pdfTemplateId)} </DialogTitle>
       <DialogContent {...defaultDialogContentProps}>
         {pdfTemplateResponse && (
           <ContainerBox style={{ overflowY: 'auto', padding: '10px' }}>

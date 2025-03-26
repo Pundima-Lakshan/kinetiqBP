@@ -1,6 +1,6 @@
 import { KBPDataGrid } from '@/components/atoms';
 import type { PdfTemplateEntry } from '@/services';
-import { dateToString, getUiUserFullName } from '@/utils';
+import { dateToString, extractPdfTemplateFilename, getUiUserFullName } from '@/utils';
 import DeleteIcon from '@mui/icons-material/Delete';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import { Button, IconButton } from '@mui/material';
@@ -19,7 +19,14 @@ interface PdfTemplatesGridProps {
 export const PdfTemplatesGrid = ({ data, loading }: PdfTemplatesGridProps) => {
   const [columns] = useState<GridColDef<PdfTemplateRowModel>[]>(() => {
     return [
-      { field: 'id', headerName: 'Template Id', description: 'Usually the file name', flex: 1, minWidth: 150 },
+      {
+        field: 'id',
+        headerName: 'Template Id',
+        description: 'Usually the file name',
+        flex: 1,
+        minWidth: 150,
+        valueFormatter: extractPdfTemplateFilename,
+      },
       { field: 'modifiedDate', headerName: 'Last Modified Data', flex: 1.5, minWidth: 150, valueFormatter: dateToString },
       { field: 'lastModifiedBy', headerName: 'Last Modifed By', flex: 1, minWidth: 150, valueFormatter: getUiUserFullName },
       { field: 'createdDate', headerName: 'Created Date', flex: 1.5, minWidth: 150, valueFormatter: dateToString },

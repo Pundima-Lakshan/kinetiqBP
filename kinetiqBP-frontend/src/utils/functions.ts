@@ -24,3 +24,9 @@ export const dateToString = (date: string | Date | null | undefined) => {
 };
 
 export const getUiUserFullName = (value?: UiServiceUser) => `${value?.firstname ?? ''} ${value?.lastname ?? ''}`;
+
+export const extractPdfTemplateFilename = (fileNameWithPrefixes: string) => {
+  const regex = /([^__]+)(?=__)/;
+  const match = fileNameWithPrefixes.match(regex);
+  return match ? match[0] : fileNameWithPrefixes;
+};
