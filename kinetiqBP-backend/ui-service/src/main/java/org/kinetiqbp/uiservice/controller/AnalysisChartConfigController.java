@@ -25,11 +25,11 @@ public class AnalysisChartConfigController {
 
     @PostMapping
     public AnalysisChartConfig createAnalysisChartConfig(@RequestBody AnalysisChartConfigPostRequest analysisChartConfigPostRequest) {
-        AnalysisChartConfig analysisChartConfig = new AnalysisChartConfig(analysisChartConfigPostRequest.getFormSchema());
+        AnalysisChartConfig analysisChartConfig = new AnalysisChartConfig(analysisChartConfigPostRequest.getConfigSchema());
         return analysisChartConfigService.save(analysisChartConfig, analysisChartConfigPostRequest.getCreatedBy());
     }
 
-    @DeleteMapping("/{id")
+    @DeleteMapping("/{id}")
     public void deleteAnalysisChartConfig(@PathVariable Integer id) {
         analysisChartConfigService.deleteById(id);
     }

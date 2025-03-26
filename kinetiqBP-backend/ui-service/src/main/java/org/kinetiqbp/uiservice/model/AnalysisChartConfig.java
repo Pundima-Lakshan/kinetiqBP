@@ -26,9 +26,9 @@ public class AnalysisChartConfig {
     @NonNull
     @Type(JsonType.class)
     @Column(columnDefinition = "json")
-    private JsonNode formSchema;
+    private JsonNode configSchema;
 
-    public AnalysisChartConfig(@NotNull JsonNode formSchema) {
-        this.formSchema = formSchema;
+    public AnalysisChartConfig(@NotNull JsonNode configSchema) {
+        this.configSchema = configSchema;
     }
 }

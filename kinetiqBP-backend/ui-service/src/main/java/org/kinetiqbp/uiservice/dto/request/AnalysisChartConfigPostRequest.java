@@ -19,5 +19,5 @@ public class AnalysisChartConfigPostRequest {
     private String createdBy;
 
     @NonNull
-    private JsonNode formSchema;
+    private JsonNode configSchema;
 }
