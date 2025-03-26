@@ -2,6 +2,7 @@ import { browserRoutesCollection } from '@/configs/browser-router.ts';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import DescriptionIcon from '@mui/icons-material/Description';
+import TaskIcon from '@mui/icons-material/Task';
 import type { Navigation } from '@toolpad/core/AppProvider';
 
 export const navigation: Navigation = [
@@ -24,7 +25,7 @@ export const navigation: Navigation = [
   {
     segment: browserRoutesCollection.Tasks.segment,
     title: browserRoutesCollection.Tasks.title,
-    icon: <AssignmentIcon />,
+    icon: <TaskIcon />,
   },
   {
     kind: 'divider',

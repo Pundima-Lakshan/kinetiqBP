@@ -520,6 +520,49 @@ export const postTaskAction = async ({ action = 'complete', taskId, variables }:
   );
 };
 
+export interface TaskInstance {
+  id: string;
+  url: string;
+  owner: string | null;
+  assignee: string;
+  delegationState: string | null;
+  name: string;
+  description: string | null;
+  createTime: Date; // Changed to Date
+  dueDate: Date | null; // Changed to Date
+  priority: number;
+  suspended: boolean;
+  claimTime: string | null;
+  taskDefinitionKey: string;
+  scopeDefinitionId: string | null;
+  scopeId: string | null;
+  subScopeId: string | null;
+  scopeType: string | null;
+  propagatedStageInstanceId: string | null;
+  tenantId: string;
+  category: string | null;
+  formKey: string | null;
+  parentTaskId: string | null;
+  parentTaskUrl: string | null;
+  executionId: string;
+  executionUrl: string;
+  processInstanceId: string;
+  processInstanceUrl: string;
+  processDefinitionId: string;
+  processDefinitionUrl: string;
+  variables: RestVariable[];
+}
+
+interface GetTaskInstancesArg {
+  assigneeLike?: string;
+}
+
+export const getTaskInstances = async (arg: GetTaskInstancesArg) => {
+  return await get<GenericFlowableListResponse<TaskInstance>>(`${flowable_rest_url}/runtime/tasks`, {
+    queries: getValidQueries([{ assigneeLike: arg.assigneeLike }]),
+  });
+};
+
 export interface PdfTemplateEntry {
   id: string;
   createdDate: Date;
@@ -741,39 +784,6 @@ interface QueryTasksArgs {
     value: unknown;
     type: string;
   }>;
-}
-
-export interface TaskInstance {
-  id: string;
-  url: string;
-  owner: string | null;
-  assignee: string;
-  delegationState: string | null;
-  name: string;
-  description: string | null;
-  createTime: Date; // Changed to Date
-  dueDate: Date | null; // Changed to Date
-  priority: number;
-  suspended: boolean;
-  claimTime: string | null;
-  taskDefinitionKey: string;
-  scopeDefinitionId: string | null;
-  scopeId: string | null;
-  subScopeId: string | null;
-  scopeType: string | null;
-  propagatedStageInstanceId: string | null;
-  tenantId: string;
-  category: string | null;
-  formKey: string | null;
-  parentTaskId: string | null;
-  parentTaskUrl: string | null;
-  executionId: string;
-  executionUrl: string;
-  processInstanceId: string;
-  processInstanceUrl: string;
-  processDefinitionId: string;
-  processDefinitionUrl: string;
-  variables: RestVariable[];
 }
 
 export const queryTasks = async (args: Partial<QueryTasksArgs>) => {

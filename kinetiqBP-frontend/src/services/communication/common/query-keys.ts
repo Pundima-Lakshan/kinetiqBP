@@ -19,6 +19,8 @@ export const queryKeys = {
   workflowInstances: 'workflowInstances',
   workflowInstance: 'workflowInstance',
 
+  taskInstances: 'taskInstances',
+
   historicWorkflowInstance: 'historicWorkflowInstance',
   historicActivityInstances: 'historicActivityInstances',
   historicTaskInstance: 'historicTaskInstance',

@@ -14,6 +14,7 @@ import {
   getPdfTemplates,
   getPdfTemplateVersions,
   getProcessInstanceVariables,
+  getTaskInstances,
   getUiServiceUsers,
   getWorkflowDefinitionModel,
   getWorkflowDefinitions,
@@ -104,6 +105,13 @@ export const useGetWorkflowInstances = (involvedUserId?: string | undefined) => 
   return useQueryBuilder({
     queryKey: [queryKeys.workflowInstances, involvedUserId],
     queryFn: async () => getWorkflowInstances({ involvedUser: involvedUserId }),
+  });
+};
+
+export const useGetTaskInstances = (userId?: string | undefined) => {
+  return useQueryBuilder({
+    queryKey: [queryKeys.taskInstances, userId],
+    queryFn: async () => getTaskInstances({ assigneeLike: userId }),
   });
 };
 

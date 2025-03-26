@@ -10,6 +10,7 @@ import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { ReactRouterAppProvider } from '@toolpad/core/react-router';
 import { Outlet } from 'react-router';
 import { useAuthInitialization } from './auth-initialization.ts';
+import { ToolbarActions } from './toolbar-actions.tsx';
 
 export const Home = () => {
   const { authentication, session, user, isLoading, signinRedirect } = useAuthInitialization();
@@ -43,7 +44,13 @@ export const Home = () => {
 
   return (
     <ReactRouterAppProvider navigation={navigation} branding={brandiung} theme={muiTheme} authentication={authentication} session={session}>
-      <DashboardLayout defaultSidebarCollapsed sx={{ height: '100%', width: '100%' }}>
+      <DashboardLayout
+        slots={{
+          toolbarActions: ToolbarActions,
+        }}
+        defaultSidebarCollapsed
+        sx={{ height: '100%', width: '100%' }}
+      >
         <PageContainer
           style={{
             display: 'flex',

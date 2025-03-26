@@ -1,4 +1,4 @@
-import type { DefaultError, MutationStatus } from '@tanstack/react-query';
+import { useQueryClient, type DefaultError, type MutationStatus } from '@tanstack/react-query';
 import { useNotifications } from '@toolpad/core';
 import { useEffect } from 'react';
 
@@ -45,4 +45,16 @@ export const useMutationSuccessErrorCallback = <T = unknown>({
       return;
     }
   }, [mutationStatus, error]);
+};
+
+export const useHandleQueriesRefresh = () => {
+  const queryClient = useQueryClient();
+
+  const handleQueriesRefresh = () => {
+    queryClient.invalidateQueries();
+  };
+
+  return {
+    handleQueriesRefresh,
+  };
 };
