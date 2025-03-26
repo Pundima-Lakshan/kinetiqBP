@@ -97,21 +97,21 @@ export const navigation: Navigation = [
     title: browserRoutesCollection.Users.title,
     icon: <DescriptionIcon />,
   },
-  {
-    kind: 'divider',
-  },
-  {
-    kind: 'header',
-    title: 'Analytics',
-  },
-  {
-    segment: browserRoutesCollection.Statistics.segment,
-    title: browserRoutesCollection.Statistics.title,
-    icon: <DescriptionIcon />,
-  },
-  {
-    segment: browserRoutesCollection.Heatmap.segment,
-    title: browserRoutesCollection.Heatmap.title,
-    icon: <DescriptionIcon />,
-  },
+  // {
+  //   kind: 'divider',
+  // },
+  // {
+  //   kind: 'header',
+  //   title: 'Analytics',
+  // },
+  // {
+  //   segment: browserRoutesCollection.Statistics.segment,
+  //   title: browserRoutesCollection.Statistics.title,
+  //   icon: <DescriptionIcon />,
+  // },
+  // {
+  //   segment: browserRoutesCollection.Heatmap.segment,
+  //   title: browserRoutesCollection.Heatmap.title,
+  //   icon: <DescriptionIcon />,
+  // },
 ];
