@@ -81,6 +81,7 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
       kbpFormViewerRef,
       dialogs,
       isFiles: true,
+      filePostfix: `${processInstanceResponse.id}_start`,
     });
 
     const data = getFormData({
@@ -235,7 +236,9 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
           });
         }
       }
-      autoInitializedData[field.key] = value;
+      if (!!field.key) {
+        autoInitializedData[field.key] = value;
+      }
     });
 
     setFormData((prev) => ({

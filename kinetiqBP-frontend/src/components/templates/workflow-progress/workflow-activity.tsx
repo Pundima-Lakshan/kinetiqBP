@@ -1,6 +1,6 @@
 import { ContainerBox } from '@/components/atoms';
 import { createDynamicForm, FormViewerCustomEventNames, KBPFormViewer, KBPFormViewerRefObj } from '@/components/organisms';
-import { getDataFromRestVariables, getFormData } from '@/logic';
+import { getDataFromRestVariables } from '@/logic';
 import {
   FormComponent,
   useGetFormDefinition,

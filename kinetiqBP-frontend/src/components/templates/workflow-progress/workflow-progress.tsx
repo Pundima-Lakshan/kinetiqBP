@@ -40,6 +40,7 @@ export const WorkFlowProgress = ({ workflowDefinitionId, workflowInstanceId }: W
       kbpFormViewerRef,
       dialogs,
       isFiles: true,
+      filePostfix: `${workflowInstanceId}_${taskId}`,
     });
 
     const data = getFormData({

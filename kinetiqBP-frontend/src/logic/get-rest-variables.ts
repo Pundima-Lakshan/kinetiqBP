@@ -7,13 +7,14 @@ interface GetFormDataCommon {
   kbpFormViewerRef: MutableRefObject<KBPFormViewerRefObj | null>;
   dialogs: DialogHook;
   isFiles?: boolean;
+  filePostfix?: string;
 }
 
 export function getFormData({ kbpFormViewerRef, dialogs }: Omit<GetFormDataCommon, 'isFiles'>): RestVariable[] | undefined; // If isFiles is undefined, return RestVariablesType[] or undefined
 
-export function getFormData({ kbpFormViewerRef, dialogs, isFiles }: GetFormDataCommon): { file: File; formKey: string }[] | undefined; // If isFiles is true, return FileType[] or undefined
+export function getFormData({ kbpFormViewerRef, dialogs, isFiles, filePostfix }: GetFormDataCommon): { file: File; formKey: string }[] | undefined; // If isFiles is true, return FileType[] or undefined
 
-export function getFormData({ kbpFormViewerRef, dialogs, isFiles }: GetFormDataCommon) {
+export function getFormData({ kbpFormViewerRef, dialogs, isFiles, filePostfix }: GetFormDataCommon) {
   const formSchema = kbpFormViewerRef.current?.getSchema();
 
   if (!formSchema) return;
@@ -27,13 +28,13 @@ export function getFormData({ kbpFormViewerRef, dialogs, isFiles }: GetFormDataC
   }
 
   if (isFiles) {
-    return getFilesdFromData(formSchema, submitResponse.data);
+    return getFilesdFromData(formSchema, submitResponse.data, filePostfix);
   } else {
     return getRestVariablesFromData(formSchema, submitResponse.data);
   }
 }
 
-export const getFilesdFromData = (formSchema: FormSchema, data: Record<string, unknown>) => {
+export const getFilesdFromData = (formSchema: FormSchema, data: Record<string, unknown>, filePostfix: string | undefined) => {
   const componentsMap = new Map(formSchema.components.map((component) => [component.key, component]));
   const filesData: { file: File; formKey: string }[] = [];
 
@@ -45,7 +46,7 @@ export const getFilesdFromData = (formSchema: FormSchema, data: Record<string, u
     switch (correspondingComponent?.type) {
       case 'pdf-template': {
         const data = JSON.parse(dataValue as string) as TemplateData;
-        fileData = new File([dataValue as string], data.fileName, {
+        fileData = new File([dataValue as string], `${data.fileName}__${filePostfix}_${dataKey}`, {
           type: 'application/json',
         });
         break;
