@@ -1,5 +1,5 @@
 import { Gauge } from '@mui/x-charts/Gauge';
-import { AnalysisCard, AnalysisCardProps } from './analysis-card';
+import { AnalysisCardProps, AnalysisCard } from './common';
 
 export type AnGaugeProps = {
   value: number;

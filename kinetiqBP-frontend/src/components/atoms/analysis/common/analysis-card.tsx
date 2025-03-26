@@ -1,7 +1,7 @@
-import { ReactNode } from 'react';
-import { Box, Card, CardActionArea, CardContent, IconButton, Typography } from '@mui/material';
-import { ContainerBox } from '../container-box';
 import InfoIcon from '@mui/icons-material/Info';
+import { Box, Card, CardActionArea, CardContent, Typography } from '@mui/material';
+import { ReactNode } from 'react';
+import { ContainerBox } from '../../container-box';
 
 export interface AnalysisCardProps {
   cardActionCallback: () => void;

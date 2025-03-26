@@ -10,8 +10,8 @@ export const useSyncedState = <T>({ getter, deps }: SyncedStateProps<T>) => {
   const [state, setState] = useState<T>(getter);
   useNonInitialEffect(() => {
     setState(getter);
-  }, deps);
-  
+  }, [...deps]);
+
   return {
     state,
     setState,

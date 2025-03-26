@@ -1,12 +1,15 @@
-import { ContainerBox, SwapyReactive } from '@/components';
-import { Box } from '@mui/material';
+import { AnalysisGroupProps, AnalysisGroup, ContainerBox } from '@/components';
 
-export const DashboardMain = () => {
+interface DashboardMainProps {
+  groups: AnalysisGroupProps[];
+}
+
+export const DashboardMain = ({ groups }: DashboardMainProps) => {
   return (
-    <ContainerBox style={{ display: 'flex', flexDirection: 'column', gap: '10px', overflowY: 'auto' }}>
-      <Box>
-        <SwapyReactive items={[]} setItems={() => {}} />
-      </Box>
+    <ContainerBox style={{ display: 'flex', flexDirection: 'column', gap: '15px', paddingRight: '7px', overflowY: 'auto' }}>
+      {groups.map((g, i) => (
+        <AnalysisGroup key={i} title={g.title} description={g.description} items={[]} />
+      ))}
     </ContainerBox>
   );
 };

@@ -4,7 +4,7 @@ import { DashboardMain } from './dashboard-main';
 
 export const DashboardTemplate = () => {
   const renderMain = () => {
-    return <DashboardMain />;
+    return <DashboardMain groups={[]} />;
   };
   const renderDrawer = () => {
     return <DashboardDrawer />;

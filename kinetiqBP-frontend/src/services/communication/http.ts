@@ -635,6 +635,8 @@ export const getPdfTemplateData = async (pdfTemplateId: string, versionId: strin
   return await downloadJson<TemplateData>(url); // Here the basePdf file type will be base64 string
 };
 
+export type QueryType = 'task' | 'process' | 'activity';
+
 interface QueryActivityInstancesArgs {
   start: number;
   size: number;

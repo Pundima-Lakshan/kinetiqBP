@@ -111,4 +111,6 @@ export const KbpFormViewerRender = (
   return <div ref={formContainerRef} style={{ width: '100%', height: '100%', overflowY: 'auto' }} />;
 };
 
+export type KbpFormViewerChangeEvent = { event: unknown; submitResult: { data: Record<string, unknown> } };
+
 export const KBPFormViewer = forwardRef(KbpFormViewerRender);

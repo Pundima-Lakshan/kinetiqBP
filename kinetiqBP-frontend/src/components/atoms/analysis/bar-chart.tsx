@@ -1,6 +1,6 @@
 import { BarChart, BarChartProps } from '@mui/x-charts/BarChart';
 import { DatasetType } from '@mui/x-charts/internals';
-import { AnalysisCard, AnalysisCardProps } from './analysis-card';
+import { AnalysisCardProps, AnalysisCard } from './common';
 
 export type AnBarChartProps = {
   dataset: DatasetType;

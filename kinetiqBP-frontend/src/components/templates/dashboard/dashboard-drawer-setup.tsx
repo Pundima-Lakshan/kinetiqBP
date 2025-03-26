@@ -15,10 +15,8 @@ export const DashboardDrawerSetup = ({ main, drawerContent }: DashboardDrawerSet
   const open = useDrawerStore((state) => state.open);
   const { handleDrawerClose } = useDrawerStoreActions();
 
-  console.log(open);
-
   return (
-    <Box>
+    <>
       <Main open={open}>{main}</Main>
       <Drawer
         sx={{
@@ -40,7 +38,7 @@ export const DashboardDrawerSetup = ({ main, drawerContent }: DashboardDrawerSet
         </Box>
         <ContainerBox>{drawerContent}</ContainerBox>
       </Drawer>
-    </Box>
+    </>
   );
 };
 

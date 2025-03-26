@@ -17,7 +17,7 @@ export type Item = {
   };
 };
 
-interface SwapyReactiveProps {
+export interface SwapyReactiveProps {
   items: Item[];
   numRows?: number;
   numCols?: number;

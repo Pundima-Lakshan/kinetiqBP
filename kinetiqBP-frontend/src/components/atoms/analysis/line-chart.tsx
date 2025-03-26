@@ -1,6 +1,6 @@
 import { LineChart } from '@mui/x-charts';
 import { DatasetType } from '@mui/x-charts/internals';
-import { AnalysisCard, AnalysisCardProps } from './analysis-card';
+import { AnalysisCardProps, AnalysisCard } from './common';
 
 export type AnLineChartProps = {
   keyToLabel: Record<string, string>;
