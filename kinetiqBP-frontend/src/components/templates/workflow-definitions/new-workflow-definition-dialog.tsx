@@ -44,7 +44,6 @@ export const NewWorkflowDefinitionDialog = ({ open, onClose }: DialogProps) => {
 
   useMutationSuccessErrorCallback({
     mutationStatus: statusPostWorkflowDefinitions,
-    successMessage: 'Workflow submitted successfully',
     error: errorPostWorkflowDefinitions,
     onSuccess: handleClose,
   });

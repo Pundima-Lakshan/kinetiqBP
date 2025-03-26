@@ -112,6 +112,7 @@ export const useGetTaskInstances = (userId?: string | undefined) => {
   return useQueryBuilder({
     queryKey: [queryKeys.taskInstances, userId],
     queryFn: async () => getTaskInstances({ assigneeLike: userId }),
+    enabled: userId != null,
   });
 };
 

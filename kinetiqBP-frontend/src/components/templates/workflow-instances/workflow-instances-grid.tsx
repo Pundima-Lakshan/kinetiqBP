@@ -15,34 +15,6 @@ export type WorkflowInstancesRowModel = ProcessInstance & {
   startedUser?: UiServiceUser;
 };
 
-const ShowMoreActions = (params: GridRenderCellParams<WorkflowInstancesRowModel>) => {
-  const linkTo = `${getPath(browserRoutesCollection.WorkflowInstances.segment)}/${params.row.processDefinitionId}/${params.row.id}`;
-  return (
-    <Link to={linkTo}>
-      <IconButton aria-label="more" color="primary" size="small" tabIndex={params.hasFocus ? 0 : -1}>
-        <ArrowOutwardIcon />
-      </IconButton>
-    </Link>
-  );
-};
-
-const RemoveFormDefinition = (params: GridRenderCellParams<WorkflowInstancesRowModel>) => {
-  const dialogs = useDialogs();
-  return (
-    <Button
-      variant="text"
-      color="error"
-      size="small"
-      tabIndex={params.hasFocus ? 0 : -1}
-      onClick={() => {
-        void dialogs.open(RemoveProcessInstanceDialog, { processInstanceId: params.row.id });
-      }}
-    >
-      <DeleteIcon color="error" />
-    </Button>
-  );
-};
-
 interface WorkflowInstancesGridProps {
   data: WorkflowInstancesRowModel[];
   isLoading: boolean;
@@ -116,5 +88,33 @@ export const WorkflowInstancesGrid = ({ data, isLoading }: WorkflowInstancesGrid
         },
       }}
     />
+  );
+};
+
+const ShowMoreActions = (params: GridRenderCellParams<WorkflowInstancesRowModel>) => {
+  const linkTo = `${getPath(browserRoutesCollection.WorkflowInstances.segment)}/${params.row.processDefinitionId}/${params.row.id}`;
+  return (
+    <Link to={linkTo}>
+      <IconButton aria-label="more" color="primary" size="small" tabIndex={params.hasFocus ? 0 : -1}>
+        <ArrowOutwardIcon />
+      </IconButton>
+    </Link>
+  );
+};
+
+const RemoveFormDefinition = (params: GridRenderCellParams<WorkflowInstancesRowModel>) => {
+  const dialogs = useDialogs();
+  return (
+    <Button
+      variant="text"
+      color="error"
+      size="small"
+      tabIndex={params.hasFocus ? 0 : -1}
+      onClick={() => {
+        void dialogs.open(RemoveProcessInstanceDialog, { processInstanceId: params.row.id });
+      }}
+    >
+      <DeleteIcon color="error" />
+    </Button>
   );
 };
