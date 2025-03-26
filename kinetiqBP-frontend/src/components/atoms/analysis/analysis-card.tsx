@@ -20,10 +20,8 @@ export const AnalysisCard = ({ title, description, children, cardActionCallback 
           <Typography gutterBottom sx={{ color: 'text.title', fontSize: 14 }}>
             {title}
           </Typography>
-          <CardActionArea style={{ width: 'fit-content' }} onClick={cardActionCallback}>
-            <IconButton>
-              <InfoIcon color="info" />
-            </IconButton>
+          <CardActionArea style={{ width: 'fit-content', borderRadius: '2px' }} onClick={cardActionCallback}>
+            <InfoIcon color="info" style={{ margin: '5px' }} />
           </CardActionArea>
         </Box>
         <ContainerBox style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 'calc(100% - 80px)' }}>
