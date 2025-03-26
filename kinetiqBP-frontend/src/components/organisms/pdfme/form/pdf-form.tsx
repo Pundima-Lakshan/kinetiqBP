@@ -7,8 +7,8 @@ import { FileInputFormControl } from '@/components/molecules';
 import { Box, Button, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material';
 import './styles.css';
 
-/*
-editor type is only for tempory type safety
+/***
+editor type is only for 
 */
 type Mode = 'form' | 'viewer' | 'editor';
 
@@ -110,13 +110,12 @@ export const PdfForm = ({ initialMode, initialTemplate, initialInputs }: PdfForm
   }, []);
 
   return (
-    <div style={{ height: '100%', width: '100%' }}>
+    <div style={{ height: '100%', width: '100%', margin: 'auto' }}>
       <Box
         style={{
           display: 'flex',
           alignItems: 'center',
           gap: '0 1rem',
-          margin: '0.5rem 0rem',
           fontSize: 'small',
         }}
       >

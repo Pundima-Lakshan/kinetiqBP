@@ -6,6 +6,7 @@ import {
   FormComponent,
   FormSchemaType,
   PdfTemplateEntry,
+  PostPdfTemplateEntry,
   useGetFormDefinition,
   useGetWorkflowDefinitionModel,
   useGetWorkflowDefinitionXml,
@@ -105,7 +106,7 @@ export const WorkflowStartDialog = ({ open, onClose, payload: workflowStartDialo
       });
 
       const files = filesData.map((f) => f.file);
-      const pdfTemplateEntries: PdfTemplateEntry[] = filesData.map((f) => ({
+      const pdfTemplateEntries: PostPdfTemplateEntry[] = filesData.map((f) => ({
         id: f.file.name,
         createdBy: loggedInUserId,
         lastModifiedBy: loggedInUserId,

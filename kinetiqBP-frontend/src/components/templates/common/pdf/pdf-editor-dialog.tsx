@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from 'react';
 interface PdfEditorDialogPayload {
   pdfFile?: File;
   templateFile?: string; // This can be only the file name or TemplateData string
+  pdfVersion?: string;
   type?: 'viewer' | 'editor' | 'form';
 }
 
@@ -24,7 +25,7 @@ export const PdfEditorDialog = ({ open, onClose, payload }: DialogProps<PdfEdito
 
   const pdfDesignerRef = useRef<PdfDesignerRefObj>(null);
 
-  const { data: pdfTemplateData, isLoading: isLoadingPdfTemplateData } = useGetPdfTemplateData(templateNameToFetch);
+  const { data: pdfTemplateData, isLoading: isLoadingPdfTemplateData } = useGetPdfTemplateData(templateNameToFetch, payload.pdfVersion);
 
   const handleConfirm = () => {
     const result = pdfDesignerRef.current?.generateTemplate();

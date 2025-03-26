@@ -135,13 +135,12 @@ export const PdfDesignerRenderer = (
   }, []);
 
   return (
-    <div style={{ height: '100%', width: '100%' }}>
+    <div style={{ height: '100%', width: '100%', margin: 'auto' }}>
       <Box
         style={{
           display: 'flex',
           alignItems: 'center',
           gap: '0 1rem',
-          margin: '0.5rem 0rem',
           fontSize: 'small',
         }}
       >
@@ -203,7 +202,7 @@ export const PdfDesignerRenderer = (
           </Button>
         </FormControl>
       </Box>
-      <div ref={designerElementRef} style={{ width: '100%', height: `calc(100% - 40px)` }} />
+      <div ref={designerElementRef} style={{ width: '100%', height: `calc(100% - 42px)` }} />
     </div>
   );
 };

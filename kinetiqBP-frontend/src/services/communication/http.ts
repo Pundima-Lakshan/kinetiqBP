@@ -563,7 +563,7 @@ export const getTaskInstances = async (arg: GetTaskInstancesArg) => {
   });
 };
 
-export interface PdfTemplateEntry {
+export interface PostPdfTemplateEntry {
   id: string;
   createdDate: Date;
   modifiedDate: Date;
@@ -573,7 +573,7 @@ export interface PdfTemplateEntry {
 
 interface PostPdfTemplateArg {
   files: File[];
-  pdfTemplateEntries: PdfTemplateEntry[];
+  pdfTemplateEntries: PostPdfTemplateEntry[];
 }
 
 export const postPdfTemplate = async ({ files, pdfTemplateEntries }: PostPdfTemplateArg) => {
@@ -586,8 +586,16 @@ export const postPdfTemplate = async ({ files, pdfTemplateEntries }: PostPdfTemp
 };
 
 export const getPdfTemplates = async () => {
-  return await get<Array<PdfTemplateEntry>>(`${ui_service_url}/pdf-templates`);
+  return await get<Array<PostPdfTemplateEntry>>(`${ui_service_url}/pdf-templates`);
 };
+
+export interface PdfTemplateEntry {
+  id: string;
+  createdDate: Date;
+  modifiedDate: Date;
+  createdBy: UiServiceUser;
+  lastModifiedBy: UiServiceUser;
+}
 
 interface PdfTemplateUserInvolvement {
   id: string;
@@ -595,7 +603,7 @@ interface PdfTemplateUserInvolvement {
   pdfTemplate: PdfTemplateEntry;
 }
 
-interface GetPdfTemplateResponse {
+export interface GetPdfTemplateResponse {
   id: string;
   createdDate: Date;
   createdBy: UiServiceUser;
@@ -611,7 +619,7 @@ export const getPdfTemplate = async (pdfTemplateId: string) => {
 };
 
 export const getPdfTemplateVersions = async (pdfTemplateId: string) => {
-  return await get<String[]>(`${ui_service_url}/pdf-templates/versions/${pdfTemplateId}`);
+  return await get<string[]>(`${ui_service_url}/pdf-templates/versions/${pdfTemplateId}`);
 };
 
 export interface TemplateData {
@@ -619,11 +627,12 @@ export interface TemplateData {
   fileName: string;
 }
 
-export const getPdfTemplateData = async (pdfTemplateId: string) => {
+export const getPdfTemplateData = async (pdfTemplateId: string, versionId: string | undefined) => {
   const url = await get<string>(`${ui_service_url}/pdf-templates/file-url/${pdfTemplateId}`, {
+    queries: getValidQueries([{ versionId }]),
     responseType: 'text',
   });
-  return await downloadJson<Template>(url); // Here the basePdf file type will be base64 string
+  return await downloadJson<TemplateData>(url); // Here the basePdf file type will be base64 string
 };
 
 interface QueryActivityInstancesArgs {

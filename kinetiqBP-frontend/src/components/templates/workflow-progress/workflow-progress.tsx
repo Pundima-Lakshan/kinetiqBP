@@ -3,9 +3,9 @@ import { bpmnActivityTypes, type KBPFormViewerRefObj } from '@/components/organi
 import { getFormData } from '@/logic';
 import {
   PdfTemplateEntry,
+  PostPdfTemplateEntry,
   useGetHistoricActivity,
   useGetWorkflowDefinitionModel,
-  useMutationSuccessErrorCallback,
   usePostPdfTemplates,
   usePostTaskAction,
 } from '@/services';
@@ -65,7 +65,7 @@ export const WorkFlowProgress = ({ workflowDefinitionId, workflowInstanceId }: W
       });
 
       const files = filesData.map((f) => f.file);
-      const pdfTemplateEntries: PdfTemplateEntry[] = filesData.map((f) => ({
+      const pdfTemplateEntries: PostPdfTemplateEntry[] = filesData.map((f) => ({
         id: f.file.name,
         createdBy: loggedInUserId,
         lastModifiedBy: loggedInUserId,

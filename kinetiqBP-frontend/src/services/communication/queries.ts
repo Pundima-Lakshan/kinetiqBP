@@ -184,10 +184,10 @@ export const useGetPdfTemplateVersions = (pdfTemplateId: string) => {
   });
 };
 
-export const useGetPdfTemplateData = (pdfTemplateId: string) => {
+export const useGetPdfTemplateData = (pdfTemplateId: string, versionId?: string) => {
   return useQueryBuilder({
-    queryKey: [queryKeys.pdfTemplate, pdfTemplateId],
-    queryFn: async () => getPdfTemplateData(pdfTemplateId),
+    queryKey: [queryKeys.pdfTemplate, pdfTemplateId, versionId],
+    queryFn: async () => getPdfTemplateData(pdfTemplateId, versionId),
     enabled: pdfTemplateId.length > 0,
   });
 };
