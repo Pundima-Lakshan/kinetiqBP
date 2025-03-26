@@ -43,7 +43,6 @@ export const NewFormDefinitionDialog = ({ open, onClose }: DialogProps) => {
 
   useMutationSuccessErrorCallback({
     mutationStatus: statusPostFormDefinition,
-    successMessage: 'Form submitted successfully',
     error: errorPostFormDefinition,
     onSuccess: handleClose,
   });
