@@ -4,7 +4,7 @@ import { useSyncedState } from '@/utils';
 
 import './styles.css';
 
-export type Item = {
+export type SwapyReactiveItem = {
   id: string;
   component: ReactNode;
   layout?: {
@@ -18,18 +18,18 @@ export type Item = {
 };
 
 export interface SwapyReactiveProps {
-  items: Item[];
+  items: SwapyReactiveItem[];
   numRows?: number;
   numCols?: number;
-  setItems?: Dispatch<SetStateAction<Item[]>>;
+  setItems?: Dispatch<SetStateAction<SwapyReactiveItem[]>>;
   slotHeight?: number;
 }
 
 export const SwapyReactive = ({ items, numCols = 4, numRows = 1, slotHeight = 200 }: SwapyReactiveProps) => {
-  const { state: gridMatrix } = useSyncedState<Item[]>({
+  const { state: gridMatrix } = useSyncedState<SwapyReactiveItem[]>({
     getter: () => {
       // return items;
-      const matrix: Item[][] = Array.from({ length: numRows }, () => Array(numCols).fill(null));
+      const matrix: SwapyReactiveItem[][] = Array.from({ length: numRows }, () => Array(numCols).fill(null));
 
       const findNextAvailableSpace = (rowSpan: number, colSpan: number): { row: number; col: number } | null => {
         for (let row = 0; row <= numRows - rowSpan; row++) {
@@ -76,7 +76,7 @@ export const SwapyReactive = ({ items, numCols = 4, numRows = 1, slotHeight = 20
       });
 
       // Fill empty spots with DummyItems
-      const gridWithDummies: Item[] = [];
+      const gridWithDummies: SwapyReactiveItem[] = [];
       const addedIds = new Set<string>(); // Track added items by their unique IDs
 
       matrix.forEach((row, rowIndex) => {

@@ -14,6 +14,8 @@ export const mutationKeys = {
   task: 'task',
 
   pdfTemplate: 'pdfTemplate',
+
+  analysisChartConfig: 'analysisChartConfig',
 } as const;
 
 export const mutationType = {

@@ -11,11 +11,11 @@ import {
   getQueryActivityFormSchema,
   getQueryProcessFormSchema,
 } from '@/configs';
-import { QueryType } from '@/services';
+import { QueryType, usePostAnalysisChartConfig } from '@/services';
 import { useDrawerStore, useDrawerStoreActions } from '@/store';
 import { useSyncedState } from '@/utils';
 import { Box, Button, Typography } from '@mui/material';
-import { useNotifications } from '@toolpad/core';
+import { useNotifications, useSession } from '@toolpad/core';
 import { useRef, useState } from 'react';
 
 export const DashboardDrawer = () => {
@@ -93,15 +93,27 @@ export const DashboardDrawer = () => {
     }
   };
 
+  const { mutate: postAnalysisChartConfig, isPending: isPendingPostAnalysisChartConfig } = usePostAnalysisChartConfig();
+
+  const sessions = useSession();
+
   const handleSubmit = () => {
     const submitResponse = kbpFormViewerRef.current?.getSubmitResponse();
-    if (submitResponse?.errors) {
+    if (submitResponse?.errors && Object.keys(submitResponse.errors).length > 0) {
       notifications.show('There are errors in the form values', {
         severity: 'error',
       });
       return;
     }
+    if (submitResponse?.data && sessions?.user?.id) {
+      postAnalysisChartConfig({
+        configSchema: submitResponse?.data,
+        createdBy: sessions.user.id,
+      });
+    }
   };
+
+  const isLoading = isPendingPostAnalysisChartConfig;
 
   return (
     <ContainerBox style={{ padding: '10px', borderRadius: '8px', display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -114,7 +126,7 @@ export const DashboardDrawer = () => {
         <KBPFormViewer schema={formSchema} ref={kbpFormViewerRef} changedHandler={handleChange} data={localFormData} />
       </ContainerBox>
       <Box style={{ marginTop: '10px', textAlign: 'center' }}>
-        <Button color="success" variant="contained" style={{ width: '100%', padding: '12px 0' }}>
+        <Button loading={isLoading} onClick={handleSubmit} color="success" variant="contained" style={{ width: '100%', padding: '12px 0' }}>
           Submit
         </Button>
       </Box>

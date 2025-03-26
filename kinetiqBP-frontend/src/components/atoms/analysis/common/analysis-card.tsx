@@ -4,9 +4,9 @@ import { ReactNode } from 'react';
 import { ContainerBox } from '../../container-box';
 
 export interface AnalysisCardProps {
-  cardActionCallback: () => void;
+  cardActionCallback?: () => void;
   title: string;
-  description: string;
+  description?: string;
   children?: ReactNode; // This is optional because to stasify types, but indended it not be optional
 }
 

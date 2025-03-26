@@ -1,5 +1,6 @@
 import { mutationKeys, mutationType, useMutationBuilder } from './common';
 import {
+  postAnalysisConfig,
   postFormDefinition,
   postPdfTemplate,
   postStartWorkflowInstance,
@@ -7,6 +8,7 @@ import {
   postWorkflowDefinition,
   putFormDefinition,
   putProcessInstanceVariables,
+  removeAnalysisConfig,
   removeFormDefinition,
   removeHistoricProcessInstance,
   removeProcessInstance,
@@ -87,5 +89,19 @@ export const usePostPdfTemplates = () => {
   return useMutationBuilder({
     mutationKey: [mutationKeys.pdfTemplate, mutationType.post],
     mutationFn: postPdfTemplate,
+  });
+};
+
+export const usePostAnalysisChartConfig = () => {
+  return useMutationBuilder({
+    mutationKey: [mutationKeys.analysisChartConfig, mutationType.post],
+    mutationFn: postAnalysisConfig,
+  });
+};
+
+export const useRemovenalysisChartConfig = () => {
+  return useMutationBuilder({
+    mutationKey: [mutationKeys.analysisChartConfig, mutationType.remove],
+    mutationFn: removeAnalysisConfig,
   });
 };

@@ -1,4 +1,4 @@
-import { FormSchema } from '@/services';
+import { AnalysisQueryArgs, FormSchema } from '@/services';
 
 export const getQuerTaskFormSchema = () =>
   ({
@@ -422,3 +422,86 @@ export const getQuerTaskFormSchema = () =>
     id: 'Form_taskQuery',
     versionTag: 'v1',
   }) as FormSchema;
+
+export const filterQueryTasksArgs = (input: AnalysisQueryArgs) => {
+  const validProperties = [
+    'start',
+    'size',
+    'sort',
+    'order',
+    'taskId',
+    'name',
+    'nameLike',
+    'nameLikeIgnoreCase',
+    'description',
+    'descriptionLike',
+    'priority',
+    'minimumPriority',
+    'maximumPriority',
+    'assignee',
+    'assigneeLike',
+    'owner',
+    'ownerLike',
+    'unassigned',
+    'delegationState',
+    'candidateUser',
+    'candidateGroup',
+    'candidateGroupIn',
+    'ignoreAssignee',
+    'involvedUser',
+    'processInstanceId',
+    'processInstanceIdWithChildren',
+    'withoutProcessInstanceId',
+    'processInstanceBusinessKey',
+    'processInstanceBusinessKeyLike',
+    'processDefinitionId',
+    'processDefinitionKey',
+    'processDefinitionName',
+    'processDefinitionKeyLike',
+    'processDefinitionNameLike',
+    'executionId',
+    'createdOn',
+    'createdBefore',
+    'createdAfter',
+    'excludeSubTasks',
+    'taskDefinitionKey',
+    'taskDefinitionKeyLike',
+    'taskDefinitionKeys',
+    'dueDate',
+    'dueBefore',
+    'dueAfter',
+    'withoutDueDate',
+    'active',
+    'includeTaskLocalVariables',
+    'includeProcessVariables',
+    'scopeDefinitionId',
+    'scopeId',
+    'withoutScopeId',
+    'scopeType',
+    'propagatedStageInstanceId',
+    'tenantId',
+    'tenantIdLike',
+    'withoutTenantId',
+    'candidateOrAssigned',
+    'category',
+    'categoryIn',
+    'categoryNotIn',
+    'withoutCategory',
+    'rootScopeId',
+    'parentScopeId',
+    'taskVariables',
+    'processInstanceVariables',
+  ];
+
+  const filteredObj = {};
+
+  return filteredObj;
+
+  validProperties.forEach((key) => {
+    if (input.hasOwnProperty(key)) {
+      filteredObj[key] = input[key];
+    }
+  });
+
+  return filteredObj;
+};

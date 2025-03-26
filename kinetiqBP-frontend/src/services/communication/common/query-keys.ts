@@ -32,4 +32,8 @@ export const queryKeys = {
   pdfTemplate: 'pdfTemplate',
   pdfTemplateVersions: 'pdfTemplateVersions',
   pdfTemplateUrl: 'pdfTemplateUrl',
+
+  analysisChartConfigs: 'analysisChartConfigs',
+
+  queryTasks: 'queryTasks',
 } as const;

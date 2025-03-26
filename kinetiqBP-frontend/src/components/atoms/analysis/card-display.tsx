@@ -1,13 +1,18 @@
+import { AnalysisQueryArgs, AnalysisQueryResponse, GenericFlowableListResponse, QueryType, useAnalysisQueries } from '@/services';
 import { Card, CardActionArea, CardContent, Typography } from '@mui/material';
 
 export interface AnCardDisplayProps {
   title: string;
-  value: string | number;
+  valueType?: string | number;
   description: string | number;
-  cardActionCallback: () => void;
+  cardActionCallback?: () => void;
+  queryType: QueryType;
+  queryArgs: AnalysisQueryArgs;
 }
 
-export const AnCardDisplay = ({ cardActionCallback, title, value, description }: AnCardDisplayProps) => {
+export const AnCardDisplay = ({ cardActionCallback, queryType, queryArgs, title, description }: AnCardDisplayProps) => {
+  const result = useAnalysisQueries({ queryType, args: queryArgs });
+
   return (
     <Card>
       <CardActionArea onClick={cardActionCallback}>
@@ -16,11 +21,17 @@ export const AnCardDisplay = ({ cardActionCallback, title, value, description }:
             {title}
           </Typography>
           <Typography variant="h5" component="div">
-            {value}
+            {getValue(result?.data).total}
           </Typography>
           <Typography variant="body2">{description}</Typography>
         </CardContent>
       </CardActionArea>
     </Card>
   );
+};
+
+const getValue = (data?: AnalysisQueryResponse) => {
+  return {
+    total: data?.total ?? 0,
+  };
 };

@@ -1,7 +1,12 @@
 import { AnalysisChart, ContainerBox, DashboardTemplate } from '@/components';
+import { useGetAnalysisChartConfigs } from '@/services';
+import { useSession } from '@toolpad/core';
 
 export const Dashboard = () => {
-  return <DashboardTemplate />;
+  const session = useSession();
+  const { data: analysisChartConfigs = [], isLoading: isLoadingAnalysisChartConfigs } = useGetAnalysisChartConfigs(session?.user?.id ?? '');
+
+  return <DashboardTemplate analysisChartConfigs={analysisChartConfigs} isLoading={isLoadingAnalysisChartConfigs} />;
 };
 
 export const _Dashboard = () => {

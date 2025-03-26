@@ -1,5 +1,6 @@
 import { queryKeys, useQueryBuilder, type ModifiedUseQueryOptions } from './common';
 import {
+  getAnalysisConfigs,
   getFlowableUser,
   getFlowableUserInfo,
   getFlowableUserInfoList,
@@ -21,6 +22,8 @@ import {
   getWorkflowDefinitionXml,
   getWorkflowHistoricInstances,
   getWorkflowInstances,
+  queryTasks,
+  QueryTasksArgs,
   type FlowableUserInfoKey,
   type FormDefinition,
 } from './http';
@@ -189,5 +192,21 @@ export const useGetPdfTemplateData = (pdfTemplateId: string, versionId?: string)
     queryKey: [queryKeys.pdfTemplate, pdfTemplateId, versionId],
     queryFn: async () => getPdfTemplateData(pdfTemplateId, versionId),
     enabled: pdfTemplateId.length > 0,
+  });
+};
+
+export const useGetAnalysisChartConfigs = (userId: string) => {
+  return useQueryBuilder({
+    queryKey: [queryKeys.analysisChartConfigs, userId],
+    queryFn: async () => getAnalysisConfigs(userId),
+    enabled: userId.length > 0,
+  });
+};
+
+export const useQueryTasks = (args: Partial<QueryTasksArgs>, enabled: boolean) => {
+  return useQueryBuilder({
+    queryKey: [queryKeys.queryTasks, args],
+    queryFn: async () => queryTasks(args),
+    enabled,
   });
 };

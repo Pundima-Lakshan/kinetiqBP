@@ -1,11 +1,11 @@
+import { AnalysisChartType } from '@/components';
 import { getEnvs } from '@/env';
-import { downloadJson, get, getValidQueries, post, postFormData, put, remove, removeUndefined } from './common';
 import { Template } from '@pdfme/common';
-import { base64ToFile } from '@/components';
+import { downloadJson, get, getValidQueries, post, postFormData, put, remove } from './common';
 const flowable_rest_url = getEnvs().VITE_FLOWABLE_REST_URL;
 const ui_service_url = getEnvs().VITE_UI_SERVICE_URL;
 
-interface GenericFlowableListResponse<T> {
+export interface GenericFlowableListResponse<T> {
   data: T[];
   total: number;
   start: number;
@@ -635,7 +635,51 @@ export const getPdfTemplateData = async (pdfTemplateId: string, versionId: strin
   return await downloadJson<TemplateData>(url); // Here the basePdf file type will be base64 string
 };
 
+export interface AnalysisConfigEntry {
+  id: number;
+  createdBy: UiServiceUser;
+  configSchema: Record<string, unknown>;
+}
+
+export const getAnalysisConfigs = async (userId: string) => {
+  return await get<AnalysisConfigEntry[]>(`${ui_service_url}/analysis-config`, {
+    queries: [{ id: userId }],
+  });
+};
+
+interface PostAnalysisConfigArg {
+  createdBy: string;
+  configSchema: Record<string, unknown>;
+}
+
+export const postAnalysisConfig = async (arg: PostAnalysisConfigArg) => {
+  return await post<AnalysisConfigEntry>(`${ui_service_url}/analysis-config`, arg);
+};
+
+export const removeAnalysisConfig = async (id: number) => {
+  return await remove(`${ui_service_url}/analysis-config/${id}`, {
+    responseType: 'none',
+  });
+};
+
+export type AnalysisConfigSchema = AnalysisChartConfigs &
+  AnalysisCardDisplayConfig &
+  (QueryActivityInstancesArgs | QueryProcessInstancesArgs | QueryTasksArgs);
+
 export type QueryType = 'task' | 'process' | 'activity';
+
+export type AnalysisChartConfigs = {
+  chartTitle: string;
+  group: string;
+  chartType: AnalysisChartType;
+  queryType: QueryType;
+};
+
+export type AnalysisCardDisplayConfig = {
+  title: string;
+  valueType: string;
+  description: string;
+};
 
 interface QueryActivityInstancesArgs {
   start: number;
@@ -718,7 +762,7 @@ export const queryProcessInstances = async (args: Partial<QueryProcessInstancesA
   return await post<GenericFlowableListResponse<ProcessInstance>>(`${flowable_rest_url}/query/process-instances`, args);
 };
 
-interface QueryTasksArgs {
+export interface QueryTasksArgs {
   start: number;
   size: number;
   sort: string;
