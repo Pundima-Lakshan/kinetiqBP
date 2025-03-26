@@ -1,0 +1,32 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 auto;
+  overflow-y: auto;
+}
+
+.items {
+  display: grid;
+  grid-template-rows: auto;
+  gap: 10px;
+}
+
+.slot {
+  /*height: 200px;*/
+}
+
+.slot[data-swapy-highlighted] {
+  background: #cfd8dc;
+}
+
+.item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}

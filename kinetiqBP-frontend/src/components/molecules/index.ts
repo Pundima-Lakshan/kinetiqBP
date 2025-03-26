@@ -3,3 +3,4 @@ export * from './page-header-actions';
 export * from './sidebar-footer';
 export * from './toolbar-account';
 export * from './analysis-chart.tsx';
+export * from './swapy-reactive';

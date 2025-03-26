@@ -17,7 +17,7 @@
     "@emotion/styled": "11.13.0",
     "@mui/icons-material": "6.4.0",
     "@mui/material": "6.4.0",
-    "@mui/x-charts": "^7.28.0",
+    "@mui/x-charts": "7.28.0",
     "@mui/x-data-grid": "7.23.6",
     "@mui/x-date-pickers": "7.23.6",
     "@pdfme/common": "5.2.11",
@@ -41,6 +41,7 @@
     "dmn-js": "17.0.1",
     "htm": "3.1.1",
     "ids": "1.0.5",
+    "immer": "10.1.1",
     "keycloak-js": "26.0.7",
     "min-dash": "4.2.2",
     "oidc-client-ts": "3.1.0",
@@ -49,8 +50,9 @@
     "react-oidc-context": "3.2.0",
     "react-router": "7.1.1",
     "signature_pad": "5.0.4",
-    "swapy": "^1.0.5",
-    "terser": "5.39.0"
+    "swapy": "1.0.5",
+    "terser": "5.39.0",
+    "zustand": "4.5.6"
   },
   "devDependencies": {
     "@types/bpmn-moddle": "5.1.11",
