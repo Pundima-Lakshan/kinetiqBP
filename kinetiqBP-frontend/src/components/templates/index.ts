@@ -7,3 +7,4 @@ export * from './workflow-instances';
 export * from './workflow-progress';
 export * from './common';
 export * from './pdf-templates';
+export * from './dashboard';

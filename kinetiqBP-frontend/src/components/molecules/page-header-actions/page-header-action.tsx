@@ -9,12 +9,19 @@ export const PageHeaderAction = () => {
   const { handleClick } = usePageHeaderActionsHandler();
 
   const getActionLabel = () => {
-    return `Create ${activePage?.title}`.trim().slice(0, -1);
+    switch (activePage?.title) {
+      case browserRoutesCollection.Dashboard.title: {
+        return 'New Analysis Chart';
+      }
+      default: {
+        return `Create ${activePage?.title}`.trim().slice(0, -1);
+      }
+    }
   };
 
   const { state: actionLabel } = useSyncedState({ getter: getActionLabel, deps: [activePage] });
 
-  const actionablePages = [browserRoutesCollection.FormDefinitions, browserRoutesCollection.WorkflowDefinitions];
+  const actionablePages = [browserRoutesCollection.FormDefinitions, browserRoutesCollection.WorkflowDefinitions, browserRoutesCollection.Dashboard];
 
   const hidden = !activePage || !actionablePages.some((page) => page.title === activePage.title);
 

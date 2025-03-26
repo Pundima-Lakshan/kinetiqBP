@@ -1,16 +1,7 @@
-import { AnalysisChart, ContainerBox } from '@/components';
-import { DashboardDrawer } from './dashboard-drawer';
-import { DashboardMain } from './dashboard-main';
-import { DashboardDrawerSetup } from './dashboard-drawer-setup';
+import { AnalysisChart, ContainerBox, DashboardTemplate } from '@/components';
 
 export const Dashboard = () => {
-  const renderMain = () => {
-    return <DashboardMain />;
-  };
-  const renderDrawer = () => {
-    return <DashboardDrawer />;
-  };
-  return <DashboardDrawerSetup main={renderMain()} drawerContent={renderDrawer()} />;
+  return <DashboardTemplate />;
 };
 
 export const _Dashboard = () => {
@@ -48,7 +39,6 @@ export const _Dashboard = () => {
           description="some desc"
           cardActionCallback={() => window.alert('d')}
           keyToLabel={keyToLabel}
-          colors={colors}
           xAxis={{ dataKey: 'year' }}
         />
       </div>

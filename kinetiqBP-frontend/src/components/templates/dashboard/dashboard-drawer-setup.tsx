@@ -4,7 +4,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Box, Drawer, IconButton, styled } from '@mui/material';
 import { ReactNode } from 'react';
 
-const DRAWER_WIDTH = 300;
+const DRAWER_WIDTH = 400;
 
 interface DashboardDrawerSetupProps {
   main: ReactNode;
@@ -12,11 +12,13 @@ interface DashboardDrawerSetupProps {
 }
 
 export const DashboardDrawerSetup = ({ main, drawerContent }: DashboardDrawerSetupProps) => {
-  const { open } = useDrawerStore();
+  const open = useDrawerStore((state) => state.open);
   const { handleDrawerClose } = useDrawerStoreActions();
 
+  console.log(open);
+
   return (
-    <ContainerBox>
+    <Box>
       <Main open={open}>{main}</Main>
       <Drawer
         sx={{
@@ -38,23 +40,26 @@ export const DashboardDrawerSetup = ({ main, drawerContent }: DashboardDrawerSet
         </Box>
         <ContainerBox>{drawerContent}</ContainerBox>
       </Drawer>
-    </ContainerBox>
+    </Box>
   );
 };
 
-const Main = styled('div', { shouldForwardProp: (prop) => prop !== 'open' })<{
+const Main = styled('div', {
+  shouldForwardProp: (prop) => {
+    return prop !== 'open';
+  },
+})<{
   open?: boolean;
 }>(({ theme }) => ({
   flexGrow: 1,
   height: '100%',
   width: '100%',
-  backgroundColor: '#eceff1',
   padding: '10px',
-  transition: theme.transitions.create('margin', {
+  backgroundColor: '#eceff1',
+  transition: theme.transitions.create('padding', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  marginRight: -DRAWER_WIDTH,
   /**
    * This is necessary to enable the selection of content. In the DOM, the stacking order is determined
    * by the order of appearance. Following this rule, elements appearing later in the markup will overlay
@@ -66,11 +71,11 @@ const Main = styled('div', { shouldForwardProp: (prop) => prop !== 'open' })<{
     {
       props: ({ open }) => open,
       style: {
-        transition: theme.transitions.create('margin', {
+        transition: theme.transitions.create('padding', {
           easing: theme.transitions.easing.easeOut,
           duration: theme.transitions.duration.enteringScreen,
         }),
-        marginRight: 0,
+        paddingRight: DRAWER_WIDTH,
       },
     },
   ],
@@ -79,7 +84,6 @@ const Main = styled('div', { shouldForwardProp: (prop) => prop !== 'open' })<{
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: 'flex-start',
