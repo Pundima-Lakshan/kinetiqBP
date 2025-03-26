@@ -80,15 +80,15 @@ export const WorkflowActivity = ({ activityInstance, formDefinitionId, dynamicVa
 
   useEffect(() => {
     if (!!activityInstance.taskId) {
-      setFormData(getDataFromRestVariables(historicTaskInstance?.data[0]?.variables ?? []));
+      setFormData(getDataFromRestVariables(historicTaskInstance?.data[0]?.variables ?? [], formDefinition?.formSchema));
     } else {
       const variables =
         processInstanceVariables?.data.map((d) => ({
           ...d.variable,
         })) ?? [];
-      setFormData(getDataFromRestVariables(variables));
+      setFormData(getDataFromRestVariables(variables, formDefinition?.formSchema));
     }
-  }, [activityInstance.taskId, processInstanceVariables, historicTaskInstance]);
+  }, [activityInstance.taskId, processInstanceVariables, historicTaskInstance, formDefinition]);
 
   useEffect(() => {
     if (formDefinitionId != null || dynamicVariables == null) {

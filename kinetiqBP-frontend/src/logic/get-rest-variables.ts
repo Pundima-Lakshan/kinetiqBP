@@ -1,5 +1,6 @@
 import type { KBPFormViewerRefObj } from '@/components/organisms';
 import type { FormSchema, RestVariable, TemplateData } from '@/services';
+import { extractPdfTemplateFilename } from '@/utils';
 import type { DialogHook } from '@toolpad/core';
 import type { MutableRefObject } from 'react';
 
@@ -128,11 +129,22 @@ export const getRestVariablesFromData = (formSchema: FormSchema, data: Record<st
   return restVariables;
 };
 
-export const getDataFromRestVariables = (restVariables: RestVariable[]) => {
+export const getDataFromRestVariables = (restVariables: RestVariable[], formSchema: FormSchema | undefined) => {
+  const pdfTemplateComponentsMap = new Map(
+    formSchema?.components
+      .map((c) => {
+        if (c.type === 'pdf-template') {
+          return c;
+        }
+      })
+      .filter((c) => c != null)
+      .map((c) => [c.key, c]),
+  );
+
   return restVariables.reduce((acc: Record<string, unknown>, curr) => {
     switch (curr.type) {
       case 'string': {
-        acc[curr.name] = String(curr.value);
+        acc[curr.name] = pdfTemplateComponentsMap.get(curr.name) ? extractPdfTemplateFilename(String(curr.value)) : String(curr.value);
         break;
       }
       case 'number': {
