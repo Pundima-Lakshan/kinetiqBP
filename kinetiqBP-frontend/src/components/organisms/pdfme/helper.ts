@@ -48,7 +48,10 @@ export const getFontsData = async () => {
   return fontDataList.reduce((acc, font) => ({ ...acc, [font.label]: font }), {} as Font);
 };
 
-export const readFile = (file: File | null, type: 'text' | 'dataURL' | 'arrayBuffer') => {
+export const readFile = async (file: File | null, type: 'text' | 'dataURL' | 'arrayBuffer') => {
+  if (!(file instanceof File)) {
+    return file;
+  }
   return new Promise<string | ArrayBuffer>((r) => {
     const fileReader = new FileReader();
     fileReader.addEventListener('load', (e) => {

@@ -5,6 +5,7 @@ import { DashboardMain } from './dashboard-main';
 import { useSyncedState } from '@/utils';
 import { AnalysisGroupProps } from '@/components/atoms';
 import { AnalysisChart, SwapyReactiveItem } from '@/components/molecules';
+import { dataset } from '@/pages';
 
 interface DashboardTemplateProps {
   analysisChartConfigs: AnalysisConfigEntry[];
@@ -30,6 +31,33 @@ export const DashboardTemplate = ({ analysisChartConfigs, isLoading }: Dashboard
                 queryArgs={typedSchema}
               />
             );
+            break;
+          }
+          case 'line': {
+            component = (
+              <AnalysisChart
+                type="card"
+                title={typedSchema.chartTitle}
+                description={typedSchema.description}
+                queryType={typedSchema.queryType}
+                queryArgs={typedSchema}
+              />
+            );
+            break;
+          }
+          case 'bar': {
+            component = (
+              <AnalysisChart
+                type="bar"
+                dataset={dataset}
+                title="bar"
+                description="some desc"
+                cardActionCallback={() => window.alert('d')}
+                series={[{ dataKey: 'london', label: 'London' }]}
+                xAxis={{ dataKey: 'month' }}
+              />
+            );
+            break;
           }
         }
 

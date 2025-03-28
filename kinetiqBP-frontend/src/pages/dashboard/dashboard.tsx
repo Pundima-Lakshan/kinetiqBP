@@ -1,12 +1,37 @@
-import { AnalysisChart, ContainerBox, DashboardTemplate } from '@/components';
+import { AnalysisChart, AnCardDisplay, ContainerBox, DashboardTemplate, GrafanaIframe } from '@/components';
 import { useGetAnalysisChartConfigs } from '@/services';
+import { Box, Card, CardActionArea, CardContent, Link, Typography } from '@mui/material';
 import { useSession } from '@toolpad/core';
 
 export const Dashboard = () => {
+  // return <GrafanaIframe />;
+  //
   const session = useSession();
   const { data: analysisChartConfigs = [], isLoading: isLoadingAnalysisChartConfigs } = useGetAnalysisChartConfigs(session?.user?.id ?? '');
 
-  return <DashboardTemplate analysisChartConfigs={analysisChartConfigs} isLoading={isLoadingAnalysisChartConfigs} />;
+  return (
+    <>
+      <Card>
+        <Box style={{ height: '200px', width: '300px', margin: '0 auto' }}>
+          <Link href="http://localhost:3000/goto/egYGcpoNR?orgId=1" target="_blank">
+            <CardActionArea>
+              <CardContent>
+                <Typography gutterBottom sx={{ color: 'text.secondary' }} textAlign={'center'}>
+                  Visit Grafana Dashboard
+                </Typography>
+                <Typography variant="body2" textAlign="center">
+                  Visit Grafana Dashbaord to Get more insights about the workflows
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Link>
+        </Box>
+      </Card>
+      <Box style={{ height: 'calc(100% - 200px)' }}>
+        <DashboardTemplate analysisChartConfigs={analysisChartConfigs} isLoading={isLoadingAnalysisChartConfigs} />;
+      </Box>
+    </>
+  );
 };
 
 export const _Dashboard = () => {
@@ -570,7 +595,7 @@ export const keyToLabel: { [key: string]: string } = {
   other: 'Other renewables excluding bioenergy (TWh)',
 };
 
-const dataset = [
+export const dataset = [
   {
     london: 59,
     paris: 57,

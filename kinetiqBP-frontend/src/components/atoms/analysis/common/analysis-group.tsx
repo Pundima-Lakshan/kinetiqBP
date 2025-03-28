@@ -9,7 +9,7 @@ export type AnalysisGroupProps = {
 export const AnalysisGroup = ({ title, description, ...rest }: AnalysisGroupProps) => {
   return (
     <Box>
-      <Box style={{ backgroundColor: 'white', padding: '15px' }}>
+      <Box style={{ backgroundColor: 'white', padding: '10px', marginBottom: '10px' }}>
         <Typography variant="h5" color="info">
           {title}
         </Typography>

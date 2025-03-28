@@ -17,7 +17,7 @@ export const AnalysisCard = ({ title, description, children, cardActionCallback 
         style={{ margin: 'auto', height: '100%', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
       >
         <Box style={{ display: 'flex', width: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Typography gutterBottom sx={{ color: 'text.title', fontSize: 14 }}>
+          <Typography gutterBottom sx={{ color: 'text.title' }}>
             {title}
           </Typography>
           <CardActionArea style={{ width: 'fit-content', borderRadius: '2px' }} onClick={cardActionCallback}>

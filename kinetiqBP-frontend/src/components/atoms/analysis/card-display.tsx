@@ -14,13 +14,13 @@ export const AnCardDisplay = ({ cardActionCallback, queryType, queryArgs, title,
   const result = useAnalysisQueries({ queryType, args: queryArgs });
 
   return (
-    <Card>
+    <Card style={{ height: '100%', width: '100%' }}>
       <CardActionArea onClick={cardActionCallback}>
         <CardContent>
-          <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
+          <Typography gutterBottom sx={{ color: 'text.secondary' }}>
             {title}
           </Typography>
-          <Typography variant="h5" component="div">
+          <Typography variant="h3" component="div">
             {getValue(result?.data).total}
           </Typography>
           <Typography variant="body2">{description}</Typography>
